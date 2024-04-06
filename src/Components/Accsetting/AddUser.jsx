@@ -28,7 +28,7 @@ const AddUser = () => {
       setSuccess(false);
       navigate("/setting");
     }, 2000);
-    console.log("success");
+    // console.log("success");
   };
 
   return (
@@ -40,7 +40,7 @@ const AddUser = () => {
           email: "",
           password: "",
           user_type_id: "2",
-          shop_id: "S-00000004",
+          shop_id: "S-00000011",
         }}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
@@ -49,7 +49,6 @@ const AddUser = () => {
           // setUser(values);
           await createUser(values);
           showMessage();
-
           setSubmitting(false);
         }}
       >

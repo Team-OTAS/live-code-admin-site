@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Box, Button, Grid, IconButton, TextField } from "@mui/material";
+import * as Yup from "yup";
 import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -15,9 +16,18 @@ import SuccessBox from "../../Components/modalBox/successBox";
 import AlertBox from "../../Components/modalBox/AlertBox";
 import EditIcon from "@mui/icons-material/Edit";
 import WaitingBox from "../../Components/modalBox/Waiting";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import "./../../Styles/addstock.css";
-import { RemoveFromQueue } from "@mui/icons-material";
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required("Stock name is required"),
+  price: Yup.string().required("Price is required"),
+  quantity: Yup.string().required("quantity is required"),
+  sale_code: Yup.string().required("salecode is required"),
+  unit: Yup.string().required("unit is required"),
+  description: Yup.string().required("description is required"),
+});
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -36,10 +46,7 @@ function CreateProdcut() {
   const { isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.stocks
   );
-  const [nameErr, setnameErr] = useState(false);
-  const [priceErr, setpriceErr] = useState(false);
-  const [quantityErr, setquantityErr] = useState(false);
-  const [desErr, setdesErr] = useState(false);
+
   const [file, setFile] = useState();
   const [showmessage, setShowmessage] = useState(false);
   const nameref = useRef();
@@ -54,32 +61,9 @@ function CreateProdcut() {
     setFile(e.target.files[0]);
   }
 
+  console.log(file);
   function hundleSubmit(e) {
     e.preventDefault();
-    // if (nameref.current.value === "") {
-    //   setnameErr(true);
-    // } else {
-    //   setnameErr(false);
-    // }
-
-    // if (priceref.current.value === "") {
-    //   setpriceErr(true);
-    // } else {
-    //   setpriceErr(false);
-    // }
-
-    // if (quantityref.current.value === "") {
-    //   setquantityErr(true);
-    // } else {
-    //   setquantityErr(false);
-    // }
-
-    // if (descriptionref.current.value === "") {
-    //   setdesErr(true);
-    //   return;
-    // } else {
-    //   setdesErr(false);
-    // }
 
     const formData = {
       shop_id: shopId,
@@ -91,18 +75,14 @@ function CreateProdcut() {
       unit: unitref.current.value,
       image: file,
     };
-    setShowmessage(true);
-    // console.log("success", isSuccess);
-    // console.log(formData);
+
     dispatch(createProduct(formData));
   }
 
   // console.log(isSuccess);
   return (
-    <Box component="form" sx={{ marginTop: "20px" }}>
-      <Grid
-        container
-        spacing={2}
+    <Box sx={{ marginTop: "20px" }}>
+      <Box
         sx={{
           border: "1px solid #000",
           borderRadius: "10px",
@@ -116,184 +96,219 @@ function CreateProdcut() {
           </Link>
         </Grid>
 
-        <Grid item xs={12} md={4}>
-          <div className="inputContainer">
-            <TextField
-              id="outlined-error-helper-text"
-              name="field1"
-              fullWidth
-              label={
-                <div className="input-field-label">
-                  <Inventory2OutlinedIcon color="primary" />
-                  <span>Stock Name</span>
-                </div>
-              }
-              color="primary"
-              error={nameErr}
-              inputRef={nameref}
-            />
-          </div>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <div className="inputContainer">
-            <TextField
-              id="outlined-error-helper-text"
-              fullWidth
-              label={
-                <div className="input-field-label">
-                  <AttachMoneyOutlinedIcon color="primary" />
-                  <span>Price</span>
-                </div>
-              }
-              color="primary"
-              error={priceErr}
-              inputRef={priceref}
-            />
-          </div>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <div className="inputContainer">
-            <TextField
-              id="outlined-error-helper-text"
-              fullWidth
-              label={
-                <div className="input-field-label">
-                  <ListIcon color="primary" />
-                  <span>Quantity</span>
-                </div>
-              }
-              color="primary"
-              error={quantityErr}
-              inputRef={quantityref}
-            />
-          </div>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <div className="inputContainer">
-            <TextField
-              id="outlined-error-helper-text"
-              fullWidth
-              label={
-                <div className="input-field-label">
-                  <Inventory2OutlinedIcon color="primary" />
-                  <span>Live Sale Code</span>
-                </div>
-              }
-              color="primary"
-              // error={quantityErr}
-              inputRef={liveSaleref}
-            />
-          </div>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <div className="inputContainer">
-            <TextField
-              id="outlined-error-helper-text"
-              fullWidth
-              label={
-                <div className="input-field-label">
-                  <Inventory2OutlinedIcon color="primary" />
-                  <span>Unit</span>
-                </div>
-              }
-              color="primary"
-              // error={quantityErr}
-              inputRef={unitref}
-            />
-          </div>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <div className="imageUpload">
-            {file ? (
-              <Box>
-                <IconButton
-                  component="label"
-                  variant="filled"
-                  sx={{
-                    position: "absolute",
-                    top: "5px",
-                    right: "5px",
-                    borderRadius: "10px",
-                    background: "#354e8e",
-                    color: "#fff",
-                    "&:hover": {
-                      color: "#354e8e",
-                    },
-                  }}
-                >
-                  <VisuallyHiddenInput
-                    type="file"
-                    onChange={hundleFileChange}
+        <Formik
+          initialValues={{
+            name: "",
+            price: "",
+            quantity: "",
+            sale_code: "",
+            unit: "",
+            description: "",
+            shop_id: shopId,
+            image: null,
+          }}
+          validationSchema={validationSchema}
+          onSubmit={async (values, { setSubmitting }) => {
+            console.log(values);
+            setSubmitting(false);
+            dispatch(createProduct(values));
+          }}
+        >
+          {(
+            { isSubmitting, errors, touched, setFieldValue } // Passing errors and touched here
+          ) => (
+            <Form>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={4}>
+                  <Field
+                    as={TextField}
+                    type="text"
+                    name="name"
+                    label={
+                      <div className="input-field-label">
+                        <Inventory2OutlinedIcon color="primary" />
+                        <span>Stock Name</span>
+                      </div>
+                    }
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    error={Boolean(errors.name && touched.name)} // Using errors and touched here
+                    helperText={<ErrorMessage name="name" />}
                   />
-                  <EditIcon />
-                </IconButton>
-                <p className="imageName">{file.name}</p>
-                {/* <img src={URL.createObjectURL(file)} alt="product" /> */}
-              </Box>
-            ) : (
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                  height: "80%",
-                  padding: "5px",
-                }}
-              >
-                <div className="input-field-label">
-                  <ImageOutlinedIcon color="primary" />
-                  <span>Image</span>
-                </div>
-                <Button
-                  component="label"
-                  variant="contained"
-                  color="vaild"
-                  // startIcon={}
-                >
-                  <AttachFileIcon />
-                  <VisuallyHiddenInput
-                    type="file"
-                    onChange={hundleFileChange}
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Field
+                    as={TextField}
+                    type="text"
+                    name="price"
+                    label={
+                      <div className="input-field-label">
+                        <AttachMoneyOutlinedIcon color="primary" />
+                        <span>Price</span>
+                      </div>
+                    }
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    error={Boolean(errors.price && touched.price)} // Using errors and touched here
+                    helperText={<ErrorMessage name="price" />}
                   />
-                </Button>
-              </Box>
-            )}
-          </div>
-        </Grid>
-        <Grid item xs={12}>
-          <div className="inputContainer">
-            <TextField
-              id="outlined-multiline-static"
-              fullWidth
-              label={
-                <div className="input-field-label">
-                  <DescriptionIcon color="primary" />
-                  <span>Description</span>
-                </div>
-              }
-              multiline
-              rows={6}
-              error={desErr}
-              color="primary"
-              inputRef={descriptionref}
-            />
-          </div>
-        </Grid>
-        {/* button */}
-        <Grid item xs={12} md={4}>
-          <div>
-            <Button
-              fullWidth
-              variant="contained"
-              color="vaild"
-              sx={{ margin: "0" }}
-              onClick={hundleSubmit}
-            >
-              Create A New Stock
-            </Button>
-          </div>
-        </Grid>
-      </Grid>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Field
+                    as={TextField}
+                    type="number"
+                    name="quantity"
+                    label={
+                      <div className="input-field-label">
+                        <ListIcon color="primary" />
+                        <span>Quantity</span>
+                      </div>
+                    }
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    error={Boolean(errors.quantity && touched.quantity)} // Using errors and touched here
+                    helperText={<ErrorMessage name="quantity" />}
+                  />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Field
+                    as={TextField}
+                    type="text"
+                    name="sale_code"
+                    label={
+                      <div className="input-field-label">
+                        <Inventory2OutlinedIcon color="primary" />
+                        <span>Live Sale Code</span>
+                      </div>
+                    }
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    error={Boolean(errors.sale_code && touched.sale_code)} // Using errors and touched here
+                    helperText={<ErrorMessage name="sale_code" />}
+                  />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Field
+                    as={TextField}
+                    type="text"
+                    name="unit"
+                    label={
+                      <div className="input-field-label">
+                        <Inventory2OutlinedIcon color="primary" />
+                        <span>Unit</span>
+                      </div>
+                    }
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    error={Boolean(errors.unit && touched.unit)} // Using errors and touched here
+                    helperText={<ErrorMessage name="unit" />}
+                  />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <div className="imageUpload" style={{ marginTop: "17px" }}>
+                    {file ? (
+                      <Box>
+                        <IconButton
+                          component="label"
+                          variant="filled"
+                          sx={{
+                            position: "absolute",
+                            top: "5px",
+                            right: "5px",
+                            borderRadius: "10px",
+                            background: "#354e8e",
+                            color: "#fff",
+                            "&:hover": {
+                              color: "#354e8e",
+                            },
+                          }}
+                        >
+                          <VisuallyHiddenInput
+                            type="file"
+                            name="image"
+                            onChange={(event) => {
+                              setFieldValue("image", event.target.files[0]);
+                            }}
+                          />
+                          <EditIcon />
+                        </IconButton>
+                        <p className="imageName">{file.name}</p>
+                        {/* <img src={URL.createObjectURL(file)} alt="product" /> */}
+                      </Box>
+                    ) : (
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          width: "100%",
+                          height: "80%",
+                          padding: "5px",
+                        }}
+                      >
+                        <div className="input-field-label">
+                          <ImageOutlinedIcon color="primary" />
+                          <span>Image</span>
+                        </div>
+                        <Button
+                          component="label"
+                          variant="contained"
+                          color="vaild"
+                        >
+                          <AttachFileIcon />
+                          <VisuallyHiddenInput
+                            type="file"
+                            onChange={hundleFileChange}
+                          />
+                        </Button>
+                      </Box>
+                    )}
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <Field
+                    as={TextField}
+                    type="text"
+                    name="description"
+                    label={
+                      <div className="input-field-label">
+                        <DescriptionIcon color="primary" />
+                        <span>Description</span>
+                      </div>
+                    }
+                    multiline
+                    rows={6}
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    error={Boolean(errors.description && touched.description)} // Using errors and touched here
+                    helperText={<ErrorMessage name="description" />}
+                  />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <div>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      disabled={isSubmitting}
+                      variant="contained"
+                      color="vaild"
+                      sx={{ margin: "0" }}
+                      // onClick={hundleSubmit}
+                    >
+                      Create A New Stock
+                    </Button>
+                  </div>
+                </Grid>
+              </Grid>
+            </Form>
+          )}
+        </Formik>
+      </Box>
       {isLoading && showmessage ? <WaitingBox /> : null}
       {!isLoading && showmessage && isSuccess ? (
         <SuccessBox message={message} />
