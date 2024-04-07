@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import productService from "./productService";
+import Swal from "sweetalert2";
+import SuccessBox from "../../Components/modalBox/successBox";
+
 // import { toast } from "react-toastify";
 
 const initialState = {
@@ -157,15 +160,15 @@ const productReducer = createSlice({
     builder
       .addCase(createProduct.pending, (state) => {
         state.isLoading = true;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = "";
       })
       .addCase(createProduct.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
         console.log(action.payload);
-        state.message = "Product added successfully";
-        // state.products = action.payload;
-        // toast.success("Product added successfully");
       })
       .addCase(createProduct.rejected, (state, action) => {
         state.isLoading = false;
@@ -229,13 +232,34 @@ const productReducer = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.message = "Product updated successfully";
+
+        let timerInterval;
+        Swal.fire({
+          icon: "success",
+          title: state.message,
+          timer: 2000,
+          timerProgressBar: true,
+          willClose: () => {
+            clearInterval(timerInterval);
+            // navigate("/");
+          },
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            // navigate("/");
+          }
+        });
         // toast.success("Product updated successfully");
       })
       .addCase(updateProduct.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
-        // toast.error(action.payload);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: state.message,
+        });
       });
   },
 });

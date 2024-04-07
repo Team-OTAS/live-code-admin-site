@@ -17,6 +17,7 @@ import SuccessBox from "../../Components/modalBox/successBox";
 import Loading from "../../Components/Loading";
 import EditIcon from "@mui/icons-material/Edit";
 import { deleteProduct } from "../../redux/features/productdeleteSlice";
+import Swal from "sweetalert2";
 
 import "./../../Styles/addstock.css";
 
@@ -47,6 +48,8 @@ function EditProduct() {
   const [price, setPrice] = useState();
   const [quantity, setQuantity] = useState();
   const [description, setDescription] = useState();
+  const [sale_code, setSale_code] = useState();
+  const [unit, setUnit] = useState();
 
   function hundleFileChange(e) {
     setFile(e.target.files[0]);
@@ -62,12 +65,12 @@ function EditProduct() {
       price: price,
       quantity: quantity,
       description: description,
-      unit: "1",
-      image: file,
+      unit: unit,
+      sale_code: sale_code,
+      image: file || null,
     };
     // console.log(formData);
     dispatch(updateProduct({ id, formData }));
-    setShowmessage(true);
   }
 
   function deleteHandleClick() {
@@ -89,10 +92,12 @@ function EditProduct() {
       setQuantity(product.data.quantity);
       setDescription(product.data.description);
       setFile(product.data.image);
+      setSale_code(product.data.sale_code);
+      setUnit(product.data.unit);
     }
   }, [product]);
 
-  console.log(product);
+  // console.log(product);
 
   return (
     <Box sx={{ marginTop: "20px" }}>
@@ -213,8 +218,8 @@ function EditProduct() {
                   </div>
                 }
                 color="primary"
-                value={name || ""}
-                onChange={(e) => setName(e.target.value)}
+                value={sale_code || ""}
+                onChange={(e) => setSale_code(e.target.value)}
               />
             </div>
           </Grid>
@@ -230,8 +235,8 @@ function EditProduct() {
                   </div>
                 }
                 color="primary"
-                value={name || ""}
-                onChange={(e) => setName(e.target.value)}
+                value={unit || ""}
+                onChange={(e) => setUnit(e.target.value)}
               />
             </div>
           </Grid>
@@ -386,20 +391,6 @@ function EditProduct() {
             </Grid>
           </Grid>
         </Grid>
-      ) : null}
-      {!isLoading && showmessage && isSuccess ? (
-        <SuccessBox message={message} />
-      ) : null}
-      {!isLoading && showmessage && isError ? (
-        <AlertBox message={message} />
-      ) : null}
-      {!deletes.loading &&
-      showmessage &&
-      deletes.deletes.status === "success" ? (
-        <SuccessBox message={deletes.deletes.message} />
-      ) : null}
-      {!deletes.loading && showmessage && deletes.error ? (
-        <AlertBox message={deletes.error} />
       ) : null}
     </Box>
   );

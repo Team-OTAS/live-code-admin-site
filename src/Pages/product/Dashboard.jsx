@@ -11,6 +11,7 @@ import CreateProdcut from "./CreateProdcut";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditProduct from "./EditProduct";
 import PersonAddAlt1OutlinedIcon from "@mui/icons-material/PersonAddAlt1Outlined";
+import Swal from "sweetalert2";
 
 import "./../../Styles/dashboard.css";
 
@@ -31,6 +32,19 @@ export default function Dashboard() {
       productIds: DeleteData,
     };
     dispatch(deleteProduct(data));
+    if (deletes.isError) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: deletes.message,
+      });
+    } else {
+      Swal.fire({
+        icon: "success",
+        title: "Deleted",
+        text: deletes.message,
+      });
+    }
     setIsDisabled(true);
   }
 
@@ -106,12 +120,6 @@ export default function Dashboard() {
             <Route path="/viewstock/:id" element={<ProductDetail />} />
           </Routes>
         </Box>
-        {!deletes.loading && deletes.deletes.status === "success" ? (
-          <SuccessBox message={deletes.deletes.message} />
-        ) : null}
-        {!deletes.loading && deletes.error ? (
-          <AlertBox message={deletes.error} />
-        ) : null}
       </div>
     </div>
   );

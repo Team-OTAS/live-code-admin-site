@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Box, Button, Grid, IconButton, TextField } from "@mui/material";
 import * as Yup from "yup";
 import { styled } from "@mui/material/styles";
@@ -17,6 +17,8 @@ import AlertBox from "../../Components/modalBox/AlertBox";
 import EditIcon from "@mui/icons-material/Edit";
 import WaitingBox from "../../Components/modalBox/Waiting";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 import "./../../Styles/addstock.css";
 
@@ -42,44 +44,31 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 function CreateProdcut() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.stocks
   );
 
   const [file, setFile] = useState();
-  const [showmessage, setShowmessage] = useState(false);
-  const nameref = useRef();
-  const priceref = useRef();
-  const quantityref = useRef();
-  const descriptionref = useRef();
-  const liveSaleref = useRef();
-  const unitref = useRef(null);
   const shopId = localStorage.getItem("shopId");
 
   function hundleFileChange(e) {
     setFile(e.target.files[0]);
   }
 
-  console.log(file);
-  function hundleSubmit(e) {
-    e.preventDefault();
+  // if (isLoading) {
+  //   return <WaitingBox />;
+  // }
 
-    const formData = {
-      shop_id: shopId,
-      name: nameref.current.value,
-      price: priceref.current.value,
-      quantity: quantityref.current.value,
-      description: descriptionref.current.value,
-      sale_code: liveSaleref.current.value,
-      unit: unitref.current.value,
-      image: file,
-    };
+  // if (isSuccess) {
+  //   return <SuccessBox message={message} />;
+  // }
 
-    dispatch(createProduct(formData));
-  }
+  // if (isError) {
+  //   return <AlertBox message={message} />;
+  // }
 
-  // console.log(isSuccess);
   return (
     <Box sx={{ marginTop: "20px" }}>
       <Box
@@ -112,6 +101,25 @@ function CreateProdcut() {
             console.log(values);
             setSubmitting(false);
             dispatch(createProduct(values));
+            if (isSuccess) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Stock Added Successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+
+              navigate("/");
+            } else if (isError) {
+              Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Stock Not Added",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
           }}
         >
           {(
@@ -140,7 +148,7 @@ function CreateProdcut() {
                 <Grid item xs={12} md={4}>
                   <Field
                     as={TextField}
-                    type="text"
+                    type="number"
                     name="price"
                     label={
                       <div className="input-field-label">
@@ -309,15 +317,16 @@ function CreateProdcut() {
           )}
         </Formik>
       </Box>
-      {isLoading && showmessage ? <WaitingBox /> : null}
-      {!isLoading && showmessage && isSuccess ? (
-        <SuccessBox message={message} />
-      ) : null}
-      {!isLoading && showmessage && isError ? (
-        <AlertBox message={message} />
-      ) : null}
     </Box>
   );
 }
 
 export default CreateProdcut;
+
+// {isLoading && showmessage ? <WaitingBox /> : null}
+// {!isLoading && showmessage && isSuccess ? (
+//   <SuccessBox message={message} />
+// ) : null}
+// {!isLoading && showmessage && isError ? (
+//   <AlertBox message={message} />
+// ) : null}
