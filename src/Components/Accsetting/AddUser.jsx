@@ -10,6 +10,7 @@ import { Box } from "@mui/material";
 import { useCreateUserMutation } from "../../redux/features/userApiSlice";
 import { useNavigate } from "react-router-dom";
 import SuccessBox from "../modalBox/successBox";
+import AlertBox from "../modalBox/AlertBox";
 
 const validationSchema = Yup.object().shape({
   user_name: Yup.string().required("Name is required"),
@@ -20,12 +21,10 @@ const validationSchema = Yup.object().shape({
 const AddUser = () => {
   const navigate = useNavigate();
   const [createUser, data] = useCreateUserMutation();
-  const [success, setSuccess] = useState(false);
+  console.log(data.error);
 
   const showMessage = () => {
-    setSuccess(true);
     setTimeout(() => {
-      setSuccess(false);
       navigate("/setting");
     }, 2000);
     // console.log("success");
@@ -111,8 +110,8 @@ const AddUser = () => {
           </Form>
         )}
       </Formik>
-      {data.isError && <div>Error: {data.error}</div>}
-      {success && <SuccessBox message={"User Added Successfully"} />}
+      {data.error && <AlertBox message={data.error.data.message} />}
+      {data.success && <SuccessBox message={"User Added Successfully"} />}
     </Box>
   );
 };

@@ -58,10 +58,7 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/changeaccinfo" element={<ChgAccInfoPage />} />
             <Route path="/fblogin" element={<FBloginPage />} />
-            <Route
-              path="/setupshopstepperpage"
-              element={<SetupShopStepperPage />}
-            />
+            <Route path="/setup" element={<SetupShopStepperPage />} />
             <Route path="/completesetuppage" element={<CompleteSetupPage />} />
             <Route path="*" element={<HomePage />} />
           </Routes>

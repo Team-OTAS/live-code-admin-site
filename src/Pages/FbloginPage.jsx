@@ -4,21 +4,20 @@ import LiveCodeLogo from "./../assets/images/logo.png";
 import FBloginPhoto from "./../assets/images/FBlogin.png";
 import { Box } from "@mui/material";
 import "./../Styles/auth.css";
-// import FacebookLogin from "react-facebook-login";
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function FBloginPage() {
-  const componentClicked = (data) => {
-    console.log("data", data);
-  };
   const navigate = useNavigate();
-  const responseFacebook = (response) => {
-    console.log(response.accessToken);
-    if (response.accessToken) {
-      console.log("Facebook Access Token is get");
-      navigate("/setupshopstepperpage");
-    }
-  };
+
+  async function handleClick() {
+    const res = await axios.get(
+      "https://api.livecodemm.com/auth/facebook/redirect?redirect_url=http://localhost:3000/setup"
+    );
+    console.log(res.data);
+  }
+
   return (
     <>
       <Box sx={{ py: 5 }}>
@@ -74,17 +73,11 @@ export default function FBloginPage() {
               </p>
             </Box>
           </Grid>
-          {/* <Grid item xs={12}>
-            <FacebookLogin
-              appId="1361887051360574"
-              size="medium"
-              autoLoad={true}
-              fields="name,email,picture"
-              onClick={componentClicked}
-              scope="public_profile,pages_show_list,pages_read_engagement"
-              callback={responseFacebook}
-            />
-          </Grid> */}
+          <Grid item xs={12}>
+            <Button variant="contained" onClick={handleClick}>
+              <span>Login Facebook Account</span>
+            </Button>
+          </Grid>
         </Grid>
       </Box>
     </>
