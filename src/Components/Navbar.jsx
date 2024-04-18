@@ -14,10 +14,12 @@ import Stack from "@mui/material/Stack";
 import "./../Styles/navbar.css";
 import AccMenu from "./AccMenu";
 import DrawerSlide from "./DrawerSlide";
+import { useNavigate } from "react-router";
 
 const drawerWidth = 240;
 
 export default function Navbar(props) {
+  const navigate = useNavigate();
   console.log(props);
   const [navtitle, setNavtitle] = useState("");
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -70,6 +72,10 @@ export default function Navbar(props) {
               border: "1px solid #000000",
               padding: "10px",
               display: { xs: "none", md: "flex" },
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              navigate("/setting");
             }}
           >
             <Avatar

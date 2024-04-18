@@ -39,7 +39,7 @@ const AddUser = () => {
           email: "",
           password: "",
           user_type_id: "2",
-          shop_id: "S-00000011",
+          shop_id: localStorage.getItem("shopId"),
         }}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {

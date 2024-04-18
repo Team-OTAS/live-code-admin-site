@@ -40,6 +40,10 @@ const AccUserTable = () => {
   };
   console.log(data);
 
+  useEffect(() => {
+    fetchUser.refetch();
+  }, []);
+
   const columns = [
     {
       field: "no",

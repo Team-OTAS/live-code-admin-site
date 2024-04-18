@@ -8,7 +8,7 @@ import AutoReply from "./AutoReply";
 import "./accsetting.css";
 
 function Accsetting() {
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = React.useState(3);
 
   function channgePage(id) {
     setPage(id);
