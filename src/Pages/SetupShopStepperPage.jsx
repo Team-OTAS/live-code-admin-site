@@ -18,18 +18,17 @@ export default function SetupShopStepperPage() {
   const showStep = (step) => {
     // console.log(step);
     switch (step) {
-      case "1":
+      case 1:
         return <StepOnePage />;
-      case "2":
+      case 2:
         return <StepTwoPage />;
-      case "3":
+      case 3:
         return <StepThreePage />;
       default:
         return <StepOnePage />;
     }
   };
 
-  
   return (
     <>
       <Grid

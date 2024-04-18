@@ -8,15 +8,14 @@ import StorefrontIcon from "@mui/icons-material/Storefront";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import {updateShops} from "../redux/features/shopUpdateSlice";
-
+// import { updateShops } from "../redux/features/shopUpdateSlice";
+import { updateFormData } from "../redux/features/shopUpdateSlice";
 
 export default function StepOnePage() {
   const { setStep } = useContext(MultiStepContext);
   const dispatch = useDispatch();
   const [shopData, setShopData] = useState({
-    shop_id: localStorage.getItem('shopId'),
-    shopName: "",
+    name: "",
     email: "",
     phone: "",
     address: "",
@@ -30,18 +29,18 @@ export default function StepOnePage() {
     });
   };
 
-  const handleOnclick = () =>{
+  const handleOnclick = () => {
     console.log("Shop Update Data", shopData);
-    dispatch(updateShops({ shopData }))
-    setStep("2");
-  }
+    dispatch(updateFormData({ ...shopData }));
+    // dispatch(updateShops({ shopData }))
+    setStep(2);
+  };
 
-  
   return (
-   <>
+    <>
       <Box>
-           {/* ---------Title Header Start -------------------------------------------------------- */}
-           <Grid item xs={12}>
+        {/* ---------Title Header Start -------------------------------------------------------- */}
+        <Grid item xs={12}>
           {/* for desktop users */}
           <Box component="div" sx={{ display: { xs: "none", sm: "block" } }}>
             <p className="textheader">Set Up Your Shop In Live Code</p>
@@ -104,71 +103,71 @@ export default function StepOnePage() {
             }}
           >
             {/* Update TextField components with unique IDs */}
-           <div className="input-field">
-           <TextField
-              id="shopName"
-              label={
-                <div className="input-field-label">
-                  <StorefrontIcon color="primary" />
-                  <span>Shop Name</span>
-                </div>
-              }
-              color="primary"
-              size="small"
-              value={shopData.shopName}
-              onChange={handleInputChange("shopName")}
-            />
-           </div>
             <div className="input-field">
-            <TextField
-              id="email"
-              label={
-                <div className="input-field-label">
-                  <EmailOutlinedIcon color="primary" />
-                  <span>Email</span>
-                </div>
-              }
-              color="primary"
-              size="small"
-              value={shopData.email}
-              onChange={handleInputChange("email")}
-            />
+              <TextField
+                id="shopName"
+                label={
+                  <div className="input-field-label">
+                    <StorefrontIcon color="primary" />
+                    <span>Shop Name</span>
+                  </div>
+                }
+                color="primary"
+                size="small"
+                value={shopData.name}
+                onChange={handleInputChange("name")}
+              />
             </div>
             <div className="input-field">
-            <TextField
-              id="phone"
-              label={
-                <div className="input-field-label">
-                  <LocalPhoneOutlinedIcon color="primary" />
-                  <span>Phone</span>
-                </div>
-              }
-              color="primary"
-              size="small"
-              value={shopData.phone}
-              onChange={handleInputChange("phone")}
-            />
+              <TextField
+                id="email"
+                label={
+                  <div className="input-field-label">
+                    <EmailOutlinedIcon color="primary" />
+                    <span>Email</span>
+                  </div>
+                }
+                color="primary"
+                size="small"
+                value={shopData.email}
+                onChange={handleInputChange("email")}
+              />
             </div>
-           <div className="input-field">
-           <TextField
-              id="address"
-              label={
-                <div className="input-field-label">
-                  <HomeOutlinedIcon color="primary" />
-                  <span>Address</span>
-                </div>
-              }
-              color="primary"
-              size="small"
-              value={shopData.address}
-              onChange={handleInputChange("address")}
-            />
-           </div>
+            <div className="input-field">
+              <TextField
+                id="phone"
+                label={
+                  <div className="input-field-label">
+                    <LocalPhoneOutlinedIcon color="primary" />
+                    <span>Phone</span>
+                  </div>
+                }
+                color="primary"
+                size="small"
+                value={shopData.phone}
+                onChange={handleInputChange("phone")}
+              />
+            </div>
+            <div className="input-field">
+              <TextField
+                id="address"
+                label={
+                  <div className="input-field-label">
+                    <HomeOutlinedIcon color="primary" />
+                    <span>Address</span>
+                  </div>
+                }
+                color="primary"
+                size="small"
+                value={shopData.address}
+                onChange={handleInputChange("address")}
+              />
+            </div>
           </Box>
         </Grid>
         {/* ---------Form End  --------------------------------------------------------*/}
-             {/* ---------Button Start  --------------------------------------------------------*/}
-             <Grid item xs={12} style={{ textAlign: "center" }}>
+        {/* ---------Button Start  --------------------------------------------------------*/}
+        <Grid item xs={12} style={{ textAlign: "center" }}>
           <Button
             variant="contained"
             color="primary"
@@ -179,7 +178,6 @@ export default function StepOnePage() {
           </Button>
         </Grid>
         {/* ---------Button End  --------------------------------------------------------*/}
-      
       </Box>
     </>
   );

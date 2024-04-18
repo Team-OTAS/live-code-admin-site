@@ -6,24 +6,26 @@ import { MultiStepContext } from "../StepContext";
 import TextField from "@mui/material/TextField";
 import SendIcon from "@mui/icons-material/Send";
 import { useDispatch } from "react-redux";
-import { updateReplyMessage } from "../redux/features/shopUpdateSlice";
+// import { updateReplyMessage } from "../redux/features/shopUpdateSlice";
+import { updateFormData } from "../redux/features/shopUpdateSlice";
 
 export default function StepTwoPage() {
   const { setStep } = useContext(MultiStepContext);
- 
+
   const dispatch = useDispatch();
-  const [message, setMessage] = useState("");
+  const [auto_reply, setMessage] = useState("");
 
   const onChangeHandler = (event) => {
     setMessage(event.target.value);
   };
 
-  const handleOnclick = () =>{
-    console.log("Setup Reply Message", message);
-    dispatch(updateReplyMessage({message}))
-    setStep("3")
-  }
-  console.log(message);
+  const handleOnclick = () => {
+    console.log("Setup Reply Message", auto_reply);
+    dispatch(updateFormData({ auto_reply }));
+    // dispatch(updateReplyMessage({message}))
+    setStep(3);
+  };
+  // console.log(message);
   return (
     <>
       <Box>
@@ -64,7 +66,6 @@ export default function StepTwoPage() {
         </Grid>
         <Grid
           item
-          
           xs={12}
           style={{
             display: "flex",
@@ -86,13 +87,13 @@ export default function StepTwoPage() {
               sx={{ width: "35ch" }}
               color="primary"
               onChange={onChangeHandler}
-              value={message}
+              value={auto_reply}
             />
           </form>
           <Box component="div" sx={{ display: { xs: "none", sm: "block" } }}>
             <div className="smartphone">
               <div className="content">
-                {message ? (
+                {auto_reply ? (
                   <div>
                     <div className="text">
                       <span style={{ fontSize: "12px" }}>
@@ -104,7 +105,7 @@ export default function StepTwoPage() {
                         variant="standard"
                         className="messageText"
                         multiline
-                        value={message}
+                        value={auto_reply}
                         inputProps={{
                           style: { color: "white", fontSize: "12px" },
                         }}

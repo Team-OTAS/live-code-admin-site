@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import { Box, Button } from "@mui/material";
 import "./../Styles/auth.css";
@@ -8,7 +8,10 @@ import TextField from "@mui/material/TextField";
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import { useNavigate } from "react-router-dom";
-
+// import { updateFormData } from "../redux/features/shopUpdateSlice";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "./../api/axios.js";
+import Swal from "sweetalert2";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -22,11 +25,46 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 export default function StepThreePage() {
+  const shopData = useSelector((state) => state.Shop.formData);
+  console.log("formThree", shopData);
+  const id = localStorage.getItem("shopId");
+  const [file, setFile] = useState(null);
+  const [receipt_header, setReceiptHeader] = useState("");
+  const [receipt_footer, setReciptFooter] = useState("");
+
+  function hundleFileChange(e) {
+    setFile(e.target.files[0]);
+    console.log(e.target.files[0]);
+  }
 
   const navigate = useNavigate();
-  const handleCompleteSetup = () =>{
-    navigate('/completesetuppage');
-  }
+  const handleCompleteSetup = async () => {
+    const data = {
+      ...shopData,
+      logo: file,
+      receipt_header: receipt_header,
+      receipt_footer: receipt_footer,
+    };
+    console.log("shop", data);
+
+    try {
+      const res = await axios.post(`/api/shops/${id}?_method=PUT`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(res);
+      navigate("/completesetuppage");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!",
+        icon: "error",
+      });
+    }
+    // navigate("/completesetuppage");
+  };
 
   return (
     <>
@@ -93,7 +131,7 @@ export default function StepThreePage() {
                 sx={{ marginTop: "10px" }}
               >
                 Upload Image
-                <VisuallyHiddenInput type="file" />
+                <VisuallyHiddenInput type="file" onChange={hundleFileChange} />
               </Button>
             </div>
             <TextField
@@ -108,6 +146,8 @@ export default function StepThreePage() {
               rows={5}
               sx={{ width: "38ch", marginY: "20px" }}
               color="primary"
+              value={receipt_header}
+              onChange={(e) => setReceiptHeader(e.target.value)}
             />
             <TextField
               id="outlined-multiline-static"
@@ -121,6 +161,8 @@ export default function StepThreePage() {
               rows={5}
               sx={{ width: "38ch" }}
               color="primary"
+              value={receipt_footer}
+              onChange={(e) => setReciptFooter(e.target.value)}
             />
           </form>
           <Box component="div" sx={{ display: { xs: "none", sm: "block" } }}>
@@ -133,7 +175,11 @@ export default function StepThreePage() {
 
         {/* ---------Button Start -------------------------------------------------------- */}
         <Grid item xs={12} style={{ textAlign: "center", paddingTop: "20px" }}>
-          <Button variant="contained" color="primary" onClick={handleCompleteSetup}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleCompleteSetup}
+          >
             Continue The Set Up
           </Button>
         </Grid>
