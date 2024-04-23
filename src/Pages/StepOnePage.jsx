@@ -13,7 +13,7 @@ import { updateFormData } from "../redux/features/shopUpdateSlice";
 
 export default function StepOnePage() {
   const { setStep } = useContext(MultiStepContext);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [shopData, setShopData] = useState({
     name: "",
     email: "",
