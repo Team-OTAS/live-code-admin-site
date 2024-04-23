@@ -6,47 +6,45 @@ import { Box, Button } from "@mui/material";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import PasswordOutlinedIcon from "@mui/icons-material/PasswordOutlined";
 import "./../Styles/auth.css";
-import ChgAccInfoPage from "./ChgAccInfoPage";
 import { useNavigate } from "react-router-dom";
-
 import fetchXsrfToken from "../api/auth";
 
 import axios from "axios";
 // import AuthService from "../services/auth.service";
 
 export default function LoginPage() {
-
-  const [user_name, setuser_name] = useState('');
-  const [password, setPassword] = useState('');
+  const [user_name, setuser_name] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
- 
+
   const navigate = useNavigate();
 
-  const handleLogin = async() =>{
-    const xsrfToken =await fetchXsrfToken();
+  const handleLogin = async () => {
+    const xsrfToken = await fetchXsrfToken();
     console.log("XSRF Token from auth.js", xsrfToken);
-    const response = await axios.post('/api/auth/login',  {
-      user_name,
-      password,
-    }, {
-      withCredentials: true, // Send cookies for authentication
-      headers: {
-        'X-XSRF-TOKEN': xsrfToken, // Include XSRF token
+    const response = await axios.post(
+      "/api/auth/login",
+      {
+        user_name,
+        password,
+      },
+      {
+        withCredentials: true, // Send cookies for authentication
+        headers: {
+          "X-XSRF-TOKEN": xsrfToken, // Include XSRF token
+        },
       }
-    });
-    if(response.status === 200){
+    );
+    if (response.status === 200) {
       const authToken = response.data.data.token;
       const shopId = response.data.data.shop_id;
-      localStorage.setItem('authToken', authToken);
-      localStorage.setItem('shopId', shopId);
-      navigate('/changeaccinfo')
+      localStorage.setItem("authToken", authToken);
+      localStorage.setItem("shopId", shopId);
+      navigate("/changeaccinfo");
     }
-    console.log('Response for shop data', response.data.data.token);
-    console.log('Response for shop data', response.data.data.shop_id);
-   
+    console.log("Response for shop data", response.data.data.token);
+    console.log("Response for shop data", response.data.data.shop_id);
   };
-
-  
 
   return (
     <>

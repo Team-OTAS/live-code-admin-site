@@ -67,3 +67,78 @@
   border-radius: 50%;
   padding: 5px;
 }
+
+.page-header {
+  font-size: 32px;
+  color: $buttonColor;
+  margin-bottom: 10px;
+  font-family: $inputFont;
+}
+
+.shopLogo {
+  width: 100%;
+  height: 250px;
+  border: 2px solid $buttonColor;
+  border-radius: 10px;
+
+  .title-logo {
+    font-size: 16px;
+    color: $buttonColor;
+    font-family: $textFont;
+    font-weight: bold;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-name {
+    background-color: $buttonColor;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px 20px;
+  }
+}
+
+.logo-img {
+  width: 70%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-img img {
+  width: inherit;
+  height: inherit;
+}
+
+.edit-btn {
+  background-color: transparent;
+  border: 1px solid rgba($color: #000000, $alpha: 0.3);
+  box-shadow: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  height: 50px;
+  font-family: $inputFont;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.receipt-body {
+  width: 95%;
+  margin: 0 20px;
+  box-shadow: none;
+  border: none;
+  font-size: 20px;
+  font-family: $inputFont;
+  font-weight: bold;
+}
+
+.receipt-body:active,
+.receipt-body:focus {
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
