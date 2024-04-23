@@ -7,9 +7,11 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import PasswordOutlinedIcon from "@mui/icons-material/PasswordOutlined";
 import "./../Styles/auth.css";
 import { useNavigate } from "react-router-dom";
-import fetchXsrfToken from "../api/auth";
 
-import axios from "axios";
+// import fetchXsrfToken from "../api/auth";
+
+// import axios from "axios";
+import axios from "../api/axios";
 // import AuthService from "../services/auth.service";
 
 export default function LoginPage() {
@@ -20,8 +22,6 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const xsrfToken = await fetchXsrfToken();
-    console.log("XSRF Token from auth.js", xsrfToken);
     const response = await axios.post(
       "/api/auth/login",
       {
@@ -29,17 +29,20 @@ export default function LoginPage() {
         password,
       },
       {
-        withCredentials: true, // Send cookies for authentication
-        headers: {
-          "X-XSRF-TOKEN": xsrfToken, // Include XSRF token
-        },
+        withCredentials: true,
       }
     );
     if (response.status === 200) {
       const authToken = response.data.data.token;
       const shopId = response.data.data.shop_id;
+      const id = response.data.data.id;
+      const status = response.data.data.status;
+      localStorage.setItem("id", id);
       localStorage.setItem("authToken", authToken);
       localStorage.setItem("shopId", shopId);
+      console.log("Shop id response", id);
+      console.log("Shop status", status);
+
       navigate("/changeaccinfo");
     }
     console.log("Response for shop data", response.data.data.token);

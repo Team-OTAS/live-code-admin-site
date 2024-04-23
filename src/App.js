@@ -45,10 +45,6 @@ const theme = createTheme({
 });
 
 const App = () => {
-  useEffect(() => {
-    fetchXsrfToken();
-  }, []);
-
   return (
     //  <BrowserRouter>
     <ThemeProvider theme={theme}>
