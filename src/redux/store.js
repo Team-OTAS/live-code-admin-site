@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import productReducers from "./features/productReducer";
 import productdeleteReducer from "./features/productdeleteSlice";
 import updateShops from "./features/shopUpdateSlice";
-import { setupListeners } from "@reduxjs/toolkit/query";
-import { userService } from "./features/userApiSlice";
+import shopData from "./features/shopDataSlice";
 import { userApi } from "./features/userApiSlice";
+// import { setupListeners } from "@reduxjs/toolkit/query";
 // import { userService } from "./features/userApiSlice";
 //
 const store = configureStore({
@@ -12,6 +12,7 @@ const store = configureStore({
     stocks: productReducers,
     deleteproduct: productdeleteReducer,
     Shop: updateShops,
+    ShopData: shopData,
     [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

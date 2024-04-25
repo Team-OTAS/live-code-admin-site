@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,6 +10,8 @@ import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import { getShopData } from "../redux/features/shopDataSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./../Styles/navbar.css";
 import AccMenu from "./AccMenu";
@@ -19,8 +21,10 @@ import { useNavigate } from "react-router";
 const drawerWidth = 240;
 
 export default function Navbar(props) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(props);
+  const id = localStorage.getItem("shopId");
+  const { loading, error, shopData } = useSelector((state) => state.ShopData);
   const [navtitle, setNavtitle] = useState("");
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -32,6 +36,22 @@ export default function Navbar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  const getexpire = (times) => {
+    const date = new Date(times);
+    const expireTime = date.getTime() - Date.now();
+    const expireDate = `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()}(${Math.trunc(
+      expireTime / 1000 / 60 / 60 / 24
+    )} Days Lefts)`;
+    return expireDate;
+  };
+
+  useEffect(() => {
+    dispatch(getShopData(id));
+    console.log(shopData);
+  }, []);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -83,10 +103,12 @@ export default function Navbar(props) {
               src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
               className="avatars"
             />
-            <div className="userName">
-              <p>nyonyolwin32</p>
-              <span>1 / 6 / 2024(179 Days Left)</span>
-            </div>
+            {shopData && (
+              <div className="userName">
+                <p style={{ marginBottom: "10px" }}>{shopData.data.name}</p>
+                <span>{getexpire(shopData.data.expire_at)}</span>
+              </div>
+            )}
           </Stack>
           <Stack sx={{ display: { xs: "block", md: "none" } }}>
             <AccMenu />

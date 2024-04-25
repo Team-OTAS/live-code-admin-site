@@ -10,7 +10,7 @@ const initialState = {
 export const deleteProduct = createAsyncThunk(
   "product/deleteProduct",
   (deleteData) => {
-    console.log(deleteData);
+    // console.log(deleteData);
     return axios
       .delete("/api/products", {
         data: deleteData,
