@@ -95,6 +95,7 @@ export default function Navbar(props) {
               cursor: "pointer",
             }}
             onClick={() => {
+              setNavtitle("Setting");
               navigate("/setting");
             }}
           >

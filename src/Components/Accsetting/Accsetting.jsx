@@ -15,7 +15,7 @@ function Accsetting() {
   }
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", marginRight: "30px" }}>
       <div className="settingBtnContainer">
         <NavLink
           className={({ isActive }) =>

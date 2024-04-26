@@ -2,25 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
+import { getShopData } from "./../../redux/features/shopDataSlice";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "./../../api/axios";
 
 function AutoReply() {
-  const [shop, setShop] = useState(null);
+  const dispatch = useDispatch();
+  const { loading, error, shopData } = useSelector((state) => state.ShopData);
   const id = localStorage.getItem("shopId");
   // console.log(shop);
 
-  async function getShop() {
-    try {
-      const res = await axios.get(`/api/shops/${id}`);
-      // console.log(res.data.data.auto_reply);
-      setShop(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   useEffect(() => {
-    getShop();
+    dispatch(getShopData(id));
   }, []);
 
   return (
@@ -52,7 +45,7 @@ function AutoReply() {
           </div>
         </div>
         <Grid container spacing={2} sx={{ paddingRight: "25px" }}>
-          {shop && (
+          {shopData && (
             <Grid item xs={12}>
               <Box className="shopLogo">
                 <div style={{ padding: "10px 0" }}>
@@ -64,7 +57,7 @@ function AutoReply() {
                     type="text"
                     className="receipt-body"
                     rows={6}
-                    value={shop.auto_reply}
+                    value={shopData.data.auto_reply}
                     readOnly={true}
                   ></textarea>
                 </div>

@@ -20,7 +20,7 @@ export default function AccMenu() {
   };
   const handleClose = () => {
     setAnchorEl(null);
-    navigate("/login");
+    // navigate("/login");
   };
 
   const getexpire = (times) => {
@@ -36,7 +36,7 @@ export default function AccMenu() {
 
   useEffect(() => {
     dispatch(getShopData(id));
-    console.log(shopData);
+    // console.log(shopData);
   }, []);
 
   return (
@@ -62,7 +62,12 @@ export default function AccMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <Box sx={{ textAlign: "center", padding: "10px" }}>
+        <Box
+          sx={{ textAlign: "center", padding: "10px" }}
+          onClick={() => {
+            navigate("/setting");
+          }}
+        >
           {shopData && (
             <div className="userName">
               <p style={{ marginBottom: "10px" }}>{shopData.data.name}</p>
@@ -71,7 +76,13 @@ export default function AccMenu() {
           )}
         </Box>
         <Divider />
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          Logout
+        </MenuItem>
       </Menu>
     </div>
   );

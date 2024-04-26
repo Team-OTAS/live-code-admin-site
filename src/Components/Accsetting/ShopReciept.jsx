@@ -3,29 +3,21 @@ import React, { useEffect, useState } from "react";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 import axios from "./../../api/axios";
+import { getShopData } from "./../../redux/features/shopDataSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function ShopReciept() {
-  const [shop, setShop] = useState(null);
+  const dispatch = useDispatch();
   const id = localStorage.getItem("shopId");
+  const { loading, error, shopData } = useSelector((state) => state.ShopData);
   // console.log(id);
-
-  async function getShop() {
-    try {
-      const res = await axios.get(`/api/shops/${id}`);
-      console.log(res.data.data.receipt_footer);
-      setShop(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   useEffect(() => {
-    getShop();
+    dispatch(getShopData(id));
   }, []);
 
   return (
     <>
-      {shop && (
+      {shopData && (
         <Box>
           <div>
             <div
@@ -68,7 +60,7 @@ function ShopReciept() {
                   >
                     <div className="logo-img">
                       <img
-                        src={`https://api.livecodemm.com${shop.logo}`}
+                        src={`https://api.livecodemm.com${shopData.data.logo}`}
                         alt="logo"
                       />
                     </div>
@@ -87,7 +79,7 @@ function ShopReciept() {
                     type="text"
                     className="receipt-body"
                     rows={6}
-                    value={shop.receipt_header}
+                    value={shopData.data.receipt_header}
                     readOnly={true}
                   ></textarea>
                 </div>
@@ -104,7 +96,7 @@ function ShopReciept() {
                     type="text"
                     className="receipt-body"
                     rows={6}
-                    value={shop.receipt_footer}
+                    value={shopData.data.receipt_footer}
                     readOnly={true}
                   ></textarea>
                 </div>

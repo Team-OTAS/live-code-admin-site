@@ -116,7 +116,7 @@ const AccUserTable = () => {
           rows={data.data.data.map((row, index) => ({ ...row, no: index + 1 }))}
           columns={columns}
           pageSize={12}
-          checkboxSelection
+          // checkboxSelection
           loading={isLoading}
           disableRowSelectionOnClick
           slots={{
