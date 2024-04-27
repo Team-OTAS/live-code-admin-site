@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import Dashboard from "./product/Dashboard";
 import { Route, Routes } from "react-router-dom";
@@ -8,16 +8,22 @@ import { Box } from "@mui/material";
 import OrderPage from "./order/OrderPage";
 import Accsetting from "../Components/Accsetting/Accsetting";
 import AddUser from "../Components/Accsetting/AddUser";
+import { useTranslation } from "react-i18next";
 // import { Route,Routes,BrowserRouter,RouterProvider } from 'react-router-dom'
 
 function HomePage() {
-  const [navtitle, setNavtitle] = useState("Stock Management");
+  const { t } = useTranslation();
+  const [navtitle, setNavtitle] = useState(t("navTitle"));
 
   // recieve from drawer
   function getTitle(title) {
     console.log("nav", title);
     setNavtitle(title);
   }
+
+  useEffect(() => {
+    setNavtitle(t("navTitle"));
+  }, [t]);
 
   return (
     <div style={{ background: "#f2f3f7" }}>
