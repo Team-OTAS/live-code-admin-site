@@ -20,7 +20,7 @@ function HomePage() {
   }
 
   return (
-    <div>
+    <div style={{ background: "#f2f3f7" }}>
       <Box>
         <Navbar title={navtitle} />
       </Box>

@@ -4,8 +4,8 @@
   width: 280px;
   height: 70vh;
   border-radius: 18px;
-  border: 3px solid $textheaderColor;
-  // box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.8);
+  background-color: #fff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
   padding: 15px 0;
 
   display: flex;
@@ -22,7 +22,7 @@
   border-radius: 5px;
   background-color: #fff;
   color: $buttonColor;
-  border: 3px solid $buttonColor;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
 
   display: flex;
   justify-content: center;

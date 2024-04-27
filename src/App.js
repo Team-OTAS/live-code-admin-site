@@ -1,19 +1,12 @@
 import React from "react";
-import { useEffect } from "react";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import { Route, Routes } from "react-router-dom";
-
 import StepContextProvider from "./StepContext";
-
-import fetchXsrfToken from "./api/auth";
 import LoginPage from "./Pages/LoginPage";
 import ChgAccInfoPage from "./Pages/ChgAccInfoPage";
 import FBloginPage from "./Pages/FbloginPage";
 import SetupShopStepperPage from "./Pages/SetupShopStepperPage";
-import StepOnePage from "./Pages/StepOnePage";
-import StepTwoPage from "./Pages/StepTwoPage";
-import StepThreePage from "./Pages/StepThreePage";
 import CompleteSetupPage from "./Pages/CompleteSetupPage";
 import HomePage from "./Pages/HomePage";
 
@@ -48,7 +41,7 @@ const App = () => {
   return (
     //  <BrowserRouter>
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div>
         <StepContextProvider>
           <Routes>
             <Route path="/login" element={<LoginPage />} />

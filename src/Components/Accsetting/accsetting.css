@@ -4,18 +4,15 @@
 @import url("https://fonts.cdnfonts.com/css/garet");
 .settingBtnContainer {
   width: 100%;
-  display: flex;
-  justify-content: end;
-  float: right;
+  display: inline-block;
 }
 
 .settingbtn {
   padding: 15px 15px;
-  text-decoration: none;
-  border-radius: 5px;
-  background-color: #fff;
-  color: #4d3f3f;
-  border: 3px solid #4d3f3f;
+  border-radius: 5px 5px 0 0;
+  background-color: #4d3f3f;
+  font-size: 16px;
+  color: #fff;
   margin-left: 10px;
   display: flex;
   justify-content: center;
@@ -27,8 +24,9 @@
 }
 
 .settingbtn.active {
-  background: #4d3f3f;
-  color: #fff;
+  background: #fff;
+  color: #4d3f3f;
+  border-bottom: none;
 }
 
 .settingText {
@@ -134,4 +132,34 @@
   box-shadow: none;
   border: none;
   outline: none;
+}
+
+.btn-container {
+  margin-right: 25px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: end;
+}
+.btn-container button {
+  padding: 10px 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  margin-left: 20px;
+}
+.btn-container .discard {
+  background-color: white;
+}
+.btn-container .discard:hover,
+.btn-container .save:hover,
+.btn-container .discard:active,
+.btn-container .save:active {
+  transform: scale(0.95);
+}
+.btn-container .save {
+  background-color: #4d3f3f;
+  color: white;
 }/*# sourceMappingURL=accsetting.css.map */

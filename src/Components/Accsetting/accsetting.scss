@@ -2,20 +2,17 @@
 
 .settingBtnContainer {
   width: 100%;
-  display: flex;
-  justify-content: end;
+  display: inline-block;
   // background-color: red;
-  float: right;
 }
 
 .settingbtn {
   // width: 250px;
   padding: 15px 15px;
-  text-decoration: none;
-  border-radius: 5px;
-  background-color: #fff;
-  color: $buttonColor;
-  border: 3px solid $buttonColor;
+  border-radius: 5px 5px 0 0;
+  background-color: $buttonColor;
+  font-size: 16px;
+  color: #fff;
   margin-left: 10px;
 
   display: flex;
@@ -28,8 +25,9 @@
 }
 
 .settingbtn.active {
-  background: $buttonColor;
-  color: #fff;
+  background: #fff;
+  color: $buttonColor;
+  border-bottom: none;
 }
 
 .settingText {
@@ -141,4 +139,38 @@
   box-shadow: none;
   border: none;
   outline: none;
+}
+
+.btn-container {
+  // float: right;
+  margin-right: 25px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: end;
+  button {
+    padding: 10px 20px;
+    font-family: $textFont;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    margin-left: 20px;
+  }
+
+  .discard {
+    background-color: white;
+  }
+
+  .discard:hover,
+  .save:hover,
+  .discard:active,
+  .save:active {
+    transform: scale(0.95);
+  }
+
+  .save {
+    background-color: $buttonColor;
+    color: white;
+  }
 }
