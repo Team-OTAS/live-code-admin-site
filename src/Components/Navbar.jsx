@@ -17,6 +17,7 @@ import "./../Styles/navbar.css";
 import AccMenu from "./AccMenu";
 import DrawerSlide from "./DrawerSlide";
 import { useNavigate } from "react-router";
+import { Button } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -27,6 +28,7 @@ export default function Navbar(props) {
   const { loading, error, shopData } = useSelector((state) => state.ShopData);
   const [navtitle, setNavtitle] = useState("");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [showmenu, setShowmenu] = useState(false);
 
   function getTitle(title) {
     console.log("nav", title);
@@ -93,10 +95,10 @@ export default function Navbar(props) {
               padding: "10px",
               display: { xs: "none", md: "flex" },
               cursor: "pointer",
+              position: "relative",
             }}
             onClick={() => {
-              setNavtitle("Setting");
-              navigate("/setting");
+              setShowmenu(!showmenu);
             }}
           >
             <Avatar
@@ -110,7 +112,24 @@ export default function Navbar(props) {
                 <span>{getexpire(shopData.data.expire_at)}</span>
               </div>
             )}
+
+            {showmenu && (
+              <div className="menu">
+                <Button
+                  onClick={() => {
+                    setNavtitle("Setting");
+                    navigate("/setting");
+                  }}
+                >
+                  <span>Setting</span>
+                </Button>
+                <Button onClick={() => navigate("/login")}>
+                  <span>Logout</span>
+                </Button>
+              </div>
+            )}
           </Stack>
+
           <Stack sx={{ display: { xs: "block", md: "none" } }}>
             <AccMenu />
           </Stack>
