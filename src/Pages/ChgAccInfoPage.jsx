@@ -12,30 +12,33 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function ChgAccInfoPage() {
-
   const navigate = useNavigate();
-  const [user_name, setuser_name] = useState('');
-  const [password, setPassword] = useState('');
-  const [password_confirmation, setpassword_confirmation] = useState('');
+  const [user_name, setuser_name] = useState("");
+  const [password, setPassword] = useState("");
+  const [password_confirmation, setpassword_confirmation] = useState("");
 
-  const handleDoitLater = () =>{
-    navigate('/setupshopstepperpage');
+  const handleDoitLater = () => {
+    navigate("/setup");
     console.log("navigation to fb login work");
-  }
+  };
 
-  const changeLoginInfos = async() =>{
-  const id = localStorage.getItem('id');
+  const changeLoginInfos = async () => {
+    const id = localStorage.getItem("id");
 
     const response = await axios.patch(`/api/update-profile/${id}`, {
       user_name,
       password,
+      password_confirmation,
+    });
+    console.log("id", id);
+    console.log("Change User Info func work");
+    console.log(
+      "Updated User Infos",
+      user_name,
+      password,
       password_confirmation
-    })
-    console.log('id', id);
-    console.log('Change User Info func work');
-    console.log('Updated User Infos', user_name, password, password_confirmation
     );
-  }
+  };
 
   return (
     <>
@@ -100,7 +103,7 @@ export default function ChgAccInfoPage() {
                 <TextField
                   id="outlined-error-helper-text"
                   value={user_name}
-                  onChange={(e)=> setuser_name(e.target.value)}
+                  onChange={(e) => setuser_name(e.target.value)}
                   label={
                     <div className="input-field-label">
                       <Person2OutlinedIcon color="primary" />
@@ -130,7 +133,7 @@ export default function ChgAccInfoPage() {
                 <TextField
                   id="outlined-error-helper-text"
                   value={password_confirmation}
-                  onChange={(e)=> setpassword_confirmation(e.target.value)}
+                  onChange={(e) => setpassword_confirmation(e.target.value)}
                   label={
                     <div className="input-field-label">
                       <PasswordOutlinedIcon color="primary" />
@@ -153,11 +156,15 @@ export default function ChgAccInfoPage() {
               flexDirection: "column",
             }}
           >
-            <Button variant="contained" color="primary" onClick={changeLoginInfos}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={changeLoginInfos}
+            >
               Change information
             </Button>
             <Button onClick={handleDoitLater}>
-              <Link >Do it Later</Link>
+              <Link>Do it Later</Link>
             </Button>
           </Grid>
         </Grid>

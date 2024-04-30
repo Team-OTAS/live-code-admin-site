@@ -5,9 +5,11 @@ import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlin
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import {} from "react-print";
 
 import "./../Styles/drawer.css";
 import LanguageSelecter from "./languageSelecter/LanguageSelecter";
+import { Button } from "@mui/material";
 
 export default function DrawerSlide({ Title }) {
   const { t } = useTranslation();
@@ -58,6 +60,12 @@ export default function DrawerSlide({ Title }) {
           <span className="btnText">{navTitle[2]}</span>
         </NavLink>
       </div>
+
+      {/* <div>
+        <Button variant="" sx={{}} onClick={() => window.print()}>
+          Print
+        </Button>
+      </div> */}
 
       <div style={{ width: "100%" }}>
         <LanguageSelecter />

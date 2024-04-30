@@ -9,6 +9,7 @@ import OrderPage from "./order/OrderPage";
 import Accsetting from "../Components/Accsetting/Accsetting";
 import AddUser from "../Components/Accsetting/AddUser";
 import { useTranslation } from "react-i18next";
+import Vouncher from "./../Components/vouncher/Vouncher";
 // import { Route,Routes,BrowserRouter,RouterProvider } from 'react-router-dom'
 
 function HomePage() {
@@ -40,6 +41,7 @@ function HomePage() {
           <Route path="/order" element={<OrderPage />} />
           <Route path="/setting" element={<Accsetting />} />
           <Route path="/adduser" element={<AddUser />} />
+          <Route path="/vouncher" element={<Vouncher />} />
         </Routes>
       </div>
     </div>

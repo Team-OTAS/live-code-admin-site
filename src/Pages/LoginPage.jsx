@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import { Box, Button } from "@mui/material";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import PasswordOutlinedIcon from "@mui/icons-material/PasswordOutlined";
+import { setAuthToken } from "../api/axios";
 import "./../Styles/auth.css";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 // import axios from "axios";
 import axios from "../api/axios";
+import Swal from "sweetalert2";
 // import AuthService from "../services/auth.service";
 
 export default function LoginPage() {
@@ -22,31 +24,36 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const response = await axios.post(
-      "/api/auth/login",
-      {
-        user_name,
-        password,
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    if (response.status === 200) {
+    try {
+      const response = await axios.post(
+        "/api/auth/login",
+        {
+          user_name,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       const authToken = response.data.data.token;
       const shopId = response.data.data.shop_id;
       const id = response.data.data.id;
-      const status = response.data.data.status;
+      // const status = response.data.data.status;
       localStorage.setItem("id", id);
+      setAuthToken(authToken);
       localStorage.setItem("authToken", authToken);
       localStorage.setItem("shopId", shopId);
-      console.log("Shop id response", id);
-      console.log("Shop status", status);
+      // console.log("Shop id response", id);
+      // console.log("Shop status", status);
 
       navigate("/changeaccinfo");
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.response.data.message,
+      });
     }
-    console.log("Response for shop data", response.data.data.token);
-    console.log("Response for shop data", response.data.data.shop_id);
   };
 
   return (
