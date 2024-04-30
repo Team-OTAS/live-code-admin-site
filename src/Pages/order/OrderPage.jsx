@@ -6,7 +6,7 @@ import OrderTable from "../../Components/order/OrderTable";
 
 function OrderPage() {
   return (
-    <Box sx={{ paddingLeft: "10px" }}>
+    <Box sx={{ paddingLeft: "10px", overflowX: "hidden" }}>
       <Box className="filterContainer">
         <Button
           size="large"

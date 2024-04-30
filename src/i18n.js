@@ -13,12 +13,16 @@ i18n
         translation: {
           greeting: "Hello",
           navTitle: "Stock Management",
+          navTitle2: "Order Management",
+          navTitle3: "Live Sale",
         },
       },
       mm: {
         translation: {
           greeting: "မင်္ဂလာပါ",
-          navTitle: "စီမံခန့်ခွဲရန်",
+          navTitle: "Stock စီမံခန့်ခွဲရန်",
+          navTitle2: "အော်ဒါစီမံခန့်ခွဲရန်",
+          navTitle3: "Live လွှင့်ရောင်းရန်",
         },
       },
     },

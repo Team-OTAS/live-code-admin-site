@@ -19,7 +19,7 @@ const createProduct = async (formData) => {
 const getProducts = async () => {
   const response = await axios.get("/api/products");
   // console.log(response.data.data.original);
-  return response.data.data.original;
+  return response.data.data.original.data;
 };
 
 // Delete a Product

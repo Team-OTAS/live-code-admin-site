@@ -1,13 +1,17 @@
 @import "./../Variables/variables.scss";
 
 .filterContainer {
+  width: 80%;
+  // background-color: red;
+  display: flex;
+  justify-content: space-between;
 }
 
 .filterButton {
   background-color: #fff;
   color: #000;
   font-family: $textFont;
-  margin-right: 15px;
+  margin-right: 20px;
 }
 
 .filterButton:hover {

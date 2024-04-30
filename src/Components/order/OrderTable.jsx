@@ -101,7 +101,7 @@ const OrderTable = ({ sendDataToDashboard }) => {
   return (
     <Box sx={{ height: { xs: 600, md: 500 } }}>
       <DataGrid
-        rows={products.data || []}
+        rows={products.map((item, index) => ({ no: index + 1, ...item })) || []}
         columns={columns}
         pageSize={12}
         checkboxSelection

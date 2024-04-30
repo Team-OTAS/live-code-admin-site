@@ -27,7 +27,7 @@ function CustomToolbar() {
 
 const columns = [
   {
-    field: "id",
+    field: "no",
     headerName: "No",
     width: 100,
   },
@@ -99,7 +99,7 @@ const LiveDataTable = ({ sendDataToDashboard }) => {
   return (
     <Box sx={{ height: { xs: 600, md: 500 } }}>
       <DataGrid
-        rows={products.data || []}
+        rows={products.map((item, index) => ({ no: index + 1, ...item })) || []}
         columns={columns}
         pageSize={12}
         checkboxSelection

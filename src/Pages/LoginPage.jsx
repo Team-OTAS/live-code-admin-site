@@ -8,13 +8,8 @@ import PasswordOutlinedIcon from "@mui/icons-material/PasswordOutlined";
 import { setAuthToken } from "../api/axios";
 import "./../Styles/auth.css";
 import { useNavigate } from "react-router-dom";
-
-// import fetchXsrfToken from "../api/auth";
-
-// import axios from "axios";
 import axios from "../api/axios";
 import Swal from "sweetalert2";
-// import AuthService from "../services/auth.service";
 
 export default function LoginPage() {
   const [user_name, setuser_name] = useState("");
@@ -25,35 +20,75 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(
-        "/api/auth/login",
-        {
-          user_name,
-          password,
-        },
-        {
-          withCredentials: true,
+      const response = await axios.post("/api/auth/login", {
+        user_name,
+        password,
+      });
+      console.log("Login Page", response);
+      if (response.status === 200) {
+        const authToken = response.data.data.token;
+        const shopId = response.data.data.shop_id;
+        const id = response.data.data.id;
+        localStorage.setItem("id", id);
+        setAuthToken(authToken);
+        localStorage.setItem("authToken", authToken);
+        localStorage.setItem("shopId", shopId);
+        if (response.data.data.user_type.id !== 1) {
+          if (response.data.data.status === "onboarding") {
+            navigate("/");
+          } else {
+            navigate("/changeaccinfo");
+          }
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Invalid Credentials",
+            text: "You are not authorized to access this shop",
+          });
         }
-      );
-      const authToken = response.data.data.token;
-      const shopId = response.data.data.shop_id;
-      const id = response.data.data.id;
-      // const status = response.data.data.status;
-      localStorage.setItem("id", id);
-      setAuthToken(authToken);
-      localStorage.setItem("authToken", authToken);
-      localStorage.setItem("shopId", shopId);
-      // console.log("Shop id response", id);
-      // console.log("Shop status", status);
-
-      navigate("/changeaccinfo");
+      }
     } catch (error) {
+      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: error.response.data.message,
+        text: "Login Failed",
       });
     }
+    // try {
+    //   const response = await axios.post(
+    //     "/api/auth/login",
+    //     {
+    //       user_name,
+    //       password,
+    //     },
+    //     {
+    //       withCredentials: true,
+    //     }
+    //   );
+    //   console.log(response);
+    //   const authToken = response.data.data.token;
+    //   const shopId = response.data.data.shop_id;
+    //   const id = response.data.data.id;
+    //   // const status = response.data.data.status;
+    //   localStorage.setItem("id", id);
+    //   setAuthToken(authToken);
+    //   localStorage.setItem("authToken", authToken);
+    //   localStorage.setItem("shopId", shopId);
+    //   let decodedToken = jwtDecode(authToken);
+    //   // console.log("Decoded Token", decodedToken.iat * 1000);
+    //   localStorage.setItem("expirationTime", decodedToken.iat * 1000);
+    //   // console.log("Shop id response", id);
+    //   // console.log("Shop status", status);
+
+    //   navigate("/changeaccinfo");
+    // } catch (error) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: "Something went wrong!",
+    //   });
+    // }
   };
 
   return (
@@ -91,11 +126,9 @@ export default function LoginPage() {
             </Box>
             <Box component="div" sx={{ display: { xs: "block", sm: "none" } }}>
               <p className="textbody">
-                <p className="textbody">
-                  Login into live code and manage <br /> your live sales with{" "}
-                  <br /> easy-peasy features to create <br />
-                  endless profits without much effort..
-                </p>
+                Login into live code and manage <br /> your live sales with{" "}
+                <br /> easy-peasy features to create <br />
+                endless profits without much effort..
               </p>
             </Box>
           </Grid>

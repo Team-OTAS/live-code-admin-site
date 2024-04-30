@@ -16,6 +16,7 @@ import {
 } from "./../../redux/features/userApiSlice";
 
 import "./../../Styles/dashboard.css";
+import Swal from "sweetalert2";
 
 function CustomToolbar() {
   return (
@@ -38,7 +39,7 @@ const AccUserTable = () => {
     deleteUser(id);
     fetchUser.refetch();
   };
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     fetchUser.refetch();
@@ -50,7 +51,7 @@ const AccUserTable = () => {
       headerName: "No",
       width: 100,
     },
-    { field: "user_name", headerName: "User Name", width: 200 },
+    { field: "user_name", headerName: "User Name", width: 300 },
     {
       field: "user_type",
       headerName: "User Type",
@@ -79,28 +80,44 @@ const AccUserTable = () => {
     },
     {
       field: "actions",
-      headerName: "Actions",
-      width: 200,
-      renderCell: (params) => (
-        <Button
-          sx={{
-            background: "red",
-            color: "white",
-            padding: "10px",
-            borderRadius: "10px",
-            fontSize: "14px",
-            "&:hover": {
-              backgroundColor: "#fff",
-              border: "3px solid red",
-              color: "red",
-            },
-          }}
-          variant="filled"
-          onClick={() => deleteAccUser(params.row.id)}
-        >
-          <DeleteOutlineOutlinedIcon sx={{ fontSize: "28px" }} />
-        </Button>
-      ),
+      headerName: "",
+      width: 100,
+      renderCell: (params) =>
+        params.row.user_type_id === 3 ? (
+          <Button
+            sx={{
+              background: "red",
+              color: "white",
+              padding: "10px",
+              borderRadius: "10px",
+              fontSize: "14px",
+              "&:hover": {
+                backgroundColor: "#fff",
+                border: "3px solid red",
+                color: "red",
+              },
+            }}
+            variant="filled"
+            onClick={() =>
+              Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  deleteAccUser(params.row.id);
+                }
+              })
+            }
+            // onClick={() => deleteAccUser(params.row.id)}
+          >
+            <DeleteOutlineOutlinedIcon sx={{ fontSize: "28px" }} />
+          </Button>
+        ) : null,
     },
   ];
 
@@ -123,10 +140,6 @@ const AccUserTable = () => {
             toolbar: CustomToolbar,
             loadingOverlay: LinearProgress,
           }}
-          // onRowSelectionModelChange={(dataId) => {
-          //   sendData(dataId);
-          //   console.log("table", dataId);
-          // }}
         />
       )}
       {!isLoading && isError ? <AlertBox message={message} /> : null}

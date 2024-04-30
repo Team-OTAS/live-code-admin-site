@@ -27,7 +27,7 @@ function ProductDetail() {
 
   console.log(product || null);
   return (
-    <Box sx={{ marginTop: "20px" }}>
+    <Box sx={{ marginTop: "20px", marginLeft: "20px" }}>
       {isLoading && <Loading />}
       {!isLoading && product ? (
         <Grid

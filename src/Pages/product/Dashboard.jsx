@@ -4,8 +4,6 @@ import { Box, Button, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../../redux/features/productdeleteSlice";
 import DataTable from "../../Components/product/DataTable";
-import SuccessBox from "../../Components/modalBox/successBox";
-import AlertBox from "../../Components/modalBox/AlertBox";
 import ProductDetail from "./ProductDetail";
 import CreateProdcut from "./CreateProdcut";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -72,7 +70,22 @@ export default function Dashboard() {
               variant="contained"
               sx={{ marginLeft: "10px" }}
               disabled={isDisabled}
-              onClick={deleteHandleClick}
+              onClick={() =>
+                Swal.fire({
+                  title: "Are you sure?",
+                  text: "You won't be able to revert this!",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, delete it!",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    deleteHandleClick();
+                  }
+                })
+              }
+              // onClick={deleteHandleClick}
             >
               <DeleteIcon />
               <span className="btnText">Remove Stock</span>
@@ -101,7 +114,21 @@ export default function Dashboard() {
               variant="contained"
               sx={{ marginLeft: "10px" }}
               disabled={isDisabled}
-              onClick={deleteHandleClick}
+              onClick={() =>
+                Swal.fire({
+                  title: "Are you sure?",
+                  text: "You won't be able to revert this!",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, delete it!",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    deleteHandleClick();
+                  }
+                })
+              }
             >
               <PersonAddAlt1OutlinedIcon />
               <span className="btnText">Remove</span>

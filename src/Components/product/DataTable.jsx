@@ -27,19 +27,22 @@ function CustomToolbar() {
 
 const columns = [
   {
-    field: "id",
+    field: "no",
     headerName: "No",
     width: 100,
+    renderCell: (params) => {
+      // console.log(params.rowIndex);
+    },
   },
-  { field: "name", headerName: "Name", width: 100 },
-  { field: "description", headerName: "Description", width: 200 },
+  { field: "name", headerName: "Name", width: 150 },
+  { field: "description", headerName: "Description", width: 300 },
   { field: "price", headerName: "Price", width: 100 },
   { field: "unit", headerName: "Unit", width: 100 },
   { field: "quantity", headerName: "Quantity", width: 100 },
   {
     field: "actions",
     headerName: "Actions",
-    width: 200,
+    width: 250,
     renderCell: (params) => (
       <Link to={`/viewstock/${params.row.id}`}>
         <Button
@@ -57,7 +60,7 @@ const columns = [
           variant="filled"
         >
           <PreviewOutlinedIcon sx={{ marginRight: "5px" }} />
-          View Shop
+          View Produuct
         </Button>
       </Link>
     ),
@@ -79,7 +82,7 @@ const DataTable = ({ sendDataToDashboard }) => {
     dispatch(getProducts());
   }, [deletes.deletes]);
 
-  // console.log(products.data);
+  // console.log(products);
 
   //   if (products.products.code === 200) {
   //     console.log(products.products.data);
@@ -100,7 +103,7 @@ const DataTable = ({ sendDataToDashboard }) => {
   return (
     <Box sx={{ height: { xs: 600, md: 500 } }}>
       <DataGrid
-        rows={products.data || []}
+        rows={products.map((item, index) => ({ no: index + 1, ...item })) || []}
         columns={columns}
         pageSize={12}
         checkboxSelection

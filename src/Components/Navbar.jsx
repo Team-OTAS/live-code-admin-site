@@ -52,7 +52,7 @@ export default function Navbar(props) {
 
   useEffect(() => {
     dispatch(getShopData(id));
-    console.log(shopData);
+    // console.log(shopData);
   }, []);
 
   const drawer = (
@@ -74,7 +74,7 @@ export default function Navbar(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2, display: { md: "none" } }}
           >
             <MenuIcon />
           </IconButton>

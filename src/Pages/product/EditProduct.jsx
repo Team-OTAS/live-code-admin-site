@@ -100,7 +100,7 @@ function EditProduct() {
   // console.log(product);
 
   return (
-    <Box sx={{ marginTop: "20px" }}>
+    <Box sx={{ marginTop: "20px", marginLeft: "20px" }}>
       {isLoading && <Loading />}
       {!isLoading && product ? (
         <Grid
@@ -354,7 +354,7 @@ function EditProduct() {
                 sx={{ margin: "0" }}
                 onClick={hundleSubmit}
               >
-                Edit Stock Details
+                Update Stock
               </Button>
             </div>
           </Grid>
@@ -383,9 +383,11 @@ function EditProduct() {
                   variant="outlined"
                   color="vaild"
                   sx={{ margin: "0" }}
-                  onClick={deleteHandleClick}
+                  onClick={() => {
+                    window.history.back();
+                  }}
                 >
-                  Remove The Stock
+                  Cancel
                 </Button>
               </div>
             </Grid>

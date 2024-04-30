@@ -9,6 +9,7 @@ import FBloginPage from "./Pages/FbloginPage";
 import SetupShopStepperPage from "./Pages/SetupShopStepperPage";
 import CompleteSetupPage from "./Pages/CompleteSetupPage";
 import HomePage from "./Pages/HomePage";
+import PrivateRoute from "./PrivateRoute";
 
 const theme = createTheme({
   palette: {
@@ -49,7 +50,14 @@ const App = () => {
             <Route path="/fblogin" element={<FBloginPage />} />
             <Route path="/setup" element={<SetupShopStepperPage />} />
             <Route path="/completesetuppage" element={<CompleteSetupPage />} />
-            <Route path="*" element={<HomePage />} />
+            <Route
+              path="*"
+              element={
+                <PrivateRoute>
+                  <HomePage />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </StepContextProvider>
       </div>

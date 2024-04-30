@@ -11,6 +11,8 @@ import { useCreateUserMutation } from "../../redux/features/userApiSlice";
 import { useNavigate } from "react-router-dom";
 import SuccessBox from "../modalBox/successBox";
 import AlertBox from "../modalBox/AlertBox";
+import axios from "./../../api/axios";
+import Swal from "sweetalert2";
 
 const validationSchema = Yup.object().shape({
   user_name: Yup.string().required("Name is required"),
@@ -20,8 +22,25 @@ const validationSchema = Yup.object().shape({
 
 const AddUser = () => {
   const navigate = useNavigate();
-  const [createUser, data] = useCreateUserMutation();
-  console.log(data.error);
+  // const [createUser, data] = useCreateUserMutation();
+  // console.log(data.error);
+
+  const createUser = async (data) => {
+    try {
+      const res = await axios.post("/api/users", data);
+      Swal.fire({
+        icon: "success",
+        text: "Create User Successful",
+      });
+      showMessage();
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Try again later",
+      });
+    }
+  };
 
   const showMessage = () => {
     setTimeout(() => {
@@ -110,8 +129,8 @@ const AddUser = () => {
           </Form>
         )}
       </Formik>
-      {data.error && <AlertBox message={data.error.data.message} />}
-      {data.success && <SuccessBox message={"User Added Successfully"} />}
+      {/* {data.error && <AlertBox message={data.error.data.message} />}
+      {data.success && <SuccessBox message={"User Added Successfully"} />} */}
     </Box>
   );
 };

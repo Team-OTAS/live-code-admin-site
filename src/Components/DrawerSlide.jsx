@@ -5,20 +5,31 @@ import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlin
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import {} from "react-print";
-
+import { useLocation } from "react-router-dom";
 import "./../Styles/drawer.css";
 import LanguageSelecter from "./languageSelecter/LanguageSelecter";
 import { Button } from "@mui/material";
 
 export default function DrawerSlide({ Title }) {
+  const location = useLocation();
+  // console.log(location.pathname);
   const { t } = useTranslation();
-  const navTitle = [t("navTitle"), "Live Sale", "Order Management"];
+  const navTitle = [t("navTitle"), t("navTitle2"), t("navTitle3")];
 
   function changeTitle(title) {
     console.log(title);
     Title(title);
   }
+
+  const activeClass = () => {
+    if (location.pathname === "/") {
+      return "slidebtn active";
+    }
+    if (location.pathname.includes("stock")) {
+      return "slidebtn active";
+    }
+    return "slidebtn";
+  };
 
   return (
     <div className="DrawContainer">
@@ -29,9 +40,10 @@ export default function DrawerSlide({ Title }) {
       <div>
         <NavLink
           to="/"
-          className={({ isActive }) =>
-            isActive ? "slidebtn active" : "slidebtn"
-          }
+          className={activeClass}
+          // className={({ isActive }) =>
+          //   isActive ? "slidebtn active" : "slidebtn"
+          // }
           onClick={() => changeTitle(navTitle[0])}
         >
           <ManageAccountsOutlinedIcon />
