@@ -174,3 +174,56 @@
     color: white;
   }
 }
+
+@media (max-width: 600px) {
+  .settingbtn {
+    // width: 250px;
+    padding: 10px 10px;
+    border-radius: 5px 5px 0 0;
+    background-color: $buttonColor;
+    font-size: 12px;
+    color: #fff;
+    margin-left: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .adduser {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .adduser span {
+    font-size: 12px;
+    margin-right: 50px;
+  }
+
+  .page-header {
+    font-size: 16px;
+    color: $buttonColor;
+    margin-bottom: 10px;
+    font-family: $inputFont;
+  }
+
+  .edit-btn {
+    font-size: 12px;
+  }
+
+  .shopLogo {
+    .title-logo {
+      margin-left: 10px;
+    }
+  }
+
+  .receipt-body {
+    width: 95%;
+    margin: 0 10px;
+    box-shadow: none;
+    border: none;
+    font-size: 12px;
+    font-family: $inputFont;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,116 @@
+@import "./../Variables/variables.scss";
+
+.containers {
+  background-color: #fff;
+  padding: 10px 40px;
+  padding-bottom: 50px;
+  margin-top: 30px;
+  border-radius: 20px;
+}
+
+.titles {
+  font-family: $inputFont;
+  font-size: 32px;
+}
+
+.title {
+  font-family: $inputFont;
+  font-size: 24px;
+}
+
+.create-input {
+  display: flex;
+  //   justify-content: center;
+  align-items: center;
+  .create-input-icon {
+    background-color: $inputFontColor;
+    color: #fff;
+    font-size: 30px;
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 20px;
+    box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  label {
+    font-family: $textFont;
+    font-size: 18px;
+    color: $inputFontColor;
+    font-weight: bold;
+  }
+
+  input {
+    border: 0;
+    width: 100%;
+    background-color: $inputFontColor;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+
+  input::placeholder {
+    font-size: 16px;
+    font-family: $inputFont;
+  }
+}
+
+.PackegeContainer {
+  background-color: $inputFontColor;
+  padding: 20px 40px;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+
+  p {
+    font-family: $textFont;
+    font-size: 17px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  span {
+    color: #666666;
+    font-family: $textFont;
+    font-size: 14px;
+  }
+
+  .circles {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+  }
+}
+
+.PackegeContainer:hover {
+  transform: scale(0.95);
+}
+
+.PackegeContainer.active {
+  border: 1px solid $textheaderColor;
+
+  .circles {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    background-color: black;
+    border-radius: 50%;
+  }
+}
+
+.create-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  font-size: 16px;
+  font-family: $textFont;
+  margin-left: 20px;
+}
+
+.create {
+  background-color: $textheaderColor;
+  color: #fff;
+}
+
+.create-btn:hover {
+  transform: scale(0.95);
+}

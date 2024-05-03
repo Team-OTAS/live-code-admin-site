@@ -1,10 +1,10 @@
 @import "./../Variables/variables.scss";
 
 .filterContainer {
-  width: 80%;
+  width: 100%;
   // background-color: red;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 
 .filterButton {
@@ -16,4 +16,20 @@
 
 .filterButton:hover {
   color: #fff;
+}
+
+.order-btn {
+  background-color: transparent;
+  border: 1px solid rgba($color: $blueColor, $alpha: 0.3);
+  box-shadow: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  height: 50px;
+  font-family: $inputFont;
+  color: $blueColor;
+  font-weight: 700;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

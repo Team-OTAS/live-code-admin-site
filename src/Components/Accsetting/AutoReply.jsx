@@ -56,8 +56,13 @@ function AutoReply() {
   }, []);
 
   return (
-    <Box>
-      <div>
+    <Box
+      sx={{
+        marginTop: { xs: "20px", md: "0" },
+        padding: { xs: "20px 0 20px 20px", md: "0" },
+      }}
+    >
+      <div style={{ marginBottom: "10px" }}>
         <div
           style={{
             display: "flex",

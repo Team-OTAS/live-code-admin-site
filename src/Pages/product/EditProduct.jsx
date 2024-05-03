@@ -11,13 +11,10 @@ import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import AlertBox from "../../Components/modalBox/AlertBox";
 import { updateProduct, getProduct } from "../../redux/features/productReducer";
-import SuccessBox from "../../Components/modalBox/successBox";
 import Loading from "../../Components/Loading";
 import EditIcon from "@mui/icons-material/Edit";
 import { deleteProduct } from "../../redux/features/productdeleteSlice";
-import Swal from "sweetalert2";
 
 import "./../../Styles/addstock.css";
 
@@ -59,6 +56,7 @@ function EditProduct() {
   function hundleSubmit(e) {
     e.preventDefault();
     const shopId = localStorage.getItem("shopId");
+
     const formData = {
       shop_id: shopId,
       name: name,
@@ -67,7 +65,7 @@ function EditProduct() {
       description: description,
       unit: unit,
       sale_code: sale_code,
-      image: file || null,
+      image: local ? file : null,
     };
     // console.log(formData);
     dispatch(updateProduct({ id, formData }));

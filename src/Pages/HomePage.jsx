@@ -8,32 +8,20 @@ import { Box } from "@mui/material";
 import OrderPage from "./order/OrderPage";
 import Accsetting from "../Components/Accsetting/Accsetting";
 import AddUser from "../Components/Accsetting/AddUser";
-import { useTranslation } from "react-i18next";
+
 import Vouncher from "./../Components/vouncher/Vouncher";
+import OrderDetail from "../Components/order/OrderDetail";
 // import { Route,Routes,BrowserRouter,RouterProvider } from 'react-router-dom'
 
 function HomePage() {
-  const { t } = useTranslation();
-  const [navtitle, setNavtitle] = useState(t("navTitle"));
-
-  // recieve from drawer
-  function getTitle(title) {
-    console.log("nav", title);
-    setNavtitle(title);
-  }
-
-  useEffect(() => {
-    setNavtitle(t("navTitle"));
-  }, [t]);
-
   return (
     <div style={{ background: "#f2f3f7" }}>
       <Box>
-        <Navbar title={navtitle} />
+        <Navbar />
       </Box>
       <div className="dashboardContainer">
         <Box component="div" sx={{ display: { xs: "none", md: "block" } }}>
-          <DrawerSlide Title={getTitle} />
+          <DrawerSlide />
         </Box>
         <Routes>
           <Route path="*" element={<Dashboard />} />
@@ -42,6 +30,7 @@ function HomePage() {
           <Route path="/setting" element={<Accsetting />} />
           <Route path="/adduser" element={<AddUser />} />
           <Route path="/vouncher" element={<Vouncher />} />
+          <Route path="/vieworder/:id" element={<OrderDetail />} />
         </Routes>
       </div>
     </div>

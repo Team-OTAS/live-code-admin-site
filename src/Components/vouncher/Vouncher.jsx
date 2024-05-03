@@ -14,7 +14,7 @@ function Vouncher() {
   const dispatch = useDispatch();
   const id = localStorage.getItem("shopId");
   const { loading, error, shopData } = useSelector((state) => state.ShopData);
-  // console.log(id);
+
   useEffect(() => {
     dispatch(getShopData(id));
   }, []);
@@ -25,35 +25,39 @@ function Vouncher() {
       <div ref={componentRef}>
         <div>
           <h3>Order Form</h3>
-          <Box sx={{ width: "100%", height: "100%" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <div
-                style={{
-                  width: "100px",
-                  height: "100px",
-                }}
-              >
-                <img
-                  src={`https://api.livecodemm.com${shopData.data.logo}`}
-                  alt="logo"
-                  style={{ width: "inherit", height: "inherit" }}
-                />
-              </div>
+          {shopData && (
+            <div>
+              <Box sx={{ width: "100%", height: "100%" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                    }}
+                  >
+                    <img
+                      src={`https://api.livecodemm.com${shopData.data.logo} `}
+                      alt="logo"
+                      style={{ width: "inherit", height: "inherit" }}
+                    />
+                  </div>
+                </div>
+              </Box>
+              <p>
+                If you need to show different data, you could grab that data via
+                AJAX on componentWill/DidMount or pass it in as props
+              </p>
+              <p>
+                The CSS will hide the original content and show what is in your
+                Print Template.
+              </p>
             </div>
-          </Box>
-          <p>
-            If you need to show different data, you could grab that data via
-            AJAX on componentWill/DidMount or pass it in as props
-          </p>
-          <p>
-            The CSS will hide the original content and show what is in your
-            Print Template.
-          </p>
+          )}
         </div>
       </div>
     </div>

@@ -242,10 +242,12 @@ const productReducer = createSlice({
           willClose: () => {
             clearInterval(timerInterval);
             // navigate("/");
+            window.history.back();
           },
         }).then((result) => {
           if (result.dismiss === Swal.DismissReason.timer) {
             // navigate("/");
+            window.history.back();
           }
         });
         // toast.success("Product updated successfully");

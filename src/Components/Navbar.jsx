@@ -12,7 +12,8 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { getShopData } from "../redux/features/shopDataSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./../Styles/navbar.css";
 import AccMenu from "./AccMenu";
 import DrawerSlide from "./DrawerSlide";
@@ -24,15 +25,28 @@ const drawerWidth = 240;
 export default function Navbar(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const id = localStorage.getItem("shopId");
   const { loading, error, shopData } = useSelector((state) => state.ShopData);
   const [navtitle, setNavtitle] = useState("");
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [showmenu, setShowmenu] = useState(false);
+  const { t } = useTranslation();
+  // console.log(location.pathname);
 
-  function getTitle(title) {
-    console.log("nav", title);
-    setNavtitle(title);
+  function getTitle() {
+    if (location.pathname.includes("stock") || location.pathname === "/") {
+      setNavtitle(t("navTitle"));
+    }
+    if (location.pathname.includes("live")) {
+      setNavtitle(t("navTitle2"));
+    }
+    if (location.pathname.includes("order")) {
+      setNavtitle(t("navTitle3"));
+    }
+    if (location.pathname.includes("setting")) {
+      setNavtitle("Setting");
+    }
   }
 
   const handleDrawerToggle = () => {
@@ -54,6 +68,10 @@ export default function Navbar(props) {
     dispatch(getShopData(id));
     // console.log(shopData);
   }, []);
+
+  useEffect(() => {
+    getTitle();
+  }, [location.pathname, t]);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -117,7 +135,7 @@ export default function Navbar(props) {
               <div className="menu">
                 <Button
                   onClick={() => {
-                    setNavtitle("Setting");
+                    // props.title = "setting";
                     navigate("/setting");
                   }}
                 >

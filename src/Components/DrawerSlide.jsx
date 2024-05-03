@@ -16,11 +16,6 @@ export default function DrawerSlide({ Title }) {
   const { t } = useTranslation();
   const navTitle = [t("navTitle"), t("navTitle2"), t("navTitle3")];
 
-  function changeTitle(title) {
-    console.log(title);
-    Title(title);
-  }
-
   const activeClass = () => {
     if (location.pathname === "/") {
       return "slidebtn active";
@@ -38,14 +33,7 @@ export default function DrawerSlide({ Title }) {
       </Box> */}
 
       <div>
-        <NavLink
-          to="/"
-          className={activeClass}
-          // className={({ isActive }) =>
-          //   isActive ? "slidebtn active" : "slidebtn"
-          // }
-          onClick={() => changeTitle(navTitle[0])}
-        >
+        <NavLink to="/" className={activeClass}>
           <ManageAccountsOutlinedIcon />
           <span className="btnText">{navTitle[0]}</span>
         </NavLink>
@@ -55,7 +43,6 @@ export default function DrawerSlide({ Title }) {
           className={({ isActive }) =>
             isActive ? "slidebtn active" : "slidebtn"
           }
-          onClick={() => changeTitle(navTitle[1])}
         >
           <StorefrontOutlinedIcon />
           <span className="btnText">{navTitle[1]}</span>
@@ -66,7 +53,6 @@ export default function DrawerSlide({ Title }) {
           className={({ isActive }) =>
             isActive ? "slidebtn active" : "slidebtn"
           }
-          onClick={() => changeTitle(navTitle[2])}
         >
           <ShoppingCartOutlinedIcon />
           <span className="btnText">{navTitle[2]}</span>

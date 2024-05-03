@@ -9,10 +9,9 @@ import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProducts } from "../../redux/features/productReducer";
-import LinearProgress from "@mui/material/LinearProgress";
-import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import AlertBox from "../modalBox/AlertBox";
-import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 
 import "./../../Styles/dashboard.css";
 
@@ -28,12 +27,11 @@ function CustomToolbar() {
 
 const columns = [
   {
-    field: "id",
+    field: "no",
     headerName: "No",
     width: 50,
   },
   { field: "name", headerName: "Customer", width: 150 },
-  { field: "price", headerName: "Phone Number", width: 150 },
   { field: "description", headerName: "Address", width: 300 },
   { field: "unit", headerName: "Amount", width: 150 },
   { field: "quantity", headerName: "Total Price", width: 150 },
@@ -42,31 +40,49 @@ const columns = [
     headerName: "Status",
     width: 200,
     renderCell: (params) => (
-      <Link to={`/vieworder/${params.row.id}`}>
+      <div>
         <Button
           sx={{
-            background: { status: "pending" } ? "#4d3f3f" : "#fff",
+            background: " #354e8e",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: "10px",
+            fontSize: "14px",
+            marginRight: "20px",
+            "&:hover": {
+              backgroundColor: "#fff",
+              color: "#354e8e",
+              border: "3px solid #354e8e",
+            },
+          }}
+          variant="filled"
+        >
+          <EditRoundedIcon />
+        </Button>
+
+        <Button
+          sx={{
+            background: "#E81609",
             color: "white",
             padding: "10px 20px",
             borderRadius: "10px",
             fontSize: "14px",
             "&:hover": {
               backgroundColor: "#fff",
-              color: "#4d3f3f",
-              border: "5px solid #4d3f3f",
+              color: "#E81609",
+              border: "3px solid #E81609",
             },
           }}
           variant="filled"
         >
-          <PendingOutlinedIcon sx={{ marginRight: "10px" }} />
-          View Order
+          <DeleteRoundedIcon />
         </Button>
-      </Link>
+      </div>
     ),
   },
 ];
 
-const OrderTable = ({ sendDataToDashboard }) => {
+const OrderDetailTable = ({ sendDataToDashboard }) => {
   const dispatch = useDispatch();
   const { products, isLoading, isError, message } = useSelector(
     (state) => state.stocks
@@ -100,18 +116,14 @@ const OrderTable = ({ sendDataToDashboard }) => {
   // };
 
   return (
-    <Box sx={{ height: { xs: 600, md: 500 }, width: "100%" }}>
+    <Box sx={{ height: { xs: 300, md: 250 }, width: "100%" }}>
       <DataGrid
         rows={products.map((item, index) => ({ no: index + 1, ...item })) || []}
         columns={columns}
-        pageSize={14}
+        // pageSize={14}
         checkboxSelection
         loading={isLoading}
         disableRowSelectionOnClick
-        slots={{
-          toolbar: CustomToolbar,
-          loadingOverlay: LinearProgress,
-        }}
         onRowSelectionModelChange={(dataId) => {
           sendData(dataId);
           console.log("table", dataId);
@@ -122,4 +134,4 @@ const OrderTable = ({ sendDataToDashboard }) => {
   );
 };
 
-export default OrderTable;
+export default OrderDetailTable;

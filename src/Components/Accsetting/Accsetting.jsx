@@ -6,6 +6,7 @@ import ShopReciept from "./ShopReciept";
 import AutoReply from "./AutoReply";
 
 import "./accsetting.css";
+import ShopDetails from "./ShopDetails";
 
 function Accsetting() {
   const [page, setPage] = React.useState(3);
@@ -18,7 +19,7 @@ function Accsetting() {
     <Box
       sx={{
         width: "100%",
-        marginRight: "30px",
+        marginRight: { sx: "0", md: "30px" },
         // background: "black",
         overflow: "hidden",
       }}
@@ -43,13 +44,19 @@ function Accsetting() {
           >
             <span className="settingText">User Acc Management</span>
           </button>
+          <button
+            className={page === 4 ? "settingbtn active" : "settingbtn"}
+            onClick={() => channgePage(4)}
+          >
+            <span className="settingText">Profile</span>
+          </button>
         </div>
       </Box>
 
       <Box
         sx={{
-          marginLeft: "20px",
-          padding: "20px",
+          marginLeft: { sx: "0", md: "20px" },
+          padding: { sx: "0", md: "20px" },
           background: "#fff",
           borderRadius: "10px",
         }}
@@ -57,6 +64,7 @@ function Accsetting() {
         {page === 1 && <AutoReply />}
         {page === 2 && <ShopReciept />}
         {page === 3 && <UserManagement />}
+        {page === 4 && <ShopDetails />}
       </Box>
     </Box>
   );

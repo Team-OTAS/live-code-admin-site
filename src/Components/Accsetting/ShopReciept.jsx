@@ -18,15 +18,19 @@ function ShopReciept() {
   return (
     <>
       {shopData && (
-        <Box>
-          <div>
+        <Box
+          sx={{
+            marginTop: { xs: "20px", md: "0" },
+            padding: { xs: "10px 0 10px 10px", md: "0" },
+          }}
+        >
+          <div style={{ marginBottom: "10px" }}>
             <div
               style={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                width: "100%",
-                // background: "red",
+                paddingRight: "25px",
               }}
             >
               <p className="page-header">Shop Receipt</p>
@@ -44,7 +48,7 @@ function ShopReciept() {
               </button>
             </div>
           </div>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} sx={{ paddingRight: "25px" }}>
             <Grid item xs={12} md={6} lg={4}>
               <Box className="shopLogo">
                 <p className="title-logo">Shop Logo</p>
