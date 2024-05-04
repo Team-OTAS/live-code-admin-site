@@ -141,6 +141,9 @@ export default function Navbar(props) {
                 >
                   <span>Setting</span>
                 </Button>
+                <Button onClick={() => navigate("/fblogin")}>
+                  <span>FB Connect</span>
+                </Button>
                 <Button onClick={() => navigate("/login")}>
                   <span>Logout</span>
                 </Button>

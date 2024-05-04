@@ -1,5 +1,6 @@
 {
-  "name": "superadmin-dashboard",
+  "name": "live-code-frontend",
+  "proxy": "https://api.livecodemm.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

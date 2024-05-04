@@ -6,14 +6,14 @@ import { Box } from "@mui/material";
 import "./../Styles/auth.css";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "./../api/axios";
 
 export default function FBloginPage() {
   const navigate = useNavigate();
 
   async function handleClick() {
     const res = await axios.get(
-      "https://api.livecodemm.com/auth/facebook/redirect?redirect_url=http://localhost:3000/setup"
+      "auth/facebook/redirect?redirect_url=http://localhost:3000/setup"
     );
     console.log(res.data);
   }
