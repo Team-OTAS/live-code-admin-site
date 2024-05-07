@@ -5,6 +5,7 @@ import axios from "./../../api/axios";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
 import Swal from "sweetalert2";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import PanoramaFishEyeOutlinedIcon from "@mui/icons-material/PanoramaFishEyeOutlined";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -13,6 +14,7 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 function ShopDetails() {
   const id = localStorage.getItem("shopId");
   const [shop, setShop] = useState();
+  const [logo, setLogo] = useState(null);
   const [packageid, setPackage] = useState(1);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -23,7 +25,7 @@ function ShopDetails() {
   const getshop = async () => {
     try {
       const res = await axios.get("/api/shops/" + id);
-      console.log("response", res.data.data);
+      // console.log("response", res.data.data);
       setShop(res.data.data);
       setName(res.data.data.name);
       setPhone(res.data.data.phone);
@@ -38,6 +40,40 @@ function ShopDetails() {
           confirmButtonText: "Okay",
         });
       }
+    }
+  };
+
+  const updateShop = async () => {
+    const data = {
+      logo: "null",
+      name,
+      address,
+      phone,
+    };
+    try {
+      const res = await axios.post(
+        `api/shops/${id}/shop-setting?_method=PATCH`,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(res);
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Updated",
+      });
+      getshop();
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.response.data.message,
+      });
     }
   };
 
@@ -85,20 +121,19 @@ function ShopDetails() {
       {shop && (
         <div>
           <Grid container spacing={2} sx={{ marginTop: "20px" }}>
-            <Grid item xs={12} md={4}>
-              <div className="detail-box">
-                <div className="detail-logo">
-                  <img
-                    src={`https://api.livecodemm.com${shop.logo}`}
-                    alt="shoplogo"
-                  />
+            {!edit && (
+              <Grid item xs={12} md={4}>
+                <div className="detail-box">
+                  <div>
+                    <AccountCircleRoundedIcon className="detail-input-icon" />
+                  </div>
+                  <div className="detail-box-content">
+                    <p>Name</p>
+                    <span>{shop.name}</span>
+                  </div>
                 </div>
-                <div className="detail-box-content">
-                  <p>Name</p>
-                  <span>{name}</span>
-                </div>
-              </div>
-            </Grid>
+              </Grid>
+            )}
 
             {edit && (
               <Grid
@@ -114,8 +149,9 @@ function ShopDetails() {
                     <br />
                     <input
                       type="text"
-                      placeholder="Enter Address"
+                      placeholder="Enter Your Name"
                       value={name}
+                      onChange={(e) => setName(e.target.value)}
                       // ref={phoneref}
                       // required
                     />
@@ -153,12 +189,13 @@ function ShopDetails() {
                 <div className="create-input">
                   <HomeRoundedIcon className="create-input-icon" />
                   <div>
-                    <label>Phone Number</label>
+                    <label>Address</label>
                     <br />
                     <input
                       type="text"
                       placeholder="Enter Address"
                       value={address}
+                      onChange={(e) => setAddress(e.target.value)}
                       // ref={phoneref}
                       // required
                     />
@@ -202,6 +239,7 @@ function ShopDetails() {
                       type="text"
                       placeholder="Enter Ph Number"
                       value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                       // ref={phoneref}
                       required
                     />
@@ -252,8 +290,10 @@ function ShopDetails() {
       {/* Button */}
       {edit && (
         <div className="btn-container">
-          <button className="discard">Discard</button>
-          <button className="save" o>
+          <button className="discard" onClick={() => setEdit(false)}>
+            Discard
+          </button>
+          <button className="save" onClick={updateShop}>
             Save Edit
           </button>
         </div>
