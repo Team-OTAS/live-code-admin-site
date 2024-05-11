@@ -7,15 +7,30 @@ import "./../Styles/auth.css";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "./../api/axios";
+import { useTranslation } from "react-i18next";
+import Swal from "sweetalert2";
 
 export default function FBloginPage() {
+  const { t } = useTranslation();
+  const loginFb = t("loginFB");
+
   const navigate = useNavigate();
 
   async function handleClick() {
-    const res = await axios.get(
-      "auth/facebook/redirect?redirect_url=http://localhost:3000/setup"
-    );
-    console.log(res.data);
+    try {
+      const res = await axios.get(
+        "auth/facebook/redirect?redirect_url=http://localhost:3000/setup"
+      );
+      console.log(res.data);
+      navigate("/dashboard");
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Opp",
+        text: "Can not connect Facebook",
+        timer: 2000,
+      });
+    }
   }
 
   return (
@@ -42,18 +57,11 @@ export default function FBloginPage() {
           <Grid item xs={2}>
             {/* for desktop users */}
             <Box component="div" sx={{ display: { xs: "none", sm: "block" } }}>
-              <p className="textheader">
-                Connect With Facebook Admin Account <br />
-                to Use Live Code
-              </p>
+              <p className="textheader">{loginFb}</p>
             </Box>
             {/* for mobile users */}
             <Box component="div" sx={{ display: { xs: "block", sm: "none" } }}>
-              <p className="textheader">
-                Connect With Facebook
-                <br /> Admin Account <br />
-                to Use Live Code
-              </p>
+              <p className="textheader">{loginFb}</p>
             </Box>
           </Grid>
           <Grid item xs={12}>

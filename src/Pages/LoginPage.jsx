@@ -10,8 +10,12 @@ import "./../Styles/auth.css";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 
 export default function LoginPage() {
+  const { t } = useTranslation();
+  const onboarding = t("onboarding");
+  const loginBtn = t("loginBtn");
   const [user_name, setuser_name] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -114,14 +118,13 @@ export default function LoginPage() {
             <img src={LiveCodeLogo} alt="live_code_logo" className="logo" />
           </Grid>
           <Grid item xs={2}>
-            <p className="textheader">Login to Live Code</p>
+            <p className="textheader">{onboarding}</p>
           </Grid>
           <Grid item xs={12}>
             <Box component="div" sx={{ display: { xs: "none", sm: "block" } }}>
               <p className="textbody">
-                Login into live code and manage your live sales with <br />{" "}
-                easy-peasy features to create endless profits without much
-                effort..
+                Login into live code and manage your live sales with easy-peasy
+                features to create endless profits without much effort..
               </p>
             </Box>
             <Box component="div" sx={{ display: { xs: "block", sm: "none" } }}>
@@ -177,7 +180,7 @@ export default function LoginPage() {
           {/* ---------Form End  --------------------------------------------------------*/}
           <Grid item xs={2}>
             <Button variant="contained" color="primary" onClick={handleLogin}>
-              Login To LiveCode
+              {loginBtn}
             </Button>
           </Grid>
         </Grid>

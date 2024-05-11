@@ -10,8 +10,12 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 // import { updateShops } from "../redux/features/shopUpdateSlice";
 import { updateFormData } from "../redux/features/shopUpdateSlice";
+import { useTranslation } from "react-i18next";
 
 export default function StepOnePage() {
+  const { t } = useTranslation();
+  const stepOne = t("stepOne");
+  const stepOneDes = t("stepOneDes");
   const { setStep } = useContext(MultiStepContext);
   const dispatch = useDispatch();
   const [shopData, setShopData] = useState({
@@ -43,7 +47,7 @@ export default function StepOnePage() {
         <Grid item xs={12}>
           {/* for desktop users */}
           <Box component="div" sx={{ display: { xs: "none", sm: "block" } }}>
-            <p className="textheader">Set Up Your Shop In Live Code</p>
+            <p className="textheader">{stepOne}</p>
           </Box>
           {/* for mobile users */}
           <Box component="div" sx={{ display: { xs: "block", sm: "none" } }}>
@@ -58,35 +62,17 @@ export default function StepOnePage() {
           {/* for desktop users */}
           <Box component="div" sx={{ display: { xs: "none", sm: "block" } }}>
             <p className="textbody">
-              Set up your shop by filling some information
+              {/* Set up your shop by filling some information
               <br /> in order to create a shop in Live Code and create endless
               <br /> opportunities.
-              <br />
-              <span style={{ fontSize: "12px" }}>
-                (You can change the shop information later in the{" "}
-                <span style={{ fontWeight: "bold" }}>
-                  profile setting &gt; security feature
-                </span>
-                )
-              </span>
+              <br /> */}
+              <span style={{ fontSize: "12px" }}>({stepOneDes})</span>
             </p>
           </Box>
           {/* for mobile users */}
           <Box component="div" sx={{ display: { xs: "block", sm: "none" } }}>
             <p className="textbody">
-              Set up your shop by filling some <br />
-              information
-              <br /> in order to create a shop in Live Code <br /> and create
-              endless
-              <br /> opportunities.
-              <br />
-              <span style={{ fontSize: "12px" }}>
-                (You can change the shop information later in the <br />
-                <span style={{ fontWeight: "bold" }}>
-                  profile setting &gt; security feature
-                </span>
-                )
-              </span>
+              <span style={{ fontSize: "12px" }}>({stepOneDes})</span>
             </p>
           </Box>
         </Grid>
