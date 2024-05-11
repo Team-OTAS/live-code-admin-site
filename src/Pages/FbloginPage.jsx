@@ -28,7 +28,7 @@ export default function FBloginPage() {
         icon: "error",
         title: "Opp",
         text: "Can not connect Facebook",
-        timer: 2000,
+        timer: 1000,
       });
     }
   }
