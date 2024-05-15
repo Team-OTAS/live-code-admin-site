@@ -8,8 +8,15 @@ import SendIcon from "@mui/icons-material/Send";
 import { useDispatch } from "react-redux";
 // import { updateReplyMessage } from "../redux/features/shopUpdateSlice";
 import { updateFormData } from "../redux/features/shopUpdateSlice";
+import { useTranslation } from "react-i18next";
 
 export default function StepTwoPage() {
+  const { t } = useTranslation();
+  const stepTwo = t("stepTwo");
+  const stepTwoDes = t("stepTwoDes");
+  const stepTwoBtn = t("stepTwoBtn");
+  const stepTwoBtn2 = t("stepTwoBtn2");
+
   const { setStep } = useContext(MultiStepContext);
 
   const dispatch = useDispatch();
@@ -30,37 +37,16 @@ export default function StepTwoPage() {
     <>
       <Box>
         <Grid item xs={12}>
-          <p className="textheader">Set Up Your Auto Reply Message</p>
+          <p className="textheader">{stepTwo}</p>
         </Grid>
         <Grid item xs={12}>
           {/* for desktop users */}
-          <Box component="div" sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box component="div">
             <p className="textbody">
-              Set up your page auto reply message <br /> to reply user in a
+              {/* Set up your page auto reply message <br /> to reply user in a
               minute.
-              <br />
-              <span style={{ fontSize: "12px" }}>
-                (You can change the shop information later in the{" "}
-                <span style={{ fontWeight: "bold" }}>
-                  profile setting &gt; security feature
-                </span>
-                )
-              </span>
-            </p>
-          </Box>
-          {/* for mobile users */}
-          <Box component="div" sx={{ display: { xs: "block", sm: "none" } }}>
-            <p className="textbody">
-              Set up your page auto reply <br /> message <br /> to reply user in
-              a minute.
-              <br />
-              <span style={{ fontSize: "12px" }}>
-                (You can change the shop information later in the <br />
-                <span style={{ fontWeight: "bold" }}>
-                  profile setting &gt; security feature
-                </span>
-                )
-              </span>
+              <br /> */}
+              <span style={{ fontSize: "12px" }}>{stepTwoDes}</span>
             </p>
           </Box>
         </Grid>
@@ -121,12 +107,26 @@ export default function StepTwoPage() {
         </Grid>
         <Grid item xs={12} style={{ textAlign: "center" }}>
           <Button
+            // variant="contained"
+            color="primary"
+            onClick={() => {
+              setStep(1);
+            }}
+            sx={{
+              marginTop: "5px",
+              marginRight: "5px",
+              textDecoration: "underline",
+            }}
+          >
+            {stepTwoBtn}
+          </Button>
+          <Button
             variant="contained"
             color="primary"
             onClick={handleOnclick}
             sx={{ marginTop: "5px" }}
           >
-            Continue The Set Up
+            {stepTwoBtn2}
           </Button>
         </Grid>
       </Box>

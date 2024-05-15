@@ -16,6 +16,12 @@ export default function StepOnePage() {
   const { t } = useTranslation();
   const stepOne = t("stepOne");
   const stepOneDes = t("stepOneDes");
+  const stepOneBtn = t("stepOneBtn");
+  const shopFormLabelOne = t("shopFormLabelOne");
+  const shopFormLabelTwo = t("shopFormLabelTwo");
+  const shopFormLabelThree = t("shopFormLabelThree");
+  const shopFormLabelFour = t("shopFormLabelFour");
+
   const { setStep } = useContext(MultiStepContext);
   const dispatch = useDispatch();
   const [shopData, setShopData] = useState({
@@ -95,7 +101,7 @@ export default function StepOnePage() {
                 label={
                   <div className="input-field-label">
                     <StorefrontIcon color="primary" />
-                    <span>Shop Name</span>
+                    <span>{shopFormLabelOne}</span>
                   </div>
                 }
                 color="primary"
@@ -110,7 +116,7 @@ export default function StepOnePage() {
                 label={
                   <div className="input-field-label">
                     <EmailOutlinedIcon color="primary" />
-                    <span>Email</span>
+                    <span>{shopFormLabelTwo}</span>
                   </div>
                 }
                 color="primary"
@@ -125,7 +131,7 @@ export default function StepOnePage() {
                 label={
                   <div className="input-field-label">
                     <LocalPhoneOutlinedIcon color="primary" />
-                    <span>Phone</span>
+                    <span>{shopFormLabelThree}</span>
                   </div>
                 }
                 color="primary"
@@ -140,7 +146,7 @@ export default function StepOnePage() {
                 label={
                   <div className="input-field-label">
                     <HomeOutlinedIcon color="primary" />
-                    <span>Address</span>
+                    <span>{shopFormLabelFour}</span>
                   </div>
                 }
                 color="primary"
@@ -160,7 +166,7 @@ export default function StepOnePage() {
             // onClick={() => setStep("2")}
             onClick={handleOnclick}
           >
-            Set Up Your Shop
+            {stepOneBtn}
           </Button>
         </Grid>
         {/* ---------Button End  --------------------------------------------------------*/}

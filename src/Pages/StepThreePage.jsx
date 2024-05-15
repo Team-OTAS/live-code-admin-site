@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "./../api/axios.js";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
+
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -25,6 +27,12 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 export default function StepThreePage() {
+  const { t } = useTranslation();
+  const stepThree = t("stepThree");
+  const stepThreeDes = t("stepThreeDes");
+  const stepThreeBtn = t("stepThreeBtn");
+  const stepThreeBtn2 = t("stepThreeBtn2");
+
   const shopData = useSelector((state) => state.Shop.formData);
   console.log("formThree", shopData);
   const id = localStorage.getItem("shopId");
@@ -71,7 +79,7 @@ export default function StepThreePage() {
       <Box>
         {/* ---------Title Header Start -------------------------------------------------------- */}
         <Grid item xs={12}>
-          <p className="textheader">Set Up Your Shop Receipt</p>
+          <p className="textheader">{stepThree}</p>
         </Grid>
         {/* ---------Title Header End -------------------------------------------------------- */}
 
@@ -80,16 +88,10 @@ export default function StepThreePage() {
           {/* for desktop users */}
           <Box component="div" sx={{ display: { xs: "none", sm: "block" } }}>
             <p className="textbody">
-              Set up your page receipt <br />
+              {/* Set up your page receipt <br />
               to show user buying lists in a minute
-              <br />
-              <span style={{ fontSize: "12px" }}>
-                (You can change the shop information later in the{" "}
-                <span style={{ fontWeight: "bold" }}>
-                  profile setting &gt; security feature
-                </span>
-                )
-              </span>
+              <br /> */}
+              <span style={{ fontSize: "12px" }}>{stepThreeDes}</span>
             </p>
           </Box>
           {/* for mobile users */}
@@ -98,13 +100,7 @@ export default function StepThreePage() {
               Set up your page receipt <br />
               to show user buying lists in a minute
               <br />
-              <span style={{ fontSize: "12px" }}>
-                (You can change the shop information later in the <br />
-                <span style={{ fontWeight: "bold" }}>
-                  profile setting &gt; security feature
-                </span>
-                )
-              </span>
+              <span style={{ fontSize: "8px" }}>{stepThreeDes}</span>
             </p>
           </Box>
         </Grid>
@@ -176,11 +172,25 @@ export default function StepThreePage() {
         {/* ---------Button Start -------------------------------------------------------- */}
         <Grid item xs={12} style={{ textAlign: "center", paddingTop: "20px" }}>
           <Button
+            // variant="contained"
+            color="primary"
+            // onClick={() => {
+            //   setStep(1);
+            // }}
+            sx={{
+              marginTop: "5px",
+              marginRight: "5px",
+              textDecoration: "underline",
+            }}
+          >
+            {stepThreeBtn}
+          </Button>
+          <Button
             variant="contained"
             color="primary"
             onClick={handleCompleteSetup}
           >
-            Continue The Set Up
+            {stepThreeBtn2}
           </Button>
         </Grid>
         {/* ---------Button End -------------------------------------------------------- */}

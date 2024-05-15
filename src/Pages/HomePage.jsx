@@ -11,6 +11,7 @@ import AddUser from "../Components/Accsetting/AddUser";
 
 import Vouncher from "./../Components/vouncher/Vouncher";
 import OrderDetail from "../Components/order/OrderDetail";
+import UserAccDetail from "../Components/Accsetting/UserAccDetail";
 // import { Route,Routes,BrowserRouter,RouterProvider } from 'react-router-dom'
 
 function HomePage() {
@@ -31,6 +32,7 @@ function HomePage() {
           <Route path="/adduser" element={<AddUser />} />
           <Route path="/vouncher" element={<Vouncher />} />
           <Route path="/vieworder/:id" element={<OrderDetail />} />
+          <Route path="/accdetail/:id" element={<UserAccDetail />} />
         </Routes>
       </div>
     </div>

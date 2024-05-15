@@ -9,7 +9,7 @@ import { Box, Button } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import LinearProgress from "@mui/material/LinearProgress";
 import AlertBox from "../modalBox/AlertBox";
-import SuccessBox from "../modalBox/successBox";
+import EditIcon from "@mui/icons-material/Edit";
 import {
   useGetAllUserQuery,
   useDeleteUserMutation,
@@ -17,6 +17,8 @@ import {
 
 import "./../../Styles/dashboard.css";
 import Swal from "sweetalert2";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import { useNavigate } from "react-router-dom";
 
 function CustomToolbar() {
   return (
@@ -29,6 +31,7 @@ function CustomToolbar() {
 }
 
 const AccUserTable = () => {
+  const navigate = useNavigate();
   const { data, isError, isLoading, message } = useGetAllUserQuery();
   const fetchUser = useGetAllUserQuery();
   const [deleteUser, { isLoading: loading, isError: error }] =
@@ -78,46 +81,69 @@ const AccUserTable = () => {
         </Box>
       ),
     },
+
     {
       field: "actions",
       headerName: "",
-      width: 100,
-      renderCell: (params) =>
-        params.row.user_type_id === 3 ? (
+      width: 300,
+      renderCell: (params) => (
+        <div>
           <Button
             sx={{
-              background: "red",
+              background: "#354E8E",
               color: "white",
               padding: "10px",
               borderRadius: "10px",
+              marginRight: "10px",
               fontSize: "14px",
               "&:hover": {
                 backgroundColor: "#fff",
-                border: "3px solid red",
-                color: "red",
+                border: "3px solid #354E8E",
+                color: "#354E8E",
               },
             }}
             variant="filled"
-            onClick={() =>
-              Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  deleteAccUser(params.row.id);
-                }
-              })
-            }
-            // onClick={() => deleteAccUser(params.row.id)}
+            onClick={() => navigate(`/accdetail/${params.row.id}`)}
           >
-            <DeleteOutlineOutlinedIcon sx={{ fontSize: "28px" }} />
+            <EditIcon sx={{ fontSize: "28px" }} />
           </Button>
-        ) : null,
+          {params.row.user_type_id === 3 ? (
+            <Button
+              sx={{
+                background: "red",
+                color: "white",
+                padding: "10px",
+                borderRadius: "10px",
+                fontSize: "14px",
+                "&:hover": {
+                  backgroundColor: "#fff",
+                  border: "3px solid red",
+                  color: "red",
+                },
+              }}
+              variant="filled"
+              onClick={() =>
+                Swal.fire({
+                  title: "Are you sure?",
+                  text: "You won't be able to revert this!",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, delete it!",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    deleteAccUser(params.row.id);
+                  }
+                })
+              }
+              // onClick={() => deleteAccUser(params.row.id)}
+            >
+              <DeleteOutlineOutlinedIcon sx={{ fontSize: "28px" }} />
+            </Button>
+          ) : null}
+        </div>
+      ),
     },
   ];
 
