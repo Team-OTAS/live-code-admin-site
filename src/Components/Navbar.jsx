@@ -85,7 +85,11 @@ export default function Navbar(props) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="secondary" sx={{ p: "10px" }}>
+      <AppBar
+        position="static"
+        color="secondary"
+        sx={{ p: "10px", display: { xs: "block", md: "none" } }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"

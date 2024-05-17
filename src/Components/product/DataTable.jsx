@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import { getProducts } from "../../redux/features/productReducer";
 import LinearProgress from "@mui/material/LinearProgress";
 import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
-import AlertBox from "../modalBox/AlertBox";
 
 import "./../../Styles/dashboard.css";
 
@@ -29,38 +28,39 @@ const columns = [
   {
     field: "no",
     headerName: "No",
-    width: 100,
+    width: 50,
     renderCell: (params) => {
       // console.log(params.rowIndex);
     },
   },
-  { field: "name", headerName: "Name", width: 150 },
-  { field: "description", headerName: "Description", width: 300 },
+  { field: "name", headerName: "Name", width: 100 },
+  { field: "description", headerName: "Description", width: 350 },
   { field: "price", headerName: "Price", width: 100 },
   { field: "unit", headerName: "Unit", width: 100 },
   { field: "quantity", headerName: "Quantity", width: 100 },
   {
     field: "actions",
     headerName: "Actions",
-    width: 250,
+    width: 150,
     renderCell: (params) => (
       <Link to={`/viewstock/${params.row.id}`}>
         <Button
           sx={{
             background: "#354e8f",
             color: "white",
-            padding: "10px 20px",
+            padding: "5px 10px",
             borderRadius: "10px",
-            fontSize: "14px",
+            fontSize: "12px",
             "&:hover": {
-              backgroundColor: "#4d3f3f",
-              color: "#fff",
+              border: "1px solid #354e8f",
+              backgroundColor: "#fff",
+              color: "#354e8f",
             },
           }}
           variant="filled"
         >
           <PreviewOutlinedIcon sx={{ marginRight: "5px" }} />
-          View Produuct
+          View Detail
         </Button>
       </Link>
     ),
@@ -69,9 +69,7 @@ const columns = [
 
 const DataTable = ({ sendDataToDashboard }) => {
   const dispatch = useDispatch();
-  const { products, isLoading, isError, message } = useSelector(
-    (state) => state.stocks
-  );
+  const { products, isLoading } = useSelector((state) => state.stocks);
   const deletes = useSelector((state) => state.deleteproduct);
   const sendData = (dataId) => {
     const Deletedata = dataId;
@@ -81,24 +79,6 @@ const DataTable = ({ sendDataToDashboard }) => {
   useEffect(() => {
     dispatch(getProducts());
   }, [deletes.deletes]);
-
-  // console.log(products);
-
-  //   if (products.products.code === 200) {
-  //     console.log(products.products.data);
-  //     const rows = products.products.data.map((index, item) => ({
-  //       no: index + 1,
-  //       ...item,
-  //     }));
-  //     console.log(rows);
-  //   }
-  // }, [products]);
-
-  // const handleRowClick = (params) => {
-  // Access the clicked row data using params.row
-  // console.log("Row clicked:", params.row);
-  // You can perform additional actions based on the clicked row data
-  // };
 
   return (
     <Box sx={{ height: { xs: 600, md: 500 } }}>
@@ -118,7 +98,6 @@ const DataTable = ({ sendDataToDashboard }) => {
           console.log("table", dataId);
         }}
       />
-      {!isLoading && isError ? <AlertBox message={message} /> : null}
     </Box>
   );
 };

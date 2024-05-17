@@ -8,7 +8,7 @@ import ProductDetail from "./ProductDetail";
 import CreateProdcut from "./CreateProdcut";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditProduct from "./EditProduct";
-import PersonAddAlt1OutlinedIcon from "@mui/icons-material/PersonAddAlt1Outlined";
+import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded";
 import Swal from "sweetalert2";
 
 import "./../../Styles/dashboard.css";
@@ -49,18 +49,25 @@ export default function Dashboard() {
   return (
     <div>
       <div className="dashboardContent">
+        <Box
+          className="dashboardContent__header"
+          sx={{ display: { xs: "none", md: "block" } }}
+        >
+          <p>Stock Management</p>
+        </Box>
+
         <Box sx={{ display: { xs: "none", md: "block" } }}>
           <Grid className="barContainer">
             <Link to="/addstock">
               <Button
-                size="large"
+                // size="large"
                 color="primary"
                 variant="contained"
                 onClick={() => {
                   setDeleteData([]);
                 }}
               >
-                <PersonAddAlt1OutlinedIcon />
+                <AddBoxRoundedIcon sx={{ marginRight: "5px" }} />
                 <span className="btnText">Add New Stock</span>
               </Button>
             </Link>
@@ -104,7 +111,7 @@ export default function Dashboard() {
                   setDeleteData([]);
                 }}
               >
-                <PersonAddAlt1OutlinedIcon />
+                <AddBoxRoundedIcon sx={{ marginRight: "5px" }} />
                 <span className="btnText">Add</span>
               </Button>
             </Link>
@@ -130,7 +137,7 @@ export default function Dashboard() {
                 })
               }
             >
-              <PersonAddAlt1OutlinedIcon />
+              <DeleteIcon />
               <span className="btnText">Remove</span>
             </Button>
           </Grid>

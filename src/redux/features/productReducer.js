@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import productService from "./productService";
 import Swal from "sweetalert2";
-import SuccessBox from "../../Components/modalBox/successBox";
+import { Navigate } from "react-router-dom";
 
 // import { toast } from "react-toastify";
 
@@ -169,11 +169,27 @@ const productReducer = createSlice({
         state.isSuccess = true;
         state.isError = false;
         console.log(action.payload);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Stock Added Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        window.location.pathname = "/";
       })
       .addCase(createProduct.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: action.payload,
+          showConfirmButton: true,
+          timer: 2000,
+        });
         // toast.error(action.payload);
       })
       .addCase(getProducts.pending, (state) => {
@@ -189,6 +205,7 @@ const productReducer = createSlice({
       })
       .addCase(getProducts.rejected, (state, action) => {
         state.isLoading = false;
+        state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
         // toast.error(action.payload);

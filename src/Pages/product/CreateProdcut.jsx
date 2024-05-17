@@ -50,24 +50,13 @@ function CreateProdcut() {
     (state) => state.stocks
   );
 
-  const [file, setFile] = useState();
+  const [file, setFile] = useState("");
   const shopId = localStorage.getItem("shopId");
 
   function hundleFileChange(e) {
     setFile(e.target.files[0]);
+    console.log(file);
   }
-
-  // if (isLoading) {
-  //   return <WaitingBox />;
-  // }
-
-  // if (isSuccess) {
-  //   return <SuccessBox message={message} />;
-  // }
-
-  // if (isError) {
-  //   return <AlertBox message={message} />;
-  // }
 
   return (
     <Box sx={{ marginTop: "20px" }}>
@@ -97,29 +86,11 @@ function CreateProdcut() {
             image: null,
           }}
           validationSchema={validationSchema}
-          onSubmit={async (values, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting }) => {
             console.log(values);
             setSubmitting(false);
-            dispatch(createProduct(values));
-            if (isSuccess) {
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Stock Added Successfully",
-                showConfirmButton: false,
-                timer: 1500,
-              });
 
-              navigate("/");
-            } else if (isError) {
-              Swal.fire({
-                position: "center",
-                icon: "error",
-                title: "Stock Not Added",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-            }
+            dispatch(createProduct(values));
           }}
         >
           {(
@@ -238,15 +209,14 @@ function CreateProdcut() {
                         >
                           <VisuallyHiddenInput
                             type="file"
-                            name="image"
                             onChange={(event) => {
+                              setFile(event.target.files[0]);
                               setFieldValue("image", event.target.files[0]);
                             }}
                           />
                           <EditIcon />
                         </IconButton>
                         <p className="imageName">{file.name}</p>
-                        {/* <img src={URL.createObjectURL(file)} alt="product" /> */}
                       </Box>
                     ) : (
                       <Box
@@ -270,7 +240,10 @@ function CreateProdcut() {
                           <AttachFileIcon />
                           <VisuallyHiddenInput
                             type="file"
-                            onChange={hundleFileChange}
+                            onChange={(event) => {
+                              setFile(event.target.files[0]);
+                              setFieldValue("image", event.target.files[0]);
+                            }}
                           />
                         </Button>
                       </Box>
@@ -322,11 +295,3 @@ function CreateProdcut() {
 }
 
 export default CreateProdcut;
-
-// {isLoading && showmessage ? <WaitingBox /> : null}
-// {!isLoading && showmessage && isSuccess ? (
-//   <SuccessBox message={message} />
-// ) : null}
-// {!isLoading && showmessage && isError ? (
-//   <AlertBox message={message} />
-// ) : null}

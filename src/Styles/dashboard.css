@@ -14,6 +14,7 @@ body {
 
 .btnText {
   padding-left: 10px;
+  font-size: 14px;
   font-family: "Poppins", sans-serif;
 }
 
@@ -43,16 +44,21 @@ body {
 }
 
 .MuiDataGrid-root .MuiDataGrid-cell {
-  font-size: 18px; /* Adjust the font size as needed */
+  font-size: 12px; /* Adjust the font size as needed */
   font-family: "Poppins", sans-serif;
-  font-weight: 600;
 }
 
 .MuiDataGrid-columnHeaders {
-  background-color: black;
+  background-color: #354e8e;
   color: white;
-  font-size: 18px; /* Adjust the font size as needed */
+  font-size: 14px; /* Adjust the font size as needed */
   font-family: "Poppins", sans-serif;
+}
+
+.dashboardContent__header p {
+  font-size: 36px;
+  font-family: "Garet", cursive;
+  margin: 0;
 }
 
 @media (max-width: 600px) {
