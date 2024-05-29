@@ -81,4 +81,9 @@ body {
   .MuiDataGrid-columnHeaders {
     font-size: 12px;
   }
+}
+.color-box {
+  height: 100%;
+  padding: 10px 1px;
+  color: transparent;
 }/*# sourceMappingURL=dashboard.css.map */

@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import LiveCodeLogo from "./../assets/images/logo.png";
 import TextField from "@mui/material/TextField";
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import PasswordOutlinedIcon from "@mui/icons-material/PasswordOutlined";
+import InputAdornment from "@mui/material/InputAdornment";
 import { setAuthToken } from "../api/axios";
 import "./../Styles/auth.css";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 export default function LoginPage() {
   const { t } = useTranslation();
@@ -19,6 +22,8 @@ export default function LoginPage() {
   const [user_name, setuser_name] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const navigate = useNavigate();
 
@@ -52,47 +57,13 @@ export default function LoginPage() {
         }
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Login Failed",
       });
     }
-    // try {
-    //   const response = await axios.post(
-    //     "/api/auth/login",
-    //     {
-    //       user_name,
-    //       password,
-    //     },
-    //     {
-    //       withCredentials: true,
-    //     }
-    //   );
-    //   console.log(response);
-    //   const authToken = response.data.data.token;
-    //   const shopId = response.data.data.shop_id;
-    //   const id = response.data.data.id;
-    //   // const status = response.data.data.status;
-    //   localStorage.setItem("id", id);
-    //   setAuthToken(authToken);
-    //   localStorage.setItem("authToken", authToken);
-    //   localStorage.setItem("shopId", shopId);
-    //   let decodedToken = jwtDecode(authToken);
-    //   // console.log("Decoded Token", decodedToken.iat * 1000);
-    //   localStorage.setItem("expirationTime", decodedToken.iat * 1000);
-    //   // console.log("Shop id response", id);
-    //   // console.log("Shop status", status);
-
-    //   navigate("/changeaccinfo");
-    // } catch (error) {
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: "Oops...",
-    //     text: "Something went wrong!",
-    //   });
-    // }
   };
 
   return (
@@ -163,8 +134,21 @@ export default function LoginPage() {
               <div className="input-field">
                 <TextField
                   id="outlined-error-helper-text"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton
+                        color="primary"
+                        onClick={handleClickShowPassword}
+                        aria-label="toggle password visibility"
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    ),
+                  }}
                   label={
                     <div className="input-field-label">
                       <PasswordOutlinedIcon color="primary" />
