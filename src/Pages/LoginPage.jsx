@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import fetchXsrfToken from "../api/auth";
 
 export default function LoginPage() {
   const { t } = useTranslation();
@@ -27,6 +28,8 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    fetchXsrfToken();
+
     try {
       const response = await axios.post("/api/auth/login", {
         user_name,

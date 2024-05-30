@@ -17,6 +17,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { deleteProduct } from "../../redux/features/productdeleteSlice";
 
 import "./../../Styles/addstock.css";
+import { useTranslation } from "react-i18next";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -31,6 +32,18 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 function EditProduct() {
+  const { t } = useTranslation();
+  const labelOne = t("stkformlbelone");
+  const labelTwo = t("stkformlbeltwo");
+  const labelThree = t("stkformlbelthree");
+  const labelFour = t("stkformlbelfour");
+  const labelFive = t("stkformlbelfive");
+  const labelSix = t("stkformlbelsix");
+  const labelSeven = t("stkformlbelseven");
+  const editBtn = t("editbtn");
+  const cancelbtn = t("cancelbtn");
+  const title = t("editTitle");
+
   const dispatch = useDispatch();
 
   const deletes = useSelector((state) => state.deleteproduct);
@@ -116,7 +129,7 @@ function EditProduct() {
             md={12}
             sx={{ display: { xs: "block", md: "flex" } }}
           >
-            <p className="header">Edit Stock</p>
+            <p className="header">{title}</p>
             <Chip
               label={
                 <div className="input-field-label">
@@ -178,7 +191,7 @@ function EditProduct() {
                 label={
                   <div className="input-field-label">
                     <Inventory2OutlinedIcon color="primary" />
-                    <span>Stock Name</span>
+                    <span>{labelOne}</span>
                   </div>
                 }
                 color="primary"
@@ -195,7 +208,7 @@ function EditProduct() {
                 label={
                   <div className="input-field-label">
                     <AttachMoneyOutlinedIcon color="primary" />
-                    <span>Price</span>
+                    <span>{labelTwo}</span>
                   </div>
                 }
                 color="primary"
@@ -212,7 +225,7 @@ function EditProduct() {
                 label={
                   <div className="input-field-label">
                     <Inventory2OutlinedIcon color="primary" />
-                    <span>Live Sale Code</span>
+                    <span>{labelFour}</span>
                   </div>
                 }
                 color="primary"
@@ -229,7 +242,7 @@ function EditProduct() {
                 label={
                   <div className="input-field-label">
                     <Inventory2OutlinedIcon color="primary" />
-                    <span>Unit</span>
+                    <span>{labelFive}</span>
                   </div>
                 }
                 color="primary"
@@ -246,7 +259,7 @@ function EditProduct() {
                 label={
                   <div className="input-field-label">
                     <ListIcon color="primary" />
-                    <span>Quantity</span>
+                    <span>{labelThree}</span>
                   </div>
                 }
                 color="primary"
@@ -286,7 +299,7 @@ function EditProduct() {
                   ) : (
                     <img
                       className="productimage"
-                      src={`https://api.livecodemm.com/storage/${
+                      src={`${process.env.REACT_APP_API_BASE_URL}/storage/${
                         product.data.image || "noimage.png"
                       }`}
                       alt="productimage"
@@ -305,7 +318,7 @@ function EditProduct() {
                 >
                   <div className="input-field-label">
                     <ImageOutlinedIcon color="primary" />
-                    <span>Image</span>
+                    <span>{labelSix}</span>
                   </div>
                   <Button
                     component="label"
@@ -331,7 +344,7 @@ function EditProduct() {
                 label={
                   <div className="input-field-label">
                     <DescriptionIcon color="primary" />
-                    <span>Description</span>
+                    <span>{labelSeven}</span>
                   </div>
                 }
                 multiline
@@ -352,7 +365,7 @@ function EditProduct() {
                 sx={{ margin: "0" }}
                 onClick={hundleSubmit}
               >
-                Update Stock
+                {editBtn}
               </Button>
             </div>
           </Grid>
@@ -385,7 +398,7 @@ function EditProduct() {
                     window.history.back();
                   }}
                 >
-                  Cancel
+                  {cancelbtn}
                 </Button>
               </div>
             </Grid>

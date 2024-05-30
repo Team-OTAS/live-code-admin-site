@@ -20,16 +20,29 @@
 
 .order-btn {
   background-color: transparent;
-  border: 1px solid rgba($color: $blueColor, $alpha: 0.3);
-  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   padding: 5px 10px;
-  height: 50px;
+  height: 56px;
   font-family: $inputFont;
-  color: $blueColor;
+  color: $buttonColor;
   font-weight: 700;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  transition: 0.5s;
+
+  p {
+    margin-right: 20px;
+  }
+}
+
+.order-btn:hover {
+  background: $buttonColor;
+  color: #fff;
+  opacity: 0.9;
+  transition: 0.5s;
 }

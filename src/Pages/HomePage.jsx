@@ -25,7 +25,7 @@ function HomePage() {
           <DrawerSlide />
         </Box>
         <Routes>
-          <Route path="*" element={<Dashboard />} />
+          <Route index element={<Dashboard />} />
           <Route path="/live" element={<LiveSale />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/setting" element={<Accsetting />} />

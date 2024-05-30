@@ -9,11 +9,16 @@ import CreateProdcut from "./CreateProdcut";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditProduct from "./EditProduct";
 import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded";
+import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 
 import "./../../Styles/dashboard.css";
 
 export default function Dashboard() {
+  const { t } = useTranslation();
+  const title = t("navTitle");
+  const addbtn = t("addStockBtn");
+  const rembtn = t("remStockBtn");
   const dispatch = useDispatch();
   const deletes = useSelector((state) => state.deleteproduct);
   const [DeleteData, setDeleteData] = useState("");
@@ -53,7 +58,7 @@ export default function Dashboard() {
           className="dashboardContent__header"
           sx={{ display: { xs: "none", md: "block" } }}
         >
-          <p>Stock Management</p>
+          <p>{title}</p>
         </Box>
 
         <Box sx={{ display: { xs: "none", md: "block" } }}>
@@ -68,7 +73,7 @@ export default function Dashboard() {
                 }}
               >
                 <AddBoxRoundedIcon sx={{ marginRight: "5px" }} />
-                <span className="btnText">Add New Stock</span>
+                <span className="btnText">{addbtn}</span>
               </Button>
             </Link>
             <Button
@@ -95,7 +100,7 @@ export default function Dashboard() {
               // onClick={deleteHandleClick}
             >
               <DeleteIcon />
-              <span className="btnText">Remove Stock</span>
+              <span className="btnText">{rembtn}</span>
             </Button>
           </Grid>
         </Box>

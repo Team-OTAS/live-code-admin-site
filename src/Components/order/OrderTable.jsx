@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   DataGrid,
   GridToolbarColumnsButton,
@@ -7,13 +7,8 @@ import {
 } from "@mui/x-data-grid";
 import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { getProducts } from "../../redux/features/productReducer";
 import LinearProgress from "@mui/material/LinearProgress";
-import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
-import AlertBox from "../modalBox/AlertBox";
-import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
-
 import "./../../Styles/dashboard.css";
 
 function CustomToolbar() {
@@ -28,7 +23,7 @@ function CustomToolbar() {
 
 const columns = [
   {
-    field: "id",
+    field: "no",
     headerName: "No",
     width: 50,
   },
@@ -57,19 +52,42 @@ const columns = [
           alignItems: "center",
         }}
       >
-        <Box
-          className="color-box"
-          sx={{
-            background: cellValues.value === "pending" ? "#6EC531" : "#E81609",
-          }}
-        >
-          p
-        </Box>
-        <div>{cellValues.value}</div>
+        {cellValues.value ? (
+          cellValues.value
+        ) : (
+          <div style={{ opacity: "0.5" }}>No Ph number Yet!</div>
+        )}
       </Box>
     ),
   },
-  { field: "delivery_address", headerName: "Address", width: 200 },
+  {
+    field: "delivery_address",
+    headerName: "Address",
+    width: 200,
+    renderCell: (cellValues) => (
+      <Box
+        sx={{
+          color: "#000",
+          borderRadius: "3px",
+          fontSize: "12px",
+          paddingRight: "10px",
+          width: "100%",
+          textAlign: "left",
+          overflow: "hidden",
+          background: "#F2F3F7",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        {cellValues.value ? (
+          cellValues.value
+        ) : (
+          <div style={{ opacity: "0.5" }}>There is no Address Yet!</div>
+        )}
+      </Box>
+    ),
+  },
   { field: "live_sale_id", headerName: "Amount", width: 50 },
   { field: "price", headerName: "Total Price", width: 150 },
   {
@@ -127,13 +145,15 @@ const columns = [
         // onClick={() => handleButtonClick(params.row.id)}
       >
         {/* <StorefrontIcon, sx={{ marginRight: "5px" }} /> */}
-        Shops Details
+        View Order
       </Button>
     ),
   },
 ];
 
-const OrderTable = ({ sendDataToDashboard }) => {
+const OrderTable = ({ status }) => {
+  // console.log(status);
+  const [products, setProducts] = useState([]);
   const orderApi = {
     code: 200,
     success: true,
@@ -149,7 +169,7 @@ const OrderTable = ({ sendDataToDashboard }) => {
         contact_phone: null,
         delivery_address: null,
         price: "6132.00",
-        status: "pending",
+        status: "half-paid",
         created_at: "2024-05-28T12:35:47.000000Z",
         updated_at: "2024-05-28T12:35:47.000000Z",
         deleted_at: null,
@@ -843,8 +863,7 @@ const OrderTable = ({ sendDataToDashboard }) => {
     ],
   };
 
-  console.log(orderApi.data);
-  const products = orderApi.data;
+  // const products = orderApi.data;
   const dispatch = useDispatch();
   // const { products, isLoading, isError, message } = useSelector(
   //   (state) => state.stocks
@@ -852,12 +871,24 @@ const OrderTable = ({ sendDataToDashboard }) => {
   const deletes = useSelector((state) => state.deleteproduct);
   const sendData = (dataId) => {
     const Deletedata = dataId;
-    sendDataToDashboard(Deletedata);
+    // sendDataToDashboard(Deletedata);
   };
 
   useEffect(() => {
     dispatch(getProducts());
   }, [deletes.deletes]);
+
+  useEffect(() => {
+    setProducts(
+      orderApi.data.filter((item) => {
+        if (status) {
+          return item.status === status;
+        } else {
+          return orderApi.data;
+        }
+      })
+    );
+  }, [status]);
 
   // console.log(products.data);
 

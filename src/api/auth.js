@@ -7,9 +7,10 @@ export default async function fetchXsrfToken() {
     const response = await axios.get("/sanctum/csrf-cookie", {
       withCredentials: true,
     });
+    console.log("XSRF Token Response", response);
     const xsrfToken = Cookies.get("XSRF-TOKEN");
     // console.log("XSRF TOKEN RESPONSE", response);
-    console.log("XSRF TOKEN", xsrfToken.data);
+    console.log("XSRF TOKEN", xsrfToken);
     return xsrfToken;
   } catch (error) {
     console.error("Error fetching XSRF token:", error);

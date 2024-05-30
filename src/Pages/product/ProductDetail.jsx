@@ -144,7 +144,7 @@ function ProductDetail() {
               {product.data.image ? (
                 <img
                   className="productimage"
-                  src={`https://api.livecodemm.com/storage/${product.data.image}`}
+                  src={`${process.env.REACT_APP_API_BASE_URL}/storage/${product.data.image}`}
                   alt="productimage"
                 />
               ) : (

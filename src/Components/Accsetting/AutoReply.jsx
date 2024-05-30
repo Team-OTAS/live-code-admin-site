@@ -11,7 +11,7 @@ function AutoReply() {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const { shopData } = useSelector((state) => state.ShopData);
-  const [auto_reply, setAutoReply] = useState(shopData.data.auto_reply);
+  const [auto_reply, setAutoReply] = useState("");
   const inputRef = useRef(null);
   const id = localStorage.getItem("shopId"); // eslint-disable-next-lin
   // console.log(shop);
@@ -55,11 +55,18 @@ function AutoReply() {
     dispatch(getShopData(id));
   }, []);
 
+  useEffect(() => {
+    if (shopData) {
+      setAutoReply(shopData.data.auto_reply);
+    }
+  }, [shopData]);
+
   return (
     <Box
       sx={{
         marginTop: { xs: "20px", md: "0" },
         padding: { xs: "20px 0 20px 20px", md: "0" },
+        minHeight: "100vh",
       }}
     >
       <div style={{ marginBottom: "10px" }}>

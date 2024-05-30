@@ -28,9 +28,9 @@ function ShopReciept() {
   const [file, setFile] = useState(null);
   const [local, setlocal] = useState(false);
   const { loading, error, shopData } = useSelector((state) => state.ShopData);
-  const [logo, setLogo] = useState(shopData.data.logo);
-  const [footer, setFooter] = useState(shopData.data.receipt_footer);
-  const [header, setHeader] = useState(shopData.data.receipt_header);
+  const [logo, setLogo] = useState(null);
+  const [footer, setFooter] = useState("");
+  const [header, setHeader] = useState("");
   const id = localStorage.getItem("shopId");
 
   function hundleFileChange(e) {
@@ -83,51 +83,60 @@ function ShopReciept() {
     dispatch(getShopData(id));
   }, []);
 
+  useEffect(() => {
+    if (shopData) {
+      setLogo(shopData.data.logo);
+      setFooter(shopData.data.receipt_footer);
+      setHeader(shopData.data.receipt_header);
+    }
+  }, [shopData]);
+
   return (
     <>
-      {shopData && (
-        <Box
-          sx={{
-            marginTop: { xs: "20px", md: "0" },
-            padding: { xs: "10px 0 10px 10px", md: "0" },
-          }}
-        >
-          <div style={{ marginBottom: "10px" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingRight: "25px",
-              }}
-            >
-              <p className="page-header">Shop Receipt</p>
-              {edit && (
-                <button className="edit-btn" onClick={() => setEdit(false)}>
-                  Edit Shop Receipt{" "}
-                  <EditRoundedIcon
-                    sx={{
-                      background: "#4D3F3F",
-                      borderRadius: "50%",
-                      color: "white",
-                      padding: "5px",
-                      marginLeft: "20px",
-                    }}
-                  />
+      <Box
+        sx={{
+          marginTop: { xs: "20px", md: "0" },
+          padding: { xs: "10px 0 10px 10px", md: "0" },
+          minHeight: "100vh",
+        }}
+      >
+        <div style={{ marginBottom: "10px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingRight: "25px",
+            }}
+          >
+            <p className="page-header">Shop Receipt</p>
+            {edit && (
+              <button className="edit-btn" onClick={() => setEdit(false)}>
+                Edit Shop Receipt{" "}
+                <EditRoundedIcon
+                  sx={{
+                    background: "#4D3F3F",
+                    borderRadius: "50%",
+                    color: "white",
+                    padding: "5px",
+                    marginLeft: "20px",
+                  }}
+                />
+              </button>
+            )}
+            {!edit && (
+              <div className="btn-container">
+                <button className="discard" onClick={discardEdit}>
+                  Discard
                 </button>
-              )}
-              {!edit && (
-                <div className="btn-container">
-                  <button className="discard" onClick={discardEdit}>
-                    Discard
-                  </button>
-                  <button className="save" onClick={saveReceipt}>
-                    Save Edit
-                  </button>
-                </div>
-              )}
-            </div>
+                <button className="save" onClick={saveReceipt}>
+                  Save Edit
+                </button>
+              </div>
+            )}
           </div>
+        </div>
+        {shopData && (
           <Grid container spacing={2} sx={{ paddingRight: "25px" }}>
             <Grid item xs={12} md={6} lg={4}>
               <Box className="shopLogo">
@@ -210,8 +219,8 @@ function ShopReciept() {
               </Box>
             </Grid>
           </Grid>
-        </Box>
-      )}
+        )}
+      </Box>
     </>
   );
 }

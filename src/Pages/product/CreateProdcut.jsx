@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import "./../../Styles/addstock.css";
+import { useTranslation } from "react-i18next";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Stock name is required"),
@@ -44,6 +45,16 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 function CreateProdcut() {
+  const { t } = useTranslation();
+  const labelOne = t("stkformlbelone");
+  const labelTwo = t("stkformlbeltwo");
+  const labelThree = t("stkformlbelthree");
+  const labelFour = t("stkformlbelfour");
+  const labelFive = t("stkformlbelfive");
+  const labelSix = t("stkformlbelsix");
+  const labelSeven = t("stkformlbelseven");
+  const addbtn = t("addStockBtn");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, isError, message, isSuccess } = useSelector(
@@ -68,7 +79,7 @@ function CreateProdcut() {
         }}
       >
         <Grid item xs={12} className="formHeader">
-          <p className="header">Add new Stock</p>
+          <p className="header">{addbtn}</p>
           <Link to="/">
             <CancelOutlinedIcon sx={{ marginBottom: "50px" }} />
           </Link>
@@ -106,7 +117,7 @@ function CreateProdcut() {
                     label={
                       <div className="input-field-label">
                         <Inventory2OutlinedIcon color="primary" />
-                        <span>Stock Name</span>
+                        <span>{labelOne}</span>
                       </div>
                     }
                     variant="outlined"
@@ -124,7 +135,7 @@ function CreateProdcut() {
                     label={
                       <div className="input-field-label">
                         <AttachMoneyOutlinedIcon color="primary" />
-                        <span>Price</span>
+                        <span>{labelTwo}</span>
                       </div>
                     }
                     variant="outlined"
@@ -142,7 +153,7 @@ function CreateProdcut() {
                     label={
                       <div className="input-field-label">
                         <ListIcon color="primary" />
-                        <span>Quantity</span>
+                        <span>{labelThree}</span>
                       </div>
                     }
                     variant="outlined"
@@ -160,7 +171,7 @@ function CreateProdcut() {
                     label={
                       <div className="input-field-label">
                         <Inventory2OutlinedIcon color="primary" />
-                        <span>Live Sale Code</span>
+                        <span>{labelFour}</span>
                       </div>
                     }
                     variant="outlined"
@@ -178,7 +189,7 @@ function CreateProdcut() {
                     label={
                       <div className="input-field-label">
                         <Inventory2OutlinedIcon color="primary" />
-                        <span>Unit</span>
+                        <span>{labelFive}</span>
                       </div>
                     }
                     variant="outlined"
@@ -230,7 +241,7 @@ function CreateProdcut() {
                       >
                         <div className="input-field-label">
                           <ImageOutlinedIcon color="primary" />
-                          <span>Image</span>
+                          <span>{labelSix}</span>
                         </div>
                         <Button
                           component="label"
@@ -258,7 +269,7 @@ function CreateProdcut() {
                     label={
                       <div className="input-field-label">
                         <DescriptionIcon color="primary" />
-                        <span>Description</span>
+                        <span>{labelSeven}</span>
                       </div>
                     }
                     multiline
@@ -281,7 +292,7 @@ function CreateProdcut() {
                       sx={{ margin: "0" }}
                       // onClick={hundleSubmit}
                     >
-                      Create A New Stock
+                      {addbtn}
                     </Button>
                   </div>
                 </Grid>
