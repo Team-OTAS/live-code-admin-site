@@ -90,7 +90,8 @@
   background: white;
 }
 
-.text, .message {
+.text,
+.message {
   background-color: #4d3f3f;
   padding: 4px 8px;
   width: 80%;
@@ -111,6 +112,20 @@
   border-radius: 10px;
   border: 1px solid #4d3f3f;
   padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.photoUpload-img {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.photoUpload-img img {
+  width: inherit;
+  height: inherit;
 }
 
 .completeSticker {

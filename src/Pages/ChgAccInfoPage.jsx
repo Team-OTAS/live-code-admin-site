@@ -10,6 +10,7 @@ import Link from "@mui/material/Link";
 import "./../Styles/auth.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function ChgAccInfoPage() {
   const navigate = useNavigate();
@@ -24,20 +25,28 @@ export default function ChgAccInfoPage() {
 
   const changeLoginInfos = async () => {
     const id = localStorage.getItem("id");
-
-    const response = await axios.patch(`/api/update-profile/${id}`, {
-      user_name,
-      password,
-      password_confirmation,
-    });
-    console.log("id", id);
-    console.log("Change User Info func work");
-    console.log(
-      "Updated User Infos",
-      user_name,
-      password,
-      password_confirmation
-    );
+    try {
+      const response = await axios.patch(`/api/update-profile/${id}`, {
+        user_name,
+        password,
+        password_confirmation,
+      });
+      console.log("Change Acc Info Page", response);
+    } catch (error) {
+      if (error.response) {
+        Swal.fire({
+          title: "Error!",
+          text: error.response.data.message,
+          icon: "error",
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: error.message,
+          icon: "error",
+        });
+      }
+    }
   };
 
   return (

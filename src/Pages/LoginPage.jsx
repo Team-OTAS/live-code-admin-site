@@ -5,7 +5,6 @@ import TextField from "@mui/material/TextField";
 import { Box, Button, IconButton } from "@mui/material";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import PasswordOutlinedIcon from "@mui/icons-material/PasswordOutlined";
-import InputAdornment from "@mui/material/InputAdornment";
 import { setAuthToken } from "../api/axios";
 import "./../Styles/auth.css";
 import { useNavigate } from "react-router-dom";
@@ -58,11 +57,19 @@ export default function LoginPage() {
       }
     } catch (error) {
       // console.log(error);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Login Failed",
-      });
+      if (error.response) {
+        Swal.fire({
+          title: "Error!",
+          text: error.response.data.message,
+          icon: "error",
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: error.message,
+          icon: "error",
+        });
+      }
     }
   };
 
@@ -118,7 +125,7 @@ export default function LoginPage() {
             >
               <div className="input-field">
                 <TextField
-                  id="outlined-error-helper-text"
+                  id="username"
                   value={user_name}
                   onChange={(e) => setuser_name(e.target.value)}
                   label={
@@ -133,7 +140,7 @@ export default function LoginPage() {
               </div>
               <div className="input-field">
                 <TextField
-                  id="outlined-error-helper-text"
+                  id="password"
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

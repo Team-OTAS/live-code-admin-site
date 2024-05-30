@@ -33,6 +33,11 @@ export default function DrawerSlide({ Title }) {
     return expireDate;
   };
 
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   const activeClass = () => {
     if (location.pathname === "/") {
       return "slidebtn active";
@@ -129,12 +134,30 @@ export default function DrawerSlide({ Title }) {
             <SettingsIcon sx={{ paddingRight: "5px" }} />
             Setting
           </Button>
+          <Button
+            sx={{
+              width: "100%",
+              marginBottom: "10px",
+              borderRadius: "10px",
+              border: "1px solid #000000",
+              padding: "5px",
+              cursor: "pointer",
+              fontSize: "14px",
+              ":hover": {
+                background: "#4d3f3f",
+                color: "#ffffff",
+              },
+            }}
+            onClick={logout}
+          >
+            <SettingsIcon sx={{ paddingRight: "5px" }} />
+            Logout
+          </Button>
         </Box>
       </Box>
-
       {/* <div style={{ width: "100%" }}>
-        <LanguageSelecter />
-      </div> */}
+            <LanguageSelecter />
+          </div> */}
     </div>
   );
 }

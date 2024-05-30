@@ -19,17 +19,24 @@ export default function FBloginPage() {
   async function handleClick() {
     try {
       const res = await axios.get(
-        "auth/facebook/redirect?redirect_url=http://localhost:3000/setup"
+        "auth/facebook/redirect?redirect_url=https://admin.staging.livecodemm.com/setup"
       );
       console.log(res.data);
-      navigate("/dashboard");
+      // navigate("/dashboard");
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Opp",
-        text: "Can not connect Facebook",
-        timer: 2000,
-      });
+      if (error.response) {
+        Swal.fire({
+          title: "Error!",
+          text: error.response.data.message,
+          icon: "error",
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: error.message,
+          icon: "error",
+        });
+      }
     }
   }
 

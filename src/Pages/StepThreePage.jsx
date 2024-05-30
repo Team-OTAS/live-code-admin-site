@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { Box, Button } from "@mui/material";
 import "./../Styles/auth.css";
@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "./../api/axios.js";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
+import { MultiStepContext } from "../StepContext";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -32,6 +33,8 @@ export default function StepThreePage() {
   const stepThreeDes = t("stepThreeDes");
   const stepThreeBtn = t("stepThreeBtn");
   const stepThreeBtn2 = t("stepThreeBtn2");
+
+  const { setStep } = useContext(MultiStepContext);
 
   const shopData = useSelector((state) => state.Shop.formData);
   console.log("formThree", shopData);
@@ -61,15 +64,23 @@ export default function StepThreePage() {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(res);
+      // console.log(res);
       navigate("/completesetuppage");
     } catch (error) {
-      console.log(error);
-      Swal.fire({
-        title: "Error!",
-        text: "Something went wrong!",
-        icon: "error",
-      });
+      // console.log(error);
+      if (error.response) {
+        Swal.fire({
+          title: "Error!",
+          text: error.response.data.message,
+          icon: "error",
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: error.message,
+          icon: "error",
+        });
+      }
     }
     // navigate("/completesetuppage");
   };
@@ -116,19 +127,29 @@ export default function StepThreePage() {
         >
           <form style={{ display: "flex", flexDirection: "column" }}>
             <div className="photoUpload">
-              <div className="input-field-label">
-                <ImageOutlinedIcon color="primary" />
-                <span>Shop Logo</span>
+              <div>
+                <div className="input-field-label">
+                  <ImageOutlinedIcon color="primary" />
+                  <span>Shop Logo</span>
+                </div>
+                <Button
+                  component="label"
+                  variant="contained"
+                  startIcon={<AttachmentOutlinedIcon />}
+                  sx={{ marginTop: "10px", fontSize: "12px" }}
+                >
+                  {file ? "edit Image" : " Upload Image"}
+                  <VisuallyHiddenInput
+                    type="file"
+                    onChange={hundleFileChange}
+                  />
+                </Button>
               </div>
-              <Button
-                component="label"
-                variant="contained"
-                startIcon={<AttachmentOutlinedIcon />}
-                sx={{ marginTop: "10px" }}
-              >
-                Upload Image
-                <VisuallyHiddenInput type="file" onChange={hundleFileChange} />
-              </Button>
+              <div className="photoUpload-img">
+                {file ? (
+                  <img src={URL.createObjectURL(file)} alt="logo" />
+                ) : null}
+              </div>
             </div>
             <TextField
               id="outlined-multiline-static"
@@ -174,9 +195,9 @@ export default function StepThreePage() {
           <Button
             // variant="contained"
             color="primary"
-            // onClick={() => {
-            //   setStep(1);
-            // }}
+            onClick={() => {
+              setStep(2);
+            }}
             sx={{
               marginTop: "5px",
               marginRight: "5px",

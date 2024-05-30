@@ -14,7 +14,7 @@ axios.defaults.headers.common["Accept"] = "application/json";
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 // axios.defaults.withCredentials = true;
-axios.defaults.withXSRFToken = true;
+// axios.defaults.withXSRFToken = true;
 
 export { setAuthToken };
 export default axios;
