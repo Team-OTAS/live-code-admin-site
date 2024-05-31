@@ -176,7 +176,7 @@ const productReducer = createSlice({
           showConfirmButton: false,
           timer: 1500,
         });
-        window.location.pathname = "/";
+        window.history.back();
       })
       .addCase(createProduct.rejected, (state, action) => {
         state.isLoading = false;
@@ -259,7 +259,7 @@ const productReducer = createSlice({
           willClose: () => {
             clearInterval(timerInterval);
             // navigate("/");
-            window.history.back();
+            navigator.push("/products");
           },
         }).then((result) => {
           if (result.dismiss === Swal.DismissReason.timer) {

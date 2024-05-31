@@ -22,6 +22,7 @@ import Swal from "sweetalert2";
 
 import "./../../Styles/addstock.css";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Stock name is required"),
@@ -54,20 +55,44 @@ function CreateProdcut() {
   const labelSix = t("stkformlbelsix");
   const labelSeven = t("stkformlbelseven");
   const addbtn = t("addStockBtn");
-
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoading, isError, message, isSuccess } = useSelector(
-    (state) => state.stocks
-  );
+  const navigate = useNavigate();
 
   const [file, setFile] = useState("");
   const shopId = localStorage.getItem("shopId");
 
-  function hundleFileChange(e) {
-    setFile(e.target.files[0]);
-    console.log(file);
-  }
+  const createProduct = async (values) => {
+    try {
+      const response = await axios.post("/api/products", values, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Stock Added Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+    } catch (error) {
+      if (error.response) {
+        Swal.fire({
+          title: "Error!",
+          text: error.response.data.message,
+          icon: "error",
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: error.message,
+          icon: "error",
+        });
+      }
+    }
+  };
 
   return (
     <Box sx={{ marginTop: "20px" }}>
@@ -100,7 +125,7 @@ function CreateProdcut() {
           onSubmit={(values, { setSubmitting }) => {
             // console.log(values);
             setSubmitting(false);
-            dispatch(createProduct(values));
+            createProduct(values);
           }}
         >
           {(

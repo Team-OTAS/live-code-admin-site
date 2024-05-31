@@ -14,15 +14,13 @@ export default function FBloginPage() {
   const { t } = useTranslation();
   const loginFb = t("loginFB");
 
-  const navigate = useNavigate();
-
   async function handleClick() {
     try {
       const res = await axios.get(
         "auth/facebook/redirect?redirect_url=https://admin.staging.livecodemm.com/setup"
       );
+      window.location.href = res.data.url;
       console.log(res.data);
-      // navigate("/dashboard");
     } catch (error) {
       if (error.response) {
         Swal.fire({
