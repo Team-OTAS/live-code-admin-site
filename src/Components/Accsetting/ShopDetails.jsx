@@ -279,7 +279,9 @@ function ShopDetails() {
                 </div>
                 <div className="detail-box-content">
                   <p>Package Type</p>
-                  <span>{shop.subscription_plan.name}</span>
+                  <span>
+                    {shop.subscription_plan ? shop.subscription_plan : null}
+                  </span>
                 </div>
               </div>
             </Grid>
