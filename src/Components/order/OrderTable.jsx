@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/features/productReducer";
 import LinearProgress from "@mui/material/LinearProgress";
 import "./../../Styles/dashboard.css";
+import { use } from "i18next";
+import { Link } from "react-router-dom";
 
 function CustomToolbar() {
   return (
@@ -127,13 +129,15 @@ const columns = [
     headerName: "Actions",
     width: 200,
     renderCell: (params) => (
-      <Button
-        sx={{
+      <Link
+        to={`/vieworder/${params.row.id}`}
+        style={{
           background: "#354E8E",
           color: "#fff",
           padding: "5px 15px",
           fontSize: "12px",
           borderRadius: "5px",
+          textDecoration: "none",
           "&:hover": {
             backgroundColor: "#fff",
             color: "#354E8E",
@@ -141,12 +145,10 @@ const columns = [
             border: "1px solid #354E8E",
           },
         }}
-        variant="filled"
-        // onClick={() => handleButtonClick(params.row.id)}
       >
         {/* <StorefrontIcon, sx={{ marginRight: "5px" }} /> */}
         View Order
-      </Button>
+      </Link>
     ),
   },
 ];
