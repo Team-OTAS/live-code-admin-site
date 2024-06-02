@@ -10,9 +10,11 @@ import "./../Styles/drawer.css";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import SettingsIcon from "@mui/icons-material/Settings";
+import FacebookIcon from "@mui/icons-material/Facebook";
 import LanguageSelecter from "./languageSelecter/LanguageSelecter";
 import { Box, Button } from "@mui/material";
 import { useSelector } from "react-redux";
+import { Accessibility } from "@mui/icons-material";
 
 export default function DrawerSlide({ Title }) {
   const location = useLocation();
@@ -59,18 +61,49 @@ export default function DrawerSlide({ Title }) {
     <div className="DrawContainer">
       <div>
         <Box
-          sx={{ display: { xs: "none", md: "block" }, marginBottom: "50px" }}
+          sx={{
+            display: {
+              xs: "none",
+              md: "block",
+            },
+            marginBottom: "50px",
+          }}
         >
-          <img src={LiveCodeLogo} alt="LiveCodeLogo" />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+              cursor: "pointer",
+            }}
+            onClick={() => navigate("/")}
+          >
+            <img src={LiveCodeLogo} alt="LiveCodeLogo" />
+          </div>
         </Box>
 
         <div>
-          <NavLink to="/" className={activeClass}>
+          {/* <NavLink to="/" className={activeClass}>
             <ManageAccountsOutlinedIcon />
-            <span className="btnText">{navTitle[0]}</span>
-          </NavLink>
+            <span className="btnText">Contact List</span>
+          </NavLink> */}
 
-          <NavLink
+          <Button
+            sx={{ m: 2, border: "1px solid rgba(0,0,0,0.2)", width: "200px" }}
+            disabled
+          >
+            <ManageAccountsOutlinedIcon />
+            <span className="btnText">Contact List</span>
+          </Button>
+
+          <Button
+            sx={{ m: 2, border: "1px solid rgba(0,0,0,0.2)", width: "200px" }}
+            disabled
+          >
+            <span className="btnText">Live Comment Replies</span>
+          </Button>
+
+          {/* <NavLink
             to="/live"
             className={({ isActive }) =>
               isActive ? "slidebtn active" : "slidebtn"
@@ -78,12 +111,12 @@ export default function DrawerSlide({ Title }) {
           >
             <StorefrontOutlinedIcon />
             <span className="btnText">{navTitle[1]}</span>
-          </NavLink>
+          </NavLink> */}
 
-          <NavLink to="/order" className={activeClass2}>
+          {/* <NavLink to="/order" className={activeClass2}>
             <ShoppingCartOutlinedIcon />
             <span className="btnText">{navTitle[2]}</span>
-          </NavLink>
+          </NavLink> */}
         </div>
       </div>
 
@@ -105,6 +138,10 @@ export default function DrawerSlide({ Title }) {
             alt="Remy Sharp"
             src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
             className="avatars"
+            onClick={() => {
+              // props.title = "setting";
+              navigate("/setting");
+            }}
           />
           {shopData && (
             <div className="userName">
@@ -122,7 +159,7 @@ export default function DrawerSlide({ Title }) {
               border: "1px solid #000000",
               padding: "5px",
               cursor: "pointer",
-              fontSize: "14px",
+              fontSize: "10px",
               ":hover": {
                 background: "#4d3f3f",
                 color: "#ffffff",
@@ -130,11 +167,11 @@ export default function DrawerSlide({ Title }) {
             }}
             onClick={() => {
               // props.title = "setting";
-              navigate("/setting");
+              navigate("/fblogin");
             }}
           >
-            <SettingsIcon sx={{ paddingRight: "5px" }} />
-            Setting
+            <FacebookIcon sx={{ paddingRight: "5px" }} />
+            Facebook Connect
           </Button>
           <Button
             sx={{
@@ -144,7 +181,7 @@ export default function DrawerSlide({ Title }) {
               border: "1px solid #000000",
               padding: "5px",
               cursor: "pointer",
-              fontSize: "14px",
+              fontSize: "10px",
               ":hover": {
                 background: "#4d3f3f",
                 color: "#ffffff",

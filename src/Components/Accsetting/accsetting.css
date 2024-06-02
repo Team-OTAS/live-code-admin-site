@@ -97,11 +97,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .logo-img img {
-  width: inherit;
-  height: inherit;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .edit-btn {

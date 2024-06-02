@@ -5,7 +5,6 @@ import FBloginPhoto from "./../assets/images/FBlogin.png";
 import { Box } from "@mui/material";
 import "./../Styles/auth.css";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
 import axios from "./../api/axios";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
@@ -17,10 +16,11 @@ export default function FBloginPage() {
   async function handleClick() {
     try {
       const res = await axios.get(
-        "auth/facebook/redirect?redirect_url=https://admin.staging.livecodemm.com/setup"
+        "auth/facebook/redirect?redirect_url=https://admin.staging.livecodemm.com"
       );
-      window.location.href = res.data.url;
-      console.log(res.data);
+
+      // console.log(res.data.data.facebook_redirect_url);
+      window.location.href = res.data.data.facebook_redirect_url;
     } catch (error) {
       if (error.response) {
         Swal.fire({
@@ -87,6 +87,21 @@ export default function FBloginPage() {
             </Box>
           </Grid>
           <Grid item xs={12}>
+            {/* <FacebookLogin
+              appId="381220697874727"
+              fields="name,email,picture"
+              scope="public_profile,pages_show_list,pages_read_engagement"
+              onSuccess={(response) => {
+                console.log("Login Successful!", response);
+              }}
+              onFail={(error) => {
+                console.log("Login Failed!", error);
+              }}
+              onProfileSuccess={(response) => {
+                console.log("Get Profile Success!", response);
+                localStorage.setItem("fb_data", response.data);
+              }}
+            /> */}
             <Button variant="contained" onClick={handleClick}>
               <span>Login Facebook Account</span>
             </Button>

@@ -157,7 +157,7 @@ function ShopReciept() {
                     ) : (
                       <div className="logo-img">
                         <img
-                          src={`https://api.livecodemm.com${logo}`}
+                          src={`${process.env.REACT_APP_API_BASE_URL}${logo}`}
                           alt="logo"
                         />
                       </div>

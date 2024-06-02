@@ -14,6 +14,7 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 function ShopDetails() {
   const id = localStorage.getItem("shopId");
   const [shop, setShop] = useState();
+  const [loading, setLoading] = useState(true);
   const [logo, setLogo] = useState(null);
   const [packageid, setPackage] = useState(1);
   const [name, setName] = useState("");
@@ -31,6 +32,7 @@ function ShopDetails() {
       setPhone(res.data.data.phone);
       setAddress(res.data.data.address);
       setPackage(res.data.data.subscription_plan.id);
+      setLoading(false);
     } catch (error) {
       if (error instanceof SyntaxError) {
         Swal.fire({
@@ -60,7 +62,7 @@ function ShopDetails() {
           },
         }
       );
-      console.log(res);
+      // console.log(res);
       Swal.fire({
         icon: "success",
         title: "Success",
@@ -95,7 +97,7 @@ function ShopDetails() {
   return (
     <Box
       className="containers"
-      sx={{ padding: { xs: "10px 15px", md: "10px 40px" } }}
+      sx={{ padding: { xs: "10px 15px", md: "10px 40px", minHeight: "100vh" } }}
     >
       <div
         style={{
@@ -286,6 +288,12 @@ function ShopDetails() {
               </div>
             </Grid>
           </Grid>
+        </div>
+      )}
+
+      {!shop && (
+        <div className="no-data">
+          <h3>Loading...</h3>
         </div>
       )}
 

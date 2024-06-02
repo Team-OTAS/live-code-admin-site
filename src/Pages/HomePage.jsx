@@ -14,6 +14,7 @@ import OrderDetail from "../Components/order/OrderDetail";
 import UserAccDetail from "../Components/Accsetting/UserAccDetail";
 import { Create } from "@mui/icons-material";
 import CreateProdcut from "./product/CreateProdcut";
+import HomeView from "../Components/HomeView";
 // import { Route,Routes,BrowserRouter,RouterProvider } from 'react-router-dom'
 
 function HomePage() {
@@ -27,10 +28,11 @@ function HomePage() {
           <DrawerSlide />
         </Box>
         <Routes>
-          <Route path="*" element={<Dashboard />} />
+          {/* <Route path="*" element={<Dashboard />} /> */}
+          {/* <Route path="*" element={<HomeView />} /> */}
           <Route path="/live" element={<LiveSale />} />
           <Route path="/order" element={<OrderPage />} />
-          <Route path="/setting" element={<Accsetting />} />
+          <Route path="/*" element={<Accsetting />} />
           <Route path="/adduser" element={<AddUser />} />
           <Route path="/vouncher" element={<Vouncher />} />
           <Route path="/vieworder/:id" element={<OrderDetail />} />

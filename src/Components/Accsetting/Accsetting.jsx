@@ -32,12 +32,12 @@ function Accsetting() {
           >
             <span className="settingText">AutoReply Message</span>
           </button>
-          <button
+          {/* <button
             className={page === 2 ? "settingbtn active" : "settingbtn"}
             onClick={() => channgePage(2)}
           >
             <span className="settingText">Shop Receipt</span>
-          </button>
+          </button> */}
           <button
             className={page === 3 ? "settingbtn active" : "settingbtn"}
             onClick={() => channgePage(3)}
