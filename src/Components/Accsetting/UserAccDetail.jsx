@@ -10,8 +10,10 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 import "./../../Styles/detailbox.css";
+import { useNavigate } from "react-router-dom";
 
 function UserAccDetail() {
+  const navigate = useNavigate();
   const id = localStorage.getItem("id");
   const { loading, error, shopData } = useSelector((state) => state.ShopData);
   const [user_name, setuser_name] = useState(null);
@@ -95,7 +97,14 @@ function UserAccDetail() {
       </Grid>
 
       <div className="btn-container" style={{ marginTop: "50px" }}>
-        <button className="discard">Discard</button>
+        <button
+          className="discard"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Discard
+        </button>
         <button className="save" onClick={updateHandler}>
           Save Edit
         </button>
