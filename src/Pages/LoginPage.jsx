@@ -28,7 +28,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    fetchXsrfToken();
+    // fetchXsrfToken();
 
     try {
       const response = await axios.post("/api/auth/login", {
@@ -41,15 +41,17 @@ export default function LoginPage() {
         const shopId = response.data.data.shop_id;
         const id = response.data.data.id;
         localStorage.setItem("id", id);
+        console.log(response);
         setAuthToken(authToken);
         localStorage.setItem("authToken", authToken);
         localStorage.setItem("shopId", shopId);
         if (response.data.data.user_type.id !== 1) {
-          if (response.data.data.status === "onboarding") {
-            navigate("/");
-          } else {
-            navigate("/changeaccinfo");
-          }
+          navigate("/");
+          // if (response.data.data.status === "onboarding") {
+          //   navigate("/");
+          // } else {
+          //   navigate("/changeaccinfo");
+          // }
         } else {
           Swal.fire({
             icon: "error",
