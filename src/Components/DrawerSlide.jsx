@@ -83,12 +83,12 @@ export default function DrawerSlide({ Title }) {
         </Box>
 
         <div>
-          {/* <NavLink to="/" className={activeClass}>
+          <NavLink to="/" className={activeClass}>
             <ManageAccountsOutlinedIcon />
-            <span className="btnText">Contact List</span>
-          </NavLink> */}
+            <span className="btnText">{navTitle[0]}</span>
+          </NavLink>
 
-          <Button
+          {/* <Button
             sx={{ m: 2, border: "1px solid rgba(0,0,0,0.2)", width: "200px" }}
             disabled
           >
@@ -101,9 +101,9 @@ export default function DrawerSlide({ Title }) {
             disabled
           >
             <span className="btnText">Live Comment Replies</span>
-          </Button>
+          </Button> */}
 
-          {/* <NavLink
+          <NavLink
             to="/live"
             className={({ isActive }) =>
               isActive ? "slidebtn active" : "slidebtn"
@@ -111,12 +111,12 @@ export default function DrawerSlide({ Title }) {
           >
             <StorefrontOutlinedIcon />
             <span className="btnText">{navTitle[1]}</span>
-          </NavLink> */}
+          </NavLink>
 
-          {/* <NavLink to="/order" className={activeClass2}>
+          <NavLink to="/order" className={activeClass2}>
             <ShoppingCartOutlinedIcon />
             <span className="btnText">{navTitle[2]}</span>
-          </NavLink> */}
+          </NavLink>
         </div>
       </div>
 

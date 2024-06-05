@@ -28,11 +28,11 @@ function HomePage() {
           <DrawerSlide />
         </Box>
         <Routes>
-          {/* <Route path="*" element={<Dashboard />} /> */}
+          <Route path="*" element={<Dashboard />} />
           {/* <Route path="*" element={<HomeView />} /> */}
           <Route path="/live" element={<LiveSale />} />
           <Route path="/order" element={<OrderPage />} />
-          <Route path="/*" element={<Accsetting />} />
+          <Route path="/setting" element={<Accsetting />} />
           <Route path="/adduser" element={<AddUser />} />
           <Route path="/vouncher" element={<Vouncher />} />
           <Route path="/vieworder/:id" element={<OrderDetail />} />

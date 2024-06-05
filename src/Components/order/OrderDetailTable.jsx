@@ -97,24 +97,6 @@ const OrderDetailTable = ({ sendDataToDashboard }) => {
     dispatch(getProducts());
   }, [deletes.deletes]);
 
-  // console.log(products.data);
-
-  //   if (products.products.code === 200) {
-  //     console.log(products.products.data);
-  //     const rows = products.products.data.map((index, item) => ({
-  //       no: index + 1,
-  //       ...item,
-  //     }));
-  //     console.log(rows);
-  //   }
-  // }, [products]);
-
-  // const handleRowClick = (params) => {
-  // Access the clicked row data using params.row
-  // console.log("Row clicked:", params.row);
-  // You can perform additional actions based on the clicked row data
-  // };
-
   return (
     <Box sx={{ height: { xs: 300, md: 250 }, width: "100%" }}>
       <DataGrid

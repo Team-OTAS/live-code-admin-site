@@ -8,14 +8,8 @@
 }
 
 .filterButton {
-  background-color: #fff;
-  color: #000;
+  background-color: transparent;
   font-family: "Poppins", sans-serif;
-  margin-right: 20px;
-}
-
-.filterButton:hover {
-  color: #fff;
 }
 
 .order-btn {

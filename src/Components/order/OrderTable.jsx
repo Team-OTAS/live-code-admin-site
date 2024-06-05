@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/features/productReducer";
 import LinearProgress from "@mui/material/LinearProgress";
 import "./../../Styles/dashboard.css";
-import { use } from "i18next";
 import { Link } from "react-router-dom";
 
 function CustomToolbar() {
@@ -22,6 +21,24 @@ function CustomToolbar() {
     </GridToolbarContainer>
   );
 }
+
+const statusArray = [
+  {
+    value: "pending",
+    label: "Pending Orders",
+    color: "#F15200",
+  },
+  {
+    value: "paid",
+    label: "Paid Orders",
+    color: "#6EC531",
+  },
+  {
+    value: "cancel",
+    label: "Cancel Orders",
+    color: "#E81609",
+  },
+];
 
 const columns = [
   {
@@ -115,7 +132,9 @@ const columns = [
         <Box
           className="color-box"
           sx={{
-            background: cellValues.value === "pending" ? "#6EC531" : "#E81609",
+            background: statusArray.find(
+              (item) => item.value === cellValues.value
+            ).color,
           }}
         >
           p
@@ -153,8 +172,7 @@ const columns = [
   },
 ];
 
-const OrderTable = ({ status }) => {
-  // console.log(status);
+const OrderTable = ({ status, date }) => {
   const [products, setProducts] = useState([]);
   const orderApi = {
     code: 200,
@@ -171,7 +189,7 @@ const OrderTable = ({ status }) => {
         contact_phone: null,
         delivery_address: null,
         price: "6132.00",
-        status: "half-paid",
+        status: "paid",
         created_at: "2024-05-28T12:35:47.000000Z",
         updated_at: "2024-05-28T12:35:47.000000Z",
         deleted_at: null,
@@ -875,6 +893,28 @@ const OrderTable = ({ status }) => {
     const Deletedata = dataId;
     // sendDataToDashboard(Deletedata);
   };
+
+  const datess = orderApi.data[0].created_at;
+  console.log(datess);
+
+  const compareDates = (date1, date2) => {
+    // Parse the dates
+    const parsedDate1 = new Date(date1);
+    const parsedDate2 = new Date(date2);
+
+    // Normalize the dates (set the time to midnight to only compare the date parts)
+    parsedDate1.setHours(0, 0, 0, 0);
+    parsedDate2.setHours(0, 0, 0, 0);
+
+    // Compare the dates
+    return parsedDate1.getTime() === parsedDate2.getTime();
+  };
+
+  const date1 = date;
+  const date2 = "2024-05-28T12:35:47.000000Z";
+
+  const isSameDate = compareDates(date1, date2);
+  console.log(isSameDate);
 
   useEffect(() => {
     dispatch(getProducts());

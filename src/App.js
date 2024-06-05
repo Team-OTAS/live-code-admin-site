@@ -10,6 +10,9 @@ import SetupShopStepperPage from "./Pages/SetupShopStepperPage";
 import CompleteSetupPage from "./Pages/CompleteSetupPage";
 import HomePage from "./Pages/HomePage";
 import PrivateRoute from "./PrivateRoute";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import "dayjs/locale/en-gb";
 
 const theme = createTheme({
   palette: {
@@ -42,7 +45,7 @@ const App = () => {
   return (
     //  <BrowserRouter>
     <ThemeProvider theme={theme}>
-      <div>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
         <StepContextProvider>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
@@ -60,7 +63,7 @@ const App = () => {
             />
           </Routes>
         </StepContextProvider>
-      </div>
+      </LocalizationProvider>
     </ThemeProvider>
     //  </BrowserRouter>
   );

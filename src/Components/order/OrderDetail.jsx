@@ -1,5 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import React from "react";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
@@ -30,7 +31,7 @@ function OrderDetail() {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "72%",
         padding: { xs: "10px 15px", md: "10px 40px" },
         background: "white",
         borderRadius: "25px",
@@ -45,6 +46,20 @@ function OrderDetail() {
         }}
       >
         <p className="page-header">Order Detail</p>
+        <div>
+          <button className="edit-btn">
+            Edit Order
+            <EditRoundedIcon
+              sx={{
+                background: "#4D3F3F",
+                borderRadius: "50%",
+                color: "white",
+                padding: "5px",
+                marginLeft: "20px",
+              }}
+            />
+          </button>
+        </div>
       </div>
       <Box>
         <div>
