@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import productService from "./productService";
 import Swal from "sweetalert2";
-import { Navigate } from "react-router-dom";
 
 // import { toast } from "react-toastify";
 

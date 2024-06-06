@@ -5,7 +5,8 @@ import {
   GridToolbarContainer,
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
+import { getOrderData } from "../../redux/features/orderApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/features/productReducer";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -173,6 +174,7 @@ const columns = [
 ];
 
 const OrderTable = ({ status, date }) => {
+  // console.log("status", status);
   const [products, setProducts] = useState([]);
   const orderApi = {
     code: 200,
@@ -885,9 +887,9 @@ const OrderTable = ({ status, date }) => {
 
   // const products = orderApi.data;
   const dispatch = useDispatch();
-  // const { products, isLoading, isError, message } = useSelector(
-  //   (state) => state.stocks
-  // );
+  const { loading, error, orderData } = useSelector((state) => state.OrderData);
+  // console.log(orderData);
+  console.log("order", orderData);
   const deletes = useSelector((state) => state.deleteproduct);
   const sendData = (dataId) => {
     const Deletedata = dataId;
@@ -910,27 +912,31 @@ const OrderTable = ({ status, date }) => {
     return parsedDate1.getTime() === parsedDate2.getTime();
   };
 
-  const date1 = date;
-  const date2 = "2024-05-28T12:35:47.000000Z";
-
-  const isSameDate = compareDates(date1, date2);
-  console.log(isSameDate);
+  useEffect(() => {
+    dispatch(getOrderData());
+  }, []);
 
   useEffect(() => {
     dispatch(getProducts());
   }, [deletes.deletes]);
 
   useEffect(() => {
-    setProducts(
-      orderApi.data.filter((item) => {
-        if (status) {
-          return item.status === status;
-        } else {
-          return orderApi.data;
-        }
-      })
-    );
-  }, [status]);
+    if (orderData) {
+      setProducts(
+        orderData.filter((item) => {
+          if (status !== "All") {
+            return (
+              item.status === status && compareDates(item.created_at, date)
+            );
+          } else {
+            return orderData;
+          }
+        })
+      );
+    }
+
+    // console.log(products);
+  }, [status, orderData, date]);
 
   // console.log(products.data);
 
@@ -958,7 +964,7 @@ const OrderTable = ({ status, date }) => {
         columns={columns}
         pageSize={14}
         checkboxSelection
-        // loading={isLoading}
+        loading={loading}
         disableRowSelectionOnClick
         slots={{
           toolbar: CustomToolbar,

@@ -3,13 +3,12 @@ import axios from "./../../api/axios";
 
 const initialState = {
   loading: false,
-  orderData: null,
+  orderData: [],
   error: "",
 };
 
-export const getOrderData = createAsyncThunk("order/getAllOrder", (id) => {
-  // console.log(deleteData);
-  return axios.get("/api/order/" + id).then((response) => response.data);
+export const getOrderData = createAsyncThunk("order/getAllOrder", () => {
+  return axios.get("/api/orders").then((response) => response.data.data.data);
 });
 
 const orderDataSlice = createSlice({
@@ -21,12 +20,13 @@ const orderDataSlice = createSlice({
     });
     builder.addCase(getOrderData.fulfilled, (state, action) => {
       state.loading = false;
-      state.shopData = action.payload;
+      console.log("Order Data from Redux Store", action.payload);
+      state.orderData = action.payload;
       state.error = "";
     });
     builder.addCase(getOrderData.rejected, (state, action) => {
       state.loading = false;
-      state.shopData = null;
+      state.orderData = null;
       state.error = action.error.message;
     });
   },

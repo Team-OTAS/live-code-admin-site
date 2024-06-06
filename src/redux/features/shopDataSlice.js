@@ -21,6 +21,7 @@ const shopDataSlice = createSlice({
     });
     builder.addCase(getShopData.fulfilled, (state, action) => {
       state.loading = false;
+      console.log("Shop Data from Redux Store", action.payload);
       state.shopData = action.payload;
       state.error = "";
     });
