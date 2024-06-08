@@ -16,14 +16,7 @@ function Accsetting() {
   }
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        marginRight: { sx: "0", md: "30px" },
-        // background: "black",
-        overflow: "hidden",
-      }}
-    >
+    <Box className="dashboardContent">
       <Box className="settingBtnContainer">
         <div style={{ display: "flex", width: "100%", justifyContent: "end" }}>
           <button
@@ -55,7 +48,6 @@ function Accsetting() {
 
       <Box
         sx={{
-          marginLeft: { sx: "0", md: "20px" },
           padding: { sx: "0", md: "20px" },
           background: "#fff",
           borderRadius: "10px",

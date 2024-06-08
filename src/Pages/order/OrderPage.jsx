@@ -6,35 +6,42 @@ import MenuItem from "@mui/material/MenuItem";
 import OrderTable from "../../Components/order/OrderTable";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { updateStatusOrder } from "../../redux/features/orderApiSlice";
 import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import dayjs from "dayjs";
 import "./../../Styles/order.css";
+import { useDispatch } from "react-redux";
+
+export const statusArray = [
+  {
+    value: "All",
+    label: "All Orders",
+    color: "#000",
+  },
+  {
+    value: "pending",
+    label: "Pending Orders",
+    color: "#F15200",
+  },
+  {
+    value: "paid",
+    label: "Paid Orders",
+    color: "#6EC531",
+  },
+  {
+    value: "cancelled",
+    label: "Cancel Orders",
+    color: "#E81609",
+  },
+];
 
 function OrderPage() {
-  const statusArray = [
-    {
-      value: "All",
-      label: "All Orders",
-      color: "#000",
-    },
-    {
-      value: "pending",
-      label: "Pending Orders",
-      color: "#F15200",
-    },
-    {
-      value: "paid",
-      label: "Paid Orders",
-      color: "#6EC531",
-    },
-    {
-      value: "cancel",
-      label: "Cancel Orders",
-      color: "#E81609",
-    },
-  ];
+  const dispatch = useDispatch();
+
   const [status, setStatus] = useState("All");
+  const [chgorder, setChgorder] = useState("");
   const [date, setDate] = useState(new Date());
+  const [order_ids, setOrder_Ids] = useState([]);
 
   const FilterIcon = () => {
     return (
@@ -54,17 +61,24 @@ function OrderPage() {
     setStatus(event.target.value);
   };
 
-  console.log(status);
+  const changeStatus = (ids) => {
+    setOrder_Ids(ids);
+  };
+
+  // Change Status
+  const handleOrder = (event) => {
+    setChgorder(event.target.value);
+    const data = {
+      order_ids: order_ids,
+      status: event.target.value,
+    };
+
+    dispatch(updateStatusOrder(data));
+    setChgorder("");
+  };
 
   return (
-    <Box
-      sx={{
-        paddingLeft: { xs: 0, md: "20px" },
-        overflowX: "hidden",
-        width: "90vw",
-        margin: "auto",
-      }}
-    >
+    <Box className="dashboardContent">
       <Grid
         container
         spacing={2}
@@ -98,14 +112,37 @@ function OrderPage() {
         </Grid>
 
         <Grid item xs={6} md={3}>
-          <button className="order-btn">
-            <p>Change Status</p>
-            <ChangeCircleIcon />
-          </button>
+          <FormControl fullWidth>
+            <Select
+              value={chgorder}
+              onChange={handleOrder}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+              IconComponent={ChangeCircleIcon}
+            >
+              <MenuItem disabled value="">
+                <span className="filterButton" style={{ opacity: "0.5" }}>
+                  Change Status
+                </span>
+              </MenuItem>
+              {statusArray
+                .filter((item) => item.value !== "All")
+                .map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    <span className="filterButton">{option.label}</span>
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
         </Grid>
       </Grid>
 
-      <OrderTable status={status} date={date} />
+      <OrderTable
+        status={status}
+        date={date}
+        sendDataToOrderTable={changeStatus}
+        chgorder={chgorder}
+      />
     </Box>
   );
 }

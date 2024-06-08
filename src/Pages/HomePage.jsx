@@ -27,17 +27,19 @@ function HomePage() {
         <Box component="div" sx={{ display: { xs: "none", md: "block" } }}>
           <DrawerSlide />
         </Box>
-        <Routes>
-          <Route path="*" element={<Dashboard />} />
-          {/* <Route path="*" element={<HomeView />} /> */}
-          <Route path="/live" element={<LiveSale />} />
-          <Route path="/order" element={<OrderPage />} />
-          <Route path="/setting" element={<Accsetting />} />
-          <Route path="/adduser" element={<AddUser />} />
-          <Route path="/vouncher" element={<Vouncher />} />
-          <Route path="/vieworder/:id" element={<OrderDetail />} />
-          <Route path="/accdetail/:id" element={<UserAccDetail />} />
-        </Routes>
+        <Box sx={{ margin: "0 auto" }}>
+          <Routes>
+            <Route path="*" element={<Dashboard />} />
+            {/* <Route path="*" element={<HomeView />} /> */}
+            <Route path="/live" element={<LiveSale />} />
+            <Route path="/order" element={<OrderPage />} />
+            <Route path="/setting" element={<Accsetting />} />
+            <Route path="/adduser" element={<AddUser />} />
+            <Route path="/vouncher" element={<Vouncher />} />
+            <Route path="/vieworder/:id" element={<OrderDetail />} />
+            <Route path="/accdetail/:id" element={<UserAccDetail />} />
+          </Routes>
+        </Box>
       </div>
     </div>
   );

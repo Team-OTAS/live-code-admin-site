@@ -5,9 +5,9 @@ import FbLive from "../../Components/liveSale/FbLiveContainer";
 
 function LiveSale() {
   return (
-    <div style={{ width: "100%" }}>
+    <div className="dashboardContent">
       <Box>
-        <Grid container sx={{ padding: "0 3px" }}>
+        <Grid container>
           <Grid item xs={12} md={8}>
             <LiveDataTable />
           </Grid>

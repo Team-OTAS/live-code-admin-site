@@ -78,24 +78,6 @@ const LiveDataTable = ({ sendDataToDashboard }) => {
     dispatch(getProducts());
   }, [deletes.deletes]);
 
-  // console.log(products);
-
-  //   if (products.products.code === 200) {
-  //     console.log(products.products.data);
-  //     const rows = products.products.data.map((index, item) => ({
-  //       no: index + 1,
-  //       ...item,
-  //     }));
-  //     console.log(rows);
-  //   }
-  // }, [products]);
-
-  // const handleRowClick = (params) => {
-  // Access the clicked row data using params.row
-  // console.log("Row clicked:", params.row);
-  // You can perform additional actions based on the clicked row data
-  // };
-
   return (
     <Box sx={{ height: { xs: 600, md: 500 } }}>
       <DataGrid

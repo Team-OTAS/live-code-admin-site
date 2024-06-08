@@ -29,7 +29,7 @@ export default function Dashboard() {
     setDeleteData(data);
     data.length === 0 ? setIsDisabled(true) : setIsDisabled(false);
   };
-  // console.log(DeleteData);
+
   function deleteHandleClick() {
     const data = {
       productIds: DeleteData,

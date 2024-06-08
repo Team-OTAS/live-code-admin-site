@@ -39,7 +39,8 @@
 
 .detail-box-content {
   margin-left: 10px;
-  p {
+  p,
+  label {
     font-family: $textFont;
     font-weight: bold;
     font-size: 16px;
@@ -50,6 +51,20 @@
   span {
     font-family: $textFont;
     font-size: 12px;
+  }
+
+  input {
+    border: 0;
+    font-size: 12px;
+    width: 80%;
+    padding: 10px;
+    background-color: $CopperColor;
+    border-radius: 5px;
+  }
+
+  input::placeholder {
+    font-size: 10px;
+    font-family: $inputFont;
   }
 }
 
