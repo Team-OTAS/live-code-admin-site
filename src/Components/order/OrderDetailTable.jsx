@@ -84,35 +84,30 @@ const columns = [
 
 const OrderDetailTable = ({ sendDataToDashboard }) => {
   const dispatch = useDispatch();
-  const { products, isLoading, isError, message } = useSelector(
-    (state) => state.stocks
-  );
-  const deletes = useSelector((state) => state.deleteproduct);
-  const sendData = (dataId) => {
-    const Deletedata = dataId;
-    sendDataToDashboard(Deletedata);
-  };
+  const { loading, orderDetail } = useSelector((state) => state.OrderData);
 
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [deletes.deletes]);
+  console.log(orderDetail.data.order_products);
 
   return (
-    <Box sx={{ height: { xs: 300, md: 250 }, width: "100%" }}>
-      <DataGrid
-        rows={products.map((item, index) => ({ no: index + 1, ...item })) || []}
-        columns={columns}
-        // pageSize={14}
-        checkboxSelection
-        loading={isLoading}
-        disableRowSelectionOnClick
-        onRowSelectionModelChange={(dataId) => {
-          sendData(dataId);
-          console.log("table", dataId);
-        }}
-      />
-      {!isLoading && isError ? <AlertBox message={message} /> : null}
-    </Box>
+    <>
+      {!loading && orderDetail.data.order_products.length > 0 && (
+        <Box sx={{ height: { xs: 300, md: 350 }, width: "100%" }}>
+          <DataGrid
+            rows={
+              orderDetail.data.order_products.map((item, index) => ({
+                no: index + 1,
+                ...item,
+              })) || []
+            }
+            columns={columns}
+            // pageSize={14}
+            checkboxSelection
+            loading={loading}
+            disableRowSelectionOnClick
+          />
+        </Box>
+      )}
+    </>
   );
 };
 

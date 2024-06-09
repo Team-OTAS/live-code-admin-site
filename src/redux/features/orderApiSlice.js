@@ -29,6 +29,16 @@ export const updateStatusOrder = createAsyncThunk(
   }
 );
 
+// Add Data Order
+export const addDataOrder = createAsyncThunk(
+  "order/addDataOrder",
+  ({ id, data }) => {
+    return axios
+      .patch("/api/orders/" + id, data)
+      .then((response) => response.data);
+  }
+);
+
 const orderDataSlice = createSlice({
   name: "orderData",
   initialState,
@@ -52,7 +62,7 @@ const orderDataSlice = createSlice({
     });
     builder.addCase(getOrderDetail.fulfilled, (state, action) => {
       state.loading = false;
-      console.log("Order Detail from Redux Store", action.payload);
+      // console.log("Order Detail from Redux Store", action.payload);
       state.orderDetail = action.payload;
       state.error = "";
     });
@@ -75,6 +85,31 @@ const orderDataSlice = createSlice({
       });
     });
     builder.addCase(updateStatusOrder.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+      console.log(action);
+      Swal.fire({
+        icon: "error",
+        title: "Status Change Failed, Please Try Again",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    });
+    // Add Data Order
+    builder.addCase(addDataOrder.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(addDataOrder.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = "";
+      Swal.fire({
+        icon: "success",
+        title: "Status Change Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    });
+    builder.addCase(addDataOrder.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
       console.log(action);
