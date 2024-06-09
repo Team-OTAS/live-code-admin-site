@@ -16,7 +16,7 @@ export default function FBloginPage() {
   async function handleClick() {
     try {
       const res = await axios.get(
-        "auth/facebook/redirect?redirect_url=https://admin.staging.livecodemm.com"
+        "auth/facebook/redirect?redirect_url=https://admin.staging.livecodemm.com/"
       );
 
       // console.log(res.data.data.facebook_redirect_url);
