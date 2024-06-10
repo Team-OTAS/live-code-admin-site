@@ -11,7 +11,9 @@ const initialState = {
 
 // Get All Order
 export const getOrderData = createAsyncThunk("order/getAllOrder", () => {
-  return axios.get("/api/orders").then((response) => response.data.data.data);
+  return axios
+    .get("/api/orders?limit=1000")
+    .then((response) => response.data.data.data);
 });
 
 // Get a Order Detail
