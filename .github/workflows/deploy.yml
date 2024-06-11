@@ -20,6 +20,8 @@ jobs:
           echo "REACT_APP_API_BASE_URL=$STAGING_API_BASE_URL" >> .env
 
       - name: Compile CSS and JS
+        env:
+          CI: false
         run: |
           rm -rf node_modules package-lock.json
           npm install
