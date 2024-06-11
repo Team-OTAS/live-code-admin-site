@@ -1,21 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Box, Grid } from "@mui/material";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
-import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import PasswordIcon from "@mui/icons-material/Password";
 import axios from "./../../api/axios";
-import { getShopData } from "../../redux/features/shopDataSlice";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-
-import "./../../Styles/detailbox.css";
 import { useNavigate } from "react-router-dom";
+import "./../../Styles/detailbox.css";
 
 function UserAccDetail() {
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
-  const { loading, error, shopData } = useSelector((state) => state.ShopData);
+  const { shopData } = useSelector((state) => state.ShopData);
   const [user_name, setuser_name] = useState(null);
   const [password, setPassword] = useState("");
   const updateHandler = async () => {

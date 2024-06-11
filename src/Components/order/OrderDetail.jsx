@@ -1,4 +1,11 @@
-import { Box, FormControl, Grid, MenuItem, Select } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -15,13 +22,26 @@ import {
 } from "../../redux/features/orderApiSlice";
 import getTime from "./../getTime";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../Loading";
 import { statusArray } from "../../Pages/order/OrderPage";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import { useTranslation } from "react-i18next";
 
 function OrderDetail() {
+  const { t } = useTranslation();
+  const title = t("orderdetail");
+  const labelone = t("customername");
+  const labeltwo = t("shopFormLabelThree");
+  const labelthree = t("customraddress");
+  const labelfour = t("customerdate");
+  const labelfive = t("itemQuantity");
+  const labelsix = t("amount");
+  const labelseven = t("editorder");
+  const editbtn = t("editbtn");
+  const cancelbtn = t("cancelbtn");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { loading, orderDetail } = useSelector((state) => state.OrderData);
   const [edit, setEdit] = useState(false);
@@ -75,7 +95,7 @@ function OrderDetail() {
               alignItems: "center",
             }}
           >
-            <p className="page-header">Order Detail</p>
+            <p className="page-header">{title}</p>
 
             {edit ? (
               <div style={{ display: "flex", gap: "10px" }}>
@@ -84,14 +104,14 @@ function OrderDetail() {
                   style={{ height: "56px", borderColor: "red" }}
                   onClick={() => setEdit(false)}
                 >
-                  <span style={{ color: "red" }}>Cancel</span>
+                  <span style={{ color: "red" }}>{cancelbtn}</span>
                 </button>
                 <button
                   className="edit-btn"
                   style={{ height: "56px" }}
                   onClick={addOrderUpdate}
                 >
-                  <span style={{ fontWeight: "bold" }}>Update</span>
+                  <span style={{ fontWeight: "bold" }}>{editbtn}</span>
                 </button>
               </div>
             ) : (
@@ -130,7 +150,7 @@ function OrderDetail() {
                     setPhone(orderDetail.data.contact_phone);
                   }}
                 >
-                  Edit Order
+                  {labelseven}
                   <EditRoundedIcon
                     sx={{
                       background: "#4D3F3F",
@@ -141,6 +161,10 @@ function OrderDetail() {
                     }}
                   />
                 </button>
+
+                <Button onClick={() => navigate(`/vouncher/${id}`)}>
+                  <span>Print</span>
+                </Button>
               </div>
             )}
           </Box>
@@ -152,7 +176,7 @@ function OrderDetail() {
                     <AccountCircleRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Name</p>
+                    <p>{labelone}</p>
                     <span>{orderDetail.data.contact_name}</span>
                   </div>
                 </div>
@@ -167,7 +191,7 @@ function OrderDetail() {
                 <div className="detail-box">
                   <HomeRoundedIcon className="detail-input-icon" />
                   <div className="detail-box-content">
-                    <label>Address</label>
+                    <label>{labelthree}</label>
                     <br />
                     <input
                       type="text"
@@ -191,7 +215,7 @@ function OrderDetail() {
                 <div className="detail-box">
                   <LocalPhoneRoundedIcon className="detail-input-icon" />
                   <div className="detail-box-content">
-                    <label>Phone Number</label>
+                    <label>{labeltwo}</label>
                     <br />
                     <input
                       type="text"
@@ -215,7 +239,7 @@ function OrderDetail() {
                     <CalendarMonthRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Date</p>
+                    <p>{labelfour}</p>
                     <span>{getTime(orderDetail.data.customer.created_at)}</span>
                   </div>
                 </div>
@@ -232,7 +256,7 @@ function OrderDetail() {
                     <ShoppingCartRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Items Quantity</p>
+                    <p>{labelfive}</p>
                     <span>{orderDetail.data.order_products.length} Items</span>
                   </div>
                 </div>
@@ -249,7 +273,7 @@ function OrderDetail() {
                     <AttachMoneyRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Amount</p>
+                    <p>{labelsix}</p>
                     <span>{orderDetail.data.price}</span>
                   </div>
                 </div>
@@ -257,9 +281,9 @@ function OrderDetail() {
             </Grid>
           </div>
           {/* Item Table */}
-          {/* <div style={{ marginTop: "20px" }}>
-            <OrderDetailTable />
-          </div> */}
+          <div style={{ marginTop: "20px" }}>
+            <OrderDetailTable id={id} items={orderDetail.data.order_products} />
+          </div>
         </Box>
       )}
     </Box>

@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import "./../Styles/shopcreate.css";
 import { Grid } from "@mui/material";
 import { openModalB } from "./../redux/feature/modalSlice";
 import { resdata } from "../redux/feature/randomUserSlice";
@@ -11,6 +10,8 @@ import Swal from "sweetalert2";
 import Loading from "./Loading";
 import { useDispatch, useSelector } from "react-redux";
 import CreateComplete from "../Components/CompleteCreateShop";
+
+import "./../Styles/shopcreate.css";
 
 function ShopCreate() {
   const dispatch = useDispatch();

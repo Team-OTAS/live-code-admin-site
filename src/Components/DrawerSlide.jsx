@@ -11,10 +11,8 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import SettingsIcon from "@mui/icons-material/Settings";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import LanguageSelecter from "./languageSelecter/LanguageSelecter";
 import { Box, Button } from "@mui/material";
 import { useSelector } from "react-redux";
-import { Accessibility } from "@mui/icons-material";
 
 export default function DrawerSlide({ Title }) {
   const location = useLocation();

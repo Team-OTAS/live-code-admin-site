@@ -6,8 +6,13 @@ import { getShopData } from "./../../redux/features/shopDataSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "./../../api/axios";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 
 function AutoReply() {
+  const { t } = useTranslation();
+  const editBtn = t("editbtn");
+  const cancelbtn = t("cancelbtn");
+  const editAutoBtn = t("automessage");
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const { shopData } = useSelector((state) => state.ShopData);
@@ -80,7 +85,7 @@ function AutoReply() {
         >
           <p className="page-header">Auto Reply</p>
           <button className="edit-btn" onClick={editAutoReply}>
-            Edit Auto Reply
+            {editAutoBtn}
             <EditRoundedIcon
               sx={{
                 background: "#4D3F3F",
@@ -119,10 +124,10 @@ function AutoReply() {
       {edit && (
         <div className="btn-container">
           <button className="discard" onClick={discardEdit}>
-            Discard
+            {cancelbtn}
           </button>
           <button className="save" onClick={saveAutoReply}>
-            Save Edit
+            {editBtn}
           </button>
         </div>
       )}

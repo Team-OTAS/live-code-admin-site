@@ -9,6 +9,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -23,11 +24,15 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 function ShopReciept() {
+  const { t } = useTranslation();
+  const editBtn = t("editbtn");
+  const cancelbtn = t("cancelbtn");
+  const editVouncherBtn = t("vounchermessage");
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(true);
   const [file, setFile] = useState(null);
   const [local, setlocal] = useState(false);
-  const { loading, error, shopData } = useSelector((state) => state.ShopData);
+  const { shopData } = useSelector((state) => state.ShopData);
   const [logo, setLogo] = useState(null);
   const [footer, setFooter] = useState("");
   const [header, setHeader] = useState("");
@@ -85,6 +90,7 @@ function ShopReciept() {
 
   useEffect(() => {
     if (shopData) {
+      console.log(shopData);
       setLogo(shopData.data.logo);
       setFooter(shopData.data.receipt_footer);
       setHeader(shopData.data.receipt_header);
@@ -112,7 +118,7 @@ function ShopReciept() {
             <p className="page-header">Shop Receipt</p>
             {edit && (
               <button className="edit-btn" onClick={() => setEdit(false)}>
-                Edit Shop Receipt{" "}
+                {editVouncherBtn}
                 <EditRoundedIcon
                   sx={{
                     background: "#4D3F3F",
@@ -127,10 +133,10 @@ function ShopReciept() {
             {!edit && (
               <div className="btn-container">
                 <button className="discard" onClick={discardEdit}>
-                  Discard
+                  {cancelbtn}
                 </button>
                 <button className="save" onClick={saveReceipt}>
-                  Save Edit
+                  {editBtn}
                 </button>
               </div>
             )}
@@ -156,10 +162,14 @@ function ShopReciept() {
                       </div>
                     ) : (
                       <div className="logo-img">
-                        <img
-                          src={`${process.env.REACT_APP_API_BASE_URL}${logo}`}
-                          alt="logo"
-                        />
+                        {logo ? (
+                          <img
+                            src={`${process.env.REACT_APP_API_BASE_URL}${logo}`}
+                            alt="logo"
+                          />
+                        ) : (
+                          <p>No Logo</p>
+                        )}
                       </div>
                     )}
                     {!edit && (

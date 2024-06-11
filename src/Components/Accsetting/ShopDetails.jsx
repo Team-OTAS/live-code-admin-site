@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./../../Styles/detailbox.css";
 import { Box, Grid } from "@mui/material";
 import axios from "./../../api/axios";
@@ -6,21 +6,27 @@ import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
 import Swal from "sweetalert2";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import PanoramaFishEyeOutlinedIcon from "@mui/icons-material/PanoramaFishEyeOutlined";
-import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import { useTranslation } from "react-i18next";
 
 function ShopDetails() {
+  const { t } = useTranslation();
+  const title = t("shopinfo");
+  const labelOne = t("shopFormLabelOne");
+  const labelThree = t("shopFormLabelThree");
+  const labelFour = t("shopFormLabelFour");
+  const labelFive = t("package");
+  const editTitle = t("editshopinfo");
+  const editBtn = t("editbtn");
+  const cancelbtn = t("cancelbtn");
   const id = localStorage.getItem("shopId");
   const [shop, setShop] = useState();
   const [loading, setLoading] = useState(true);
-  const [logo, setLogo] = useState(null);
   const [packageid, setPackage] = useState(1);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
-  const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
 
   const getshop = async () => {
@@ -53,15 +59,11 @@ function ShopDetails() {
       phone,
     };
     try {
-      const res = await axios.post(
-        `api/shops/${id}/shop-setting?_method=PATCH`,
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`api/shops/${id}/shop-setting?_method=PATCH`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       // console.log(res);
       Swal.fire({
         icon: "success",
@@ -69,6 +71,7 @@ function ShopDetails() {
         text: "Updated",
       });
       getshop();
+      setEdit(false);
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -99,14 +102,14 @@ function ShopDetails() {
       className="containers"
       sx={{ padding: { xs: "10px 15px", md: "10px 40px", minHeight: "100vh" } }}
     >
-      <div
-        style={{
-          display: "flex",
+      <Box
+        sx={{
+          display: { xs: "block", md: "flex" },
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <p className="page-header">User Shop Info</p>
+        <p className="page-header">{title}</p>
 
         <button
           className="btn-update"
@@ -114,10 +117,10 @@ function ShopDetails() {
             setEdit(!edit);
           }}
         >
-          <span>Edit Profile</span>
+          <span>{editTitle}</span>
           <EditRoundedIcon className="update-icon" />
         </button>
-      </div>
+      </Box>
 
       {/* Shop Info */}
       {shop && (
@@ -130,7 +133,7 @@ function ShopDetails() {
                     <AccountCircleRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Name</p>
+                    <p>{labelOne}</p>
                     <span>{shop.name}</span>
                   </div>
                 </div>
@@ -147,15 +150,13 @@ function ShopDetails() {
                 <div className="create-input">
                   <HomeRoundedIcon className="create-input-icon" />
                   <div>
-                    <label>Name</label>
+                    <label>{labelOne}</label>
                     <br />
                     <input
                       type="text"
                       placeholder="Enter Your Name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      // ref={phoneref}
-                      // required
                     />
                   </div>
                 </div>
@@ -174,7 +175,7 @@ function ShopDetails() {
                     <HomeRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Address</p>
+                    <p>{labelFour}</p>
                     <span>{shop.address}</span>
                   </div>
                 </div>
@@ -191,7 +192,7 @@ function ShopDetails() {
                 <div className="create-input">
                   <HomeRoundedIcon className="create-input-icon" />
                   <div>
-                    <label>Address</label>
+                    <label>{labelFour}</label>
                     <br />
                     <input
                       type="text"
@@ -218,7 +219,7 @@ function ShopDetails() {
                     <LocalPhoneRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Phone Number</p>
+                    <p>{labelThree}</p>
                     <span>{shop.phone}</span>
                   </div>
                 </div>
@@ -235,7 +236,7 @@ function ShopDetails() {
                 <div className="create-input">
                   <LocalPhoneRoundedIcon className="create-input-icon" />
                   <div>
-                    <label>Phone Number</label>
+                    <label>{labelThree}</label>
                     <br />
                     <input
                       type="text"
@@ -263,13 +264,13 @@ function ShopDetails() {
                   <CalendarMonthRoundedIcon className="detail-input-icon cleander" />
                 </div>
                 <div className="detail-box-content">
-                  <p>Package Expires In </p>
+                  <p>{labelFive}</p>
                   <span>{getexpire(shop.expire_at)}</span>
                 </div>
               </div>
             </Grid>
 
-            <Grid
+            {/* <Grid
               item
               xs={12}
               md={4}
@@ -286,7 +287,7 @@ function ShopDetails() {
                   </span>
                 </div>
               </div>
-            </Grid>
+            </Grid> */}
           </Grid>
         </div>
       )}
@@ -301,10 +302,10 @@ function ShopDetails() {
       {edit && (
         <div className="btn-container">
           <button className="discard" onClick={() => setEdit(false)}>
-            Discard
+            {cancelbtn}
           </button>
           <button className="save" onClick={updateShop}>
-            Save Edit
+            {editBtn}
           </button>
         </div>
       )}

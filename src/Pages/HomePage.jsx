@@ -35,7 +35,7 @@ function HomePage() {
             <Route path="/order" element={<OrderPage />} />
             <Route path="/setting" element={<Accsetting />} />
             <Route path="/adduser" element={<AddUser />} />
-            <Route path="/vouncher" element={<Vouncher />} />
+            <Route path="/vouncher/:id" element={<Vouncher />} />
             <Route path="/vieworder/:id" element={<OrderDetail />} />
             <Route path="/accdetail/:id" element={<UserAccDetail />} />
           </Routes>

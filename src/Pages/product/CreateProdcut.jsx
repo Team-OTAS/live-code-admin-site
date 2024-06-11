@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, Grid, IconButton, TextField } from "@mui/material";
 import * as Yup from "yup";
 import { styled } from "@mui/material/styles";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { createProduct } from "../../redux/features/productReducer";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
@@ -12,17 +10,13 @@ import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import ListIcon from "@mui/icons-material/List";
 import DescriptionIcon from "@mui/icons-material/Description";
-import SuccessBox from "../../Components/modalBox/successBox";
-import AlertBox from "../../Components/modalBox/AlertBox";
 import EditIcon from "@mui/icons-material/Edit";
-import WaitingBox from "../../Components/modalBox/Waiting";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
-import "./../../Styles/addstock.css";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import "./../../Styles/addstock.css";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Stock name is required"),
@@ -55,7 +49,6 @@ function CreateProdcut() {
   const labelSix = t("stkformlbelsix");
   const labelSeven = t("stkformlbelseven");
   const addbtn = t("addStockBtn");
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [file, setFile] = useState("");
