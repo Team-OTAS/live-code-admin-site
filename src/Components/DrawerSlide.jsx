@@ -1,5 +1,5 @@
 import LiveCodeLogo from "./../assets/images/logo.png";
-import React, { useState } from "react";
+import React from "react";
 import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -10,18 +10,17 @@ import "./../Styles/drawer.css";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import SettingsIcon from "@mui/icons-material/Settings";
-import FacebookIcon from "@mui/icons-material/Facebook";
+
 import { Box, Button } from "@mui/material";
 import { useSelector } from "react-redux";
+import LanguageSelecter from "./languageSelecter/LanguageSelecter";
 
 export default function DrawerSlide({ Title }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const id = localStorage.getItem("shopId");
   const { shopData } = useSelector((state) => state.ShopData);
   const navTitle = [t("navTitle"), t("navTitle2"), t("navTitle3")];
-  const [showmenu, setShowmenu] = useState(false);
   const getexpire = (times) => {
     const date = new Date(times);
     const expireTime = date.getTime() - Date.now();
@@ -149,32 +148,12 @@ export default function DrawerSlide({ Title }) {
           )}
         </Stack>
         <Box>
+          <LanguageSelecter />
+
           <Button
             sx={{
               width: "100%",
-              marginBottom: "10px",
-              borderRadius: "10px",
-              border: "1px solid #000000",
-              padding: "5px",
-              cursor: "pointer",
-              fontSize: "10px",
-              ":hover": {
-                background: "#4d3f3f",
-                color: "#ffffff",
-              },
-            }}
-            onClick={() => {
-              // props.title = "setting";
-              navigate("/fblogin");
-            }}
-          >
-            <FacebookIcon sx={{ paddingRight: "5px" }} />
-            Facebook Connect
-          </Button>
-          <Button
-            sx={{
-              width: "100%",
-              marginBottom: "10px",
+              margin: "10px 0",
               borderRadius: "10px",
               border: "1px solid #000000",
               padding: "5px",
@@ -192,9 +171,7 @@ export default function DrawerSlide({ Title }) {
           </Button>
         </Box>
       </Box>
-      {/* <div style={{ width: "100%" }}>
-            <LanguageSelecter />
-          </div> */}
+      <div style={{ width: "100%" }}></div>
     </div>
   );
 }

@@ -23,12 +23,13 @@ function ProductDetail() {
   const labelThree = t("stkformlbelthree");
   const labelFour = t("stkformlbelfour");
   const labelFive = t("stkformlbelfive");
-  const labelSix = t("stkformlbelsix");
   const labelSeven = t("stkformlbelseven");
 
   const { product, isLoading, isError, message } = useSelector(
     (state) => state.stocks
   );
+
+  console.log(product);
 
   useEffect(() => {
     dispatch(getProduct(id));

@@ -14,7 +14,6 @@ import AlertBox from "../modalBox/AlertBox";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 
 import "./../../Styles/dashboard.css";
-import { getOrderDetail } from "../../redux/features/orderApiSlice";
 
 function CustomToolbar() {
   return (
@@ -32,69 +31,40 @@ const columns = [
     headerName: "No",
     width: 50,
   },
-  // { field: "name", headerName: "", width: 150 },
-  { field: "description", headerName: "order_id", width: 300 },
+  { field: "name", headerName: "Name", width: 200 },
+  // { field: "description", headerName: "Description", width: 300 },
 
   { field: "quantity", headerName: "quantity", width: 150 },
-  { field: "unit_price", headerName: "Unit Price", width: 150 },
-  { field: "Amount", headerName: "Total Price", width: 150 },
-  // {
-  //   field: "Status",
-  //   headerName: "Status",
-  //   width: 200,
-  //   renderCell: (params) => (
-  //     <div>
-  //       <Button
-  //         sx={{
-  //           background: " #354e8e",
-  //           color: "white",
-  //           padding: "10px 20px",
-  //           borderRadius: "10px",
-  //           fontSize: "14px",
-  //           marginRight: "20px",
-  //           "&:hover": {
-  //             backgroundColor: "#fff",
-  //             color: "#354e8e",
-  //             border: "3px solid #354e8e",
-  //           },
-  //         }}
-  //         variant="filled"
-  //       >
-  //         <EditRoundedIcon />
-  //       </Button>
-
-  //       <Button
-  //         sx={{
-  //           background: "#E81609",
-  //           color: "white",
-  //           padding: "10px 20px",
-  //           borderRadius: "10px",
-  //           fontSize: "14px",
-  //           "&:hover": {
-  //             backgroundColor: "#fff",
-  //             color: "#E81609",
-  //             border: "3px solid #E81609",
-  //           },
-  //         }}
-  //         variant="filled"
-  //       >
-  //         <DeleteRoundedIcon />
-  //       </Button>
-  //     </div>
-  //   ),
-  // },
+  { field: "price", headerName: "Unit Price", width: 200 },
+  // { field: "Amount", headerName: "Total Price", width: 150 },
+  {
+    headerName: "Amount",
+    width: 200,
+    renderCell: (params) => <p>{params.row.price * params.row.quantity}</p>,
+  },
 ];
 
 const OrderDetailTable = ({ items }) => {
   console.log(items);
-  const dispatch = useDispatch();
-  const { loading, orderDetail } = useSelector((state) => state.OrderData);
 
-  // useEffect(() => {
-  //   // dispatch(getOrderDetail(id));
-  // }, []);
-
-  return <></>;
+  return (
+    <>
+      <Box sx={{ height: { xs: 300, md: 250 }, width: "100%" }}>
+        <DataGrid
+          rows={items.map((item, index) => ({ no: index + 1, ...item })) || []}
+          columns={columns}
+          // pageSize={14}
+          checkboxSelection
+          // loading={isLoading}
+          disableRowSelectionOnClick
+          onRowSelectionModelChange={(dataId) => {
+            // sendData(dataId);
+            // console.log("table", dataId);
+          }}
+        />
+      </Box>
+    </>
+  );
 };
 
 export default OrderDetailTable;

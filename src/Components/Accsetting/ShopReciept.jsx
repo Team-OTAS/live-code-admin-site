@@ -44,7 +44,7 @@ function ShopReciept() {
   }
 
   const saveReceipt = async () => {
-    setEdit(false);
+    setEdit(!edit);
     const data = {
       logo: local ? file : null,
       receipt_header: header,

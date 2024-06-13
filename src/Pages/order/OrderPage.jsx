@@ -8,6 +8,7 @@ import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { updateStatusOrder } from "../../redux/features/orderApiSlice";
 import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
+import Cookies from "js-cookie";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
 
@@ -39,9 +40,11 @@ export const statusArray = [
 function OrderPage() {
   const dispatch = useDispatch();
 
+  console.log(Cookies.get("date"));
+
   const [status, setStatus] = useState("All");
   const [chgorder, setChgorder] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(Cookies.get("date") || new Date());
   const [order_ids, setOrder_Ids] = useState([]);
 
   const FilterIcon = () => {
@@ -90,7 +93,10 @@ function OrderPage() {
           <DatePicker
             fullWidth
             defaultValue={dayjs(date)}
-            onChange={(newValue) => setDate(newValue)}
+            onChange={(newValue) => {
+              setDate(newValue);
+              Cookies.set("date", newValue);
+            }}
           />
         </Grid>
 

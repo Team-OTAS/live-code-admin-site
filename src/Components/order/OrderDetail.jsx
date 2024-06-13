@@ -15,12 +15,12 @@ import AttachMoneyRoundedIcon from "@mui/icons-material/AttachMoneyRounded";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import OrderDetailTable from "./OrderDetailTable";
+import getTime from "./../../Components/getTime";
 import {
   getOrderDetail,
   addDataOrder,
   updateStatusOrder,
 } from "../../redux/features/orderApiSlice";
-import getTime from "./../getTime";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../Loading";
@@ -49,7 +49,7 @@ function OrderDetail() {
   const [phone, setPhone] = useState("");
   const [chgorder, setChgorder] = useState("");
 
-  // console.log(orderDetail.data.order_products.length);
+  console.log(orderDetail);
 
   // Change Status
   const handleOrder = (event) => {
@@ -119,7 +119,9 @@ function OrderDetail() {
                 <Grid item xs={6} md={3}>
                   <FormControl fullWidth minHeight={50}>
                     <Select
-                      value={chgorder ? chgorder : orderDetail.data.status}
+                      value={
+                        chgorder ? chgorder : orderDetail.data.order.status
+                      }
                       onChange={handleOrder}
                       displayEmpty
                       inputProps={{ "aria-label": "Without label" }}
@@ -177,7 +179,7 @@ function OrderDetail() {
                   </div>
                   <div className="detail-box-content">
                     <p>{labelone}</p>
-                    <span>{orderDetail.data.contact_name}</span>
+                    <span>{orderDetail.data.order.contact_name}</span>
                   </div>
                 </div>
               </Grid>
@@ -197,7 +199,9 @@ function OrderDetail() {
                       type="text"
                       placeholder="There is no Address Yet!"
                       value={
-                        address ? address : orderDetail.data.delivery_address
+                        address
+                          ? address
+                          : orderDetail.data.order.delivery_address
                       }
                       onChange={(e) => setAddress(e.target.value)}
                       readOnly={!edit}
@@ -220,7 +224,9 @@ function OrderDetail() {
                     <input
                       type="text"
                       placeholder="No Phone Number Yet!"
-                      value={phone ? phone : orderDetail.data.contact_phone}
+                      value={
+                        phone ? phone : orderDetail.data.order.contact_phone
+                      }
                       onChange={(e) => setPhone(e.target.value)}
                       readOnly={!edit}
                     />
@@ -240,7 +246,7 @@ function OrderDetail() {
                   </div>
                   <div className="detail-box-content">
                     <p>{labelfour}</p>
-                    <span>{getTime(orderDetail.data.customer.created_at)}</span>
+                    <span>{getTime(orderDetail.data.order.created_at)}</span>
                   </div>
                 </div>
               </Grid>
@@ -257,7 +263,7 @@ function OrderDetail() {
                   </div>
                   <div className="detail-box-content">
                     <p>{labelfive}</p>
-                    <span>{orderDetail.data.order_products.length} Items</span>
+                    <span>{orderDetail.data.products.length} Items</span>
                   </div>
                 </div>
               </Grid>
@@ -274,7 +280,7 @@ function OrderDetail() {
                   </div>
                   <div className="detail-box-content">
                     <p>{labelsix}</p>
-                    <span>{orderDetail.data.price}</span>
+                    <span>{orderDetail.data.order.price}</span>
                   </div>
                 </div>
               </Grid>
@@ -282,7 +288,7 @@ function OrderDetail() {
           </div>
           {/* Item Table */}
           <div style={{ marginTop: "20px" }}>
-            <OrderDetailTable id={id} items={orderDetail.data.order_products} />
+            <OrderDetailTable id={id} items={orderDetail.data.products} />
           </div>
         </Box>
       )}

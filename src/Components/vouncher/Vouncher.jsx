@@ -15,6 +15,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
+import "./../../Styles/vouncher.css";
+
 function Vouncher() {
   const orderId = useParams();
   const componentRef = useRef();
@@ -23,7 +25,7 @@ function Vouncher() {
   const id = localStorage.getItem("shopId");
   const { shopData } = useSelector((state) => state.ShopData);
   const { orderDetail } = useSelector((state) => state.OrderData);
-  console.log("order", orderDetail.data);
+  console.log("order", orderDetail);
   console.log(orderId.id);
 
   const handlePrint = useReactToPrint({
@@ -70,14 +72,14 @@ function Vouncher() {
                   </div>
                   {/* date */}
                   <div>
-                    <p>Date: {date}</p>
+                    <p className="vouncher-text">Date: {date}</p>
                   </div>
                 </Grid>
                 <Grid item xs={12}>
-                  <p>{shopData.data.receipt_header}</p>
-                  <span>{shopData.data.address}</span>
+                  <p className="row-header">{shopData.data.receipt_header}</p>
+                  <span className="vouncher-text">{shopData.data.address}</span>
                   <br />
-                  <span>{shopData.data.phone}</span>
+                  <span className="vouncher-text">{shopData.data.phone}</span>
                 </Grid>
                 {/* Product Table */}
                 {orderDetail && (
@@ -87,48 +89,58 @@ function Vouncher() {
                         <TableHead>
                           <TableRow>
                             <TableCell align="left" colSpan={12}>
-                              <p>
-                                <span>Name</span> -{" "}
-                                {orderDetail.data.contact_name}
+                              <p className="vouncher-text">
+                                <span className="row-header">Name</span> -{" "}
+                                {orderDetail.data.order.contact_name}
                               </p>
-                              <span>
-                                <span>Address</span> -{" "}
-                                {orderDetail.data.delivery_address}
+                              <span className="vouncher-text">
+                                <span className="row-header">Address</span> -{" "}
+                                {orderDetail.data.order.delivery_address}
                               </span>
                             </TableCell>
                           </TableRow>
 
                           <TableRow>
-                            <TableCell>No</TableCell>
-                            <TableCell>Desc</TableCell>
-                            <TableCell align="right">Qty.</TableCell>
-                            <TableCell align="right">Unit</TableCell>
-                            <TableCell align="right">Amount</TableCell>
+                            <TableCell className="row-header">No</TableCell>
+                            <TableCell className="row-header">Desc</TableCell>
+                            <TableCell className="row-header" align="right">
+                              Qty.
+                            </TableCell>
+                            <TableCell className="row-header" align="right">
+                              Unit
+                            </TableCell>
+                            <TableCell className="row-header" align="right">
+                              Amount
+                            </TableCell>
                           </TableRow>
                         </TableHead>
 
                         <TableBody>
-                          {orderDetail.data.order_products.map((row, index) => (
+                          {orderDetail.data.products.map((row, index) => (
                             <TableRow key={row.id}>
                               <TableCell>{index + 1}</TableCell>
-                              <TableCell>{row.order_id}</TableCell>
+                              <TableCell>{row.name}</TableCell>
                               <TableCell align="right">
                                 {row.quantity}
                               </TableCell>
                               <TableCell align="right">
-                                {row.unit_price} Ks
+                                {row.price} Ks
                               </TableCell>
                               <TableCell align="right">
-                                {row.total_price} Ks
+                                {row.price * row.quantity} Ks
                               </TableCell>
                             </TableRow>
                           ))}
                           <TableRow>
-                            <TableCell align="right" colSpan={4}>
+                            <TableCell
+                              className="row-header"
+                              align="right"
+                              colSpan={4}
+                            >
                               Total
                             </TableCell>
                             <TableCell align="right">
-                              {orderDetail.data.price} Ks
+                              {orderDetail.data.order.price} Ks
                             </TableCell>
                           </TableRow>
                         </TableBody>

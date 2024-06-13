@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./../../Styles/detailbox.css";
-import { Box, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import axios from "./../../api/axios";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
@@ -9,6 +8,10 @@ import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import { useTranslation } from "react-i18next";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import { useNavigate } from "react-router-dom";
+
+import "./../../Styles/detailbox.css";
 
 function ShopDetails() {
   const { t } = useTranslation();
@@ -22,6 +25,7 @@ function ShopDetails() {
   const cancelbtn = t("cancelbtn");
   const id = localStorage.getItem("shopId");
   const [shop, setShop] = useState();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [packageid, setPackage] = useState(1);
   const [name, setName] = useState("");
@@ -32,7 +36,7 @@ function ShopDetails() {
   const getshop = async () => {
     try {
       const res = await axios.get("/api/shops/" + id);
-      // console.log("response", res.data.data);
+      console.log("response", res.data.data.channels[0].name);
       setShop(res.data.data);
       setName(res.data.data.name);
       setPhone(res.data.data.phone);
@@ -270,24 +274,35 @@ function ShopDetails() {
               </div>
             </Grid>
 
-            {/* <Grid
+            <Grid
               item
               xs={12}
               md={4}
               sx={{ margin: { xs: "10px 0", md: "0" } }}
             >
-              <div className="detail-box">
-                <div>
-                  <CardMembershipIcon className="detail-input-icon" />
-                </div>
-                <div className="detail-box-content">
-                  <p>Package Type</p>
-                  <span>
-                    {shop.subscription_plan ? shop.subscription_plan : null}
-                  </span>
-                </div>
-              </div>
-            </Grid> */}
+              <Button
+                variant="contained"
+                sx={{
+                  width: "100%",
+                  marginBottom: "10px",
+                  borderRadius: "10px",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  cursor: "pointer",
+                  fontSize: "10px",
+                  ":hover": {
+                    background: "#4d3f3f",
+                    color: "#ffffff",
+                  },
+                }}
+                onClick={() => {
+                  navigate("/fblogin");
+                }}
+              >
+                <FacebookIcon sx={{ paddingRight: "5px" }} />
+                {shop.channels[0].name}
+              </Button>
+            </Grid>
           </Grid>
         </div>
       )}
