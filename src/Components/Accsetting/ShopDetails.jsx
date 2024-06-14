@@ -36,7 +36,7 @@ function ShopDetails() {
   const getshop = async () => {
     try {
       const res = await axios.get("/api/shops/" + id);
-      console.log("response", res.data.data.channels[0].name);
+      // console.log("response", res.data.data.channels[5].access_token);
       setShop(res.data.data);
       setName(res.data.data.name);
       setPhone(res.data.data.phone);
@@ -300,7 +300,9 @@ function ShopDetails() {
                 }}
               >
                 <FacebookIcon sx={{ paddingRight: "5px" }} />
-                {shop.channels[0].name}
+                {shop.channels.length > 0
+                  ? shop.channels[0].name
+                  : "Connect Facebook"}
               </Button>
             </Grid>
           </Grid>

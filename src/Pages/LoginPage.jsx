@@ -46,12 +46,12 @@ export default function LoginPage() {
         localStorage.setItem("authToken", authToken);
         localStorage.setItem("shopId", shopId);
         if (response.data.data.user_type.id !== 1) {
-          navigate("/");
-          // if (response.data.data.status === "onboarding") {
-          //   navigate("/");
-          // } else {
-          //   navigate("/changeaccinfo");
-          // }
+          // navigate("/");
+          if (response.data.data.status === "active") {
+            navigate("/");
+          } else {
+            navigate("/changeaccinfo");
+          }
         } else {
           Swal.fire({
             icon: "error",
