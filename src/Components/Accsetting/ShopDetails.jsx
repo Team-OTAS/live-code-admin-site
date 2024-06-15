@@ -26,8 +26,6 @@ function ShopDetails() {
   const id = localStorage.getItem("shopId");
   const [shop, setShop] = useState();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [packageid, setPackage] = useState(1);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
@@ -41,8 +39,6 @@ function ShopDetails() {
       setName(res.data.data.name);
       setPhone(res.data.data.phone);
       setAddress(res.data.data.address);
-      setPackage(res.data.data.subscription_plan.id);
-      setLoading(false);
     } catch (error) {
       if (error instanceof SyntaxError) {
         Swal.fire({

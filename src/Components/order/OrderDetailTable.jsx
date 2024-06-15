@@ -1,29 +1,8 @@
-import React, { useEffect } from "react";
-import {
-  DataGrid,
-  GridToolbarColumnsButton,
-  GridToolbarContainer,
-  GridToolbarQuickFilter,
-} from "@mui/x-data-grid";
-import { Box, Button } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { getProducts } from "../../redux/features/productReducer";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
-import AlertBox from "../modalBox/AlertBox";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import React from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import { Box } from "@mui/material";
 
 import "./../../Styles/dashboard.css";
-
-function CustomToolbar() {
-  return (
-    <GridToolbarContainer className="toolbarContainer">
-      {/* <GridToolbarFilterButton /> */}
-      <GridToolbarColumnsButton />
-      <GridToolbarQuickFilter />
-    </GridToolbarContainer>
-  );
-}
 
 const columns = [
   {

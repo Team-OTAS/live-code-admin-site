@@ -8,8 +8,7 @@ import TextField from "@mui/material/TextField";
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import { useNavigate } from "react-router-dom";
-// import { updateFormData } from "../redux/features/shopUpdateSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "./../api/axios.js";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
@@ -59,7 +58,7 @@ export default function StepThreePage() {
     console.log("shop", data);
 
     try {
-      const res = await axios.post(`/api/shops/${id}?_method=PUT`, data, {
+      await axios.post(`/api/shops/${id}?_method=PUT`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import PasswordIcon from "@mui/icons-material/Password";
@@ -11,35 +11,56 @@ import "./../../Styles/detailbox.css";
 function UserAccDetail() {
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
-  const { shopData } = useSelector((state) => state.ShopData);
   const [user_name, setuser_name] = useState(null);
   const [password, setPassword] = useState("");
+  const getUser = async () => {
+    try {
+      const response = await axios.get("/api/users/" + id);
+      console.log(response.data.data.user_name);
+      setuser_name(response.data.data.user_name);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const updateHandler = async () => {
     try {
-      const response = await axios.patch(`/api/update-profile/${id}`, {
-        user_name: user_name === null ? shopData.data.name : user_name,
+      await axios.patch(`/api/update-profile/${id}`, {
+        user_name: user_name,
         password,
         password_confirmation: password,
       });
-      console.log(response);
+
       Swal.fire("Success", "Updated Successfully", "success");
     } catch (error) {
-      console.log(error.response.data.message);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: error.response.data.message,
-      });
+      // console.log(error.response.data.message);
+      if (error.response) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response.data.message,
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: error.message,
+          icon: "error",
+        });
+      }
     }
   };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <Box
       sx={{
         marginTop: { xs: "20px", md: "50px" },
-        marginLeft: "30px",
+        marginLeft: "10px",
         padding: "50px",
-        width: "100%",
+        width: "95%",
         background: "#fff",
       }}
     >
@@ -62,11 +83,11 @@ function UserAccDetail() {
             <div>
               <label>Name</label>
               <br />
-              {shopData && (
+              {user_name && (
                 <input
                   type="text"
                   placeholder="Enter Your Name"
-                  value={user_name === null ? shopData.data.name : user_name}
+                  value={user_name === null ? "Pls Wait" : user_name}
                   onChange={(e) => setuser_name(e.target.value)}
                 />
               )}
@@ -96,7 +117,7 @@ function UserAccDetail() {
         <button
           className="discard"
           onClick={() => {
-            navigate("/");
+            navigate("/setting");
           }}
         >
           Discard

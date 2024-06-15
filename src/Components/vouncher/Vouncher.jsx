@@ -42,7 +42,14 @@ function Vouncher() {
 
   return (
     <div>
-      <Button onClick={handlePrint}>Print</Button>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ margin: "10px" }}
+        onClick={handlePrint}
+      >
+        Print
+      </Button>
       <div ref={componentRef}>
         <div>
           {shopData && (
@@ -148,6 +155,12 @@ function Vouncher() {
                     </TableContainer>
                   </Grid>
                 )}
+
+                {/* Footer */}
+
+                <Grid item xs={12} sx={{ marginTop: "10px" }}>
+                  <p className="row-header">{shopData.data.receipt_footer}</p>
+                </Grid>
               </Grid>
             </Box>
           )}

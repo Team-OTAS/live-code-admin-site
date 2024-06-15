@@ -1,11 +1,6 @@
-import { Box, Button } from "@mui/material";
-import React, { useState } from "react";
+import { Button } from "@mui/material";
+import React from "react";
 import { useTranslation } from "react-i18next";
-
-const language = [
-  { code: "en", lang: "English" },
-  { code: "mm", lang: "မြန်မာ" },
-];
 
 function LanguageSelecter() {
   const { i18n } = useTranslation();

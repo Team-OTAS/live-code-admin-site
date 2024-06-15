@@ -24,7 +24,7 @@ const AddUser = () => {
 
   const createUser = async (data) => {
     try {
-      const res = await axios.post("/api/users", data);
+      await axios.post("/api/users", data);
       Swal.fire({
         icon: "success",
         text: "Create User Successful",
