@@ -13,7 +13,6 @@ import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import fetchXsrfToken from "../api/auth";
 
 export default function LoginPage() {
   const { t } = useTranslation();
@@ -21,7 +20,6 @@ export default function LoginPage() {
   const loginBtn = t("loginBtn");
   const [user_name, setuser_name] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -46,12 +44,12 @@ export default function LoginPage() {
         localStorage.setItem("authToken", authToken);
         localStorage.setItem("shopId", shopId);
         if (response.data.data.user_type.id !== 1) {
-          navigate("/");
-          // if (response.data.data.status === "onboarding") {
-          //   navigate("/");
-          // } else {
-          //   navigate("/changeaccinfo");
-          // }
+          // navigate("/");
+          if (response.data.data.status === "active") {
+            navigate("/");
+          } else {
+            navigate("/changeaccinfo");
+          }
         } else {
           Swal.fire({
             icon: "error",

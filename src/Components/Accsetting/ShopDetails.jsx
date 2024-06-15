@@ -1,38 +1,44 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./../../Styles/detailbox.css";
-import { Box, Grid } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Button, Grid } from "@mui/material";
 import axios from "./../../api/axios";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
 import Swal from "sweetalert2";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import PanoramaFishEyeOutlinedIcon from "@mui/icons-material/PanoramaFishEyeOutlined";
-import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import { useTranslation } from "react-i18next";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import { useNavigate } from "react-router-dom";
+
+import "./../../Styles/detailbox.css";
 
 function ShopDetails() {
+  const { t } = useTranslation();
+  const title = t("shopinfo");
+  const labelOne = t("shopFormLabelOne");
+  const labelThree = t("shopFormLabelThree");
+  const labelFour = t("shopFormLabelFour");
+  const labelFive = t("package");
+  const editTitle = t("editshopinfo");
+  const editBtn = t("editbtn");
+  const cancelbtn = t("cancelbtn");
   const id = localStorage.getItem("shopId");
   const [shop, setShop] = useState();
-  const [loading, setLoading] = useState(true);
-  const [logo, setLogo] = useState(null);
-  const [packageid, setPackage] = useState(1);
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
-  const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
 
   const getshop = async () => {
     try {
       const res = await axios.get("/api/shops/" + id);
-      // console.log("response", res.data.data);
+      // console.log("response", res.data.data.channels[5].access_token);
       setShop(res.data.data);
       setName(res.data.data.name);
       setPhone(res.data.data.phone);
       setAddress(res.data.data.address);
-      setPackage(res.data.data.subscription_plan.id);
-      setLoading(false);
     } catch (error) {
       if (error instanceof SyntaxError) {
         Swal.fire({
@@ -53,15 +59,11 @@ function ShopDetails() {
       phone,
     };
     try {
-      const res = await axios.post(
-        `api/shops/${id}/shop-setting?_method=PATCH`,
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`api/shops/${id}/shop-setting?_method=PATCH`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       // console.log(res);
       Swal.fire({
         icon: "success",
@@ -69,6 +71,7 @@ function ShopDetails() {
         text: "Updated",
       });
       getshop();
+      setEdit(false);
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -99,14 +102,14 @@ function ShopDetails() {
       className="containers"
       sx={{ padding: { xs: "10px 15px", md: "10px 40px", minHeight: "100vh" } }}
     >
-      <div
-        style={{
-          display: "flex",
+      <Box
+        sx={{
+          display: { xs: "block", md: "flex" },
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <p className="page-header">User Shop Info</p>
+        <p className="page-header">{title}</p>
 
         <button
           className="btn-update"
@@ -114,10 +117,10 @@ function ShopDetails() {
             setEdit(!edit);
           }}
         >
-          <span>Edit Profile</span>
+          <span>{editTitle}</span>
           <EditRoundedIcon className="update-icon" />
         </button>
-      </div>
+      </Box>
 
       {/* Shop Info */}
       {shop && (
@@ -130,7 +133,7 @@ function ShopDetails() {
                     <AccountCircleRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Name</p>
+                    <p>{labelOne}</p>
                     <span>{shop.name}</span>
                   </div>
                 </div>
@@ -147,15 +150,13 @@ function ShopDetails() {
                 <div className="create-input">
                   <HomeRoundedIcon className="create-input-icon" />
                   <div>
-                    <label>Name</label>
+                    <label>{labelOne}</label>
                     <br />
                     <input
                       type="text"
                       placeholder="Enter Your Name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      // ref={phoneref}
-                      // required
                     />
                   </div>
                 </div>
@@ -174,7 +175,7 @@ function ShopDetails() {
                     <HomeRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Address</p>
+                    <p>{labelFour}</p>
                     <span>{shop.address}</span>
                   </div>
                 </div>
@@ -191,7 +192,7 @@ function ShopDetails() {
                 <div className="create-input">
                   <HomeRoundedIcon className="create-input-icon" />
                   <div>
-                    <label>Address</label>
+                    <label>{labelFour}</label>
                     <br />
                     <input
                       type="text"
@@ -218,7 +219,7 @@ function ShopDetails() {
                     <LocalPhoneRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Phone Number</p>
+                    <p>{labelThree}</p>
                     <span>{shop.phone}</span>
                   </div>
                 </div>
@@ -235,7 +236,7 @@ function ShopDetails() {
                 <div className="create-input">
                   <LocalPhoneRoundedIcon className="create-input-icon" />
                   <div>
-                    <label>Phone Number</label>
+                    <label>{labelThree}</label>
                     <br />
                     <input
                       type="text"
@@ -263,7 +264,7 @@ function ShopDetails() {
                   <CalendarMonthRoundedIcon className="detail-input-icon cleander" />
                 </div>
                 <div className="detail-box-content">
-                  <p>Package Expires In </p>
+                  <p>{labelFive}</p>
                   <span>{getexpire(shop.expire_at)}</span>
                 </div>
               </div>
@@ -275,17 +276,30 @@ function ShopDetails() {
               md={4}
               sx={{ margin: { xs: "10px 0", md: "0" } }}
             >
-              <div className="detail-box">
-                <div>
-                  <CardMembershipIcon className="detail-input-icon" />
-                </div>
-                <div className="detail-box-content">
-                  <p>Package Type</p>
-                  <span>
-                    {shop.subscription_plan ? shop.subscription_plan : null}
-                  </span>
-                </div>
-              </div>
+              <Button
+                variant="contained"
+                sx={{
+                  width: "100%",
+                  marginBottom: "10px",
+                  borderRadius: "10px",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  cursor: "pointer",
+                  fontSize: "10px",
+                  ":hover": {
+                    background: "#4d3f3f",
+                    color: "#ffffff",
+                  },
+                }}
+                onClick={() => {
+                  navigate("/fblogin");
+                }}
+              >
+                <FacebookIcon sx={{ paddingRight: "5px" }} />
+                {shop.channels.length > 0
+                  ? shop.channels[0].name
+                  : "Connect Facebook"}
+              </Button>
             </Grid>
           </Grid>
         </div>
@@ -301,10 +315,10 @@ function ShopDetails() {
       {edit && (
         <div className="btn-container">
           <button className="discard" onClick={() => setEdit(false)}>
-            Discard
+            {cancelbtn}
           </button>
           <button className="save" onClick={updateShop}>
-            Save Edit
+            {editBtn}
           </button>
         </div>
       )}

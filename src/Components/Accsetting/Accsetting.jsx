@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import React from "react";
-import { NavLink } from "react-router-dom";
 import UserManagement from "./UserManagement";
 import ShopReciept from "./ShopReciept";
 import AutoReply from "./AutoReply";
@@ -29,7 +28,7 @@ function Accsetting() {
             className={page === 2 ? "settingbtn active" : "settingbtn"}
             onClick={() => channgePage(2)}
           >
-            <span className="settingText">Shop Receipt</span>
+            <span className="settingText">Shop Vouncher</span>
           </button>
           <button
             className={page === 3 ? "settingbtn active" : "settingbtn"}

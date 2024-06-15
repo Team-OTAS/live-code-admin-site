@@ -10,16 +10,26 @@ import ListIcon from "@mui/icons-material/List";
 import DescriptionIcon from "@mui/icons-material/Description";
 import AlertBox from "../../Components/modalBox/AlertBox";
 import Loading from "../../Components/Loading";
+import { useTranslation } from "react-i18next";
 
 import "./../../Styles/addstock.css";
 
 function ProductDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const { t } = useTranslation();
+  const labelOne = t("stkformlbelone");
+  const labelTwo = t("stkformlbeltwo");
+  const labelThree = t("stkformlbelthree");
+  const labelFour = t("stkformlbelfour");
+  const labelFive = t("stkformlbelfive");
+  const labelSeven = t("stkformlbelseven");
 
   const { product, isLoading, isError, message } = useSelector(
     (state) => state.stocks
   );
+
+  console.log(product);
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -58,7 +68,7 @@ function ProductDetail() {
                 label={
                   <div className="input-field-label">
                     <Inventory2OutlinedIcon color="primary" />
-                    <span>Stock Name</span>
+                    <span>{labelOne}</span>
                   </div>
                 }
                 color="primary"
@@ -77,7 +87,7 @@ function ProductDetail() {
                 label={
                   <div className="input-field-label">
                     <AttachMoneyOutlinedIcon color="primary" />
-                    <span>Price</span>
+                    <span>{labelTwo}</span>
                   </div>
                 }
                 color="primary"
@@ -96,7 +106,7 @@ function ProductDetail() {
                 label={
                   <div className="input-field-label">
                     <Inventory2OutlinedIcon color="primary" />
-                    <span>Live Sale Code</span>
+                    <span>{labelFour}</span>
                   </div>
                 }
                 color="primary"
@@ -112,7 +122,7 @@ function ProductDetail() {
                 label={
                   <div className="input-field-label">
                     <Inventory2OutlinedIcon color="primary" />
-                    <span>Unit</span>
+                    <span>{labelFive}</span>
                   </div>
                 }
                 color="primary"
@@ -128,7 +138,7 @@ function ProductDetail() {
                 label={
                   <div className="input-field-label">
                     <ListIcon color="primary" />
-                    <span>Quantity</span>
+                    <span>{labelThree}</span>
                   </div>
                 }
                 color="primary"
@@ -161,7 +171,7 @@ function ProductDetail() {
                 label={
                   <div className="input-field-label">
                     <DescriptionIcon color="primary" />
-                    <span>Description</span>
+                    <span>{labelSeven}</span>
                   </div>
                 }
                 multiline

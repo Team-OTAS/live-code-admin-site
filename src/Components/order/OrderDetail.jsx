@@ -1,4 +1,11 @@
-import { Box, FormControl, Grid, MenuItem, Select } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -6,24 +13,43 @@ import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
 import AttachMoneyRoundedIcon from "@mui/icons-material/AttachMoneyRounded";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import OrderDetailTable from "./OrderDetailTable";
-import { getOrderDetail } from "../../redux/features/orderApiSlice";
-import getTime from "./../getTime";
+import getTime from "./../../Components/getTime";
+import {
+  getOrderDetail,
+  addDataOrder,
+  updateStatusOrder,
+} from "../../redux/features/orderApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../Loading";
 import { statusArray } from "../../Pages/order/OrderPage";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
-import { updateStatusOrder } from "../../redux/features/orderApiSlice";
+import { useTranslation } from "react-i18next";
 
 function OrderDetail() {
+  const { t } = useTranslation();
+  const title = t("orderdetail");
+  const labelone = t("customername");
+  const labeltwo = t("shopFormLabelThree");
+  const labelthree = t("customraddress");
+  const labelfour = t("customerdate");
+  const labelfive = t("itemQuantity");
+  const labelsix = t("amount");
+  const labelseven = t("editorder");
+  const editbtn = t("editbtn");
+  const cancelbtn = t("cancelbtn");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { loading, orderDetail } = useSelector((state) => state.OrderData);
   const [edit, setEdit] = useState(false);
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [chgorder, setChgorder] = useState("");
+
+  console.log(orderDetail);
 
   // Change Status
   const handleOrder = (event) => {
@@ -34,6 +60,15 @@ function OrderDetail() {
     };
 
     dispatch(updateStatusOrder(data));
+  };
+
+  const addOrderUpdate = () => {
+    const data = {
+      contact_phone: phone,
+      delivery_address: address,
+    };
+    dispatch(addDataOrder({ id, data }));
+    setEdit(false);
   };
 
   useEffect(() => {
@@ -60,7 +95,7 @@ function OrderDetail() {
               alignItems: "center",
             }}
           >
-            <p className="page-header">Order Detail</p>
+            <p className="page-header">{title}</p>
 
             {edit ? (
               <div style={{ display: "flex", gap: "10px" }}>
@@ -69,14 +104,14 @@ function OrderDetail() {
                   style={{ height: "56px", borderColor: "red" }}
                   onClick={() => setEdit(false)}
                 >
-                  <span style={{ color: "red" }}>Cancel</span>
+                  <span style={{ color: "red" }}>{cancelbtn}</span>
                 </button>
                 <button
                   className="edit-btn"
                   style={{ height: "56px" }}
-                  // onClick={() => setEdit(true)}
+                  onClick={addOrderUpdate}
                 >
-                  <span style={{ fontWeight: "bold" }}>Update</span>
+                  <span style={{ fontWeight: "bold" }}>{editbtn}</span>
                 </button>
               </div>
             ) : (
@@ -84,7 +119,9 @@ function OrderDetail() {
                 <Grid item xs={6} md={3}>
                   <FormControl fullWidth minHeight={50}>
                     <Select
-                      value={chgorder ? chgorder : orderDetail.data.status}
+                      value={
+                        chgorder ? chgorder : orderDetail.data.order.status
+                      }
                       onChange={handleOrder}
                       displayEmpty
                       inputProps={{ "aria-label": "Without label" }}
@@ -109,9 +146,13 @@ function OrderDetail() {
                 <button
                   className="edit-btn"
                   style={{ height: "56px" }}
-                  onClick={() => setEdit(true)}
+                  onClick={() => {
+                    setEdit(true);
+                    setAddress(orderDetail.data.delivery_address);
+                    setPhone(orderDetail.data.contact_phone);
+                  }}
                 >
-                  Edit Order
+                  {labelseven}
                   <EditRoundedIcon
                     sx={{
                       background: "#4D3F3F",
@@ -122,6 +163,10 @@ function OrderDetail() {
                     }}
                   />
                 </button>
+
+                <Button onClick={() => navigate(`/vouncher/${id}`)}>
+                  <span>Print</span>
+                </Button>
               </div>
             )}
           </Box>
@@ -133,8 +178,8 @@ function OrderDetail() {
                     <AccountCircleRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Name</p>
-                    <span>{orderDetail.data.contact_name}</span>
+                    <p>{labelone}</p>
+                    <span>{orderDetail.data.order.contact_name}</span>
                   </div>
                 </div>
               </Grid>
@@ -146,15 +191,17 @@ function OrderDetail() {
                 sx={{ margin: { xs: "10px 0", md: "0" } }}
               >
                 <div className="detail-box">
-                  <LocalPhoneRoundedIcon className="detail-input-icon" />
+                  <HomeRoundedIcon className="detail-input-icon" />
                   <div className="detail-box-content">
-                    <label>Phone Number</label>
+                    <label>{labelthree}</label>
                     <br />
                     <input
                       type="text"
                       placeholder="There is no Address Yet!"
                       value={
-                        address ? address : orderDetail.data.delivery_address
+                        address
+                          ? address
+                          : orderDetail.data.order.delivery_address
                       }
                       onChange={(e) => setAddress(e.target.value)}
                       readOnly={!edit}
@@ -172,28 +219,21 @@ function OrderDetail() {
                 <div className="detail-box">
                   <LocalPhoneRoundedIcon className="detail-input-icon" />
                   <div className="detail-box-content">
-                    <label>Phone Number</label>
+                    <label>{labeltwo}</label>
                     <br />
                     <input
                       type="text"
                       placeholder="No Phone Number Yet!"
-                      value={phone ? phone : orderDetail.data.contact_phone}
+                      value={
+                        phone ? phone : orderDetail.data.order.contact_phone
+                      }
                       onChange={(e) => setPhone(e.target.value)}
                       readOnly={!edit}
-
-                      // value={name}
-                      // onChange={(e) => setName(e.target.value)}
                     />
                   </div>
                 </div>
               </Grid>
-            </Grid>
 
-            <Grid
-              container
-              spacing={2}
-              sx={{ marginTop: { xs: "0", md: "50px" } }}
-            >
               <Grid
                 item
                 xs={12}
@@ -205,13 +245,13 @@ function OrderDetail() {
                     <CalendarMonthRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Date</p>
-                    <span>{getTime(orderDetail.data.created_at)}</span>
+                    <p>{labelfour}</p>
+                    <span>{getTime(orderDetail.data.order.created_at)}</span>
                   </div>
                 </div>
               </Grid>
 
-              {/* <Grid
+              <Grid
                 item
                 xs={12}
                 md={4}
@@ -219,14 +259,14 @@ function OrderDetail() {
               >
                 <div className="detail-box">
                   <div>
-                    <ShoppingCartOutlinedIcon className="detail-input-icon" />
+                    <ShoppingCartRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Item Quantity</p>
-                    <span>3 items</span>
+                    <p>{labelfive}</p>
+                    <span>{orderDetail.data.products.length} Items</span>
                   </div>
                 </div>
-              </Grid> */}
+              </Grid>
 
               <Grid
                 item
@@ -239,15 +279,16 @@ function OrderDetail() {
                     <AttachMoneyRoundedIcon className="detail-input-icon" />
                   </div>
                   <div className="detail-box-content">
-                    <p>Amount</p>
-                    <span>{orderDetail.data.price}</span>
+                    <p>{labelsix}</p>
+                    <span>{orderDetail.data.order.price}</span>
                   </div>
                 </div>
               </Grid>
             </Grid>
           </div>
+          {/* Item Table */}
           <div style={{ marginTop: "20px" }}>
-            <OrderDetailTable />
+            <OrderDetailTable id={id} items={orderDetail.data.products} />
           </div>
         </Box>
       )}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Chip, Container, Grid, TextField } from "@mui/material";
+import { Box, Button, Chip, Grid, TextField } from "@mui/material";
 import AttachmentOutlinedIcon from "@mui/icons-material/AttachmentOutlined";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
@@ -33,7 +33,7 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 function EditStock() {
-  const shopId = localStorage.getItem('shopId');
+  const shopId = localStorage.getItem("shopId");
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product);
   const updates = useSelector((state) => state.updateproduct);

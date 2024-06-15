@@ -46,10 +46,7 @@ function EditProduct() {
 
   const dispatch = useDispatch();
 
-  const deletes = useSelector((state) => state.deleteproduct);
-  const { product, isLoading, isError, message, isSuccess } = useSelector(
-    (state) => state.stocks
-  );
+  const { product, isLoading } = useSelector((state) => state.stocks);
   const [showmessage, setShowmessage] = useState(false);
   const [local, setlocal] = useState(false);
   const { id } = useParams();

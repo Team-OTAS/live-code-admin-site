@@ -27,7 +27,7 @@ export default function Navbar(props) {
   const navigate = useNavigate();
   const location = useLocation();
   const id = localStorage.getItem("shopId");
-  const { loading, error, shopData } = useSelector((state) => state.ShopData);
+  const { shopData } = useSelector((state) => state.ShopData);
   const [navtitle, setNavtitle] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showmenu, setShowmenu] = useState(false);

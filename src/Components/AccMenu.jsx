@@ -11,7 +11,7 @@ export default function AccMenu() {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const id = localStorage.getItem("shopId");
-  const { loading, error, shopData } = useSelector((state) => state.ShopData);
+  const { shopData } = useSelector((state) => state.ShopData);
 
   const open = Boolean(anchorEl);
   const navigate = useNavigate();

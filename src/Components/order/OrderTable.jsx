@@ -8,10 +8,10 @@ import {
 import { Box, Typography } from "@mui/material";
 import { getOrderData } from "../../redux/features/orderApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/features/productReducer";
 import LinearProgress from "@mui/material/LinearProgress";
 import "./../../Styles/dashboard.css";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function CustomToolbar() {
   return (
@@ -172,6 +172,8 @@ const columns = [
 ];
 
 const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
+  const { t } = useTranslation();
+  const tablemsg = t("ordertable");
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const { loading, orderData } = useSelector((state) => state.OrderData);
@@ -239,7 +241,7 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
                   fontSize: "20px",
                 }}
               >
-                <Typography variant="h6">No Orders Yet!</Typography>
+                <Typography variant="h6">{tablemsg}</Typography>
               </div>
             );
           },

@@ -258,7 +258,6 @@ const productReducer = createSlice({
           willClose: () => {
             clearInterval(timerInterval);
             // navigate("/");
-            navigator.push("/products");
           },
         }).then((result) => {
           if (result.dismiss === Swal.DismissReason.timer) {

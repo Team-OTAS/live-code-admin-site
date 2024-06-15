@@ -17,7 +17,6 @@ import {
 
 import "./../../Styles/dashboard.css";
 import Swal from "sweetalert2";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import { useNavigate } from "react-router-dom";
 
 function CustomToolbar() {

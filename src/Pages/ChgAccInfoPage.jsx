@@ -19,8 +19,7 @@ export default function ChgAccInfoPage() {
   const [password_confirmation, setpassword_confirmation] = useState("");
 
   const handleDoitLater = () => {
-    navigate("/setup");
-    console.log("navigation to fb login work");
+    navigate("/");
   };
 
   const changeLoginInfos = async () => {
@@ -32,6 +31,7 @@ export default function ChgAccInfoPage() {
         password_confirmation,
       });
       console.log("Change Acc Info Page", response);
+      navigate("/setup");
     } catch (error) {
       if (error.response) {
         Swal.fire({

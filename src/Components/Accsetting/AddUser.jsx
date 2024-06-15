@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
@@ -7,10 +7,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { Box } from "@mui/material";
-import { useCreateUserMutation } from "../../redux/features/userApiSlice";
 import { useNavigate } from "react-router-dom";
-import SuccessBox from "../modalBox/successBox";
-import AlertBox from "../modalBox/AlertBox";
 import axios from "./../../api/axios";
 import Swal from "sweetalert2";
 
@@ -27,7 +24,7 @@ const AddUser = () => {
 
   const createUser = async (data) => {
     try {
-      const res = await axios.post("/api/users", data);
+      await axios.post("/api/users", data);
       Swal.fire({
         icon: "success",
         text: "Create User Successful",

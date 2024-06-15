@@ -3,17 +3,17 @@ import Grid from "@mui/material/Grid";
 import LiveCodeLogo from "./../assets/images/logo.png";
 import CompleteSticker from "./../assets/images/Completed-bro.png";
 import { Box, Button } from "@mui/material";
-import "./../Styles/auth.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import "./../Styles/auth.css";
 
 export default function CompleteSetupPage() {
   const [show] = useState(true);
   const navigate = useNavigate();
-  const clickHandler = () =>{
+  const clickHandler = () => {
     console.log("Finish Register");
-    navigate('/');
-  }
+    navigate("/");
+  };
   return (
     <>
       <Box sx={{ py: 5 }}>
