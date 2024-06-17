@@ -294,6 +294,7 @@ function ShopDetails() {
                 onClick={() => {
                   navigate("/fblogin");
                 }}
+                disabled={shop.channels.length > 0 ? true : false}
               >
                 <FacebookIcon sx={{ paddingRight: "5px" }} />
                 {shop.channels.length > 0
