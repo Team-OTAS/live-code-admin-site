@@ -263,7 +263,7 @@ function OrderDetail() {
                   </div>
                   <div className="detail-box-content">
                     <p>{labelfive}</p>
-                    <span>{orderDetail.data.products.length} Items</span>
+                    <span>{orderDetail.data.order_products.length} Items</span>
                   </div>
                 </div>
               </Grid>
@@ -288,7 +288,7 @@ function OrderDetail() {
           </div>
           {/* Item Table */}
           <div style={{ marginTop: "20px" }}>
-            <OrderDetailTable id={id} items={orderDetail.data.products} />
+            <OrderDetailTable id={id} items={orderDetail.data.order_products} />
           </div>
         </Box>
       )}

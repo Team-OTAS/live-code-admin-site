@@ -8,12 +8,12 @@ function LiveSale() {
     <div className="dashboardContent">
       <Box>
         <Grid container>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12}>
             <LiveDataTable />
           </Grid>
-          <Grid item xs={12} md={4}>
+          {/* <Grid item xs={12} md={4}>
             <FbLive />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Box>
     </div>

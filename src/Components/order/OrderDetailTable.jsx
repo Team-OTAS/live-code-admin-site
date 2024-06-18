@@ -10,16 +10,18 @@ const columns = [
     headerName: "No",
     width: 50,
   },
-  { field: "name", headerName: "Name", width: 200 },
-  // { field: "description", headerName: "Description", width: 300 },
-
+  {
+    field: "name",
+    headerName: "Name",
+    width: 200,
+    renderCell: (params) => <p>{params.row.product.name}</p>,
+  },
   { field: "quantity", headerName: "quantity", width: 150 },
-  { field: "price", headerName: "Unit Price", width: 200 },
-  // { field: "Amount", headerName: "Total Price", width: 150 },
+  { field: "unit_price", headerName: "Unit Price", width: 200 },
   {
     headerName: "Amount",
     width: 200,
-    renderCell: (params) => <p>{params.row.price * params.row.quantity}</p>,
+    renderCell: (params) => <p>{params.row.total_price}</p>,
   },
 ];
 
