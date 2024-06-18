@@ -9,9 +9,10 @@ import { Box, Typography } from "@mui/material";
 import { getOrderData } from "../../redux/features/orderApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import LinearProgress from "@mui/material/LinearProgress";
-import "./../../Styles/dashboard.css";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
+import "./../../Styles/dashboard.css";
 
 function CustomToolbar() {
   return (
@@ -172,6 +173,7 @@ const columns = [
 ];
 
 const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
+  // console.log(chgorder);
   const { t } = useTranslation();
   const tablemsg = t("ordertable");
   const [products, setProducts] = useState([]);
@@ -201,7 +203,7 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
   }, [chgorder]);
 
   useEffect(() => {
-    console.log(status);
+    // console.log(status);
     if (orderData) {
       setProducts(
         orderData.filter((item) => {

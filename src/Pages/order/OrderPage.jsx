@@ -78,7 +78,6 @@ function OrderPage() {
     };
 
     dispatch(updateStatusOrder(data));
-    setChgorder("");
   };
 
   return (

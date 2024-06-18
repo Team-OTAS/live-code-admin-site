@@ -33,7 +33,7 @@ export default function LoginPage() {
         user_name,
         password,
       });
-      console.log("Login Page", response);
+      // console.log("Login Page", response);
       if (response.status === 200) {
         const authToken = response.data.data.token;
         const shopId = response.data.data.shop_id;
