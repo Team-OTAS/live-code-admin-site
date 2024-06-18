@@ -1,29 +1,149 @@
 @import "./../Variables/variables.scss";
 
-.logo{
+.logo {
   width: 158px;
   height: 53px;
 }
 
-.changeAccInfo{
+.changeAccInfo {
   width: 200px;
   height: 200px;
 }
 
 .textheader {
-    text-align: center;
-    color: $textheaderColor;
-    font-size: 24px;
-    font-family: $textFont;
-    font-weight: bold;
-    word-wrap: break-word;
-    margin-top: -20px;
-  }
+  text-align: center;
+  color: $textheaderColor;
+  font-size: 24px;
+  font-family: $textFont;
+  font-weight: bold;
+  word-wrap: break-word;
+  // margin-top: -10px;
+}
 
-  .textbody {
-    text-align: center;
-    color: $textheaderColor;
-    font-size: 15px;
-    font-family: $textFont;
-    margin-top: -20px;
+.textbody {
+  text-align: center;
+  color: $textheaderColor;
+  font-size: 15px;
+  font-family: $textFont;
+  margin-top: -25px;
+}
+
+.doneSticker {
+  width: 260px;
+  height: 130px;
+}
+
+.authBtn {
+  color: $buttonColor;
+}
+
+.input-field {
+  display: flex;
+  justify-content: center;
+}
+
+/* The device with borders */
+.smartphone {
+  position: relative;
+  width: 150px;
+  height: 240px;
+  margin-left: 20px;
+  border: 5px black solid;
+  border-top-width: 20px;
+  border-bottom-width: 30px;
+  border-radius: 24px;
+}
+
+/* The horizontal line on the top of the device */
+.smartphone:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 5px;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 10px;
+}
+
+/* The circle on the bottom of the device */
+.smartphone:after {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  left: 50%;
+  bottom: -35px;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* The screen (or content) of the device */
+.smartphone .content {
+  width: 150px;
+  height: 250px;
+  background: white;
+}
+
+.text,
+.message {
+  background-color: $textheaderColor;
+  padding: 4px 8px;
+  width: 80%;
+  color: #fff;
+  border-radius: 15px 5px 15px 5px;
+  margin-top: 5px;
+}
+
+.message {
+  float: right;
+  margin-top: 20px;
+  margin-right: 5px;
+  // height :50;
+}
+
+.photoUpload {
+  width: 260px;
+  height: 80px;
+  border-radius: 10px;
+  border: 1px solid $textheaderColor;
+  padding: 12px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.photoUpload-img {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.photoUpload-img img {
+  width: inherit;
+  height: inherit;
+}
+
+.completeSticker {
+  width: 200px;
+  height: 200px;
+}
+
+.input-field-label {
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+
+  span {
+    font-weight: bold;
+    font-family: $inputFont;
+    color: $inputFontColor;
+    font-size: 13px;
+    margin-left: 2px;
   }
+}

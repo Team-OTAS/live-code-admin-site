@@ -1,0 +1,40 @@
+/* Poppin */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+/* Garet */
+@import url("https://fonts.cdnfonts.com/css/garet");
+.filterContainer {
+  width: 100%;
+  display: flex;
+}
+
+.filterButton {
+  background-color: transparent;
+  font-family: "Poppins", sans-serif;
+}
+
+.order-btn {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 5px 10px;
+  height: 56px;
+  font-family: "Garet", cursive;
+  color: #4d3f3f;
+  font-weight: 700;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.5s;
+}
+.order-btn p {
+  margin-right: 20px;
+}
+
+.order-btn:hover {
+  background: #4d3f3f;
+  color: #fff;
+  opacity: 0.9;
+  transition: 0.5s;
+}/*# sourceMappingURL=order.css.map */

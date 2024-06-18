@@ -1,0 +1,207 @@
+/* Poppin */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+/* Garet */
+@import url("https://fonts.cdnfonts.com/css/garet");
+.containers {
+  position: relative;
+  padding: 0;
+}
+
+.detail-box {
+  display: flex;
+}
+.detail-box .detail-logo {
+  width: 100px;
+  height: 100px;
+  margin-top: -25px;
+}
+.detail-box .detail-logo img {
+  width: inherit;
+  height: inherit;
+}
+.detail-box .detail-input-icon {
+  background-color: #4d3f3f;
+  color: #fff;
+  font-size: 30px;
+  border-radius: 50%;
+  padding: 5px;
+  margin-right: 20px;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+.detail-box .cleander {
+  background-color: #6ec531;
+  box-shadow: none;
+}
+
+.detail-box-content {
+  margin-left: 10px;
+}
+.detail-box-content p,
+.detail-box-content label {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.detail-box-content span {
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+}
+.detail-box-content input {
+  border: 0;
+  font-size: 12px;
+  width: 80%;
+  padding: 10px;
+  background-color: #f2f3f7;
+  border-radius: 5px;
+}
+.detail-box-content input::-moz-placeholder {
+  font-size: 10px;
+  font-family: "Garet", cursive;
+}
+.detail-box-content input::placeholder {
+  font-size: 10px;
+  font-family: "Garet", cursive;
+}
+
+.btn-update {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: #4d3f3f;
+  border: none;
+  color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.btn-update span {
+  font-family: "Garet", cursive;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.update-icon {
+  background-color: #fff;
+  color: #4d3f3f;
+  font-size: 25px;
+  border-radius: 50%;
+  padding: 2px;
+  margin-left: 20px;
+}
+
+.containers {
+  background-color: #fff;
+  margin-top: 30px;
+  border-radius: 20px;
+}
+
+.titles {
+  font-family: "Garet", cursive;
+  font-size: 32px;
+}
+
+.title {
+  font-family: "Garet", cursive;
+  font-size: 24px;
+}
+
+.create-input {
+  display: flex;
+  width: 80%;
+  align-items: center;
+}
+.create-input .create-input-icon {
+  background-color: #4d3f3f;
+  color: #fff;
+  font-size: 30px;
+  border-radius: 50%;
+  padding: 5px;
+  margin-right: 20px;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+.create-input label {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  color: #4d3f3f;
+  font-weight: bold;
+}
+.create-input input {
+  border: 0;
+  width: 100%;
+  background-color: #f2f3f7;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: gray;
+  font-family: "Poppins", sans-serif;
+}
+.create-input input::-moz-placeholder {
+  font-size: 16px;
+  font-family: "Garet", cursive;
+}
+.create-input input::placeholder {
+  font-size: 16px;
+  font-family: "Garet", cursive;
+}
+
+.PackegeContainer {
+  background-color: #4d3f3f;
+  padding: 20px 40px;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+}
+.PackegeContainer p {
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  margin: 0;
+  margin-bottom: 10px;
+}
+.PackegeContainer span {
+  color: #666666;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}
+.PackegeContainer .circles {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+}
+
+.PackegeContainer:hover {
+  transform: scale(0.95);
+}
+
+.PackegeContainer.active {
+  border: 1px solid #4d3f3f;
+}
+.PackegeContainer.active .circles {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.create-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  margin-left: 20px;
+}
+
+.create {
+  background-color: #4d3f3f;
+  color: #fff;
+}
+
+.create-btn:hover {
+  transform: scale(0.95);
+}/*# sourceMappingURL=detailbox.css.map */

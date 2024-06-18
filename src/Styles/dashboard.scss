@@ -1,0 +1,100 @@
+@import "./../Variables/variables.scss";
+
+body {
+  overflow-x: hidden;
+}
+
+.dashboardContainer {
+  width: 97vw;
+  padding: 20px;
+  display: flex;
+  // background-color: blue;
+  // justify-content: space-between;
+}
+
+.btnText {
+  padding-left: 10px;
+  font-size: 14px;
+  font-family: $textFont;
+}
+
+.dashboardContent {
+  width: 75vw;
+  padding: 0px;
+  margin-left: 10px;
+  // background-color: yellow;
+}
+
+.barContainer {
+  // width: inherit;
+  // display: block;
+  text-align: right;
+}
+
+.toolbarContainer {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+}
+
+.MuiDataGrid-columnHeaders .MuiCheckbox-root {
+  border-radius: 0;
+  color: white;
+}
+
+.MuiDataGrid-columnHeaders .MuiCheckbox-root.Mui-checked {
+  color: white;
+}
+
+.MuiDataGrid-root .MuiDataGrid-cell {
+  font-size: 12px; /* Adjust the font size as needed */
+  font-family: $textFont;
+  // font-weight: 600;
+}
+
+.MuiDataGrid-columnHeaders {
+  background-color: $blueColor;
+  color: white;
+  font-size: 14px; /* Adjust the font size as needed */
+  font-family: $textFont;
+}
+
+.dashboardContent__header p {
+  font-size: 36px;
+  font-family: $inputFont;
+  margin: 0;
+  // padding: 0;
+}
+
+@media (max-width: 600px) {
+  .dashboardContainer {
+    width: 95vw;
+    padding: 5px;
+  }
+  .dashboardContent {
+    width: 90vw;
+    padding: 0;
+    margin-left: 10px;
+  }
+
+  .toolbarContainer {
+    display: block;
+    height: 80px;
+  }
+
+  .MuiDataGrid-root .MuiDataGrid-cell {
+    font-size: 12px;
+  }
+
+  .MuiDataGrid-columnHeaders {
+    font-size: 12px;
+  }
+}
+
+.color-box {
+  // width: 20px;
+  height: 100%;
+  // background-color: green;
+  padding: 10px 1px;
+  color: transparent;
+}

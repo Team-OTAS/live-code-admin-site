@@ -1,0 +1,234 @@
+@import "./../../Variables//variables.scss";
+
+.settingBtnContainer {
+  width: 100%;
+  display: inline-block;
+  // background-color: red;
+}
+
+.settingbtn {
+  // width: 250px;
+  padding: 15px 15px;
+  border-radius: 5px 5px 0 0;
+  background-color: $buttonColor;
+  font-size: 16px;
+  color: #fff;
+  margin-left: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.settingbtn:hover {
+  transform: scale(0.95);
+}
+
+.settingbtn.active {
+  background: #fff;
+  color: $buttonColor;
+  border-bottom: none;
+}
+
+.settingText {
+  //   padding-left: 10px;
+  font-family: $textFont;
+}
+
+.adduser {
+  // width: 250px;
+  background-color: #fff;
+  display: flex;
+  padding: 10px 15px;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  // border-color: ;
+}
+
+.adduser:hover {
+  transform: scale(0.95);
+}
+
+.adduser span {
+  font-family: $textFont;
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 100px;
+}
+
+.adduserIcon {
+  background: black;
+  color: #fff;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.page-header {
+  font-size: 32px;
+  color: $buttonColor;
+  margin-bottom: 10px;
+  font-family: $inputFont;
+}
+
+.shopLogo {
+  width: 100%;
+  height: 250px;
+  border: 2px solid $buttonColor;
+  border-radius: 10px;
+
+  .title-logo {
+    font-size: 16px;
+    color: $buttonColor;
+    font-family: $textFont;
+    font-weight: bold;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-name {
+    background-color: $buttonColor;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px 20px;
+  }
+}
+
+.logo-img {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.logo-img img {
+  object-fit: cover;
+}
+
+.edit-btn {
+  background-color: transparent;
+  border: 1px solid rgba($color: #000000, $alpha: 0.3);
+  box-shadow: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  height: 50px;
+  font-family: $inputFont;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-btn:hover {
+  transform: scale(0.95);
+  cursor: pointer;
+}
+
+.receipt-body {
+  width: 95%;
+  margin: 0 20px;
+  box-shadow: none;
+  border: none;
+  font-size: 20px;
+  font-family: $inputFont;
+  font-weight: bold;
+}
+
+.receipt-body:active,
+.receipt-body:focus {
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+.btn-container {
+  // float: right;
+  margin-right: 25px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: end;
+  button {
+    padding: 10px 20px;
+    font-family: $textFont;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    margin-left: 20px;
+  }
+
+  .discard {
+    background-color: white;
+  }
+
+  .discard:hover,
+  .save:hover,
+  .discard:active,
+  .save:active {
+    transform: scale(0.95);
+  }
+
+  .save {
+    background-color: $buttonColor;
+    color: white;
+  }
+}
+
+@media (max-width: 600px) {
+  .settingbtn {
+    // width: 250px;
+    padding: 10px 10px;
+    border-radius: 5px 5px 0 0;
+    background-color: $buttonColor;
+    font-size: 12px;
+    color: #fff;
+    margin-left: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .adduser {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .adduser span {
+    font-size: 12px;
+    margin-right: 50px;
+  }
+
+  .page-header {
+    font-size: 16px;
+    color: $buttonColor;
+    margin-bottom: 10px;
+    font-family: $inputFont;
+  }
+
+  .edit-btn {
+    font-size: 12px;
+  }
+
+  .shopLogo {
+    .title-logo {
+      margin-left: 10px;
+    }
+  }
+
+  .receipt-body {
+    width: 95%;
+    margin: 0 10px;
+    box-shadow: none;
+    border: none;
+    font-size: 12px;
+    font-family: $inputFont;
+    font-weight: bold;
+  }
+}

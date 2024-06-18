@@ -1,0 +1,89 @@
+/* Poppin */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+/* Garet */
+@import url("https://fonts.cdnfonts.com/css/garet");
+body {
+  overflow-x: hidden;
+}
+
+.dashboardContainer {
+  width: 97vw;
+  padding: 20px;
+  display: flex;
+}
+
+.btnText {
+  padding-left: 10px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+}
+
+.dashboardContent {
+  width: 75vw;
+  padding: 0px;
+  margin-left: 10px;
+}
+
+.barContainer {
+  text-align: right;
+}
+
+.toolbarContainer {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+}
+
+.MuiDataGrid-columnHeaders .MuiCheckbox-root {
+  border-radius: 0;
+  color: white;
+}
+
+.MuiDataGrid-columnHeaders .MuiCheckbox-root.Mui-checked {
+  color: white;
+}
+
+.MuiDataGrid-root .MuiDataGrid-cell {
+  font-size: 12px; /* Adjust the font size as needed */
+  font-family: "Poppins", sans-serif;
+}
+
+.MuiDataGrid-columnHeaders {
+  background-color: #354e8e;
+  color: white;
+  font-size: 14px; /* Adjust the font size as needed */
+  font-family: "Poppins", sans-serif;
+}
+
+.dashboardContent__header p {
+  font-size: 36px;
+  font-family: "Garet", cursive;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .dashboardContainer {
+    width: 95vw;
+    padding: 5px;
+  }
+  .dashboardContent {
+    width: 90vw;
+    padding: 0;
+    margin-left: 10px;
+  }
+  .toolbarContainer {
+    display: block;
+    height: 80px;
+  }
+  .MuiDataGrid-root .MuiDataGrid-cell {
+    font-size: 12px;
+  }
+  .MuiDataGrid-columnHeaders {
+    font-size: 12px;
+  }
+}
+.color-box {
+  height: 100%;
+  padding: 10px 1px;
+  color: transparent;
+}/*# sourceMappingURL=dashboard.css.map */

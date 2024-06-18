@@ -1,0 +1,56 @@
+@import "./../Variables/variables.scss";
+
+.DrawContainer {
+  width: 240px;
+  height: 90vh;
+  border-radius: 18px;
+  background-color: #fff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  padding: 15px 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.slidebtn {
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: 12px;
+  padding: 10px 5px;
+  text-decoration: none;
+  border-radius: 3px;
+  background-color: #fff;
+  color: $buttonColor;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slidebtn.active {
+  background: $buttonColor;
+  color: #fff;
+}
+
+.btnText {
+  padding-left: 10px;
+  font-family: $textFont;
+}
+
+@media (max-width: 600px) {
+  .DrawContainer {
+    width: 200px;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: auto;
+  }
+
+  .btnText {
+    padding: 0;
+    font-size: 12px;
+  }
+}
