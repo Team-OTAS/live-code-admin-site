@@ -104,6 +104,10 @@ function Vouncher() {
                                 <span className="row-header">Address</span> -{" "}
                                 {orderDetail.data.order.delivery_address}
                               </span>
+                              <span className="vouncher-text">
+                                <span className="row-header">Phone Number</span>{" "}
+                                - {orderDetail.data.order.delivery_address}
+                              </span>
                             </TableCell>
                           </TableRow>
 
@@ -123,18 +127,18 @@ function Vouncher() {
                         </TableHead>
 
                         <TableBody>
-                          {orderDetail.data.products.map((row, index) => (
+                          {orderDetail.data.order_products.map((row, index) => (
                             <TableRow key={row.id}>
                               <TableCell>{index + 1}</TableCell>
-                              <TableCell>{row.name}</TableCell>
+                              <TableCell>{row.product.name}</TableCell>
                               <TableCell align="right">
                                 {row.quantity}
                               </TableCell>
                               <TableCell align="right">
-                                {row.price} Ks
+                                {row.unit_price} Ks
                               </TableCell>
                               <TableCell align="right">
-                                {row.price * row.quantity} Ks
+                                {row.total_price} Ks
                               </TableCell>
                             </TableRow>
                           ))}
