@@ -27,6 +27,9 @@ import Loading from "../Loading";
 import { statusArray } from "../../Pages/order/OrderPage";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { useTranslation } from "react-i18next";
+import { AddBoxTwoTone } from "@mui/icons-material";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function OrderDetail() {
   const { t } = useTranslation();
@@ -69,6 +72,24 @@ function OrderDetail() {
     };
     dispatch(addDataOrder({ id, data }));
     setEdit(false);
+  };
+
+  const deleteOrder = async () => {
+    try {
+      await axios.delete(`api/orders/${id}`);
+      Swal.fire({
+        title: "Deleted!",
+        text: "Order has been deleted.",
+        icon: "success",
+      });
+      navigate("/order");
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: "Some thing went wrong.",
+        icon: "error",
+      });
+    }
   };
 
   useEffect(() => {
@@ -115,59 +136,66 @@ function OrderDetail() {
                 </button>
               </div>
             ) : (
-              <div style={{ display: "flex", gap: "10px" }}>
-                <Grid item xs={6} md={3}>
-                  <FormControl fullWidth minHeight={50}>
-                    <Select
-                      value={
-                        chgorder ? chgorder : orderDetail.data.order.status
-                      }
-                      onChange={handleOrder}
-                      displayEmpty
-                      inputProps={{ "aria-label": "Without label" }}
-                      IconComponent={ChangeCircleIcon}
-                    >
-                      {statusArray
-                        .filter((item) => item.value !== "All")
-                        .map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            <span
-                              className="filterButton"
-                              style={{ color: option.color }}
-                            >
-                              {option.label}
-                            </span>
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
+              <Box sx={{ display: { xs: "block", md: "flex" }, gap: "10px" }}>
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <Grid item xs={12} md={3}>
+                    <FormControl fullWidth minHeight={50}>
+                      <Select
+                        value={
+                          chgorder ? chgorder : orderDetail.data.order.status
+                        }
+                        onChange={handleOrder}
+                        displayEmpty
+                        inputProps={{ "aria-label": "Without label" }}
+                        IconComponent={ChangeCircleIcon}
+                      >
+                        {statusArray
+                          .filter((item) => item.value !== "All")
+                          .map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                              <span
+                                className="filterButton"
+                                style={{ color: option.color }}
+                              >
+                                {option.label}
+                              </span>
+                            </MenuItem>
+                          ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
 
-                <button
-                  className="edit-btn"
-                  style={{ height: "56px" }}
-                  onClick={() => {
-                    setEdit(true);
-                    setAddress(orderDetail.data.delivery_address);
-                    setPhone(orderDetail.data.contact_phone);
-                  }}
-                >
-                  {labelseven}
-                  <EditRoundedIcon
-                    sx={{
-                      background: "#4D3F3F",
-                      borderRadius: "50%",
-                      color: "white",
-                      padding: "5px",
-                      marginLeft: "20px",
+                  <button
+                    className="edit-btn"
+                    style={{ height: "56px" }}
+                    onClick={() => {
+                      setEdit(true);
+                      setAddress(orderDetail.data.delivery_address);
+                      setPhone(orderDetail.data.contact_phone);
                     }}
-                  />
-                </button>
+                  >
+                    {labelseven}
+                    <EditRoundedIcon
+                      sx={{
+                        background: "#4D3F3F",
+                        borderRadius: "50%",
+                        color: "white",
+                        padding: "5px",
+                        marginLeft: "20px",
+                      }}
+                    />
+                  </button>
+                </div>
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <Button variant="contained" onClick={deleteOrder}>
+                    Delete
+                  </Button>
 
-                <Button onClick={() => navigate(`/vouncher/${id}`)}>
-                  <span>Print</span>
-                </Button>
-              </div>
+                  <Button onClick={() => navigate(`/vouncher/${id}`)}>
+                    <span>Print</span>
+                  </Button>
+                </div>
+              </Box>
             )}
           </Box>
           <div>
