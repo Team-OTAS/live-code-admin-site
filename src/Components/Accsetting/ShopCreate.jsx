@@ -37,9 +37,9 @@ function ShopCreate() {
       const res = await axios.post("/api/shops", data);
       if (res) {
         setLoading(false);
-        console.log("Its Work");
+        // console.log("Its Work");
       }
-      console.log("response", res.data.data);
+      // console.log("response", res.data.data);
       phoneref.current.value = res.data.data.phone;
       dispatch(openModalB());
       dispatch(resdata(res.data.data));

@@ -60,7 +60,7 @@ function ShopReciept() {
           },
         }
       );
-      console.log(res);
+      // console.log(res);
       Swal.fire({
         icon: "success",
         title: "Success",
@@ -68,7 +68,7 @@ function ShopReciept() {
       });
       dispatch(getShopData(id));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -90,7 +90,7 @@ function ShopReciept() {
 
   useEffect(() => {
     if (shopData) {
-      console.log(shopData);
+      // console.log(shopData);
       setLogo(shopData.data.logo);
       setFooter(shopData.data.receipt_footer);
       setHeader(shopData.data.receipt_header);

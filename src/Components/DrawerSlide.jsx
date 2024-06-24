@@ -6,20 +6,20 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
-import "./../Styles/drawer.css";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import SettingsIcon from "@mui/icons-material/Settings";
-
+import FacebookIcon from "@mui/icons-material/Facebook";
 import { Box, Button } from "@mui/material";
 import { useSelector } from "react-redux";
-import LanguageSelecter from "./languageSelecter/LanguageSelecter";
+import "./../Styles/drawer.css";
 
 export default function DrawerSlide({ Title }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { shopData } = useSelector((state) => state.ShopData);
+  console.log(shopData);
   const navTitle = [t("navTitle"), t("navTitle2"), t("navTitle3")];
   const getexpire = (times) => {
     const date = new Date(times);
@@ -85,21 +85,6 @@ export default function DrawerSlide({ Title }) {
             <span className="btnText">{navTitle[0]}</span>
           </NavLink>
 
-          {/* <Button
-            sx={{ m: 2, border: "1px solid rgba(0,0,0,0.2)", width: "200px" }}
-            disabled
-          >
-            <ManageAccountsOutlinedIcon />
-            <span className="btnText">Contact List</span>
-          </Button>
-
-          <Button
-            sx={{ m: 2, border: "1px solid rgba(0,0,0,0.2)", width: "200px" }}
-            disabled
-          >
-            <span className="btnText">Live Comment Replies</span>
-          </Button> */}
-
           <NavLink
             to="/live"
             className={({ isActive }) =>
@@ -136,7 +121,6 @@ export default function DrawerSlide({ Title }) {
             src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
             className="avatars"
             onClick={() => {
-              // props.title = "setting";
               navigate("/setting");
             }}
           />
@@ -148,7 +132,33 @@ export default function DrawerSlide({ Title }) {
           )}
         </Stack>
         <Box>
-          <LanguageSelecter />
+          {shopData && (
+            <Button
+              variant="contained"
+              sx={{
+                width: "100%",
+                marginBottom: "10px",
+                borderRadius: "10px",
+                border: "1px solid #000000",
+                padding: "5px",
+                cursor: "pointer",
+                fontSize: "10px",
+                ":hover": {
+                  background: "#4d3f3f",
+                  color: "#ffffff",
+                },
+              }}
+              onClick={() => {
+                navigate("/fblogin");
+              }}
+              disabled={shopData.data.channels.length > 0 ? true : false}
+            >
+              <FacebookIcon sx={{ paddingRight: "5px" }} />
+              {shopData.data.channels.length > 0
+                ? shopData.data.channels[0].name
+                : "Connect Facebook"}
+            </Button>
+          )}
 
           <Button
             sx={{

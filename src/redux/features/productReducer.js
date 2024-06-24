@@ -29,7 +29,7 @@ export const createProduct = createAsyncThunk(
           error.response.data.message) ||
         error.message || // import axios from "./../../api/axios";
         error.toString();
-      console.log(message);
+
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -48,7 +48,7 @@ export const getProducts = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
-      console.log(message);
+
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -67,7 +67,7 @@ export const deleteProduct = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
-      console.log(message);
+
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -86,7 +86,7 @@ export const getProduct = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
-      console.log(message);
+
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -104,7 +104,7 @@ export const updateProduct = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
-      console.log(message);
+
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -167,7 +167,7 @@ const productReducer = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        console.log(action.payload);
+
         Swal.fire({
           position: "center",
           icon: "success",

@@ -14,7 +14,6 @@ const stepperFormSlice = createSlice({
     // },
     updateFormData: (state, action) => {
       state.formData = { ...state.formData, ...action.payload };
-      console.log("Form Data from Redux Store", state.formData);
     },
     resetForm: (state) => {
       // state.step = 0;
@@ -26,7 +25,6 @@ const stepperFormSlice = createSlice({
 export const updateShops = createAsyncThunk(
   "shopupdate/updateShops",
   (shopData) => {
-    console.log("Shop Data from Redux Store", shopData);
     //   return axios
     //     .post(`/products/${productData.id}?_method=PUT`, productData.formData, {
     //       headers: {
@@ -39,9 +37,7 @@ export const updateShops = createAsyncThunk(
 
 export const updateReplyMessage = createAsyncThunk(
   "shopupdate/updateReplyMessage",
-  (message, { getState }) => {
-    console.log("Shop Data from Redux Store", message);
-  }
+  (message, { getState }) => {}
 );
 
 const shopUpdateSlice = createSlice({

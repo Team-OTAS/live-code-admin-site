@@ -25,8 +25,6 @@ function Vouncher() {
   const id = localStorage.getItem("shopId");
   const { shopData } = useSelector((state) => state.ShopData);
   const { orderDetail } = useSelector((state) => state.OrderData);
-  console.log("order", orderDetail);
-  console.log(orderId.id);
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,

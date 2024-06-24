@@ -61,7 +61,6 @@ function CreateProdcut() {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response);
       Swal.fire({
         position: "center",
         icon: "success",

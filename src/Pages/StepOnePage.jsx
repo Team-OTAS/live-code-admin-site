@@ -40,7 +40,6 @@ export default function StepOnePage() {
   };
 
   const handleOnclick = () => {
-    console.log("Shop Update Data", shopData);
     dispatch(updateFormData({ ...shopData }));
     // dispatch(updateShops({ shopData }))
     setStep(2);

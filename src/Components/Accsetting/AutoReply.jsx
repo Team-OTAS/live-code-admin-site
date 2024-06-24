@@ -40,14 +40,14 @@ function AutoReply() {
         `api/shops/${id}/auto-reply?_method=PATCH`,
         data
       );
-      console.log(res);
+      // console.log(res);
       Swal.fire({
         icon: "success",
         title: "Success",
         text: "Auto Reply Message Saved",
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",

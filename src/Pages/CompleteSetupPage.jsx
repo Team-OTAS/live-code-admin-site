@@ -11,7 +11,6 @@ export default function CompleteSetupPage() {
   const [show] = useState(true);
   const navigate = useNavigate();
   const clickHandler = () => {
-    console.log("Finish Register");
     navigate("/");
   };
   return (

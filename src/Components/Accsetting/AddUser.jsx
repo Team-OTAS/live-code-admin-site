@@ -59,9 +59,6 @@ const AddUser = () => {
         }}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          // Handle form submission
-          console.log(values);
-          // setUser(values);
           await createUser(values);
           showMessage();
           setSubmitting(false);

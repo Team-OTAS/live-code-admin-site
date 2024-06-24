@@ -3,14 +3,13 @@ import { Box, Button, Grid } from "@mui/material";
 import axios from "./../../api/axios";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
-import Swal from "sweetalert2";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import { useTranslation } from "react-i18next";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import { useNavigate } from "react-router-dom";
-
+import LanguageSelecter from "./../languageSelecter/LanguageSelecter";
+import Swal from "sweetalert2";
 import "./../../Styles/detailbox.css";
 
 function ShopDetails() {
@@ -73,7 +72,7 @@ function ShopDetails() {
       getshop();
       setEdit(false);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -276,31 +275,7 @@ function ShopDetails() {
               md={4}
               sx={{ margin: { xs: "10px 0", md: "0" } }}
             >
-              <Button
-                variant="contained"
-                sx={{
-                  width: "100%",
-                  marginBottom: "10px",
-                  borderRadius: "10px",
-                  border: "1px solid #000000",
-                  padding: "5px",
-                  cursor: "pointer",
-                  fontSize: "10px",
-                  ":hover": {
-                    background: "#4d3f3f",
-                    color: "#ffffff",
-                  },
-                }}
-                onClick={() => {
-                  navigate("/fblogin");
-                }}
-                disabled={shop.channels.length > 0 ? true : false}
-              >
-                <FacebookIcon sx={{ paddingRight: "5px" }} />
-                {shop.channels.length > 0
-                  ? shop.channels[0].name
-                  : "Connect Facebook"}
-              </Button>
+              <LanguageSelecter />
             </Grid>
           </Grid>
         </div>

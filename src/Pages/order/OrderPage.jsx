@@ -39,9 +39,6 @@ export const statusArray = [
 
 function OrderPage() {
   const dispatch = useDispatch();
-
-  console.log(Cookies.get("date"));
-
   const [status, setStatus] = useState("All");
   const [chgorder, setChgorder] = useState("");
   const [date, setDate] = useState(Cookies.get("date") || new Date());

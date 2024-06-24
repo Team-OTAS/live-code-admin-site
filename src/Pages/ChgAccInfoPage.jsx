@@ -30,7 +30,6 @@ export default function ChgAccInfoPage() {
         password,
         password_confirmation,
       });
-      console.log("Change Acc Info Page", response);
       navigate("/setup");
     } catch (error) {
       if (error.response) {

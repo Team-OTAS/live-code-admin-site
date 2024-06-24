@@ -1,19 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   DataGrid,
   GridToolbarColumnsButton,
   GridToolbarContainer,
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
-import { Box, Button } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getProducts } from "../../redux/features/productReducer";
+import { Box } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import AlertBox from "../modalBox/AlertBox";
-
 import "./../../Styles/dashboard.css";
+import axios from "axios";
 
 function CustomToolbar() {
   return (
@@ -35,20 +30,31 @@ const columns = [
   { field: "description", headerName: "description", width: 300 },
   { field: "price", headerName: "Price", width: 100 },
   { field: "unit", headerName: "Unit", width: 100 },
-  { field: "quantity", headerName: "Quantity", width: 100 },
+  {
+    field: "quantity",
+    headerName: "Quantity",
+    width: 100,
+  },
 ];
 
 const LiveDataTable = () => {
-  const dispatch = useDispatch();
-  const { products, isLoading, isError, message } = useSelector(
-    (state) => state.stocks
-  );
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchProducts = async () => {
+    const res = await axios.get("api/products?limit=1000");
+    setProducts(res.data.data.data);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     setInterval(() => {
-      dispatch(getProducts());
+      fetchProducts();
     }, 10000);
-    console.log("working");
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
   }, []);
 
   return (
@@ -65,7 +71,6 @@ const LiveDataTable = () => {
           loadingOverlay: LinearProgress,
         }}
       />
-      {!isLoading && isError ? <AlertBox message={message} /> : null}
     </Box>
   );
 };

@@ -2,24 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import PasswordIcon from "@mui/icons-material/Password";
-import axios from "./../../api/axios";
-import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import axios from "./../../api/axios";
+import Swal from "sweetalert2";
 import "./../../Styles/detailbox.css";
 
 function UserAccDetail() {
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
-  const [user_name, setuser_name] = useState(null);
+  const [user_name, setuser_name] = useState("");
   const [password, setPassword] = useState("");
   const getUser = async () => {
     try {
       const response = await axios.get("/api/users/" + id);
-      console.log(response.data.data.user_name);
+      // console.log(response.data.data.user_name);
       setuser_name(response.data.data.user_name);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -32,6 +31,7 @@ function UserAccDetail() {
       });
 
       Swal.fire("Success", "Updated Successfully", "success");
+      navigate("/setting");
     } catch (error) {
       // console.log(error.response.data.message);
       if (error.response) {
@@ -83,14 +83,12 @@ function UserAccDetail() {
             <div>
               <label>Name</label>
               <br />
-              {user_name && (
-                <input
-                  type="text"
-                  placeholder="Enter Your Name"
-                  value={user_name === null ? "Pls Wait" : user_name}
-                  onChange={(e) => setuser_name(e.target.value)}
-                />
-              )}
+              <input
+                type="text"
+                placeholder="Enter Your Name"
+                value={user_name}
+                onChange={(e) => setuser_name(e.target.value)}
+              />
             </div>
           </div>
         </Grid>

@@ -37,11 +37,9 @@ const AccUserTable = () => {
     useDeleteUserMutation();
 
   const deleteAccUser = (id) => {
-    console.log(id);
     deleteUser(id);
     fetchUser.refetch();
   };
-  // console.log(data);
 
   useEffect(() => {
     fetchUser.refetch();

@@ -39,7 +39,7 @@ export default function LoginPage() {
         const shopId = response.data.data.shop_id;
         const id = response.data.data.id;
         localStorage.setItem("id", id);
-        console.log(response);
+
         setAuthToken(authToken);
         localStorage.setItem("authToken", authToken);
         localStorage.setItem("shopId", shopId);

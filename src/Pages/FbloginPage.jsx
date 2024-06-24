@@ -18,8 +18,6 @@ export default function FBloginPage() {
       const res = await axios.get(
         "auth/facebook/redirect?redirect_url=https://admin.livecodemm.com/"
       );
-
-      // console.log(res.data.data.facebook_redirect_url);
       window.location.href = res.data.data.facebook_redirect_url;
     } catch (error) {
       if (error.response) {
@@ -87,21 +85,6 @@ export default function FBloginPage() {
             </Box>
           </Grid>
           <Grid item xs={12}>
-            {/* <FacebookLogin
-              appId="381220697874727"
-              fields="name,email,picture"
-              scope="public_profile,pages_show_list,pages_read_engagement"
-              onSuccess={(response) => {
-                console.log("Login Successful!", response);
-              }}
-              onFail={(error) => {
-                console.log("Login Failed!", error);
-              }}
-              onProfileSuccess={(response) => {
-                console.log("Get Profile Success!", response);
-                localStorage.setItem("fb_data", response.data);
-              }}
-            /> */}
             <Button variant="contained" onClick={handleClick}>
               <span>Login Facebook Account</span>
             </Button>

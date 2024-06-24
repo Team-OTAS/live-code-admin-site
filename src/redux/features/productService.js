@@ -17,7 +17,7 @@ const createProduct = async (formData) => {
 
 // Get all products
 const getProducts = async () => {
-  const response = await axios.get("/api/products");
+  const response = await axios.get("/api/products?limit=1000");
   // console.log(response.data.data.data);
   return response.data.data.data;
 };

@@ -26,22 +26,15 @@ const columns = [
 ];
 
 const OrderDetailTable = ({ items }) => {
-  console.log(items);
-
   return (
     <>
       <Box sx={{ height: { xs: 300, md: 250 }, width: "100%" }}>
         <DataGrid
           rows={items.map((item, index) => ({ no: index + 1, ...item })) || []}
           columns={columns}
-          // pageSize={14}
           checkboxSelection
-          // loading={isLoading}
           disableRowSelectionOnClick
-          onRowSelectionModelChange={(dataId) => {
-            // sendData(dataId);
-            // console.log("table", dataId);
-          }}
+          onRowSelectionModelChange={(dataId) => {}}
         />
       </Box>
     </>

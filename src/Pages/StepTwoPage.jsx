@@ -27,7 +27,6 @@ export default function StepTwoPage() {
   };
 
   const handleOnclick = () => {
-    console.log("Setup Reply Message", auto_reply);
     dispatch(updateFormData({ auto_reply }));
     // dispatch(updateReplyMessage({message}))
     setStep(3);

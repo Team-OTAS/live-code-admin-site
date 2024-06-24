@@ -89,7 +89,7 @@ const orderDataSlice = createSlice({
     builder.addCase(updateStatusOrder.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
-      console.log(action);
+
       Swal.fire({
         icon: "error",
         title: "Status Change Failed, Please Try Again",
@@ -114,7 +114,7 @@ const orderDataSlice = createSlice({
     builder.addCase(addDataOrder.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
-      console.log(action);
+
       Swal.fire({
         icon: "error",
         title: "Status Change Failed, Please Try Again",

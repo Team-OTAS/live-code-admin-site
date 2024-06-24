@@ -36,7 +36,7 @@ export default function StepThreePage() {
   const { setStep } = useContext(MultiStepContext);
 
   const shopData = useSelector((state) => state.Shop.formData);
-  console.log("formThree", shopData);
+
   const id = localStorage.getItem("shopId");
   const [file, setFile] = useState(null);
   const [receipt_header, setReceiptHeader] = useState("");
@@ -44,7 +44,6 @@ export default function StepThreePage() {
 
   function hundleFileChange(e) {
     setFile(e.target.files[0]);
-    console.log(e.target.files[0]);
   }
 
   const navigate = useNavigate();
@@ -55,7 +54,6 @@ export default function StepThreePage() {
       receipt_header: receipt_header,
       receipt_footer: receipt_footer,
     };
-    console.log("shop", data);
 
     try {
       await axios.post(`/api/shops/${id}?_method=PUT`, data, {
@@ -63,10 +61,9 @@ export default function StepThreePage() {
           "Content-Type": "multipart/form-data",
         },
       });
-      // console.log(res);
+
       navigate("/completesetuppage");
     } catch (error) {
-      // console.log(error);
       if (error.response) {
         Swal.fire({
           title: "Error!",

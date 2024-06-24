@@ -29,13 +29,9 @@ function ProductDetail() {
     (state) => state.stocks
   );
 
-  console.log(product);
-
   useEffect(() => {
     dispatch(getProduct(id));
   }, [isError, message, dispatch]);
-
-  console.log(product || null);
   return (
     <Box sx={{ marginTop: "20px", marginLeft: "20px" }}>
       {isLoading && <Loading />}
