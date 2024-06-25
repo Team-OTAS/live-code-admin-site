@@ -32,7 +32,7 @@ export default function Dashboard() {
 
   function deleteHandleClick() {
     const data = {
-      productIds: DeleteData,
+      product_ids: DeleteData,
     };
     dispatch(deleteProduct(data));
     if (deletes.isError) {
