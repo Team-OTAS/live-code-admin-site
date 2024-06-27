@@ -3,10 +3,9 @@ import React, { useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { getShopData } from "./../../redux/features/shopDataSlice";
 import { useDispatch, useSelector } from "react-redux";
-import dayjs from "dayjs";
 import { getOrderDetail } from "../../redux/features/orderApiSlice";
 import { useParams } from "react-router-dom";
-
+import MMText from "react-mm-text";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -16,6 +15,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import "./../../Styles/vouncher.css";
+import dayjs from "dayjs";
 
 function Vouncher() {
   const orderId = useParams();
@@ -25,6 +25,7 @@ function Vouncher() {
   const id = localStorage.getItem("shopId");
   const { shopData } = useSelector((state) => state.ShopData);
   const { orderDetail } = useSelector((state) => state.OrderData);
+  // console.log(orderDetail);
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -81,8 +82,22 @@ function Vouncher() {
                   </div>
                 </Grid>
                 <Grid item xs={12}>
-                  <p className="row-header">{shopData.data.receipt_header}</p>
-                  <span className="vouncher-text">{shopData.data.address}</span>
+                  <p className="row-header">
+                    <MMText
+                      text={shopData.data.receipt_header}
+                      showFont={"unicode"}
+                      conveter={"rabbit"}
+                      detector={"knayi"}
+                    />
+                  </p>
+                  <span className="vouncher-text">
+                    <MMText
+                      text={shopData.data.address}
+                      showFont={"unicode"}
+                      conveter={"rabbit"}
+                      detector={"knayi"}
+                    />
+                  </span>
                   <br />
                   <span className="vouncher-text">{shopData.data.phone}</span>
                 </Grid>
@@ -100,11 +115,16 @@ function Vouncher() {
                               </p>
                               <span className="vouncher-text">
                                 <span className="row-header">Address</span> -{" "}
-                                {orderDetail.data.order.delivery_address}
+                                <MMText
+                                  text={orderDetail.data.order.delivery_address}
+                                  showFont={"unicode"}
+                                  conveter={"rabbit"}
+                                  detector={"knayi"}
+                                />
                               </span>
                               <span className="vouncher-text">
                                 <span className="row-header">Phone Number</span>{" "}
-                                - {orderDetail.data.order.delivery_address}
+                                - {orderDetail.data.order.contact_phone}
                               </span>
                             </TableCell>
                           </TableRow>
@@ -128,7 +148,14 @@ function Vouncher() {
                           {orderDetail.data.order_products.map((row, index) => (
                             <TableRow key={row.id}>
                               <TableCell>{index + 1}</TableCell>
-                              <TableCell>{row.product.name}</TableCell>
+                              <TableCell>
+                                <MMText
+                                  text={row.product.name}
+                                  showFont={"unicode"}
+                                  conveter={"rabbit"}
+                                  detector={"knayi"}
+                                />
+                              </TableCell>
                               <TableCell align="right">
                                 {row.quantity}
                               </TableCell>
@@ -161,7 +188,14 @@ function Vouncher() {
                 {/* Footer */}
 
                 <Grid item xs={12} sx={{ marginTop: "10px" }}>
-                  <p className="row-header">{shopData.data.receipt_footer}</p>
+                  <p className="row-header">
+                    <MMText
+                      text={shopData.data.receipt_footer}
+                      showFont={"unicode"}
+                      conveter={"rabbit"}
+                      detector={"knayi"}
+                    />
+                  </p>
                 </Grid>
               </Grid>
             </Box>

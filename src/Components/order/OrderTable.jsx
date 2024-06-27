@@ -173,7 +173,6 @@ const columns = [
 ];
 
 const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
-  // console.log(chgorder);
   const { t } = useTranslation();
   const tablemsg = t("ordertable");
   const [products, setProducts] = useState([]);
@@ -203,7 +202,6 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
   }, [chgorder]);
 
   useEffect(() => {
-    // console.log(status);
     if (orderData) {
       setProducts(
         orderData.filter((item) => {
@@ -215,8 +213,6 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
         })
       );
     }
-
-    // console.log(products);
   }, [status, orderData, date]);
 
   return (
@@ -249,6 +245,7 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
           },
         }}
         onRowSelectionModelChange={(dataId) => {
+          console.log(dataId);
           sendData(dataId);
         }}
       />
