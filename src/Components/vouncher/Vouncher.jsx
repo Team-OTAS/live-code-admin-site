@@ -24,6 +24,7 @@ function Vouncher() {
   const id = localStorage.getItem("shopId");
   const { shopData } = useSelector((state) => state.ShopData);
   const { orderDetail } = useSelector((state) => state.OrderData);
+  console.log(orderDetail);
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -137,7 +138,7 @@ function Vouncher() {
 
                           <TableRow>
                             <TableCell className="row-header">No</TableCell>
-                            <TableCell className="row-header">Desc</TableCell>
+                            <TableCell className="row-header">Name</TableCell>
                             <TableCell className="row-header" align="right">
                               Qty.
                             </TableCell>
@@ -156,7 +157,7 @@ function Vouncher() {
                               <TableCell>{index + 1}</TableCell>
                               <TableCell>
                                 <MMText
-                                  text={orderDetail.data.order.contact_phone}
+                                  text={row.product.name}
                                   showFont={"unicode"}
                                   conveter={"rabbit"}
                                   detector={"knayi"}
