@@ -16,6 +16,9 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import rabbit from "rabbit-node";
+import knayi from "knayi-myscript";
+
 import "./../../Styles/addstock.css";
 
 const validationSchema = Yup.object().shape({
@@ -50,13 +53,16 @@ function CreateProdcut() {
   const labelSeven = t("stkformlbelseven");
   const addbtn = t("addStockBtn");
   const navigate = useNavigate();
-
   const [file, setFile] = useState("");
   const shopId = localStorage.getItem("shopId");
 
+  const convertToUnicode = (text) => {
+    return knayi.fontConvert(text, "unicode");
+  };
+
   const createProduct = async (values) => {
     try {
-      const response = await axios.post("/api/products", values, {
+      await axios.post("/api/products", values, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -115,7 +121,12 @@ function CreateProdcut() {
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting }) => {
-            // console.log(values);
+            const convertedValues = {
+              ...values,
+              name: convertToUnicode(values.name),
+              description: convertToUnicode(values.description),
+            };
+            console.log(convertedValues);
             setSubmitting(false);
             createProduct(values);
           }}

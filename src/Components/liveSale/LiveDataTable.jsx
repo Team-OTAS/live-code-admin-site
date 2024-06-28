@@ -7,8 +7,9 @@ import {
 } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
-import "./../../Styles/dashboard.css";
 import axios from "axios";
+
+import "./../../Styles/dashboard.css";
 
 function CustomToolbar() {
   return (
@@ -28,13 +29,20 @@ const columns = [
   },
   { field: "name", headerName: "Name", width: 150 },
   { field: "description", headerName: "description", width: 300 },
-  { field: "price", headerName: "Price", width: 100 },
-  { field: "unit", headerName: "Unit", width: 100 },
+  { field: "sale_code", headerName: "Live Sale Code", width: 150 },
   {
     field: "quantity",
     headerName: "Quantity",
     width: 100,
+    renderCell: (cellValues) => {
+      return (
+        <span style={{ fontWeight: "bold", color: "blue" }}>
+          {cellValues.value}
+        </span>
+      );
+    },
   },
+  { field: "price", headerName: "Price", width: 100 },
 ];
 
 const LiveDataTable = () => {
@@ -43,6 +51,7 @@ const LiveDataTable = () => {
 
   const fetchProducts = async () => {
     const res = await axios.get("api/products?limit=1000");
+    // console.log(res.data.data.data);
     setProducts(res.data.data.data);
     setIsLoading(false);
   };
@@ -50,7 +59,7 @@ const LiveDataTable = () => {
   useEffect(() => {
     setInterval(() => {
       fetchProducts();
-    }, 10000);
+    }, 5000);
   }, []);
 
   useEffect(() => {

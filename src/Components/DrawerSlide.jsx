@@ -19,7 +19,6 @@ export default function DrawerSlide({ Title }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { shopData } = useSelector((state) => state.ShopData);
-  console.log(shopData);
   const navTitle = [t("navTitle"), t("navTitle2"), t("navTitle3")];
   const getexpire = (times) => {
     const date = new Date(times);
