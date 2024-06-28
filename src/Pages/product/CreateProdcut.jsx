@@ -126,7 +126,6 @@ function CreateProdcut() {
               name: convertToUnicode(values.name),
               description: convertToUnicode(values.description),
             };
-            console.log(convertedValues);
             setSubmitting(false);
             createProduct(values);
           }}
