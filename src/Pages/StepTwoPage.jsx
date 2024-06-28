@@ -18,7 +18,6 @@ export default function StepTwoPage() {
   const stepTwoBtn2 = t("stepTwoBtn2");
 
   const data = useSelector((state) => state.Shop.formData);
-  console.log(data);
   const { setStep } = useContext(MultiStepContext);
 
   const dispatch = useDispatch();
