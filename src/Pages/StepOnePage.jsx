@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import React, { useContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useContext, useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { Box, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -8,7 +8,6 @@ import StorefrontIcon from "@mui/icons-material/Storefront";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-// import { updateShops } from "../redux/features/shopUpdateSlice";
 import { updateFormData } from "../redux/features/shopUpdateSlice";
 import { useTranslation } from "react-i18next";
 
@@ -22,6 +21,7 @@ export default function StepOnePage() {
   const shopFormLabelThree = t("shopFormLabelThree");
   const shopFormLabelFour = t("shopFormLabelFour");
 
+  const data = useSelector((state) => state.Shop.formData);
   const { setStep } = useContext(MultiStepContext);
   const dispatch = useDispatch();
   const [shopData, setShopData] = useState({
@@ -40,10 +40,28 @@ export default function StepOnePage() {
   };
 
   const handleOnclick = () => {
+    if (
+      shopData.name === "" ||
+      shopData.email === "" ||
+      shopData.phone === "" ||
+      shopData.address === ""
+    ) {
+      return;
+    }
     dispatch(updateFormData({ ...shopData }));
-    // dispatch(updateShops({ shopData }))
     setStep(2);
   };
+
+  useEffect(() => {
+    if (data.name) {
+      setShopData({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        address: data.address,
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -67,10 +85,6 @@ export default function StepOnePage() {
           {/* for desktop users */}
           <Box component="div" sx={{ display: { xs: "none", sm: "block" } }}>
             <p className="textbody">
-              {/* Set up your shop by filling some information
-              <br /> in order to create a shop in Live Code and create endless
-              <br /> opportunities.
-              <br /> */}
               <span style={{ fontSize: "12px" }}>({stepOneDes})</span>
             </p>
           </Box>
@@ -159,12 +173,7 @@ export default function StepOnePage() {
         {/* ---------Form End  --------------------------------------------------------*/}
         {/* ---------Button Start  --------------------------------------------------------*/}
         <Grid item xs={12} style={{ textAlign: "center" }}>
-          <Button
-            variant="contained"
-            color="primary"
-            // onClick={() => setStep("2")}
-            onClick={handleOnclick}
-          >
+          <Button variant="contained" color="primary" onClick={handleOnclick}>
             {stepOneBtn}
           </Button>
         </Grid>

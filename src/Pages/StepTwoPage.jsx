@@ -1,14 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { Box, Button } from "@mui/material";
-import "./../Styles/auth.css";
 import { MultiStepContext } from "../StepContext";
 import TextField from "@mui/material/TextField";
 import SendIcon from "@mui/icons-material/Send";
-import { useDispatch } from "react-redux";
-// import { updateReplyMessage } from "../redux/features/shopUpdateSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { updateFormData } from "../redux/features/shopUpdateSlice";
 import { useTranslation } from "react-i18next";
+
+import "./../Styles/auth.css";
 
 export default function StepTwoPage() {
   const { t } = useTranslation();
@@ -17,6 +17,8 @@ export default function StepTwoPage() {
   const stepTwoBtn = t("stepTwoBtn");
   const stepTwoBtn2 = t("stepTwoBtn2");
 
+  const data = useSelector((state) => state.Shop.formData);
+  console.log(data);
   const { setStep } = useContext(MultiStepContext);
 
   const dispatch = useDispatch();
@@ -28,10 +30,15 @@ export default function StepTwoPage() {
 
   const handleOnclick = () => {
     dispatch(updateFormData({ auto_reply }));
-    // dispatch(updateReplyMessage({message}))
     setStep(3);
   };
-  // console.log(message);
+
+  useEffect(() => {
+    if (data.auto_reply) {
+      setMessage(data.auto_reply);
+    }
+  }, []);
+
   return (
     <>
       <Box>

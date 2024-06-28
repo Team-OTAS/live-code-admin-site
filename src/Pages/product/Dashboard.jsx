@@ -97,7 +97,6 @@ export default function Dashboard() {
                   }
                 })
               }
-              // onClick={deleteHandleClick}
             >
               <DeleteIcon />
               <span className="btnText">{rembtn}</span>
@@ -148,7 +147,7 @@ export default function Dashboard() {
           </Grid>
         </Box>
         {/* Stock CRUD Route */}
-        <Box>
+        <Box sx={{ mt: 1 }}>
           <Routes>
             <Route path="/addstock" element={<CreateProdcut />} />
             <Route

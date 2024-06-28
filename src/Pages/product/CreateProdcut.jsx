@@ -127,7 +127,7 @@ function CreateProdcut() {
               description: convertToUnicode(values.description),
             };
             setSubmitting(false);
-            createProduct(values);
+            createProduct(convertedValues);
           }}
         >
           {(
