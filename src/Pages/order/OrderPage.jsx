@@ -141,7 +141,7 @@ function OrderPage() {
         </Grid>
 
         <Grid item xs={6} md={3}>
-          <Button variant="contained">
+          <Button variant="contained" onClick={() => generateMultiPagePDF()}>
             <span>Print Order</span>
           </Button>
         </Grid>

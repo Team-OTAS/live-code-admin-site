@@ -1,51 +1,215 @@
-import React from "react";
-import jsPDF from "jspdf";
+import React, { useState, useEffect } from "react";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { Grid } from "@mui/material";
+import { getOrderDetail } from "../../../redux/features/orderApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getShopData } from "../../../redux/features/shopDataSlice";
+import dayjs from "dayjs";
+import axios from "./../../../api/axios";
+import Vouncher from "../Vouncher";
 
 const MultiVouncher = () => {
-  const generateMultiPagePDF = () => {
-    const doc = new jsPDF();
-    const vouchers = [
-      {
-        id: 1,
-        title: "Voucher 1",
-        text: "This is some example content for voucher 1.",
-      },
-      {
-        id: 2,
-        title: "Voucher 2",
-        text: "This is some example content for voucher 2.",
-      },
-      {
-        id: 3,
-        title: "Voucher 3",
-        text: "This is some example content for voucher 3.",
-      },
-      // Add more vouchers as needed
-    ];
+  const orderIds = [66, 67, 68];
+  const [vouchers, setVouchers] = useState([]);
 
-    vouchers.forEach((voucher, index) => {
-      if (index !== 0) {
-        doc.addPage();
+  // useEffect(() => {
+  //   // Fetch voucher data from API
+  //   const fetchVouchers = async () => {
+  //     try {
+  //       const response = await axios.get("https://api.example.com/vouchers");
+  //       setVouchers(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching vouchers:", error);
+  //     }
+  //   };
+
+  //   fetchVouchers();
+  // }, []);
+  const dispatch = useDispatch();
+  const id = localStorage.getItem("shopId");
+  const { shopData } = useSelector((state) => state.ShopData);
+  const { orderDetail } = useSelector((state) => state.OrderData);
+  const { loading, orderData } = useSelector((state) => state.OrderData);
+
+  useEffect(() => {
+    dispatch(getOrderDetail(8));
+  }, []);
+
+  useEffect(() => {
+    dispatch(getShopData(id));
+  }, []);
+
+  useEffect(() => {
+    const getVoucherData = async (orderId) => {
+      try {
+        const res = await axios.get("/api/orders/" + orderId);
+        console.log("voucher", res.data);
+        setVouchers((prevVouchers) => [...prevVouchers, res.data]);
+      } catch (error) {
+        console.log(error);
       }
-      doc.text(voucher.title, 10, 10);
-      doc.text(voucher.text, 10, 20);
+    };
+
+    orderIds.map((orderId) => {
+      getVoucherData(orderId);
     });
+  }, []);
 
-    // Save the document
-    doc.save("vouchers.pdf");
+  console.log(vouchers);
 
-    // Auto print the document (optional)
-    doc.autoPrint();
-    const pdfOutput = doc.output("bloburl");
+  const generatePdf = async () => {
+    const pdf = new jsPDF();
+    const elements = document.querySelectorAll(".pdf-content");
+
+    for (let i = 0; i < elements.length; i++) {
+      const canvas = await html2canvas(elements[i]);
+      const imgData = canvas.toDataURL("image/png");
+
+      if (i > 0) {
+        pdf.addPage();
+      }
+
+      pdf.addImage(imgData, "PNG", 10, 10);
+
+      // Adding image to each page (assuming order has an imageUrl property)
+
+      pdf.addImage(
+        process.env.REACT_APP_API_BASE_URL + shopData.data.logo,
+        "JPEG",
+        10,
+        100,
+        100,
+        100
+      ); // Adjust coordinates and size as needed
+    }
+
+    // pdf.save("vouchers.pdf");
+    pdf.autoPrint();
+    const pdfOutput = pdf.output("bloburl");
     window.open(pdfOutput);
   };
 
   return (
-    <div>
-      <button onClick={generateMultiPagePDF}>
-        Generate and Print Multi-Page PDF
-      </button>
-    </div>
+    <>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: 20,
+        }}
+      >
+        {vouchers.map((voucher, index) => (
+          <div
+            key={index}
+            className="pdf-content"
+            style={{
+              padding: 10,
+              backgroundColor: "#f5f5f5",
+              marginBottom: 20,
+              border: "1px solid #ddd",
+              width: "50vw",
+            }}
+          >
+            <h1>Voucher # {voucher.data.order.id}</h1>
+            {orderDetail && (
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <img
+                    src={`${process.env.REACT_APP_API_BASE_URL}${shopData.data.logo} `}
+                    alt="logo"
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                    }}
+                  />
+                  <p className="row-header">{shopData.data.receipt_header}</p>
+                  <span className="vouncher-text">{shopData.data.address}</span>
+                  <br />
+                  <span className="vouncher-text">{shopData.data.phone}</span>
+                </Grid>
+                <Grid item xs={12}>
+                  <TableContainer>
+                    <Table aria-label="spanning table">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell align="left" colSpan={12}>
+                            <p className="vouncher-text">
+                              <span className="row-header">Name</span> -{" "}
+                              {voucher.data.order.contact_name}
+                            </p>
+                            <span className="vouncher-text">
+                              <span className="row-header">Address</span> -{" "}
+                              {voucher.data.order.delivery_address}
+                            </span>
+                            <br />
+                            <span className="vouncher-text">
+                              <span className="row-header">
+                                Phone Number -{" "}
+                              </span>
+                              {voucher.data.order.contact_phone}
+                            </span>
+                          </TableCell>
+                        </TableRow>
+
+                        <TableRow>
+                          <TableCell className="row-header">No</TableCell>
+                          <TableCell className="row-header">Name</TableCell>
+                          <TableCell className="row-header" align="right">
+                            Qty.
+                          </TableCell>
+                          <TableCell className="row-header" align="right">
+                            Unit
+                          </TableCell>
+                          <TableCell className="row-header" align="right">
+                            Amount
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+
+                      <TableBody>
+                        {voucher.data.order_products.map((row, index) => (
+                          <TableRow key={row.id}>
+                            <TableCell>{index + 1}</TableCell>
+                            <TableCell>{row.product.name}</TableCell>
+                            <TableCell align="right">{row.quantity}</TableCell>
+                            <TableCell align="right">
+                              {row.unit_price} Ks
+                            </TableCell>
+                            <TableCell align="right">
+                              {row.total_price} Ks
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                        <TableRow>
+                          <TableCell
+                            className="row-header"
+                            align="right"
+                            colSpan={4}
+                          >
+                            Total
+                          </TableCell>
+                          <TableCell align="right">
+                            {voucher.data.order.price} Ks
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Grid>
+              </Grid>
+            )}
+          </div>
+        ))}
+      </div>
+      <button onClick={generatePdf}>Generate PDF</button>
+    </>
   );
 };
 
