@@ -59,8 +59,8 @@ export const generateMultiPagePDF = (voucherIds) => {
 
       // Add logo
       doc.addImage(
-        `https://api.livecodemm.com/${shopData.data.logo}`,
-        "PNG",
+        "https://i.imgur.com/Yyi3HuJ.jpeg",
+        "JPEG",
         10, // x-coordinate
         30, // y-coordinate
         30, // width
