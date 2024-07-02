@@ -9,7 +9,6 @@ import OrderPage from "./order/OrderPage";
 import Accsetting from "../Components/Accsetting/Accsetting";
 import AddUser from "../Components/Accsetting/AddUser";
 import Vouncher from "./../Components/vouncher/Vouncher";
-import MultiVouncher from "./../Components/vouncher/miltiVoucher/MultiVouncher";
 import OrderDetail from "../Components/order/OrderDetail";
 import UserAccDetail from "../Components/Accsetting/UserAccDetail";
 
@@ -32,7 +31,6 @@ function HomePage() {
             <Route path="/setting" element={<Accsetting />} />
             <Route path="/adduser" element={<AddUser />} />
             <Route path="/vouncher/:id" element={<Vouncher />} />
-            <Route path="/vouncher" element={<MultiVouncher />} />
             <Route path="/vieworder/:id" element={<OrderDetail />} />
             <Route path="/accdetail/:id" element={<UserAccDetail />} />
           </Routes>
