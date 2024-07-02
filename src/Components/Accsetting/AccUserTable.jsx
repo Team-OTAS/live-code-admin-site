@@ -33,8 +33,7 @@ const AccUserTable = () => {
   const navigate = useNavigate();
   const { data, isError, isLoading, message } = useGetAllUserQuery();
   const fetchUser = useGetAllUserQuery();
-  const [deleteUser, { isLoading: loading, isError: error }] =
-    useDeleteUserMutation();
+  const [deleteUser] = useDeleteUserMutation();
 
   const deleteAccUser = (id) => {
     deleteUser(id);

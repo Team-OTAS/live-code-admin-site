@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import React, { useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -11,6 +11,7 @@ import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import Cookies from "js-cookie";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
+import { generateMultiPagePDF } from "../../Components/vouncher/vouncher";
 
 import "./../../Styles/order.css";
 
@@ -85,7 +86,7 @@ function OrderPage() {
         className="filterContainer"
         sx={{ marginBottom: "20px" }}
       >
-        <Grid item xs={12} md={3}>
+        <Grid item xs={6} md={3}>
           <DatePicker
             fullWidth
             defaultValue={dayjs(date)}
@@ -137,6 +138,15 @@ function OrderPage() {
                 ))}
             </Select>
           </FormControl>
+        </Grid>
+
+        <Grid item xs={6} md={3}>
+          <Button
+            variant="contained"
+            onClick={() => generateMultiPagePDF(order_ids)}
+          >
+            <span>Print Order</span>
+          </Button>
         </Grid>
       </Grid>
 

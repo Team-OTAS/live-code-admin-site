@@ -184,15 +184,18 @@ function OrderDetail() {
                     />
                   </button>
                 </div>
-                <div style={{ display: "flex", gap: "10px" }}>
-                  <Button variant="contained" onClick={deleteOrder}>
-                    Delete
-                  </Button>
+                <Box
+                  sx={{ display: "flex", marginTop: { xs: "10px", md: "0px" } }}
+                >
+                  <Button onClick={deleteOrder}>Delete</Button>
 
-                  <Button onClick={() => navigate(`/vouncher/${id}`)}>
+                  <Button
+                    variant="contained"
+                    onClick={() => navigate(`/vouncher/${id}`)}
+                  >
                     <span>Print</span>
                   </Button>
-                </div>
+                </Box>
               </Box>
             )}
           </Box>

@@ -24,7 +24,6 @@ function Vouncher() {
   const id = localStorage.getItem("shopId");
   const { shopData } = useSelector((state) => state.ShopData);
   const { orderDetail } = useSelector((state) => state.OrderData);
-  console.log(orderDetail);
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -128,10 +127,8 @@ function Vouncher() {
                               </span>
                               <br />
                               <span className="vouncher-text">
-                                <span className="row-header">
-                                  Phone Number -{" "}
-                                </span>
-                                {orderDetail.data.order.contact_phone}
+                                <span className="row-header">Phone Number</span>{" "}
+                                - {orderDetail.data.order.delivery_address}
                               </span>
                             </TableCell>
                           </TableRow>
