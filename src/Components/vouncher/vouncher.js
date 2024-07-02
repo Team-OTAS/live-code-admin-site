@@ -109,13 +109,13 @@ export const generateMultiPagePDF = (voucherIds) => {
       );
     });
 
-    doc.autoPrint();
-    const pdfOutput = doc.output("bloburl");
-    window.open(pdfOutput);
-  }, 2000);
+    // Save the document
+    doc.save("vouchers.pdf");
 
-  // Save the document
-  // doc.save("vouchers.pdf");
+    // doc.autoPrint();
+    // const pdfOutput = doc.output("bloburl");
+    // window.open(pdfOutput);
+  }, 2000);
 
   // Auto print the document (optional)
 };
