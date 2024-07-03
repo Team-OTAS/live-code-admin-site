@@ -2,6 +2,7 @@ import jsPDF from "jspdf";
 import axios from "./../../api/axios";
 import PyidaungSu from "./../../assets/fonts/pyidaungsu-1.3.ttf";
 import dayjs from "dayjs";
+import autoTable from "jspdf-autotable";
 
 export const generateMultiPagePDF = (voucherIds) => {
   console.log(voucherIds);
@@ -81,26 +82,29 @@ export const generateMultiPagePDF = (voucherIds) => {
       // Add table headers
       doc.setFontSize(10);
       const headers = ["No", "Name", "Qty.", "Unit", "Amount"];
-      headers.forEach((header, i) => {
-        doc.text(header, 10 + i * 40, 140);
-      });
+      const data = voucher.data.order_products.map((row, rowIndex) => [
+        rowIndex + 1,
+        row.product.name,
+        row.quantity,
+        `${row.unit_price} Ks`,
+        `${row.total_price} Ks`,
+      ]);
 
-      // Add table rows
-      voucher.data.order_products.forEach((row, rowIndex) => {
-        doc.text(`${rowIndex + 1}`, 10, 150 + rowIndex * 10);
-        doc.text(`${row.product.name}`, 50, 150 + rowIndex * 10);
-        doc.text(`${row.quantity}`, 90, 150 + rowIndex * 10);
-        doc.text(`${row.unit_price} Ks`, 130, 150 + rowIndex * 10);
-        doc.text(`${row.total_price} Ks`, 170, 150 + rowIndex * 10);
+      autoTable(doc, {
+        head: [headers],
+        body: data,
+        startY: 140,
+        theme: "striped", // Optional: 'striped', 'grid', or 'plain'
+        styles: { font: "Pyidaungsu" }, // Apply font
+        headStyles: { fillColor: [22, 160, 133] }, // Header background color
+        margin: { top: 10 },
       });
 
       // Add total amount
+      // Add total amount below the table
+      // const finalY = doc.previousAutoTable.finalY; // The y position where the last table ended
       doc.setFontSize(12);
-      doc.text(
-        `Total: ${voucher.data.order.price} Ks`,
-        160,
-        160 + voucher.data.order_products.length * 10
-      );
+      doc.text(`Total: ${voucher.data.order.price} Ks`, 180, 180 + 200 + 10);
 
       doc.text(
         shopData.data.receipt_footer,
@@ -115,7 +119,7 @@ export const generateMultiPagePDF = (voucherIds) => {
     const pdfOutput = doc.output("bloburl");
     window.open(pdfOutput);
 
-    doc.save("vouchers.pdf");
+    // doc.save("vouchers.pdf");
   }, 2000);
 
   // Auto print the document (optional)
