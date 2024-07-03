@@ -128,7 +128,7 @@ function Vouncher() {
                               <br />
                               <span className="vouncher-text">
                                 <span className="row-header">Phone Number</span>{" "}
-                                - {orderDetail.data.order.delivery_address}
+                                - {orderDetail.data.order.contact_phone}
                               </span>
                             </TableCell>
                           </TableRow>
