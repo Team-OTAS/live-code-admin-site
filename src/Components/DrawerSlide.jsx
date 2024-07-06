@@ -63,6 +63,7 @@ export default function DrawerSlide({ Title }) {
               md: "block",
             },
             marginBottom: "50px",
+            // backgroundColor: "red",
           }}
         >
           <div
