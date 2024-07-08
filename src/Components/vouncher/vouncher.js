@@ -4,7 +4,7 @@ import PyidaungSu from "./../../assets/fonts/pyidaungsu-1.3.ttf";
 import dayjs from "dayjs";
 
 export const generateMultiPagePDF = (voucherIds) => {
-  console.log(voucherIds);
+  // console.log(voucherIds);
   const doc = new jsPDF();
   const date = dayjs().format("DD-MM-YYYY");
   const id = localStorage.getItem("shopId");
@@ -16,7 +16,7 @@ export const generateMultiPagePDF = (voucherIds) => {
     try {
       const res = await axios.get("/api/shops/" + id);
       shopData = res.data;
-      // console.log(shopData);
+      console.log(shopData);
     } catch (error) {}
     // dispatch(getShopData(id));
   };
@@ -25,7 +25,7 @@ export const generateMultiPagePDF = (voucherIds) => {
     try {
       const res = await axios.get("/api/orders/" + orderId);
       vouchers.push(res.data);
-      // console.log(vouchers);
+      console.log(vouchers);
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +69,7 @@ export const generateMultiPagePDF = (voucherIds) => {
 
       // Add shop information
       doc.setFontSize(12);
-      doc.text(shopData.data.receipt_header, 10, 80);
+      // doc.text(shopData.data.receipt_header, 10, 80);
       doc.text(shopData.data.address, 10, 90);
       doc.text(shopData.data.phone, 10, 100);
 
@@ -102,21 +102,20 @@ export const generateMultiPagePDF = (voucherIds) => {
         160 + voucher.data.order_products.length * 10
       );
 
-      doc.text(
-        shopData.data.receipt_footer,
-        10,
-        170 + voucher.data.order_products.length * 10
-      );
+      // doc.text(
+      //   shopData.data.receipt_footer,
+      //   10,
+      //   170 + voucher.data.order_products.length * 10
+      // );
     });
-
-    // Save the document
 
     doc.autoPrint();
     const pdfOutput = doc.output("bloburl");
     window.open(pdfOutput);
-
-    doc.save("vouchers.pdf");
   }, 2000);
+
+  // Save the document
+  // doc.save("vouchers.pdf");
 
   // Auto print the document (optional)
 };
