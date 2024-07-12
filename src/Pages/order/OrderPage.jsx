@@ -11,8 +11,8 @@ import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import Cookies from "js-cookie";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
-import { generateMultiPagePDF } from "../../Components/vouncher/vouncher";
-
+import vouncher from "./../../Components/vouncher/vouncher";
+import axios from "./../../api/axios";
 import "./../../Styles/order.css";
 
 export const statusArray = [
@@ -141,10 +141,7 @@ function OrderPage() {
         </Grid>
 
         <Grid item xs={6} md={3}>
-          <Button
-            variant="contained"
-            onClick={() => generateMultiPagePDF(order_ids)}
-          >
+          <Button variant="contained" onClick={() => vouncher(order_ids)}>
             <span>Print Order</span>
           </Button>
         </Grid>

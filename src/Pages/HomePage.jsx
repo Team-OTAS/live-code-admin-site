@@ -22,7 +22,15 @@ function HomePage() {
         <Box component="div" sx={{ display: { xs: "none", md: "block" } }}>
           <DrawerSlide />
         </Box>
-        <Box sx={{ margin: "0 auto" }}>
+        <Box
+          sx={{
+            margin: "0 auto",
+            background: "#fff",
+            padding: "10px",
+            borderRadius: "15px",
+            boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+          }}
+        >
           <Routes>
             <Route path="*" element={<Dashboard />} />
             {/* <Route path="*" element={<HomeView />} /> */}
