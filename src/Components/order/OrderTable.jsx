@@ -109,7 +109,7 @@ const columns = [
       </Box>
     ),
   },
-  { field: "live_sale_id", headerName: "Amount", width: 50 },
+  // { field: "live_sale_id", headerName: "Amount", width: 200 },
   { field: "price", headerName: "Total Price", width: 100 },
   {
     field: "status",

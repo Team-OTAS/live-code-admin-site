@@ -27,9 +27,10 @@ import Loading from "../Loading";
 import { statusArray } from "../../Pages/order/OrderPage";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { useTranslation } from "react-i18next";
-import { AddBoxTwoTone } from "@mui/icons-material";
+import vouncher from "./../../Components/vouncher/vouncher";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Vouncher from "../vouncher/Vouncher";
 
 function OrderDetail() {
   const { t } = useTranslation();
@@ -187,12 +188,21 @@ function OrderDetail() {
                 <Box
                   sx={{ display: "flex", marginTop: { xs: "10px", md: "0px" } }}
                 >
-                  <Button onClick={deleteOrder}>Delete</Button>
-
-                  <Button
-                    variant="contained"
-                    onClick={() => navigate(`/vouncher/${id}`)}
+                  <button
+                    className="edit-btn"
+                    style={{
+                      height: "56px",
+                      borderColor: "red",
+                      color: "red",
+                      fontWeight: "500",
+                      marginRight: "10px",
+                    }}
+                    onClick={deleteOrder}
                   >
+                    Delete
+                  </button>
+
+                  <Button variant="contained" onClick={() => vouncher([id])}>
                     <span>Print</span>
                   </Button>
                 </Box>
