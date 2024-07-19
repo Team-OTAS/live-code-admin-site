@@ -1,0 +1,36 @@
+name: Cleanup Artifacts
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install jq
+        run: sudo apt-get install jq -y
+      - name: List and delete old artifacts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          REPO=${{ github.repository }}
+          # Get current date in ISO 8601 format
+          CURRENT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          # Get date 24 hours ago in ISO 8601 format
+          YESTERDAY_DATE=$(date -u -d "$CURRENT_DATE - 1 day" +"%Y-%m-%dT%H:%M:%SZ")
+
+          # Fetch all artifacts
+          ARTIFACTS=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/$REPO/actions/artifacts" | jq -c '.artifacts[]')
+
+          for artifact in $ARTIFACTS; do
+            CREATED_AT=$(echo $artifact | jq -r '.created_at')
+            ID=$(echo $artifact | jq -r '.id')
+
+            # Compare artifact creation date with yesterday's date
+            if [[ "$CREATED_AT" < "$YESTERDAY_DATE" ]]; then
+              echo "Deleting artifact ID: $ID created at: $CREATED_AT"
+              curl -s -H "Authorization: token $GITHUB_TOKEN" -X DELETE "https://api.github.com/repos/$REPO/actions/artifacts/$ID"
+            fi
+          done
