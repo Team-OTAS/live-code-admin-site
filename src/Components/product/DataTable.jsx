@@ -48,8 +48,9 @@ const columns = [
           sx={{
             background: "#354e8f",
             color: "white",
+            fontWeight: "bold",
             padding: "5px 10px",
-            borderRadius: "10px",
+            borderRadius: "5px",
             fontSize: "12px",
             "&:hover": {
               border: "1px solid #354e8f",

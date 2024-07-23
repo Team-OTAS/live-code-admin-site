@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 import AccUserTable from "./AccUserTable";
 import { Link } from "react-router-dom";
@@ -9,10 +9,17 @@ function UserManagement() {
     <Box>
       <div className="buttonContainer">
         <Link to="/adduser" style={{ textDecoration: "none" }}>
-          <button className="adduser">
+          <Button
+            variant="contained"
+            sx={{
+              width: "200px",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
             <span>Add User</span>
-            <PersonAddAltOutlinedIcon className="adduserIcon" />
-          </button>
+            <PersonAddAltOutlinedIcon />
+          </Button>
         </Link>
       </div>
       <AccUserTable />

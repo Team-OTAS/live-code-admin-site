@@ -5,12 +5,13 @@ import {
   GridToolbarContainer,
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { getOrderData } from "../../redux/features/orderApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
 
 import "./../../Styles/dashboard.css";
 
@@ -148,25 +149,26 @@ const columns = [
     headerName: "Actions",
     width: 150,
     renderCell: (params) => (
-      <Link
-        to={`/vieworder/${params.row.id}`}
-        style={{
-          background: "#354E8E",
-          color: "#fff",
-          padding: "5px 15px",
-          fontSize: "12px",
-          borderRadius: "5px",
-          textDecoration: "none",
-          "&:hover": {
-            backgroundColor: "#fff",
-            color: "#354E8E",
+      <Link to={`/vieworder/${params.row.id}`}>
+        <Button
+          sx={{
+            background: "#354e8f",
+            color: "white",
             fontWeight: "bold",
-            border: "1px solid #354E8E",
-          },
-        }}
-      >
-        {/* <StorefrontIcon, sx={{ marginRight: "5px" }} /> */}
-        View Order
+            padding: "5px 10px",
+            borderRadius: "5px",
+            fontSize: "12px",
+            "&:hover": {
+              border: "1px solid #354e8f",
+              backgroundColor: "#fff",
+              color: "#354e8f",
+            },
+          }}
+          variant="filled"
+        >
+          <PreviewOutlinedIcon sx={{ marginRight: "5px" }} />
+          View Order
+        </Button>
       </Link>
     ),
   },

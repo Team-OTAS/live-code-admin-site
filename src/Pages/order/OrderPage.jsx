@@ -103,7 +103,7 @@ function OrderPage() {
               onChange={handleChange}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
-              IconComponent={FilterIcon}
+              IconComponent={FilterListRoundedIcon}
             >
               {statusArray.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
