@@ -59,7 +59,7 @@ const LiveDataTable = () => {
   useEffect(() => {
     setInterval(() => {
       fetchProducts();
-    }, 5000);
+    }, 10000);
   }, []);
 
   useEffect(() => {

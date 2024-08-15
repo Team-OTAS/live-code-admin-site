@@ -4,7 +4,7 @@
 @import url("https://fonts.cdnfonts.com/css/garet");
 .DrawContainer {
   width: 240px;
-  height: 90vh;
+  height: auto;
   border-radius: 18px;
   background-color: #fff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);

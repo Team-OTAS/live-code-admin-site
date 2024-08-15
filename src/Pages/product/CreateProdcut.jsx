@@ -16,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import rabbit from "rabbit-node";
 import knayi from "knayi-myscript";
 
 import "./../../Styles/addstock.css";
@@ -27,7 +26,6 @@ const validationSchema = Yup.object().shape({
   quantity: Yup.string().required("quantity is required"),
   sale_code: Yup.string().required("salecode is required"),
   unit: Yup.string().required("unit is required"),
-  description: Yup.string().required("description is required"),
 });
 
 const VisuallyHiddenInput = styled("input")({
@@ -115,7 +113,7 @@ function CreateProdcut() {
             quantity: "",
             sale_code: "",
             unit: "",
-            description: "",
+            description: null,
             shop_id: shopId,
             image: null,
           }}
@@ -124,7 +122,6 @@ function CreateProdcut() {
             const convertedValues = {
               ...values,
               name: convertToUnicode(values.name),
-              description: convertToUnicode(values.description),
             };
             setSubmitting(false);
             createProduct(convertedValues);
@@ -303,8 +300,6 @@ function CreateProdcut() {
                     variant="outlined"
                     margin="normal"
                     fullWidth
-                    error={Boolean(errors.description && touched.description)} // Using errors and touched here
-                    helperText={<ErrorMessage name="description" />}
                   />
                 </Grid>
                 <Grid item xs={12} md={4}>
