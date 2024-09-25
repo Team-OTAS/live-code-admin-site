@@ -30,7 +30,6 @@ import { useTranslation } from "react-i18next";
 import vouncher from "./../../Components/vouncher/vouncher";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Vouncher from "../vouncher/Vouncher";
 
 function OrderDetail() {
   const { t } = useTranslation();
@@ -52,6 +51,7 @@ function OrderDetail() {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [chgorder, setChgorder] = useState("");
+  console.log("id", id);
 
   // Change Status
   const handleOrder = (event) => {
@@ -99,7 +99,7 @@ function OrderDetail() {
     <Box
       sx={{
         width: { xs: "84vw", md: "70vw" },
-        minHeight: "100vh",
+        // minHeight: "100vh",
         padding: { xs: "10px", md: "10px 40px" },
         background: { xs: "transparent", md: "#fff" },
         borderRadius: "25px",
@@ -138,7 +138,7 @@ function OrderDetail() {
               <Box sx={{ display: { xs: "block", md: "flex" }, gap: "10px" }}>
                 <div style={{ display: "flex", gap: "10px" }}>
                   <Grid item xs={12} md={3}>
-                    <FormControl fullWidth minHeight={50}>
+                    <FormControl fullWidth>
                       <Select
                         value={
                           chgorder ? chgorder : orderDetail.data.order.status
