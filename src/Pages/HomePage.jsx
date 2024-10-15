@@ -11,6 +11,7 @@ import AddUser from "../Components/Accsetting/AddUser";
 import Vouncher from "./../Components/vouncher/Vouncher";
 import OrderDetail from "../Components/order/OrderDetail";
 import UserAccDetail from "../Components/Accsetting/UserAccDetail";
+import SaleReport from "../Components/SaleReport/SaleReport";
 
 function HomePage() {
   return (
@@ -41,6 +42,7 @@ function HomePage() {
             <Route path="/vouncher/:id" element={<Vouncher />} />
             <Route path="/vieworder/:id" element={<OrderDetail />} />
             <Route path="/accdetail/:id" element={<UserAccDetail />} />
+            <Route path="/report" element={<SaleReport />} />
           </Routes>
         </Box>
       </div>

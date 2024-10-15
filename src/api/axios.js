@@ -11,6 +11,8 @@ const setAuthToken = (token) => {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
 
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+
 axios.defaults.headers.common["Accept"] = "application/json";
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 axios.defaults.headers.post["Content-Type"] = "application/json";

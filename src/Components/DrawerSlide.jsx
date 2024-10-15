@@ -53,6 +53,13 @@ export default function DrawerSlide({ Title }) {
     return "slidebtn";
   };
 
+  const activeClass3 = () => {
+    if (location.pathname.includes("report")) {
+      return "slidebtn active";
+    }
+    return "slidebtn";
+  };
+
   return (
     <div className="DrawContainer">
       <div>
@@ -98,6 +105,11 @@ export default function DrawerSlide({ Title }) {
           <NavLink to="/order" className={activeClass2}>
             <ShoppingCartOutlinedIcon />
             <span className="btnText">{navTitle[2]}</span>
+          </NavLink>
+
+          <NavLink to="/report" className={activeClass3}>
+            <ShoppingCartOutlinedIcon />
+            <span className="btnText">Sale Report</span>
           </NavLink>
         </div>
       </div>
