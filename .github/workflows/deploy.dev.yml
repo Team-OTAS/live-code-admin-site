@@ -52,7 +52,7 @@ jobs:
           key: ${{ secrets.DO_STAGING_SERVER_SSH_KEY }}
           port: 22
           source: admin-dashboard.tar.gz
-          target: /var/www/html/admin-dashboard-artifacts
+          target: /var/www/html/artifacts
 
       - name: Extract Artifact And Copy To Root Directory
         uses: appleboy/ssh-action@v0.1.5
@@ -61,5 +61,5 @@ jobs:
           username: ${{ secrets.DO_STAGING_SERVER_USER }}
           key: ${{ secrets.DO_STAGING_SERVER_SSH_KEY }}
           script: |
-            tar xzf /var/www/html/admin-dashboard-artifacts/admin-dashboard.tar.gz -C /var/www/html/livecode-admin-dashboard
-            rm /var/www/html/admin-dashboard-artifacts/admin-dashboard.tar.gz
+            tar xzf /var/www/html/artifacts/admin-dashboard.tar.gz -C /var/www/html/live-code-admin-dashboard
+            rm /var/www/html/artifacts/admin-dashboard.tar.gz
