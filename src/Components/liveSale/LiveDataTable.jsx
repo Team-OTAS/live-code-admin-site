@@ -45,9 +45,40 @@ const columns = [
   { field: "price", headerName: "Price", width: 100 },
 ];
 
-const LiveDataTable = () => {
+const LiveDataTable = ({ liveData }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const shopId = localStorage.getItem("shopId");
+  console.log(shopId);
+  // console.log(products);
+  // console.log("liveData", liveData);
+
+  const updateProductData = () => {
+    if (!liveData) return;
+
+    if (shopId === liveData.shopId) {
+      setProducts((prevData) => {
+        return prevData.map((item) => {
+          const updatedProduct = liveData.products.find(
+            (liveItem) => liveItem.id === item.id
+          );
+
+          // If a matching product is found, update its quantity
+          if (updatedProduct) {
+            return {
+              ...item,
+              quantity: updatedProduct.quantity,
+            };
+          }
+          return item;
+        });
+      });
+    }
+  };
+
+  useEffect(() => {
+    updateProductData();
+  }, [liveData]);
 
   const fetchProducts = async () => {
     const res = await axios.get("api/products?limit=1000");

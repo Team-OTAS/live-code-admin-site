@@ -17,7 +17,7 @@
 
 .slidebtn {
   margin-bottom: 20px;
-  width: 100%;
+  width: 200px;
   font-size: 12px;
   padding: 10px 0px;
   text-decoration: none;
@@ -40,13 +40,12 @@
   font-family: "Poppins", sans-serif;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .DrawContainer {
-    width: 200px;
+    height: auto;
+    width: auto;
     border: none;
-    box-shadow: none;
-    padding: 0;
-    margin: auto;
+    border-radius: none;
   }
   .btnText {
     padding: 0;
