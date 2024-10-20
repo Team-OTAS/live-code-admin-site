@@ -180,6 +180,7 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const { loading, orderData } = useSelector((state) => state.OrderData);
+  console.log(orderData);
 
   const sendData = (dataId) => {
     const order_ids = dataId;
