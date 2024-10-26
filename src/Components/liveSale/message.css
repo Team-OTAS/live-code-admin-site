@@ -1,0 +1,59 @@
+.container {
+  position: relative;
+  /* background-color: red; */
+  height: 100vh;
+  overflow: hidden;
+}
+
+.live-container {
+  height: 90%;
+  /* background-color: #f2f3f7; */
+  position: absolute;
+  bottom: 0; /* Align to the bottom */
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.live-header {
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* position: absolute; */
+  /* padding: 10px; */
+  background-color: blue;
+  border-bottom: 1px solid #ccc;
+}
+
+.message-box {
+  display: flex;
+  flex-direction: column; /* This makes new messages appear at the bottom */
+  align-items: center;
+  max-height: 500px; /* Set a max height for the message box */
+  overflow-y: auto; /* Enable scrolling if messages exceed max height */
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-wrap: wrap;
+
+  border-radius: 20px;
+  padding: 15px; /* Padding inside the message box */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+  border-radius: 5px; /* Rounded corners */
+  animation: slide-up 0.3s ease; /* Animation on message add */
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(20px); /* Start lower */
+    opacity: 0; /* Start transparent */
+  }
+  to {
+    transform: translateY(0); /* Slide to final position */
+    opacity: 1; /* Become opaque */
+  }
+}

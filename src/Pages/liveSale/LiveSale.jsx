@@ -1,8 +1,8 @@
 import { Box, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import LiveDataTable from "../../Components/liveSale/LiveDataTable";
-import FbLive from "../../Components/liveSale/FbLiveContainer";
 import useEcho from "../../hook/echo";
+import LiveNotifincation from "../../Components/liveSale/LiveNotifincation";
 
 function LiveSale() {
   const [liveData, setLiveData] = useState([]);
@@ -24,12 +24,13 @@ function LiveSale() {
     <div className="dashboardContent">
       <Box>
         <Grid container>
-          <Grid item xs={12}>
+          <Grid item xs={12} md={8}>
             <LiveDataTable liveData={liveData} />
           </Grid>
-          {/* <Grid item xs={12} md={4}>
-            <FbLive />
-          </Grid> */}
+          <Grid item xs={12} md={4}>
+            {/* <NotificationArea /> */}
+            <LiveNotifincation liveData={liveData} />
+          </Grid>
         </Grid>
       </Box>
     </div>

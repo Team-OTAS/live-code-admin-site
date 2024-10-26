@@ -44,19 +44,19 @@ function OrderPage() {
   const [date, setDate] = useState(Cookies.get("date") || new Date());
   const [order_ids, setOrder_Ids] = useState([]);
 
-  const FilterIcon = () => {
-    return (
-      <FilterListRoundedIcon
-        sx={{
-          background: statusArray.find((item) => item.value === status).color,
-          borderRadius: "50%",
-          color: "white",
-          padding: "5px",
-          marginRight: "10px",
-        }}
-      />
-    );
-  };
+  // const FilterIcon = () => {
+  //   return (
+  //     <FilterListRoundedIcon
+  //       sx={{
+  //         background: statusArray.find((item) => item.value === status).color,
+  //         borderRadius: "50%",
+  //         color: "white",
+  //         padding: "5px",
+  //         marginRight: "10px",
+  //       }}
+  //     />
+  //   );
+  // };
 
   const handleChange = (event) => {
     setStatus(event.target.value);

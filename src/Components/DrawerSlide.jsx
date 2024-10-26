@@ -117,9 +117,10 @@ export default function DrawerSlide({ Title }) {
 
       <Box
         sx={{
-          borderRadius: "10px",
-          border: "1px solid rgba(0, 0, 0, 0.12)",
-          padding: "20px",
+          marginTop: "20px",
+          // borderRadius: "10px",
+          // border: "1px solid rgba(0, 0, 0, 0.12)",
+          padding: "25px",
           cursor: "pointer",
           position: "relative",
         }}
@@ -194,7 +195,6 @@ export default function DrawerSlide({ Title }) {
           </Button>
         </Box>
       </Box>
-      <div style={{ width: "100%" }}></div>
     </div>
   );
 }

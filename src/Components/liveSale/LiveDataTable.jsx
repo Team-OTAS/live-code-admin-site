@@ -25,10 +25,10 @@ const columns = [
   {
     field: "no",
     headerName: "No",
-    width: 100,
+    width: 50,
   },
-  { field: "name", headerName: "Name", width: 150 },
-  { field: "description", headerName: "description", width: 300 },
+  { field: "name", headerName: "Name", width: 300 },
+  // { field: "description", headerName: "description", width: 300 },
   { field: "sale_code", headerName: "Live Sale Code", width: 150 },
   {
     field: "quantity",
@@ -92,7 +92,7 @@ const LiveDataTable = ({ liveData }) => {
   }, []);
 
   return (
-    <Box sx={{ height: { xs: 600, md: 500 } }}>
+    <Box sx={{ height: { xs: 600, md: 550 } }}>
       <DataGrid
         rows={products.map((item, index) => ({ no: index + 1, ...item })) || []}
         columns={columns}
@@ -101,7 +101,7 @@ const LiveDataTable = ({ liveData }) => {
         loading={isLoading}
         disableRowSelectionOnClick
         slots={{
-          toolbar: CustomToolbar,
+          // toolbar: CustomToolbar,
           loadingOverlay: LinearProgress,
         }}
       />
