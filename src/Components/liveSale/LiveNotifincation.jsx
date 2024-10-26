@@ -3,7 +3,7 @@ import MessageBox from "./MessageBox";
 import "./message.css";
 
 const LiveNotifincation = ({ liveData }) => {
-  // console.log("liveData", liveData);
+  console.log("liveData", liveData);
   const [messages, setMessages] = useState([]);
 
   const maxMessages = 100; // Maximum number of messages to display
@@ -12,7 +12,7 @@ const LiveNotifincation = ({ liveData }) => {
     if (liveData.length === 0) return;
 
     liveData.products.map((product) => {
-      console.log("product", product);
+      // console.log("product", product);
       if (product.quantity === 0) {
         const newMessage = {
           text: `${product.sale_code} is out of stock`,

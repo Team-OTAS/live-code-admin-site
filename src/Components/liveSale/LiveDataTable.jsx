@@ -49,7 +49,7 @@ const LiveDataTable = ({ liveData }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const shopId = localStorage.getItem("shopId");
-  console.log(shopId);
+  // console.log(shopId);
   // console.log(products);
   // console.log("liveData", liveData);
 

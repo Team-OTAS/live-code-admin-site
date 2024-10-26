@@ -2,7 +2,7 @@ import { Box, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import LiveDataTable from "../../Components/liveSale/LiveDataTable";
 import useEcho from "../../hook/echo";
-import LiveNotifincation from "../../Components/liveSale/LiveNotifincation";
+import LiveNotifincation from "./../../Components/liveSale/LiveNotifincation";
 
 function LiveSale() {
   const [liveData, setLiveData] = useState([]);
