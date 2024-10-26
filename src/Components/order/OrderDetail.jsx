@@ -51,7 +51,7 @@ function OrderDetail() {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [chgorder, setChgorder] = useState("");
-  console.log("id", id);
+  // console.log("id", id);
 
   // Change Status
   const handleOrder = (event) => {

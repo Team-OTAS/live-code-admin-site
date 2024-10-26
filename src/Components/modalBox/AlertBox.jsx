@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 
 const AlertBox = ({ message }) => {
-  console.log(message);
+  // console.log(message);
   Swal.fire({
     icon: "error",
     title: "Oops...",

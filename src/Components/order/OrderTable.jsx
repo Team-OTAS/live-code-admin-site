@@ -180,7 +180,7 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const { loading, orderData } = useSelector((state) => state.OrderData);
-  console.log(orderData);
+  // console.log(orderData);
 
   const sendData = (dataId) => {
     const order_ids = dataId;
@@ -248,7 +248,7 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
           },
         }}
         onRowSelectionModelChange={(dataId) => {
-          console.log(dataId);
+          // console.log(dataId);
           sendData(dataId);
         }}
       />

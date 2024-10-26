@@ -20,7 +20,7 @@ const MultiVouncher = () => {
   const dispatch = useDispatch();
   const id = localStorage.getItem("shopId");
   const { shopData } = useSelector((state) => state.ShopData);
-  console.log(vouchers);
+  // console.log(vouchers);
 
   useEffect(() => {
     dispatch(getShopData(id));
@@ -32,7 +32,7 @@ const MultiVouncher = () => {
         const res = await axios.get("/api/orders/" + orderId);
         setVouchers((prevVouchers) => [...prevVouchers, res.data]);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
 

@@ -58,7 +58,7 @@ const columns = [
 ];
 
 const DataTable = ({ data }) => {
-  console.log(data);
+  // console.log(data);
 
   return (
     <Box sx={{ height: { xs: 600, md: 400 } }}>
