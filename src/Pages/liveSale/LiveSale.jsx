@@ -17,6 +17,11 @@ function LiveSale() {
         console.log("product Update Event", e);
         setLiveData(e);
       });
+
+      // echo.private(`shop.${shopId}.order-success-message`).listen("OrderSuccessMessage", (e) => {
+      //   console.log("order success message", e);
+      //   setLiveData(e);
+      // });
     }
   }, [echo]);
 

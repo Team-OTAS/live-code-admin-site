@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import { Route, Routes } from "react-router-dom";
@@ -13,6 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import "dayjs/locale/en-gb";
+import axios from "./api/axios";
 
 const theme = createTheme({
   palette: {
@@ -42,6 +43,20 @@ const theme = createTheme({
 });
 
 const App = () => {
+  const vaildToken = async () => {
+    const response = await axios.post("api/auth/refresh-token");
+    // console.log(response);
+    if (response.status !== 200) {
+      window.location.href = "/login";
+    }
+  };
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    // console.log("work");
+    if (token) {
+      vaildToken();
+    }
+  }, []);
   return (
     //  <BrowserRouter>
     <ThemeProvider theme={theme}>
