@@ -21,7 +21,7 @@ const MessageBox = ({ messages }) => {
             key={index}
             className="message"
             style={{
-              backgroundColor: isZeroStockMessage ? "#FF7F7F" : "inherit",
+              backgroundColor: isZeroStockMessage ? "#FF7F7F" : "#4d3f3f",
             }} // Change color for zero stock message
           >
             <span style={{ fontWeight: "bold", marginBottom: "10px" }}>

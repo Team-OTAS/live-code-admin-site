@@ -6,6 +6,7 @@ import LiveNotifincation from "./../../Components/liveSale/LiveNotifincation";
 
 function LiveSale() {
   const [liveData, setLiveData] = useState([]);
+  const [orderSuccessMessage, setOrderSuccessMessage] = useState([]);
   const echo = useEcho();
   const shopId = localStorage.getItem("shopId");
 
@@ -18,12 +19,19 @@ function LiveSale() {
         setLiveData(e);
       });
 
-      // echo.private(`shop.${shopId}.order-success-message`).listen("OrderSuccessMessage", (e) => {
-      //   console.log("order success message", e);
-      //   setLiveData(e);
-      // });
+      echo
+        .private(`shop.${shopId}.order-success-message`)
+        .listen("OrderSuccessMessage", (e) => {
+          console.log("Order Success Message Event", e);
+          setOrderSuccessMessage(e);
+        });
     }
   }, [echo]);
+
+  // echo.private(`shop.${shopId}.order-success-message`).listen("OrderSuccessMessage", (e) => {
+  //   console.log("order success message", e);
+  //   setLiveData(e);
+  // });
 
   return (
     <div className="dashboardContent">
@@ -34,7 +42,10 @@ function LiveSale() {
           </Grid>
           <Grid item xs={12} md={4}>
             {/* <NotificationArea /> */}
-            <LiveNotifincation liveData={liveData} />
+            <LiveNotifincation
+              orderSuccessMessage={orderSuccessMessage}
+              liveData={liveData}
+            />
           </Grid>
         </Grid>
       </Box>

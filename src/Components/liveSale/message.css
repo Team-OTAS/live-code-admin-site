@@ -22,8 +22,11 @@
   align-items: center;
   /* position: absolute; */
   /* padding: 10px; */
-  background-color: blue;
+  background-color: #354e8e;
   border-bottom: 1px solid #ccc;
+  color: white;
+  padding: 0 10px;
+  font-weight: bold;
 }
 
 .message-box {

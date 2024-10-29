@@ -44,6 +44,7 @@ const theme = createTheme({
 
 const App = () => {
   const vaildToken = async () => {
+    // console.log("res");
     const response = await axios.post("api/auth/refresh-token");
     // console.log(response);
     if (response.status !== 200) {
@@ -54,6 +55,7 @@ const App = () => {
     const token = localStorage.getItem("authToken");
     // console.log("work");
     if (token) {
+      // console.log(token);
       vaildToken();
     }
   }, []);

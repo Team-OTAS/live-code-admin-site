@@ -27,7 +27,7 @@ const columns = [
     headerName: "No",
     width: 50,
   },
-  { field: "name", headerName: "Name", width: 300 },
+  { field: "name", headerName: "Name", width: 250 },
   // { field: "description", headerName: "description", width: 300 },
   { field: "sale_code", headerName: "Live Sale Code", width: 150 },
   {
