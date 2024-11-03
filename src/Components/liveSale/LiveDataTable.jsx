@@ -51,7 +51,7 @@ const LiveDataTable = ({ liveData }) => {
   const shopId = localStorage.getItem("shopId");
   // console.log(shopId);
   // console.log(products);
-  // console.log("liveData", liveData);
+  console.log("liveData", liveData);
 
   const updateProductData = () => {
     if (!liveData) return;

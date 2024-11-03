@@ -9,9 +9,10 @@ function LiveSale() {
   const [orderSuccessMessage, setOrderSuccessMessage] = useState([]);
   const echo = useEcho();
   const shopId = localStorage.getItem("shopId");
+  console.log("live page", liveData);
 
   useEffect(() => {
-    // console.log("echo", echo);
+    console.log("echo", echo);
 
     if (echo) {
       echo.private(`shop.${shopId}.products`).listen("ProductUpdated", (e) => {
@@ -19,19 +20,14 @@ function LiveSale() {
         setLiveData(e);
       });
 
-      echo
-        .private(`shop.${shopId}.order-success-message`)
-        .listen("OrderSuccessMessage", (e) => {
-          console.log("Order Success Message Event", e);
-          setOrderSuccessMessage(e);
-        });
+      // echo
+      //   .private(`shop.${shopId}.order-success-message`)
+      //   .listen("OrderSuccessMessage", (e) => {
+      //     console.log("Order Success Message Event", e);
+      //     setOrderSuccessMessage(e);
+      //   });
     }
   }, [echo]);
-
-  // echo.private(`shop.${shopId}.order-success-message`).listen("OrderSuccessMessage", (e) => {
-  //   console.log("order success message", e);
-  //   setLiveData(e);
-  // });
 
   return (
     <div className="dashboardContent">

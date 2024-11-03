@@ -8,35 +8,31 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { Card, CardContent, Typography, Tab, Tabs, Box } from "@mui/material";
+import { CardContent, Tab, Tabs, Box } from "@mui/material";
 import getReport from "./getReport";
 import SaleTable from "./SaleTable";
 import "./../../Styles/dashboard.css";
 
 export default function SalesChart() {
-  const [value, setValue] = React.useState(0);
+  // const [value, setValue] = React.useState(0);
   const [data, setData] = React.useState([]);
 
-  const getCharts = async () => {
-    const res = await getReport();
+  const getCharts = async (data) => {
+    const res = await getReport(data);
     setData(res);
   };
 
   useEffect(() => {
-    getCharts();
+    getCharts("top");
   }, []);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
 
   return (
     <div className="dashboardContent">
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange} aria-label="sales tabs">
-          <Tab label="Best Sales" />
-          <Tab label="Worst Sales" />
-          <Tab label="Top Spenders" />
+        <Tabs aria-label="sales tabs">
+          <Tab label="Best Sales" onClick={() => getCharts("top")} />
+          <Tab label="Worst Sales" onClick={() => getCharts("worst")} />
+          <Tab label="Top Spenders" onClick={() => getCharts("spenders")} />
         </Tabs>
       </Box>
       <Box
