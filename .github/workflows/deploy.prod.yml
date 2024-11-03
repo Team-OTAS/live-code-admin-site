@@ -19,6 +19,12 @@ jobs:
         env:
           CI: false
           REACT_APP_API_BASE_URL: ${{ vars.PROD_API_BASE_URL }}
+          REACT_APP_REVERB_APP_ID: ${{ vars.PROD_REVERB_APP_ID }}
+          REACT_APP_REVERB_APP_KEY: ${{ vars.PROD_REVERB_APP_KEY }}
+          REACT_APP_REVERB_APP_SECRET: ${{ vars.PROD_REVERB_APP_SECRET }}
+          REACT_APP_REVERB_HOST: ${{ vars.PROD_REVERB_HOST }}
+          REACT_APP_REVERB_PORT: ${{ vars.PROD_REVERB_PORT }}
+          REACT_APP_REVERB_SCHEME: ${{ vars.PROD_REVERB_SCHEME }}
         run: |
           rm -rf node_modules package-lock.json
           npm install
