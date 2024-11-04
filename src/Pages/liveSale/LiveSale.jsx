@@ -6,17 +6,17 @@ import LiveNotifincation from "./../../Components/liveSale/LiveNotifincation";
 
 function LiveSale() {
   const [liveData, setLiveData] = useState([]);
-  const [orderSuccessMessage, setOrderSuccessMessage] = useState([]);
+  // const [orderSuccessMessage, setOrderSuccessMessage] = useState([]);
   const echo = useEcho();
   const shopId = localStorage.getItem("shopId");
-  console.log("live page", liveData);
+  // console.log("live page", liveData);
 
   useEffect(() => {
-    console.log("echo", echo);
+    // console.log("echo", echo);
 
     if (echo) {
       echo.private(`shop.${shopId}.products`).listen("ProductUpdated", (e) => {
-        console.log("product Update Event", e);
+        // console.log("product Update Event", e);
         setLiveData(e);
       });
 
@@ -39,7 +39,7 @@ function LiveSale() {
           <Grid item xs={12} md={4}>
             {/* <NotificationArea /> */}
             <LiveNotifincation
-              orderSuccessMessage={orderSuccessMessage}
+              // orderSuccessMessage={orderSuccessMessage}
               liveData={liveData}
             />
           </Grid>

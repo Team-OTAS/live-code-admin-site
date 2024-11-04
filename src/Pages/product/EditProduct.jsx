@@ -15,9 +15,8 @@ import { updateProduct, getProduct } from "../../redux/features/productReducer";
 import Loading from "../../Components/Loading";
 import EditIcon from "@mui/icons-material/Edit";
 import { deleteProduct } from "../../redux/features/productdeleteSlice";
-
-import "./../../Styles/addstock.css";
 import { useTranslation } from "react-i18next";
+import "./../../Styles/addstock.css";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -47,7 +46,7 @@ function EditProduct() {
   const dispatch = useDispatch();
 
   const { product, isLoading } = useSelector((state) => state.stocks);
-  const [showmessage, setShowmessage] = useState(false);
+  // const [showmessage, setShowmessage] = useState(false);
   const [local, setlocal] = useState(false);
   const { id } = useParams();
   const [file, setFile] = useState();
@@ -86,7 +85,7 @@ function EditProduct() {
       productIds: [id * 1],
     };
     dispatch(deleteProduct(data));
-    setShowmessage(true);
+    // setShowmessage(true);
   }
 
   useEffect(() => {
