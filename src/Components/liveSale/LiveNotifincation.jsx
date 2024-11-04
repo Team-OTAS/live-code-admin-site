@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import MessageBox from "./MessageBox";
 import "./message.css";
 
-const LiveNotifincation = ({ liveData, orderSuccessMessage }) => {
+const LiveNotifincation = ({ liveData }) => {
   const shopId = localStorage.getItem("shopId");
-  console.log("orderSuccessMessage", orderSuccessMessage);
+  // console.log("orderSuccessMessage", orderSuccessMessage);
   console.log("liveData", liveData);
   // const orderSuccessMessageData = {
   //   shopId: "S-00000010",
@@ -13,18 +13,20 @@ const LiveNotifincation = ({ liveData, orderSuccessMessage }) => {
   // };
   // console.log("orderSuccessMessage", orderSuccessMessage);
   const [messages, setMessages] = useState([]);
+  // console.log(messages);
 
   const maxMessages = 100; // Maximum number of messages to display
 
   const showMessage = () => {
-    // if (liveData.length === 0) return;
+    console.log(liveData.shopId, shopId);
+    if (liveData.length === 0) return;
 
-    if (liveData.shopID === shopId) {
+    if (liveData.shopId === shopId) {
       liveData.products.map((product) => {
-        // console.log("product", product);
+        console.log("product", product);
         if (product.quantity === 0) {
           const newMessage = {
-            text: `${product.sale_code} is out of stock`,
+            text: `${product.name} is out of stock`,
             time: new Date().toLocaleTimeString(),
           };
           setMessages((prevMessages) => {
@@ -41,26 +43,26 @@ const LiveNotifincation = ({ liveData, orderSuccessMessage }) => {
       });
     }
 
-    if (orderSuccessMessage.shopId === shopId) {
-      console.log("orderSuccessMessageData", orderSuccessMessage.message);
-      const newMessage = {
-        text: orderSuccessMessage.message,
-        time: new Date().toLocaleTimeString(),
-      };
-      setMessages((prevMessages) => {
-        // Limit the messages array and add the new message
-        const newMessages = [...prevMessages, newMessage];
-        // If exceeding maxMessages, remove the oldest message
-        return newMessages.length > maxMessages
-          ? newMessages.slice(1)
-          : newMessages;
-      });
-    }
+    // if (orderSuccessMessage.shopId === shopId) {
+    //   console.log("orderSuccessMessageData", orderSuccessMessage.message);
+    //   const newMessage = {
+    //     text: orderSuccessMessage.message,
+    //     time: new Date().toLocaleTimeString(),
+    //   };
+    //   setMessages((prevMessages) => {
+    //     // Limit the messages array and add the new message
+    //     const newMessages = [...prevMessages, newMessage];
+    //     // If exceeding maxMessages, remove the oldest message
+    //     return newMessages.length > maxMessages
+    //       ? newMessages.slice(1)
+    //       : newMessages;
+    //   });
+    // }
   };
 
   useEffect(() => {
     showMessage();
-  }, [liveData, orderSuccessMessage]);
+  }, [liveData]);
 
   // const decrementQuantity = () => {
   //   if (liveData.products[0].quantity >= 0) {
