@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import axios from "./../../api/axios";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
@@ -7,7 +7,7 @@ import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import LanguageSelecter from "./../languageSelecter/LanguageSelecter";
 import Swal from "sweetalert2";
 import "./../../Styles/detailbox.css";
@@ -24,7 +24,7 @@ function ShopDetails() {
   const cancelbtn = t("cancelbtn");
   const id = localStorage.getItem("shopId");
   const [shop, setShop] = useState();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
