@@ -5,7 +5,7 @@ import "./message.css";
 const LiveNotifincation = ({ liveData }) => {
   const shopId = localStorage.getItem("shopId");
   // console.log("orderSuccessMessage", orderSuccessMessage);
-  // console.log("liveData", liveData.shopId);
+  console.log("liveData", liveData);
   // const orderSuccessMessageData = {
   //   shopId: "S-00000010",
   //   message: "Aung Aung got A001 x 2 from live sale.",
@@ -18,7 +18,7 @@ const LiveNotifincation = ({ liveData }) => {
   const maxMessages = 100; // Maximum number of messages to display
 
   const showMessage = () => {
-    // console.log(liveData.shopId, shopId);
+    console.log(liveData.shopId, shopId);
     if (liveData.length === 0) return;
 
     if (liveData.shopId === shopId) {
