@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from "react";
-import {
-  DataGrid,
-  GridToolbarColumnsButton,
-  GridToolbarContainer,
-  GridToolbarQuickFilter,
-} from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import axios from "axios";
 
 import "./../../Styles/dashboard.css";
 
-function CustomToolbar() {
-  return (
-    <GridToolbarContainer className="toolbarContainer">
-      {/* <GridToolbarFilterButton /> */}
-      <GridToolbarColumnsButton />
-      <GridToolbarQuickFilter />
-    </GridToolbarContainer>
-  );
-}
+// function CustomToolbar() {
+//   return (
+//     <GridToolbarContainer className="toolbarContainer">
+//       {/* <GridToolbarFilterButton /> */}
+//       <GridToolbarColumnsButton />
+//       <GridToolbarQuickFilter />
+//     </GridToolbarContainer>
+//   );
+// }
 
 const columns = [
   {
@@ -51,7 +46,7 @@ const LiveDataTable = ({ liveData }) => {
   const shopId = localStorage.getItem("shopId");
   // console.log(shopId);
   // console.log(products);
-  console.log("liveData", liveData);
+  // console.log("liveData", liveData);
 
   const updateProductData = () => {
     if (!liveData) return;
