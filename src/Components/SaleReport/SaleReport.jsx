@@ -13,7 +13,7 @@ import getReport from "./getReport";
 import SaleTable from "./SaleTable";
 import "./../../Styles/dashboard.css";
 import "./../../Components/Accsetting/accsetting.css";
-import Loading from "../Loading";
+import Loading from "./../../Components/Loading";
 
 export default function SalesChart() {
   // const [value, setValue] = React.useState(0);
