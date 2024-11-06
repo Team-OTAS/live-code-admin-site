@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -8,17 +8,22 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { CardContent, Tab, Tabs, Box } from "@mui/material";
+import { CardContent, Box } from "@mui/material";
 import getReport from "./getReport";
 import SaleTable from "./SaleTable";
 import "./../../Styles/dashboard.css";
+import "./../../Components/Accsetting/accsetting.css";
+import Loading from "../Loading";
 
 export default function SalesChart() {
   // const [value, setValue] = React.useState(0);
   const [data, setData] = React.useState([]);
+  const [activeTab, setActiveTab] = useState("top");
 
   const getCharts = async (data) => {
+    setActiveTab(data);
     const res = await getReport(data);
+    console.log(res);
     setData(res);
   };
 
@@ -26,14 +31,40 @@ export default function SalesChart() {
     getCharts("top");
   }, []);
 
+  if (data.length === 0)
+    return (
+      <div className="dashboardContent">
+        <Loading />
+      </div>
+    );
+
   return (
     <div className="dashboardContent">
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs aria-label="sales tabs">
-          <Tab label="Best Sales" onClick={() => getCharts("top")} />
-          <Tab label="Worst Sales" onClick={() => getCharts("worst")} />
-          <Tab label="Top Spenders" onClick={() => getCharts("spenders")} />
-        </Tabs>
+        <div
+          style={{ display: "flex", width: "100%", justifyContent: "start" }}
+        >
+          <button
+            className={activeTab === "top" ? "settingbtn active" : "settingbtn"}
+            onClick={() => getCharts("top")}
+          >
+            <span className="settingText">Top Sale Items</span>
+          </button>
+          <button
+            className={
+              activeTab === "worst" ? "settingbtn active" : "settingbtn"
+            }
+            onClick={() => getCharts("worst")}
+          >
+            <span className="settingText">Worst Sale Items</span>
+          </button>
+          {/* <button
+            className={page === 3 ? "settingbtn active" : "settingbtn"}
+            onClick={() =>  getCharts("spenders")}
+          >
+            <span className="settingText">User Acc Management</span>
+          </button> */}
+        </div>
       </Box>
       <Box
         className="dashboardContent__header"
@@ -42,14 +73,20 @@ export default function SalesChart() {
         <p>Product Sales Profit Analytics Chart</p>
       </Box>
       <CardContent>
-        <p style={{ color: "black", fontWeight: "bold" }}>Best Sale Product</p>
-        <ResponsiveContainer width="100%" height={250}>
+        <p style={{ color: "black", fontWeight: "bold" }}>
+          {activeTab} Sale Product
+        </p>
+        <ResponsiveContainer
+          width="100%"
+          style={{ background: "", padding: "10px" }}
+          height={250}
+        >
           <BarChart layout="vertical" data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis type="number" />
             <YAxis dataKey="Name" type="category" />
             <Tooltip />
-            <Bar dataKey="Total Price" fill="#2196f3" />
+            <Bar dataKey="Total Price" fill="#354e8e" />
           </BarChart>
         </ResponsiveContainer>
       </CardContent>

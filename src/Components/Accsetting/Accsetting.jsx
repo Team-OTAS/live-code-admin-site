@@ -3,9 +3,8 @@ import React from "react";
 import UserManagement from "./UserManagement";
 import ShopReciept from "./ShopReciept";
 import AutoReply from "./AutoReply";
-
-import "./accsetting.css";
 import ShopDetails from "./ShopDetails";
+import "./accsetting.css";
 
 function Accsetting() {
   const [page, setPage] = React.useState(3);
