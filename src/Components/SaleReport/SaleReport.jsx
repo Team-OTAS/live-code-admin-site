@@ -18,12 +18,14 @@ import Loading from "./../../Components/Loading";
 export default function SalesChart() {
   // const [value, setValue] = React.useState(0);
   const [data, setData] = React.useState([]);
+  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("top");
 
   const getCharts = async (data) => {
     setActiveTab(data);
     const res = await getReport(data);
-    console.log(res);
+    setLoading(false);
+    // console.log(res);
     setData(res);
   };
 
@@ -31,12 +33,22 @@ export default function SalesChart() {
     getCharts("top");
   }, []);
 
-  if (data.length === 0)
+  if (loading)
     return (
       <div className="dashboardContent">
         <Loading />
       </div>
     );
+
+  if (data.length === 0) {
+    return (
+      <div className="dashboardContent">
+        <div className="noData">
+          <h1>No Report Data Available</h1>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="dashboardContent">
