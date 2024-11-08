@@ -14,6 +14,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import "dayjs/locale/en-gb";
 import axios from "./api/axios";
+import Vouncher from "./Components/vouncher/miltiVoucher/Vouncher";
 
 const theme = createTheme({
   palette: {
@@ -70,6 +71,7 @@ const App = () => {
             <Route path="/fblogin" element={<FBloginPage />} />
             <Route path="/setup" element={<SetupShopStepperPage />} />
             <Route path="/completesetuppage" element={<CompleteSetupPage />} />
+            <Route path="/vouncher/:id" element={<Vouncher />} />
             <Route
               path="*"
               element={

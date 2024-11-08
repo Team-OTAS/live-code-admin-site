@@ -118,8 +118,6 @@ export default function DrawerSlide({ Title }) {
       <Box
         sx={{
           marginTop: "20px",
-          // borderRadius: "10px",
-          // border: "1px solid rgba(0, 0, 0, 0.12)",
           padding: "25px",
           cursor: "pointer",
           position: "relative",
@@ -128,7 +126,11 @@ export default function DrawerSlide({ Title }) {
         <Stack
           direction="row"
           spacing={1}
-          sx={{ marginBottom: "10px", display: { xs: "none", md: "flex" } }}
+          sx={{
+            marginBottom: "10px",
+            width: "200px ",
+            display: { xs: "none", md: "flex" },
+          }}
         >
           <Avatar
             alt="Remy Sharp"
@@ -139,9 +141,20 @@ export default function DrawerSlide({ Title }) {
             }}
           />
           {shopData && (
-            <div className="userName">
-              <p style={{ marginBottom: "5px" }}>{shopData.data.name}</p>
-              <span>{getexpire(shopData.data.expire_at)}</span>
+            <div
+              className="userName"
+              style={{
+                width: "150px",
+                // background: "red",
+                wordWrap: "break-word",
+              }}
+            >
+              <p style={{ marginBottom: "5px", whiteSpace: "normal" }}>
+                {shopData.data.name}
+              </p>
+              <span style={{ whiteSpace: "normal" }}>
+                {getexpire(shopData.data.expire_at)}
+              </span>
             </div>
           )}
         </Stack>
@@ -150,10 +163,11 @@ export default function DrawerSlide({ Title }) {
             <Button
               variant="contained"
               sx={{
-                width: "100%",
+                width: "200px",
                 marginBottom: "10px",
                 borderRadius: "10px",
                 border: "1px solid #000000",
+                textWrap: "wrap",
                 padding: "5px",
                 cursor: "pointer",
                 fontSize: "10px",

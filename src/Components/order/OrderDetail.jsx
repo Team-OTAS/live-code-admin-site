@@ -202,9 +202,13 @@ function OrderDetail() {
                     Delete
                   </button>
 
-                  <Button variant="contained" onClick={() => vouncher([id])}>
+                  <Button onClick={() => navigate(`/vouncher/${id}`)}>
                     <span>Print</span>
                   </Button>
+
+                  {/* <Button variant="contained" onClick={() => vouncher([id])}>
+                    <span>Print</span>
+                  </Button> */}
                 </Box>
               </Box>
             )}
