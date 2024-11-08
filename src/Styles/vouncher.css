@@ -7,8 +7,18 @@
   font-size: 14px;
 }
 
+@media print {
+  .printable-area {
+    width: 148mm; /* A5 width */
+    height: 210mm; /* A5 height */
+    margin: 0; /* Remove margins */
+    padding: 10mm; /* Optional padding */
+    box-shadow: none; /* Remove any box shadows */
+  }
+}
+
 .row-header {
   font-family: "Poppins", sans-serif;
   font-weight: bold;
   font-size: 14px;
-}/*# sourceMappingURL=vouncher.css.map */
+} /*# sourceMappingURL=vouncher.css.map */
