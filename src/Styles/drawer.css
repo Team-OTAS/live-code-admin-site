@@ -47,12 +47,10 @@
     border-radius: none;
   }
   userName {
-    width: 50%; /* or a specific width based on your layout */
+    width: 100%; /* or a specific width based on your layout */
     word-wrap: break-word; /* Break long words if necessary */
   }
-  .userName p {
-    text-wrap: wrap;
-  }
+  .userName p,
   .userName span {
     white-space: normal; /* Allows the text to wrap normally */
     margin: 0; /* Adjust margins for better alignment if necessary */
@@ -61,4 +59,4 @@
     padding: 0;
     font-size: 12px;
   }
-} /*# sourceMappingURL=drawer.css.map */
+}/*# sourceMappingURL=drawer.css.map */
