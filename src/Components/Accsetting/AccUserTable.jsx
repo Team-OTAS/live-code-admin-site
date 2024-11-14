@@ -144,7 +144,7 @@ const AccUserTable = () => {
   ];
 
   return (
-    <Box sx={{ height: { xs: 600, md: 500 } }}>
+    <Box sx={{ height: { xs: 600, md: 450 } }}>
       {isLoading && (
         <div className="loading">
           <LinearProgress />

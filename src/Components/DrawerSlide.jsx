@@ -138,15 +138,11 @@ export default function DrawerSlide({ Title }) {
             width: "200px ",
             display: { xs: "none", md: "flex" },
           }}
+          onClick={() => {
+            navigate("/setting");
+          }}
         >
-          <Avatar
-            alt="Remy Sharp"
-            src={shop}
-            className="avatars"
-            onClick={() => {
-              navigate("/setting");
-            }}
-          />
+          <Avatar alt="Remy Sharp" src={shop} className="avatars" />
           {shopData && (
             <div
               className="userName"

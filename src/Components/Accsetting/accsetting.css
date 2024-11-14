@@ -1,15 +1,16 @@
 @font-face {
   font-family: "Poppins"; /* Replace with your font name */
-  src: url("./../assets/fonts/Poppins-Regular.ttf") format("ttf");
+  src: url("./../../assets/fonts/Poppins-Regular.ttf") format("ttf");
   font-weight: normal; /* or bold, etc. */
   font-style: normal; /* or italic, etc. */
 }
 @font-face {
   font-family: "Garet"; /* Replace with your font name */
-  src: url("./../assets/fonts/Garet-Book.ttf") format("ttf");
+  src: url("./../../assets/fonts/Garet-Book.ttf") format("ttf");
   font-weight: normal; /* or bold, etc. */
   font-style: normal; /* or italic, etc. */
 }
+
 .settingBtnContainer {
   width: 100%;
   display: inline-block;
@@ -110,7 +111,7 @@
 
 .logo-img img {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .edit-btn {
@@ -219,4 +220,4 @@
     font-family: "Garet", sans-serif;
     font-weight: bold;
   }
-}/*# sourceMappingURL=accsetting.css.map */
+} /*# sourceMappingURL=accsetting.css.map */
