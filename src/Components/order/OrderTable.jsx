@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   DataGrid,
   GridToolbarColumnsButton,
@@ -177,52 +177,61 @@ const columns = [
 const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
   const { t } = useTranslation();
   const tablemsg = t("ordertable");
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const { loading, orderData } = useSelector((state) => state.OrderData);
-  // console.log(orderData);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // months are zero-based
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
 
   const sendData = (dataId) => {
     const order_ids = dataId;
     sendDataToOrderTable(order_ids);
   };
 
-  const compareDates = (date1, date2) => {
-    // Parse the dates
-    const parsedDate1 = new Date(date1);
-    const parsedDate2 = new Date(date2);
+  // const compareDates = (date1, date2) => {
+  //   // Parse the dates
+  //   const parsedDate1 = new Date(date1);
+  //   const parsedDate2 = new Date(date2);
 
-    // Normalize the dates (set the time to midnight to only compare the date parts)
-    parsedDate1.setHours(0, 0, 0, 0);
-    parsedDate2.setHours(0, 0, 0, 0);
+  //   // Normalize the dates (set the time to midnight to only compare the date parts)
+  //   parsedDate1.setHours(0, 0, 0, 0);
+  //   parsedDate2.setHours(0, 0, 0, 0);
 
-    // Compare the dates
-    return parsedDate1.getTime() === parsedDate2.getTime();
-  };
-
-  useEffect(() => {
-    dispatch(getOrderData());
-  }, [chgorder]);
+  //   // Compare the dates
+  //   return parsedDate1.getTime() === parsedDate2.getTime();
+  // };
 
   useEffect(() => {
-    if (orderData) {
-      setProducts(
-        orderData.filter((item) => {
-          if (status !== "All" && compareDates(item.created_at, date)) {
-            return item.status === status;
-          } else if (status === "All" && compareDates(item.created_at, date)) {
-            return orderData;
-          }
-        })
-      );
-    }
-  }, [status, orderData, date]);
+    dispatch(getOrderData(formatDate(date)));
+  }, [chgorder, date]);
+
+  // useEffect(() => {
+  //   if (orderData) {
+  //     setProducts(
+  //       orderData.filter((item) => {
+  //         if (status !== "All" && compareDates(item.created_at, date)) {
+  //           return item.status === status;
+  //         } else if (status === "All" && compareDates(item.created_at, date)) {
+  //           return orderData;
+  //         }
+  //       })
+  //     );
+  //   }
+  // }, [status, orderData, date]);
 
   return (
     <Box sx={{ height: { xs: 600, md: 500 } }}>
       <DataGrid
-        // rows={[]}
-        rows={products.map((item, index) => ({ no: index + 1, ...item })) || []}
+        rows={
+          orderData.map((item, index) => ({ no: index + 1, ...item })) || []
+        }
         columns={columns}
         pageSize={14}
         checkboxSelection

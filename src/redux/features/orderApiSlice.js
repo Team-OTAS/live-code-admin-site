@@ -10,9 +10,10 @@ const initialState = {
 };
 
 // Get All Order
-export const getOrderData = createAsyncThunk("order/getAllOrder", () => {
+export const getOrderData = createAsyncThunk("order/getAllOrder", (data) => {
+  // console.log("data", data);
   return axios
-    .get("/api/orders?limit=1000")
+    .get(`/api/orders?date=${data}&?limit=1000`)
     .then((response) => response.data.data.data);
 });
 
