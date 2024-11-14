@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
 
 import "./../../Styles/dashboard.css";
+import AlertBox from "../modalBox/AlertBox";
 
 function CustomToolbar() {
   return (
@@ -179,7 +180,7 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
   const tablemsg = t("ordertable");
   // const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
-  const { loading, orderData } = useSelector((state) => state.OrderData);
+  const { loading, orderData, error } = useSelector((state) => state.OrderData);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -261,7 +262,7 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
           sendData(dataId);
         }}
       />
-      {/* {!isLoading && isError ? <AlertBox message={message} /> : null} */}
+      {!loading && error ? <AlertBox message={error} /> : null}
     </Box>
   );
 };
