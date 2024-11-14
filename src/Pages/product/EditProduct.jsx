@@ -9,7 +9,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { updateProduct, getProduct } from "../../redux/features/productReducer";
 import Loading from "../../Components/Loading";
@@ -44,7 +44,7 @@ function EditProduct() {
   const title = t("editTitle");
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const { product, isLoading } = useSelector((state) => state.stocks);
   // const [showmessage, setShowmessage] = useState(false);
   const [local, setlocal] = useState(false);
@@ -391,7 +391,7 @@ function EditProduct() {
                   color="vaild"
                   sx={{ margin: "0" }}
                   onClick={() => {
-                    window.history.back();
+                    navigate(`/viewstock/${id}`);
                   }}
                 >
                   {cancelbtn}

@@ -184,7 +184,7 @@ const productReducer = createSlice({
         state.message = action.payload;
         Swal.fire({
           position: "center",
-          icon: "error",
+          icon: "warning",
           title: action.payload,
           showConfirmButton: true,
           timer: 2000,
@@ -273,8 +273,8 @@ const productReducer = createSlice({
         state.isSuccess = false;
         state.message = action.payload;
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
+          icon: "warning",
+          title: "လုပ်ဆောင်ချက်မှားယွင်းနေပါသည်",
           text: state.message,
         });
       });

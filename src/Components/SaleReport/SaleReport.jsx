@@ -101,7 +101,7 @@ export default function SalesChart() {
           }}
         >
           <div style={{ textAlign: "center" }}>
-            <SummarizeIcon style={{ fontSize: "80px" }} />
+            <SummarizeIcon style={{ fontSize: "80px", color: "#4d3f3f" }} />
             <p>{noReport}</p>
           </div>
         </div>
