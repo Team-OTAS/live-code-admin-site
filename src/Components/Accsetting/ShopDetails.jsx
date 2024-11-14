@@ -74,8 +74,8 @@ function ShopDetails() {
     } catch (error) {
       // console.log(error);
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
+        icon: "warning",
+        title: "အချက်အလတ်မရရှိပါ",
         text: error.response.data.message,
       });
     }

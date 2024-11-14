@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SummarizeIcon from "@mui/icons-material/Summarize";
 import {
   BarChart,
   Bar,
@@ -14,8 +15,12 @@ import SaleTable from "./SaleTable";
 import "./../../Styles/dashboard.css";
 import "./../../Components/Accsetting/accsetting.css";
 import Loading from "./../../Components/Loading";
+import { useTranslation } from "react-i18next";
 
 export default function SalesChart() {
+  const { t } = useTranslation();
+  const noReport = t("noReport");
+  const reportTile = t("reportTitle");
   // const [value, setValue] = React.useState(0);
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,15 +45,15 @@ export default function SalesChart() {
       </div>
     );
 
-  if (data.length === 0) {
-    return (
-      <div className="dashboardContent">
-        <div className="noData">
-          <h1>No Report Data Available</h1>
-        </div>
-      </div>
-    );
-  }
+  // if (data.length === 0) {
+  //   return (
+  //     <div className="dashboardContent">
+  //       <div className="noData">
+  //         <h1>No Report Data Available</h1>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="dashboardContent">
@@ -82,28 +87,48 @@ export default function SalesChart() {
         className="dashboardContent__header"
         sx={{ display: { xs: "none", md: "block" }, marginTop: "10px" }}
       >
-        <p>Product Sales Profit Analytics Chart</p>
+        <p>{reportTile}</p>
       </Box>
-      <CardContent>
-        <p style={{ color: "black", fontWeight: "bold" }}>
-          {activeTab} Sale Product
-        </p>
-        <ResponsiveContainer
-          width="100%"
-          style={{ background: "", padding: "10px" }}
-          height={250}
+      {data.length === 0 ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            width: "100%",
+            marginTop: "100px",
+          }}
         >
-          <BarChart layout="vertical" data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis type="number" />
-            <YAxis dataKey="Name" type="category" />
-            <Tooltip />
-            <Bar dataKey="Total Price" fill="#354e8e" />
-          </BarChart>
-        </ResponsiveContainer>
-      </CardContent>
+          <div style={{ textAlign: "center" }}>
+            <SummarizeIcon style={{ fontSize: "80px" }} />
+            <p>{noReport}</p>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <CardContent>
+            <p style={{ color: "black", fontWeight: "bold" }}>
+              {activeTab} Sale Product
+            </p>
+            <ResponsiveContainer
+              width="100%"
+              style={{ background: "", padding: "10px" }}
+              height={250}
+            >
+              <BarChart layout="vertical" data={data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis type="number" />
+                <YAxis dataKey="Name" type="category" />
+                <Tooltip />
+                <Bar dataKey="Total Price" fill="#354e8e" />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
 
-      <SaleTable data={data} />
+          <SaleTable data={data} />
+        </div>
+      )}
     </div>
   );
 }

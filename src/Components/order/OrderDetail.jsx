@@ -27,7 +27,7 @@ import Loading from "../Loading";
 import { statusArray } from "../../Pages/order/OrderPage";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { useTranslation } from "react-i18next";
-import vouncher from "./../../Components/vouncher/vouncher";
+// import vouncher from "./../../Components/vouncher/vouncher";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -84,9 +84,9 @@ function OrderDetail() {
       navigate("/order");
     } catch (error) {
       Swal.fire({
-        title: "Error!",
-        text: "Some thing went wrong.",
-        icon: "error",
+        title: "လုပ်ဆောင်မှုမအောင်မြင်ပါသည်။",
+        // text: "Some thing went wrong.",
+        icon: "warning",
       });
     }
   };
@@ -197,7 +197,22 @@ function OrderDetail() {
                       fontWeight: "500",
                       marginRight: "10px",
                     }}
-                    onClick={deleteOrder}
+                    onClick={() =>
+                      Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!",
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          deleteOrder();
+                        }
+                      })
+                    }
+                    // onClick={deleteOrder}
                   >
                     Delete
                   </button>

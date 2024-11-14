@@ -25,7 +25,7 @@ export default function ChgAccInfoPage() {
   const changeLoginInfos = async () => {
     const id = localStorage.getItem("id");
     try {
-      const response = await axios.patch(`/api/update-profile/${id}`, {
+      await axios.patch(`/api/update-profile/${id}`, {
         user_name,
         password,
         password_confirmation,
@@ -34,15 +34,15 @@ export default function ChgAccInfoPage() {
     } catch (error) {
       if (error.response) {
         Swal.fire({
-          title: "Error!",
+          title: "လုပ်ဆောင်မှု မအောင်မြင်ပါ။",
           text: error.response.data.message,
-          icon: "error",
+          icon: "warning",
         });
       } else {
         Swal.fire({
-          title: "Error!",
+          title: "internet မရှိပါ။",
           text: error.message,
-          icon: "error",
+          icon: "info",
         });
       }
     }

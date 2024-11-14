@@ -1,7 +1,15 @@
-/* Poppin */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
-/* Garet */
-@import url("https://fonts.cdnfonts.com/css/garet");
+@font-face {
+  font-family: "Poppins"; /* Replace with your font name */
+  src: url("./../assets/fonts/Poppins-Regular.ttf") format("ttf");
+  font-weight: normal; /* or bold, etc. */
+  font-style: normal; /* or italic, etc. */
+}
+@font-face {
+  font-family: "Garet"; /* Replace with your font name */
+  src: url("./../assets/fonts/Garet-Book.ttf") format("ttf");
+  font-weight: normal; /* or bold, etc. */
+  font-style: normal; /* or italic, etc. */
+}
 body {
   overflow-x: hidden;
 }
@@ -65,7 +73,7 @@ body {
 
 .dashboardContent__header p {
   font-size: 36px;
-  font-family: "Garet", cursive;
+  font-family: "Garet", sans-serif;
   margin: 0;
 }
 

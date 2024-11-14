@@ -54,9 +54,9 @@ function ShopCreate() {
         });
       } else if (error) {
         Swal.fire({
-          title: "Error",
+          title: "လုပ်ဆောင်မှုမအောင်မြင်ပါ",
           text: error.response.data.message,
-          icon: "error",
+          icon: "warning",
         });
       }
 

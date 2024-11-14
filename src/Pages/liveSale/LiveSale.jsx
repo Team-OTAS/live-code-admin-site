@@ -31,7 +31,13 @@ function LiveSale() {
 
   return (
     <div className="dashboardContent">
-      <Box>
+      <Box
+        className="dashboardContent__header"
+        sx={{ display: { xs: "none", md: "block" } }}
+      >
+        <p>Live Sale</p>
+      </Box>
+      <Box style={{ marginTop: "30px" }}>
         <Grid container>
           <Grid item xs={12} md={8}>
             {/* <LiveDataTable liveData={liveData} /> */}

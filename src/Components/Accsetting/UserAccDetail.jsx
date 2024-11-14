@@ -36,8 +36,8 @@ function UserAccDetail() {
       // console.log(error.response.data.message);
       if (error.response) {
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
+          icon: "warning",
+          title: "လုပ်ဆောင်းမှုမှားနေပါသည်",
           text: error.response.data.message,
         });
       } else {

@@ -1,7 +1,15 @@
-/* Poppin */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
-/* Garet */
-@import url("https://fonts.cdnfonts.com/css/garet");
+@font-face {
+  font-family: "Poppins"; /* Replace with your font name */
+  src: url("./../assets/fonts/Poppins-Regular.ttf") format("ttf");
+  font-weight: normal; /* or bold, etc. */
+  font-style: normal; /* or italic, etc. */
+}
+@font-face {
+  font-family: "Garet"; /* Replace with your font name */
+  src: url("./../assets/fonts/Garet-Book.ttf") format("ttf");
+  font-weight: normal; /* or bold, etc. */
+  font-style: normal; /* or italic, etc. */
+}
 .settingBtnContainer {
   width: 100%;
   display: inline-block;
@@ -10,9 +18,9 @@
 .settingbtn {
   padding: 15px 15px;
   border-radius: 5px 5px 0 0;
-  background-color: #4d3f3f;
+  background-color: #fff;
   font-size: 16px;
-  color: #fff;
+  color: #4d3f3f;
   margin-left: 10px;
   display: flex;
   justify-content: center;
@@ -24,8 +32,8 @@
 }
 
 .settingbtn.active {
-  background: #fff;
-  color: #4d3f3f;
+  background: #4d3f3f;
+  color: #fff;
   border-bottom: none;
 }
 
@@ -66,7 +74,7 @@
   font-size: 32px;
   color: #4d3f3f;
   margin-bottom: 10px;
-  font-family: "Garet", cursive;
+  font-family: "Garet", sans-serif;
 }
 
 .shopLogo {
@@ -112,7 +120,7 @@
   border-radius: 5px;
   padding: 5px 10px;
   height: 50px;
-  font-family: "Garet", cursive;
+  font-family: "Garet", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,7 +137,7 @@
   box-shadow: none;
   border: none;
   font-size: 20px;
-  font-family: "Garet", cursive;
+  font-family: "Garet", sans-serif;
   font-weight: bold;
 }
 
@@ -194,7 +202,7 @@
     font-size: 16px;
     color: #4d3f3f;
     margin-bottom: 10px;
-    font-family: "Garet", cursive;
+    font-family: "Garet", sans-serif;
   }
   .edit-btn {
     font-size: 12px;
@@ -208,7 +216,7 @@
     box-shadow: none;
     border: none;
     font-size: 12px;
-    font-family: "Garet", cursive;
+    font-family: "Garet", sans-serif;
     font-weight: bold;
   }
 }/*# sourceMappingURL=accsetting.css.map */

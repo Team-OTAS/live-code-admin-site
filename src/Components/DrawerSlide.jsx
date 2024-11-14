@@ -10,16 +10,23 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import SettingsIcon from "@mui/icons-material/Settings";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import SummarizeIcon from "@mui/icons-material/Summarize";
 import { Box, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import "./../Styles/drawer.css";
+import shop from "./../assets/images/shop.png";
 
 export default function DrawerSlide({ Title }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { shopData } = useSelector((state) => state.ShopData);
-  const navTitle = [t("navTitle"), t("navTitle2"), t("navTitle3")];
+  const navTitle = [
+    t("navTitle"),
+    t("navTitle2"),
+    t("navTitle3"),
+    t("navTitle4"),
+  ];
   const getexpire = (times) => {
     const date = new Date(times);
     const expireTime = date.getTime() - Date.now();
@@ -109,8 +116,8 @@ export default function DrawerSlide({ Title }) {
           </NavLink>
 
           <NavLink to="/report" className={activeClass3}>
-            <ShoppingCartOutlinedIcon />
-            <span className="btnText">Sale Report</span>
+            <SummarizeIcon />
+            <span className="btnText">{navTitle[3]}</span>
           </NavLink>
         </div>
       </div>
@@ -134,7 +141,7 @@ export default function DrawerSlide({ Title }) {
         >
           <Avatar
             alt="Remy Sharp"
-            src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
+            src={shop}
             className="avatars"
             onClick={() => {
               navigate("/setting");

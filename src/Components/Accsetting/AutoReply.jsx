@@ -49,8 +49,8 @@ function AutoReply() {
     } catch (error) {
       // console.log(error);
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
+        icon: "warning",
+        title: "လုပ်ဆောင်မှုမှားယွင်းနေပါသည်",
         text: error.response.data.message,
       });
     }

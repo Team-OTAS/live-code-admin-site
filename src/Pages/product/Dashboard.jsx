@@ -37,8 +37,8 @@ export default function Dashboard() {
     dispatch(deleteProduct(data));
     if (deletes.isError) {
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
+        icon: "warning",
+        title: "လုပ်ဆောင်မှုမအောင်မြင်ပါ",
         text: deletes.message,
       });
     } else {

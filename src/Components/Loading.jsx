@@ -1,5 +1,6 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import React from "react";
+import "./../Styles/loading.css";
 
 function Loading() {
   return (
@@ -13,7 +14,7 @@ function Loading() {
       }}
     >
       <CircularProgress />
-      <Typography variant="h5">Loading Data</Typography>
+      <Typography variant="h5">Loading...</Typography>
     </Box>
   );
 }

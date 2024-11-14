@@ -1,7 +1,15 @@
-/* Poppin */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
-/* Garet */
-@import url("https://fonts.cdnfonts.com/css/garet");
+@font-face {
+  font-family: "Poppins"; /* Replace with your font name */
+  src: url("./../assets/fonts/Poppins-Regular.ttf") format("ttf");
+  font-weight: normal; /* or bold, etc. */
+  font-style: normal; /* or italic, etc. */
+}
+@font-face {
+  font-family: "Garet"; /* Replace with your font name */
+  src: url("./../assets/fonts/Garet-Book.ttf") format("ttf");
+  font-weight: normal; /* or bold, etc. */
+  font-style: normal; /* or italic, etc. */
+}
 .containers {
   position: relative;
   padding: 0;
@@ -58,11 +66,11 @@
 }
 .detail-box-content input::-moz-placeholder {
   font-size: 10px;
-  font-family: "Garet", cursive;
+  font-family: "Garet", sans-serif;
 }
 .detail-box-content input::placeholder {
   font-size: 10px;
-  font-family: "Garet", cursive;
+  font-family: "Garet", sans-serif;
 }
 
 .btn-update {
@@ -80,7 +88,7 @@
 }
 
 .btn-update span {
-  font-family: "Garet", cursive;
+  font-family: "Garet", sans-serif;
   font-size: 12px;
   font-weight: 500;
 }
@@ -101,12 +109,12 @@
 }
 
 .titles {
-  font-family: "Garet", cursive;
+  font-family: "Garet", sans-serif;
   font-size: 32px;
 }
 
 .title {
-  font-family: "Garet", cursive;
+  font-family: "Garet", sans-serif;
   font-size: 24px;
 }
 
@@ -141,11 +149,11 @@
 }
 .create-input input::-moz-placeholder {
   font-size: 16px;
-  font-family: "Garet", cursive;
+  font-family: "Garet", sans-serif;
 }
 .create-input input::placeholder {
   font-size: 16px;
-  font-family: "Garet", cursive;
+  font-family: "Garet", sans-serif;
 }
 
 .PackegeContainer {

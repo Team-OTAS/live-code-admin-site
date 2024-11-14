@@ -29,9 +29,6 @@ const columns = [
     field: "no",
     headerName: "No",
     width: 50,
-    renderCell: (params) => {
-      // console.log(params.rowIndex);
-    },
   },
   { field: "name", headerName: "Name", width: 100 },
   { field: "description", headerName: "Description", width: 350 },

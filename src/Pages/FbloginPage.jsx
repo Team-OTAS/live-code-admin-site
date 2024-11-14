@@ -22,15 +22,15 @@ export default function FBloginPage() {
     } catch (error) {
       if (error.response) {
         Swal.fire({
-          title: "Error!",
+          title: "လုပ်ဆောင်မှု မအောင်မြင်ပါ။",
           text: error.response.data.message,
-          icon: "error",
+          icon: "info",
         });
       } else {
         Swal.fire({
-          title: "Error!",
+          title: "internet မရှိပါ။",
           text: error.message,
-          icon: "error",
+          icon: "warrning",
         });
       }
     }

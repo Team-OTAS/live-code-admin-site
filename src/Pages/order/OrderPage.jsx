@@ -122,6 +122,7 @@ function OrderPage() {
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
               IconComponent={ChangeCircleIcon}
+              disabled={order_ids.length === 0}
             >
               <MenuItem disabled value="">
                 <span className="filterButton" style={{ opacity: "0.5" }}>

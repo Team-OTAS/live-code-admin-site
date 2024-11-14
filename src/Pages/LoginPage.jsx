@@ -52,7 +52,7 @@ export default function LoginPage() {
           }
         } else {
           Swal.fire({
-            icon: "error",
+            icon: "warning",
             title: "Invalid Credentials",
             text: "You are not authorized to access this shop",
           });
@@ -62,15 +62,15 @@ export default function LoginPage() {
       // console.log(error);
       if (error.response) {
         Swal.fire({
-          title: "Error!",
+          title: "လုပ်ဆောင်မှု မအောင်မြင်ပါ။",
           text: error.response.data.message,
-          icon: "error",
+          icon: "warning",
         });
       } else {
         Swal.fire({
-          title: "Error!",
+          title: "internet မရှိပါ။",
           text: error.message,
-          icon: "error",
+          icon: "info",
         });
       }
     }
