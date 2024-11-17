@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
 import vouncher from "./../../Components/vouncher/vouncher";
 import "./../../Styles/order.css";
+import { Link } from "react-router-dom";
 
 export const statusArray = [
   {
@@ -141,13 +142,11 @@ function OrderPage() {
         </Grid>
 
         <Grid item xs={6} md={3}>
-          <Button
-            variant="contained"
-            sx={{ height: "50px" }}
-            onClick={() => vouncher(order_ids)}
-          >
-            <span>Print Order</span>
-          </Button>
+          <Link to="/pdf" state={{ ids: order_ids }}>
+            <Button variant="contained" sx={{ height: "50px" }}>
+              <span>Print Order</span>
+            </Button>
+          </Link>
         </Grid>
       </Grid>
 

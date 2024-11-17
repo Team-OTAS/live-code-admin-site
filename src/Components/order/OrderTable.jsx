@@ -196,6 +196,8 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
     sendDataToOrderTable(order_ids);
   };
 
+  // console.log(orderData);
+
   // const compareDates = (date1, date2) => {
   //   // Parse the dates
   //   const parsedDate1 = new Date(date1);

@@ -1,4 +1,12 @@
-/* Poppin */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
-/* Garet */
-@import url("https://fonts.cdnfonts.com/css/garet");/*# sourceMappingURL=variables.css.map */
+@font-face {
+  font-family: "Poppins"; /* Replace with your font name */
+  src: url("/assets/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal; /* or bold, etc. */
+  font-style: normal; /* or italic, etc. */
+}
+@font-face {
+  font-family: "Garet"; /* Replace with your font name */
+  src: url("/assets/fonts/Garet-Book.ttf") format("truetype");
+  font-weight: normal; /* or bold, etc. */
+  font-style: normal; /* or italic, etc. */
+}/*# sourceMappingURL=variables.css.map */
