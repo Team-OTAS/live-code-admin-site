@@ -13,7 +13,7 @@ import OrderDetail from "../Components/order/OrderDetail";
 import UserAccDetail from "../Components/Accsetting/UserAccDetail";
 import SaleReport from "../Components/SaleReport/SaleReport";
 import MultiVouncher from "../Components/vouncher/miltiVoucher/MultiVouncher";
-import PdfGenerater from "../Components/vouncher/miltiVoucher/PdfGenerater";
+// import PdfGenerater from "../Components/vouncher/miltiVoucher/PdfGenerater";
 
 function HomePage() {
   return (

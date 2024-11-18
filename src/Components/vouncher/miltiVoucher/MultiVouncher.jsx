@@ -27,6 +27,16 @@ Font.register({
   src: "/assets/fonts/pyidaungsu-1.3.ttf", // Ensure the path is correct
 });
 
+const date = new Date();
+// Extract day, month, and year
+const day = String(date.getDate()).padStart(2, "0"); // Ensure two digits
+const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed
+const year = date.getFullYear();
+
+// Format date as dd-mm-yyyy
+const formattedDate = `${day}-${month}-${year}`;
+console.log(formattedDate);
+
 const MyDocument = ({ vouchers, shopData }) => {
   const styles = StyleSheet.create({
     page: {
@@ -37,12 +47,13 @@ const MyDocument = ({ vouchers, shopData }) => {
     },
     header: {
       fontSize: 16,
-      textAlign: "center",
-      marginBottom: 3,
+      textAlign: "right",
     },
     contact: {
-      textAlign: "center",
-      marginBottom: 8,
+      textAlign: "right",
+    },
+    address: {
+      textAlign: "right",
     },
     customerInfo: {
       marginBottom: 10,
@@ -120,15 +131,19 @@ const MyDocument = ({ vouchers, shopData }) => {
             {/* <Image src="https://api.livecodemm.com/storage/images/1731857607Download-bro.png" /> */}
             <Text style={styles.header}>{shopData.data?.name}</Text>
             <Text style={styles.contact}>{shopData.data?.phone}</Text>
+            <Text style={styles.address}>{shopData.data?.address}</Text>
             {/* Customer Info */}
             <View style={styles.customerInfo}>
+              <Text style={styles.date}>Date: {formattedDate} </Text>
               <Text style={styles.customerText}>
                 Name: {voucher.data.order?.contact_name}
               </Text>
               <Text style={styles.customerText}>
-                Address: {voucher.data.order?.contact_phone}
+                Address: {voucher.data.order?.delivery_address}
               </Text>
-              {/* <Text style={styles.customerText}>Date: </Text> */}
+              <Text style={styles.customerText}>
+                phone: {voucher.data.order?.contact_phone}
+              </Text>
             </View>
             <View style={styles.table}>
               <View style={[styles.tableRow, styles.tableHeader]}>
@@ -226,8 +241,8 @@ const MultiVouncher = () => {
       setLoading(false);
     }, 5000);
   }, []);
-  // console.log(shopData);
-  // console.log(vouchers);
+  console.log(shopData);
+  // console.log(vouche rs);
   // Print Feature
   const handlePrint = async () => {
     // Create PDF document
