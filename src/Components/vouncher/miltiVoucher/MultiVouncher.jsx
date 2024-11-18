@@ -17,8 +17,9 @@ import {
 } from "@react-pdf/renderer";
 import axios from "./../../../api/axios";
 import downloadSvg from "./../../../assets/images/Download-bro.png";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Loading from "./../../../Components/Loading";
+import { MoveLeft } from "lucide-react";
 
 // Register Myanmar font
 Font.register({
@@ -252,7 +253,12 @@ const MultiVouncher = () => {
 
   return (
     <div className="dashboardContent">
-      <h1>Vouncher PDF Export</h1>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Link to="/order" style={{ textDecoration: "none", margin: "0" }}>
+          <MoveLeft size={40} color="#4d3f3f" />
+        </Link>
+        <h1 style={{ marginLeft: "10px" }}>Vouncher PDF Export</h1>
+      </div>
 
       <Grid
         container

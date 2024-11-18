@@ -13,4 +13,6 @@
 .loading {
   font-family: "Garet", sans-serif;
   color: #4d3f3f;
-}/*# sourceMappingURL=loading.css.map */
+  font-size: 1.2rem;
+  font-weight: 800;
+} /*# sourceMappingURL=loading.css.map */

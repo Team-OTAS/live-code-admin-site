@@ -11,7 +11,7 @@ import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import Cookies from "js-cookie";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
-import vouncher from "./../../Components/vouncher/vouncher";
+import { FolderInput } from "lucide-react";
 import "./../../Styles/order.css";
 import { Link } from "react-router-dom";
 
@@ -143,8 +143,12 @@ function OrderPage() {
 
         <Grid item xs={6} md={3}>
           <Link to="/pdf" state={{ ids: order_ids }}>
-            <Button variant="contained" sx={{ height: "50px" }}>
-              <span>Print Order</span>
+            <Button
+              variant="contained"
+              sx={{ height: "55px", padding: "0px 40px" }}
+            >
+              <FolderInput size={20} style={{ marginRight: "10px" }} />
+              <span>Export</span>
             </Button>
           </Link>
         </Grid>

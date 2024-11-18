@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import productService from "./productService";
 import Swal from "sweetalert2";
+import { object } from "yup";
 
 // import { toast } from "react-toastify";
 
@@ -272,10 +273,11 @@ const productReducer = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.payload;
+        console.log(action.payload);
         Swal.fire({
           icon: "warning",
           title: "လုပ်ဆောင်ချက်မှားယွင်းနေပါသည်",
-          text: state.message,
+          // text: object.value(state.message),
         });
       });
   },

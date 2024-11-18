@@ -14,7 +14,7 @@ function Loading() {
       }}
     >
       <CircularProgress />
-      <Typography variant="h5">Loading...</Typography>
+      <p className="loading">Loading...</p>
     </Box>
   );
 }

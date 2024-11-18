@@ -77,10 +77,19 @@ function CreateProdcut() {
       navigate("/");
     } catch (error) {
       if (error.response) {
+        // Attempt to parse the error message to extract details
+        // if (error.response.data.message) {
+        //   console.log("Error Messages:");
+        //   Object.keys(error.response.data.message).forEach((key) => {
+        //     console.log(
+        //       `  ${key}: ${error.response.data.message[key].join(", ")}`
+        //     );
+        //   });
+        // }
         Swal.fire({
           title: "Error!",
-          text: error.response.data.message,
-          icon: "error",
+          text: Object.values(error.response.data.message).join(", "),
+          icon: "warning",
         });
       } else {
         Swal.fire({
