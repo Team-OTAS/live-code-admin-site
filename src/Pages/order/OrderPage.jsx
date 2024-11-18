@@ -142,11 +142,7 @@ function OrderPage() {
         </Grid>
 
         <Grid item xs={6} md={3}>
-          <Button
-            disabled={order_ids.length === 0}
-            variant="contained"
-            sx={{ height: "55px", padding: "0px 40px" }}
-          >
+          <Button disabled={order_ids.length === 0}>
             <Link
               to="/pdf"
               state={{ ids: order_ids }}
@@ -155,6 +151,11 @@ function OrderPage() {
                 textDecoration: "none",
                 display: "flex",
                 alignItems: "center",
+                backgroundColor: "#4d3f3f",
+                padding: "0 40px",
+                borderRadius: "5px",
+                height: "55px",
+                marginTop: "-5px",
               }}
             >
               <FolderInput size={20} style={{ marginRight: "10px" }} />
