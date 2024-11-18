@@ -142,15 +142,25 @@ function OrderPage() {
         </Grid>
 
         <Grid item xs={6} md={3}>
-          <Link to="/pdf" state={{ ids: order_ids }}>
-            <Button
-              variant="contained"
-              sx={{ height: "55px", padding: "0px 40px" }}
+          <Button
+            disabled={order_ids.length === 0}
+            variant="contained"
+            sx={{ height: "55px", padding: "0px 40px" }}
+          >
+            <Link
+              to="/pdf"
+              state={{ ids: order_ids }}
+              style={{
+                color: "white",
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+              }}
             >
               <FolderInput size={20} style={{ marginRight: "10px" }} />
               <span>Export</span>
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </Grid>
       </Grid>
 
