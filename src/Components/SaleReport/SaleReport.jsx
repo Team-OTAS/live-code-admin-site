@@ -57,37 +57,41 @@ export default function SalesChart() {
 
   return (
     <div className="dashboardContent">
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <div
-          style={{ display: "flex", width: "100%", justifyContent: "start" }}
-        >
-          <button
-            className={activeTab === "top" ? "settingbtn active" : "settingbtn"}
-            onClick={() => getCharts("top")}
-          >
-            <span className="settingText">Top Sale Items</span>
-          </button>
-          <button
-            className={
-              activeTab === "worst" ? "settingbtn active" : "settingbtn"
-            }
-            onClick={() => getCharts("worst")}
-          >
-            <span className="settingText">Worst Sale Items</span>
-          </button>
-          {/* <button
-            className={page === 3 ? "settingbtn active" : "settingbtn"}
-            onClick={() =>  getCharts("spenders")}
-          >
-            <span className="settingText">User Acc Management</span>
-          </button> */}
-        </div>
-      </Box>
       <Box
         className="dashboardContent__header"
         sx={{ display: { xs: "none", md: "block" }, marginTop: "10px" }}
       >
         <p>{reportTile}</p>
+        <Box
+          sx={{ marginTop: "30px", borderBottom: 1, borderColor: "divider" }}
+        >
+          <div
+            style={{ display: "flex", width: "100%", justifyContent: "start" }}
+          >
+            <button
+              className={
+                activeTab === "top" ? "settingbtn active" : "settingbtn"
+              }
+              onClick={() => getCharts("top")}
+            >
+              <span className="settingText">Top Sale Items</span>
+            </button>
+            <button
+              className={
+                activeTab === "worst" ? "settingbtn active" : "settingbtn"
+              }
+              onClick={() => getCharts("worst")}
+            >
+              <span className="settingText">Worst Sale Items</span>
+            </button>
+            {/* <button
+            className={page === 3 ? "settingbtn active" : "settingbtn"}
+            onClick={() =>  getCharts("spenders")}
+          >
+            <span className="settingText">User Acc Management</span>
+          </button> */}
+          </div>
+        </Box>
       </Box>
       {data.length === 0 ? (
         <div

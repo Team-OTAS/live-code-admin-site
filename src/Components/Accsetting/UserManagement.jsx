@@ -14,6 +14,7 @@ function UserManagement() {
             sx={{
               width: "200px",
               display: "flex",
+              marginTop: "20px",
               justifyContent: "space-between",
             }}
           >

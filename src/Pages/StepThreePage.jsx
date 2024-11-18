@@ -67,7 +67,7 @@ export default function StepThreePage() {
       if (error.response) {
         Swal.fire({
           title: "လုပ်ဆောင်မှု မအောင်မြင်ပါ။",
-          text: error.response.data.message,
+          // text: error.response.data.message,
           icon: "warning",
         });
       } else {
