@@ -13,7 +13,7 @@ const initialState = {
 export const getOrderData = createAsyncThunk("order/getAllOrder", (data) => {
   // console.log("data", data);
   return axios
-    .get(`/api/orders?date=${data}&?limit=1000`)
+    .get(`/api/orders?date=${data}&limit=500`)
     .then((response) => response.data.data.data);
 });
 
