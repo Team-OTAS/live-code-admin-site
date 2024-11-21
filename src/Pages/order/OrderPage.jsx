@@ -12,8 +12,8 @@ import Cookies from "js-cookie";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
 import { FolderInput } from "lucide-react";
-import "./../../Styles/order.css";
 import { Link } from "react-router-dom";
+import "./../../Styles/order.css";
 
 export const statusArray = [
   {
@@ -44,20 +44,6 @@ function OrderPage() {
   const [chgorder, setChgorder] = useState("");
   const [date, setDate] = useState(Cookies.get("date") || new Date());
   const [order_ids, setOrder_Ids] = useState([]);
-
-  // const FilterIcon = () => {
-  //   return (
-  //     <FilterListRoundedIcon
-  //       sx={{
-  //         background: statusArray.find((item) => item.value === status).color,
-  //         borderRadius: "50%",
-  //         color: "white",
-  //         padding: "5px",
-  //         marginRight: "10px",
-  //       }}
-  //     />
-  //   );
-  // };
 
   const handleChange = (event) => {
     setStatus(event.target.value);
@@ -142,20 +128,29 @@ function OrderPage() {
         </Grid>
 
         <Grid item xs={6} md={3}>
-          <Button disabled={order_ids.length === 0}>
+          <Button
+            fullWidth
+            disabled={order_ids.length === 0}
+            style={{
+              margin: "0",
+              padding: "0",
+            }}
+          >
             <Link
               to="/pdf"
               state={{ ids: order_ids }}
               style={{
                 color: "white",
+                width: "inherit",
                 textDecoration: "none",
                 display: "flex",
+                justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "#4d3f3f",
-                padding: "0 40px",
                 borderRadius: "5px",
                 height: "55px",
-                marginTop: "-5px",
+
+                // marginTop: "-5px",
               }}
             >
               <FolderInput size={20} style={{ marginRight: "10px" }} />

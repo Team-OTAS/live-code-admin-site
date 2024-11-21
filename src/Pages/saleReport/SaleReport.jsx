@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from "react";
 import SummarizeIcon from "@mui/icons-material/Summarize";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import { CardContent, Box } from "@mui/material";
-import getReport from "./getReport";
-import SaleTable from "./SaleTable";
+import { ChartBarDecreasing, Grid3x3 } from "lucide-react";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Button from "@mui/material/Button";
+import { Box, Tooltip } from "@mui/material";
+import getReport from "./../../Components/SaleReport/getReport";
+import SaleTable from "./../../Components/SaleReport/SaleTable";
 import "./../../Styles/dashboard.css";
-import "./../../Components/Accsetting/accsetting.css";
 import Loading from "./../../Components/Loading";
 import { useTranslation } from "react-i18next";
+import "./../../Styles/salereport.css";
+import SaleChart from "../../Components/SaleReport/SaleChart";
 
 export default function SalesChart() {
   const { t } = useTranslation();
   const noReport = t("noReport");
   const reportTile = t("reportTitle");
-  // const [value, setValue] = React.useState(0);
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("top");
+  const [layout, setLayout] = useState("chart");
+  // console.log(data);
 
   const getCharts = async (data) => {
     setActiveTab(data);
@@ -45,28 +41,73 @@ export default function SalesChart() {
       </div>
     );
 
-  // if (data.length === 0) {
-  //   return (
-  //     <div className="dashboardContent">
-  //       <div className="noData">
-  //         <h1>No Report Data Available</h1>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="dashboardContent">
-      <Box
-        className="dashboardContent__header"
-        sx={{ display: { xs: "none", md: "block" }, marginTop: "10px" }}
-      >
-        <p>{reportTile}</p>
+      <Box className="dashboardContent__header" sx={{ marginTop: "10px" }}>
+        <Box
+          sx={{
+            display: {
+              xs: "block",
+              md: "flex",
+            },
+            justifyContent: "space-between",
+            textAlign: {
+              xs: "right",
+              md: "flex-start",
+            },
+          }}
+        >
+          <p
+            style={{
+              textAlign: "left",
+            }}
+          >
+            {reportTile}
+          </p>
+          <ButtonGroup>
+            <Tooltip title="Chart View">
+              <Button
+                sx={{
+                  "&:hover": {
+                    color: "#4d3f3f",
+                  },
+                }}
+                className={
+                  layout === "chart" ? "layoutbtn active" : "layoutbtn"
+                }
+                onClick={() => setLayout("chart")}
+              >
+                <ChartBarDecreasing />
+              </Button>
+            </Tooltip>
+            <Tooltip title="Table View">
+              <Button
+                sx={{
+                  "&:hover": {
+                    color: "#4d3f3f",
+                  },
+                }}
+                className={
+                  layout === "table" ? "layoutbtn active" : "layoutbtn"
+                }
+                onClick={() => setLayout("table")}
+              >
+                <Grid3x3 />
+              </Button>
+            </Tooltip>
+          </ButtonGroup>
+        </Box>
+
         <Box
           sx={{ marginTop: "30px", borderBottom: 1, borderColor: "divider" }}
         >
           <div
-            style={{ display: "flex", width: "100%", justifyContent: "start" }}
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "start",
+              gap: "10px",
+            }}
           >
             <button
               className={
@@ -111,26 +152,15 @@ export default function SalesChart() {
         </div>
       ) : (
         <div>
-          <CardContent>
-            <p style={{ color: "black", fontWeight: "bold" }}>
-              {activeTab} Sale Product
-            </p>
-            <ResponsiveContainer
-              width="100%"
-              style={{ background: "", padding: "10px" }}
-              height={250}
-            >
-              <BarChart layout="vertical" data={data}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" />
-                <YAxis dataKey="Name" type="category" />
-                <Tooltip />
-                <Bar dataKey="Total Price" fill="#354e8e" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
+          {layout === "chart" && (
+            <SaleChart data={data} activeTab={activeTab} />
+          )}
 
-          <SaleTable data={data} />
+          {layout === "table" && (
+            <div>
+              <SaleTable data={data} />
+            </div>
+          )}
         </div>
       )}
     </div>

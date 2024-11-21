@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import React from "react";
 import UserManagement from "./UserManagement";
 import ShopReciept from "./ShopReciept";
@@ -16,32 +16,72 @@ function Accsetting() {
   return (
     <Box className="dashboardContent">
       <Box className="settingBtnContainer">
-        <div style={{ display: "flex", width: "100%", justifyContent: "end" }}>
-          <button
-            className={page === 1 ? "settingbtn active" : "settingbtn"}
-            onClick={() => channgePage(1)}
-          >
-            <span className="settingText">AutoReply Message</span>
-          </button>
-          <button
-            className={page === 2 ? "settingbtn active" : "settingbtn"}
-            onClick={() => channgePage(2)}
-          >
-            <span className="settingText">Shop Vouncher</span>
-          </button>
-          <button
-            className={page === 3 ? "settingbtn active" : "settingbtn"}
-            onClick={() => channgePage(3)}
-          >
-            <span className="settingText">User Acc Management</span>
-          </button>
-          <button
-            className={page === 4 ? "settingbtn active" : "settingbtn"}
-            onClick={() => channgePage(4)}
-          >
-            <span className="settingText">Profile</span>
-          </button>
-        </div>
+        <Grid container spacing={2}>
+          <Grid item xs={6} md={3}>
+            <Button
+              fullWidth
+              sx={{
+                border: "1px solid #4d3f3f",
+                "&:hover": {
+                  background: "#4d3f3f",
+                  color: "#fff",
+                },
+              }}
+              className={page === 1 ? "settingbtn active" : "settingbtn"}
+              onClick={() => channgePage(1)}
+            >
+              <span className="settingText">AutoReply Message</span>
+            </Button>
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Button
+              fullWidth
+              sx={{
+                border: "1px solid #4d3f3f",
+                "&:hover": {
+                  background: "#4d3f3f",
+                  color: "#fff",
+                },
+              }}
+              className={page === 2 ? "settingbtn active" : "settingbtn"}
+              onClick={() => channgePage(2)}
+            >
+              <span className="settingText">Shop Vouncher</span>
+            </Button>
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Button
+              fullWidth
+              sx={{
+                border: "1px solid #4d3f3f",
+                "&:hover": {
+                  background: "#4d3f3f",
+                  color: "#fff",
+                },
+              }}
+              className={page === 3 ? "settingbtn active" : "settingbtn"}
+              onClick={() => channgePage(3)}
+            >
+              <span className="settingText">User Acc Management</span>
+            </Button>
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Button
+              fullWidth
+              sx={{
+                border: "1px solid #4d3f3f",
+                "&:hover": {
+                  background: "#4d3f3f",
+                  color: "#fff",
+                },
+              }}
+              className={page === 4 ? "settingbtn active" : "settingbtn"}
+              onClick={() => channgePage(4)}
+            >
+              <span className="settingText">Profile</span>
+            </Button>
+          </Grid>
+        </Grid>
       </Box>
 
       <Box

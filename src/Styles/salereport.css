@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "Poppins"; /* Replace with your font name */
+  src: url("./../assets/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal; /* or bold, etc. */
+  font-style: normal; /* or italic, etc. */
+}
+@font-face {
+  font-family: "Garet"; /* Replace with your font name */
+  src: url("./../assets/fonts/Garet-Book.ttf") format("truetype");
+  font-weight: normal; /* or bold, etc. */
+  font-style: normal; /* or italic, etc. */
+}
+
+.layoutbtn {
+  padding: 15px 15px;
+  border-radius: 5px 5px 0 0;
+  background-color: #fff;
+  font-size: 16px;
+  color: #4d3f3f;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.layoutbtn:hover {
+  transform: scale(0.95);
+  color: "#4d3f3f";
+}
+
+.layoutbtn.active {
+  background: #4d3f3f;
+  color: #fff;
+  border-bottom: none;
+}
+
+.layoutText {
+  font-family: "Poppins", sans-serif;
+}

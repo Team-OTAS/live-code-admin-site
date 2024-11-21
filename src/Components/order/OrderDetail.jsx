@@ -1,11 +1,5 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  Grid,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { Box, FormControl, Grid, MenuItem, Select } from "@mui/material";
+import { FolderInput } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -22,7 +16,7 @@ import {
   updateStatusOrder,
 } from "../../redux/features/orderApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Loading from "../Loading";
 import { statusArray } from "../../Pages/order/OrderPage";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
@@ -217,9 +211,22 @@ function OrderDetail() {
                     Delete
                   </button>
 
-                  <Button onClick={() => navigate(`/vouncher/${id}`)}>
-                    <span>Print</span>
-                  </Button>
+                  <Link
+                    to={`/voucher/${id}`}
+                    style={{
+                      color: "white",
+                      textDecoration: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      backgroundColor: "#4d3f3f",
+                      padding: "0 40px",
+                      borderRadius: "5px",
+                      height: "55px",
+                    }}
+                  >
+                    <FolderInput size={20} style={{ marginRight: "10px" }} />
+                    <span>Export</span>
+                  </Link>
 
                   {/* <Button variant="contained" onClick={() => vouncher([id])}>
                     <span>Print</span>

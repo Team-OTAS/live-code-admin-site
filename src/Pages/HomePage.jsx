@@ -11,8 +11,9 @@ import AddUser from "../Components/Accsetting/AddUser";
 // import Vouncher from "./../Components/vouncher/Vouncher";
 import OrderDetail from "../Components/order/OrderDetail";
 import UserAccDetail from "../Components/Accsetting/UserAccDetail";
-import SaleReport from "../Components/SaleReport/SaleReport";
+import SaleReport from "./../Pages/saleReport/SaleReport";
 import MultiVouncher from "../Components/vouncher/miltiVoucher/MultiVouncher";
+import SingleVouncher from "../Components/vouncher/miltiVoucher/SingleVouncher";
 // import PdfGenerater from "../Components/vouncher/miltiVoucher/PdfGenerater";
 
 function HomePage() {
@@ -44,7 +45,7 @@ function HomePage() {
             <Route path="/accdetail/:id" element={<UserAccDetail />} />
             <Route path="/report" element={<SaleReport />} />
             <Route path="/pdf" element={<MultiVouncher />} />
-            {/* <Route path="/pdf" element={<PdfGenerater />} /> */}
+            <Route path="/voucher/:id" element={<SingleVouncher />} />
           </Routes>
         </Box>
       </div>

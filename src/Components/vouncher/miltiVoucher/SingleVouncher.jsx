@@ -17,7 +17,7 @@ import {
 } from "@react-pdf/renderer";
 import axios from "./../../../api/axios";
 import downloadSvg from "./../../../assets/images/Download-bro.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "./../../../Components/Loading";
 import { MoveLeft } from "lucide-react";
 
@@ -37,7 +37,7 @@ const year = date.getFullYear();
 const formattedDate = `${day}-${month}-${year}`;
 console.log(formattedDate);
 
-const MyDocument = ({ vouchers, shopData }) => {
+const MyDocument = ({ voucher, shopData }) => {
   const styles = StyleSheet.create({
     page: {
       padding: 20,
@@ -124,85 +124,80 @@ const MyDocument = ({ vouchers, shopData }) => {
   });
   return (
     <Document>
-      {vouchers.map((voucher, index) => (
-        <Page size="A5" style={styles.page} key={index}>
-          <View>
-            {/* Shop Info */}
-            {/* <Image src="https://api.livecodemm.com/storage/images/1731857607Download-bro.png" /> */}
-            <Text style={styles.header}>{shopData.data?.name}</Text>
-            <Text style={styles.contact}>{shopData.data?.phone}</Text>
-            <Text style={styles.address}>{shopData.data?.address}</Text>
-            {/* Customer Info */}
-            <View style={styles.customerInfo}>
-              <Text style={styles.date}>Date: {formattedDate} </Text>
-              <Text style={styles.customerText}>
-                Name: {voucher.data.order?.contact_name}
+      <Page size="A5" style={styles.page}>
+        <View>
+          {/* Shop Info */}
+          {/* <Image src="https://api.livecodemm.com/storage/images/1731857607Download-bro.png" /> */}
+          <Text style={styles.header}>{shopData.data?.name}</Text>
+          <Text style={styles.contact}>{shopData.data?.phone}</Text>
+          <Text style={styles.address}>{shopData.data?.address}</Text>
+          {/* Customer Info */}
+          <View style={styles.customerInfo}>
+            <Text style={styles.date}>Date: {formattedDate} </Text>
+            <Text style={styles.customerText}>
+              Name: {voucher.data.order?.contact_name}
+            </Text>
+            <Text style={styles.customerText}>
+              Address: {voucher.data.order?.delivery_address}
+            </Text>
+            <Text style={styles.customerText}>
+              phone: {voucher.data.order?.contact_phone}
+            </Text>
+          </View>
+          <View style={styles.table}>
+            <View style={[styles.tableRow, styles.tableHeader]}>
+              <Text style={[styles.tableCell, styles.headerCell]}>No.</Text>
+              <Text style={[styles.tableCell, styles.productCell]}>
+                Product Name
               </Text>
-              <Text style={styles.customerText}>
-                Address: {voucher.data.order?.delivery_address}
+              <Text style={[styles.tableCell, styles.qtyCell]}>Qty</Text>
+              <Text style={[styles.tableCell, styles.unitPriceCell]}>
+                Unit Price
               </Text>
-              <Text style={styles.customerText}>
-                phone: {voucher.data.order?.contact_phone}
-              </Text>
+              <Text style={[styles.tableCell, styles.amountCell]}>Amount</Text>
             </View>
-            <View style={styles.table}>
-              <View style={[styles.tableRow, styles.tableHeader]}>
-                <Text style={[styles.tableCell, styles.headerCell]}>No.</Text>
-                <Text style={[styles.tableCell, styles.productCell]}>
-                  Product Name
+
+            {voucher.data.order_products.map((products, index) => (
+              <View style={styles.tableRow} key={products.id}>
+                <Text style={[styles.tableCell, styles.headerCell]}>
+                  {index}
                 </Text>
-                <Text style={[styles.tableCell, styles.qtyCell]}>Qty</Text>
+                <Text style={[styles.tableCell, styles.productCell]}>
+                  {products.product.name}
+                </Text>
+                <Text style={[styles.tableCell, styles.qtyCell]}>
+                  {products.quantity}
+                </Text>
                 <Text style={[styles.tableCell, styles.unitPriceCell]}>
-                  Unit Price
+                  {products.product.price}
                 </Text>
                 <Text style={[styles.tableCell, styles.amountCell]}>
-                  Amount
+                  {products.total_price}
                 </Text>
               </View>
-
-              {voucher.data.order_products.map((products, index) => (
-                <View style={styles.tableRow} key={products.id}>
-                  <Text style={[styles.tableCell, styles.headerCell]}>
-                    {index}
-                  </Text>
-                  <Text style={[styles.tableCell, styles.productCell]}>
-                    {products.product.name}
-                  </Text>
-                  <Text style={[styles.tableCell, styles.qtyCell]}>
-                    {products.quantity}
-                  </Text>
-                  <Text style={[styles.tableCell, styles.unitPriceCell]}>
-                    {products.product.price}
-                  </Text>
-                  <Text style={[styles.tableCell, styles.amountCell]}>
-                    {products.total_price}
-                  </Text>
-                </View>
-              ))}
-              {/* Total amount row */}
-              <View style={styles.totalRow}>
-                <Text style={[styles.tableCell, styles.totalCell]}>
-                  Total Amount:
-                </Text>
-                <Text style={[styles.tableCell, styles.totalCell]}>
-                  {voucher.data.order.price} kyats
-                </Text>
-              </View>
+            ))}
+            {/* Total amount row */}
+            <View style={styles.totalRow}>
+              <Text style={[styles.tableCell, styles.totalCell]}>
+                Total Amount:
+              </Text>
+              <Text style={[styles.tableCell, styles.totalCell]}>
+                {voucher.data.order.price} kyats
+              </Text>
             </View>
-
-            <Text style={styles.signature}>Signature</Text>
           </View>
-        </Page>
-      ))}
+
+          <Text style={styles.signature}>Signature</Text>
+        </View>
+      </Page>
     </Document>
   );
 };
 
-const MultiVouncher = () => {
-  const location = useLocation();
-  const ids = location.state?.ids || [];
-  // console.log("ids", ids);
-  const [vouchers, setVouchers] = useState([]);
+const SingleVouncher = () => {
+  const orderid = useParams();
+  //   console.log("ids", ids);
+  const [voucher, setVouchers] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const id = localStorage.getItem("shopId");
@@ -217,19 +212,14 @@ const MultiVouncher = () => {
   // get Order Data
   useEffect(() => {
     const getVoucherData = async () => {
-      const voucherPromises = ids.map(async (orderId) => {
-        try {
-          const res = await axios.get("/api/orders/" + orderId);
-          return res.data; // Return the fetched data
-        } catch (error) {
-          console.error("Error fetching voucher data:", error);
-          return null; // Handle the error case
-        }
-      });
+      try {
+        const res = await axios.get("/api/orders/" + orderid.id);
 
-      const fetchedVouchers = await Promise.all(voucherPromises);
-      // Filter out any null values in case of errors
-      setVouchers(fetchedVouchers.filter((voucher) => voucher !== null));
+        setVouchers(res.data);
+      } catch (error) {
+        console.error("Error fetching voucher data:", error);
+        return null; // Handle the error case
+      }
     };
 
     getVoucherData();
@@ -241,13 +231,13 @@ const MultiVouncher = () => {
       setLoading(false);
     }, 5000);
   }, []);
-  // console.log(shopData);
+  //   console.log(shopData);
   // console.log(vouche rs);
   // Print Feature
   const handlePrint = async () => {
     // Create PDF document
     const blob = await pdf(
-      <MyDocument shopData={shopData} vouchers={vouchers} />
+      <MyDocument shopData={shopData} voucher={voucher} />
     ).toBlob();
     const url = URL.createObjectURL(blob);
 
@@ -330,9 +320,7 @@ const MultiVouncher = () => {
                   cursor: "pointer", // Pointer cursor
                   transition: "background-color 0.3s", // Transition effect
                 }}
-                document={
-                  <MyDocument vouchers={vouchers} shopData={shopData} />
-                }
+                document={<MyDocument voucher={voucher} shopData={shopData} />}
                 fileName="receipt.pdf"
               >
                 <FileText />
@@ -372,4 +360,4 @@ const MultiVouncher = () => {
   );
 };
 
-export default MultiVouncher;
+export default SingleVouncher;

@@ -79,13 +79,15 @@ body {
 
 @media (max-width: 600px) {
   .dashboardContainer {
-    width: 95vw;
+    width: 85vw;
     padding: 5px;
+    /* background-color: "red"; */
   }
   .dashboardContent {
-    width: 90vw;
-    padding: 0;
-    margin-left: 10px;
+    width: 85vw;
+    margin: auto;
+    /* padding: 0; */
+    /* margin-left: 10px; */
   }
   .toolbarContainer {
     display: block;

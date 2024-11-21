@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function UserManagement() {
   return (
     <Box>
-      <div className="buttonContainer">
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <Link to="/adduser" style={{ textDecoration: "none" }}>
           <Button
             variant="contained"

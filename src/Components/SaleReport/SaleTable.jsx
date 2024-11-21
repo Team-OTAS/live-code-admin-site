@@ -24,10 +24,17 @@ const columns = [
   {
     field: "ID",
     headerName: "No",
-    width: 150,
+    width: 50,
   },
-  { field: "Name", headerName: "Name", width: 300 },
-  { field: "Sale Unit", headerName: "Sale Unit", width: 150 },
+  { field: "Name", headerName: "Name", width: 400 },
+  {
+    field: "Sale Unit",
+    headerName: "Sale Unit",
+    width: 150,
+    renderCell: (params) => {
+      return (params.value = params.value.replace(" Kyat", ""));
+    },
+  },
   { field: "Price", headerName: "Price", width: 200 },
   {
     field: "Total Price",

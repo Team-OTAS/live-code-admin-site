@@ -12,9 +12,8 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
-
-import "./../../Styles/dashboard.css";
 import AlertBox from "../modalBox/AlertBox";
+import "./../../Styles/dashboard.css";
 
 function CustomToolbar() {
   return (
@@ -178,7 +177,6 @@ const columns = [
 const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
   const { t } = useTranslation();
   const tablemsg = t("ordertable");
-  // const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const { loading, orderData, error } = useSelector((state) => state.OrderData);
 
@@ -196,24 +194,9 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
     sendDataToOrderTable(order_ids);
   };
 
-  // console.log(orderData);
-
-  // const compareDates = (date1, date2) => {
-  //   // Parse the dates
-  //   const parsedDate1 = new Date(date1);
-  //   const parsedDate2 = new Date(date2);
-
-  //   // Normalize the dates (set the time to midnight to only compare the date parts)
-  //   parsedDate1.setHours(0, 0, 0, 0);
-  //   parsedDate2.setHours(0, 0, 0, 0);
-
-  //   // Compare the dates
-  //   return parsedDate1.getTime() === parsedDate2.getTime();
-  // };
-
   useEffect(() => {
     dispatch(getOrderData(formatDate(date)));
-  }, [chgorder, date]);
+  }, [chgorder, date, status]);
 
   // useEffect(() => {
   //   if (orderData) {
