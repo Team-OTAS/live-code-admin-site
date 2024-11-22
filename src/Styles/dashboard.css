@@ -15,10 +15,12 @@ body {
 }
 
 .dashboardContainer {
-  /* margin: auto; */
+  margin: auto;
   width: 97vw;
   padding: 20px 0;
   display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .btnText {
@@ -28,6 +30,7 @@ body {
 }
 
 .dashboardContent {
+  margin: "auto";
   width: 75vw;
   padding: 0px;
   margin-left: 10px;

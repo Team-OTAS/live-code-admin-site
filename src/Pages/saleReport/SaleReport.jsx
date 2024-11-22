@@ -57,13 +57,15 @@ export default function SalesChart() {
             },
           }}
         >
-          <p
-            style={{
-              textAlign: "left",
-            }}
-          >
-            {reportTile}
-          </p>
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <p
+              style={{
+                textAlign: "left",
+              }}
+            >
+              {reportTile}
+            </p>
+          </Box>
           <ButtonGroup>
             <Tooltip title="Chart View">
               <Button
