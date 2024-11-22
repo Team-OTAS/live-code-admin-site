@@ -8,13 +8,11 @@ import { Box } from "@mui/material";
 import OrderPage from "./order/OrderPage";
 import Accsetting from "../Components/Accsetting/Accsetting";
 import AddUser from "../Components/Accsetting/AddUser";
-// import Vouncher from "./../Components/vouncher/Vouncher";
 import OrderDetail from "../Components/order/OrderDetail";
 import UserAccDetail from "../Components/Accsetting/UserAccDetail";
 import SaleReport from "./../Pages/saleReport/SaleReport";
 import MultiVouncher from "../Components/vouncher/miltiVoucher/MultiVouncher";
 import SingleVouncher from "../Components/vouncher/miltiVoucher/SingleVouncher";
-// import PdfGenerater from "../Components/vouncher/miltiVoucher/PdfGenerater";
 
 function HomePage() {
   return (
@@ -28,7 +26,7 @@ function HomePage() {
         </Box>
         <Box
           sx={{
-            margin: "0 auto",
+            margin: "0",
             background: "#fff",
             padding: "10px",
             borderRadius: "15px",
