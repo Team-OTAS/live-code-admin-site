@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   DataGrid,
   GridToolbarColumnsButton,
@@ -179,6 +179,8 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
   const tablemsg = t("ordertable");
   const dispatch = useDispatch();
   const { loading, orderData, error } = useSelector((state) => state.OrderData);
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(100); // Default page size
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -189,14 +191,24 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
     return `${year}-${month}-${day}`;
   };
 
+  const handlePageChange = (newPage) => {
+    setPageSize(newPage.pageSize); // Update page size
+    setPage(newPage.page); // Update current page
+  };
+
   const sendData = (dataId) => {
     const order_ids = dataId;
     sendDataToOrderTable(order_ids);
   };
 
   useEffect(() => {
-    dispatch(getOrderData(formatDate(date)));
-  }, [chgorder, date, status]);
+    const data = {
+      date: formatDate(date),
+      page: page + 1,
+      pageSize: pageSize,
+    };
+    dispatch(getOrderData(data));
+  }, [chgorder, date, status, page, pageSize]);
 
   // useEffect(() => {
   //   if (orderData) {
@@ -216,12 +228,19 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
     <Box sx={{ height: { xs: 600, md: 500 } }}>
       <DataGrid
         rows={
-          orderData.map((item, index) => ({ no: index + 1, ...item })) || []
+          orderData?.data?.map((item, index) => ({
+            no: index + page * pageSize + 1,
+            ...item,
+          })) || []
         }
+        rowCount={orderData?.total || 0}
         columns={columns}
-        pageSize={14}
+        // pageSize={14}
         checkboxSelection
         loading={loading}
+        pagination
+        paginationMode="server"
+        onPaginationModelChange={handlePageChange}
         disableRowSelectionOnClick
         slots={{
           toolbar: CustomToolbar,
@@ -243,7 +262,6 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
           },
         }}
         onRowSelectionModelChange={(dataId) => {
-          // console.log(dataId);
           sendData(dataId);
         }}
       />

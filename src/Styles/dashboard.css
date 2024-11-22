@@ -15,8 +15,9 @@ body {
 }
 
 .dashboardContainer {
+  margin: auto;
   width: 97vw;
-  padding: 20px;
+  padding: 20px 0;
   display: flex;
 }
 
