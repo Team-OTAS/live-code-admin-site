@@ -57,6 +57,8 @@ function EditProduct() {
   const [sale_code, setSale_code] = useState();
   const [unit, setUnit] = useState();
 
+  const regex = /^[A-Za-z][A-Za-z0-9]*$/;
+
   function hundleFileChange(e) {
     setFile(e.target.files[0]);
     setlocal(true);
@@ -166,16 +168,18 @@ function EditProduct() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                flexDirection: "column",
-                padding: "20px 35px",
+
+                // padding: "20px 35px",
               }}
               onClick={deleteHandleClick}
             >
               <DeleteForeverOutlinedIcon
-                sx={{ fontSize: 40 }}
+                sx={{ fontSize: "40px" }}
                 className="deleteIcon"
               />
-              <span>Remove</span>
+              <Box sx={{ display: { xs: "none", md: "block" } }}>
+                <span>Remove</span>
+              </Box>
             </Button>
           </Grid>
 
@@ -226,7 +230,13 @@ function EditProduct() {
                 }
                 color="primary"
                 value={sale_code || ""}
-                onChange={(e) => setSale_code(e.target.value)}
+                onChange={(e) => {
+                  setSale_code(e.target.value);
+                }}
+                error={regex.test(sale_code) ? false : true}
+                helperText={
+                  regex.test(sale_code) ? "" : "Invalid Sale Code Format"
+                }
               />
             </div>
           </Grid>
@@ -259,7 +269,7 @@ function EditProduct() {
                   </div>
                 }
                 color="primary"
-                value={quantity || ""}
+                value={quantity || "0"}
                 onChange={(e) => setQuantity(e.target.value)}
               />
             </div>

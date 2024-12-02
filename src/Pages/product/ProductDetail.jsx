@@ -47,12 +47,33 @@ function ProductDetail() {
         >
           <Grid item xs={12} className="formHeader">
             <p className="header">View Stock</p>
-            <Link to={`/editstock/${id}`}>
-              <EditNoteOutlinedIcon
-                fontSize="large"
-                color="primary"
-                sx={{ marginBottom: "50px" }}
-              />
+            <Link
+              to={`/editstock/${id}`}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textDecoration: "none",
+                backgroundColor: "#4d3f3f",
+                color: "#fff",
+                padding: "5px 10px",
+                borderRadius: "5px",
+                // marginBottom: "100px",
+              }}
+            >
+              <EditNoteOutlinedIcon fontSize="large" />
+              <Box sx={{ display: { xs: "none", md: "block" } }}>
+                <span
+                  style={{
+                    marginLeft: "10px",
+                    // color: "#000",
+                    fontWeight: "bold",
+                    fontSize: "16px",
+                  }}
+                >
+                  Edit
+                </span>
+              </Box>
             </Link>
           </Grid>
 
@@ -70,6 +91,7 @@ function ProductDetail() {
                 color="primary"
                 InputProps={{
                   readOnly: true,
+                  style: { opacity: 1 },
                 }}
                 value={product.data.name || ""}
               />
