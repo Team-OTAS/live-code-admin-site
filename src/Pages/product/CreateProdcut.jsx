@@ -25,7 +25,12 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required("Stock name is required"),
   price: Yup.string().required("Price is required"),
   quantity: Yup.string().required("quantity is required"),
-  sale_code: Yup.string().required("salecode is required"),
+  sale_code: Yup.string()
+    .required("Sale code is required")
+    .matches(
+      /^[A-Za-z][A-Za-z0-9]*$/,
+      "Invalid sale code format. Use A001, B012, or AB0245."
+    ),
   unit: Yup.string().required("unit is required"),
   // description: Yup.string().required("description is required"),
 });
