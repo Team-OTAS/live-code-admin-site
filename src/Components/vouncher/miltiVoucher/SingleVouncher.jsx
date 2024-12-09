@@ -35,7 +35,7 @@ const year = date.getFullYear();
 
 // Format date as dd-mm-yyyy
 const formattedDate = `${day}-${month}-${year}`;
-console.log(formattedDate);
+// console.log(formattedDate);
 
 const MyDocument = ({ voucher, shopData }) => {
   const styles = StyleSheet.create({

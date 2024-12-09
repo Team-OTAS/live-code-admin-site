@@ -5,6 +5,8 @@ import {
   GridToolbarContainer,
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
+import axios from "./../../api/axios";
+import { updateStatusOrder } from "../../redux/features/orderApiSlice";
 import { Box, Button, Typography } from "@mui/material";
 import { getOrderData } from "../../redux/features/orderApiSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +16,8 @@ import { useTranslation } from "react-i18next";
 import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
 import AlertBox from "../modalBox/AlertBox";
 import "./../../Styles/dashboard.css";
+import { useTimeout } from "@mui/x-data-grid/internals";
+import Swal from "sweetalert2";
 
 function CustomToolbar() {
   return (
@@ -175,9 +179,11 @@ const columns = [
 ];
 
 const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
+  // console.log(chgorder);
   const { t } = useTranslation();
   const tablemsg = t("ordertable");
   const dispatch = useDispatch();
+  const [orderids, setOrderids] = useState([]);
   const { loading, orderData, error } = useSelector((state) => state.OrderData);
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(0);
@@ -192,28 +198,59 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
     return `${year}-${month}-${day}`;
   };
 
-  const handlePageChange = (newPage) => {
-    setPageSize(newPage.pageSize); // Update page size
-    setPage(newPage.page); // Update current page
-  };
-
-  const sendData = (dataId) => {
-    const order_ids = dataId;
-    sendDataToOrderTable(order_ids);
-  };
-
-  useEffect(() => {
+  const getAllOrders = () => {
     const data = {
       date: formatDate(date),
       page: page + 1,
       pageSize: pageSize,
     };
     dispatch(getOrderData(data));
+  };
+
+  const handlePageChange = (newPage) => {
+    setPageSize(newPage.pageSize); // Update page size
+    setPage(newPage.page); // Update current page
+  };
+
+  const sendData = (dataId) => {
+    setOrderids(dataId);
+    const order_ids = dataId;
+    sendDataToOrderTable(order_ids);
+  };
+
+  const updateStatus = async (data) => {
+    try {
+      const res = await axios.patch("/api/orders", data);
+      // console.log(res);
+      if (res.data.code === 200) {
+        // console.log(res);
+        getAllOrders();
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "warning",
+        title: "လုပ်ဆောင်ချက်မှားယွင်းနေပါသည်",
+        text: error.response.data.message,
+      });
+    }
+  };
+  useEffect(() => {
+    if (orderids.length !== 0) {
+      const data = {
+        order_ids: orderids,
+        status: chgorder,
+      };
+      updateStatus(data);
+    }
+  }, [chgorder]);
+
+  useEffect(() => {
+    getAllOrders();
   }, []);
 
   useEffect(() => {
     if (orderData.data) {
-      console.log(orderData);
+      // console.log(orderData);
       setProducts(
         orderData?.data.filter((item) => {
           if (status !== "All") {

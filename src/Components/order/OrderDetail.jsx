@@ -50,12 +50,6 @@ function OrderDetail() {
   // Change Status
   const handleOrder = (event) => {
     setChgorder(event.target.value);
-    const data = {
-      order_ids: [id],
-      status: event.target.value,
-    };
-
-    dispatch(updateStatusOrder(data));
   };
 
   const addOrderUpdate = () => {
