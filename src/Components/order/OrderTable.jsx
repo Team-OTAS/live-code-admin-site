@@ -179,6 +179,7 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
   const tablemsg = t("ordertable");
   const dispatch = useDispatch();
   const { loading, orderData, error } = useSelector((state) => state.OrderData);
+  const [products, setProducts] = useState([]);
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(100); // Default page size
 
@@ -208,27 +209,29 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
       pageSize: pageSize,
     };
     dispatch(getOrderData(data));
-  }, [chgorder, date, status, page, pageSize]);
+  }, []);
 
-  // useEffect(() => {
-  //   if (orderData) {
-  //     setProducts(
-  //       orderData.filter((item) => {
-  //         if (status !== "All" && compareDates(item.created_at, date)) {
-  //           return item.status === status;
-  //         } else if (status === "All" && compareDates(item.created_at, date)) {
-  //           return orderData;
-  //         }
-  //       })
-  //     );
-  //   }
-  // }, [status, orderData, date]);
+  useEffect(() => {
+    if (orderData.data) {
+      console.log(orderData);
+      setProducts(
+        orderData?.data.filter((item) => {
+          if (status !== "All") {
+            return item.status === status;
+          } else if (status === "All") {
+            return orderData;
+          }
+          return true; // or add your specific filter condition here
+        })
+      );
+    }
+  }, [chgorder, date, status, page, pageSize, orderData]);
 
   return (
     <Box sx={{ height: { xs: 600, md: 500 } }}>
       <DataGrid
         rows={
-          orderData?.data?.map((item, index) => ({
+          products?.map((item, index) => ({
             no: index + page * pageSize + 1,
             ...item,
           })) || []
