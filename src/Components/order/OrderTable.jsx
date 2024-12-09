@@ -179,7 +179,7 @@ const columns = [
 ];
 
 const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
-  // console.log(chgorder);
+  console.log(status);
   const { t } = useTranslation();
   const tablemsg = t("ordertable");
   const dispatch = useDispatch();
@@ -188,6 +188,7 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(100); // Default page size
+  console.log(orderData);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -203,6 +204,7 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
       date: formatDate(date),
       page: page + 1,
       pageSize: pageSize,
+      status: status,
     };
     dispatch(getOrderData(data));
   };
@@ -246,29 +248,29 @@ const OrderTable = ({ status, date, sendDataToOrderTable, chgorder }) => {
 
   useEffect(() => {
     getAllOrders();
-  }, []);
+  }, [chgorder, date, status, page, pageSize]);
 
-  useEffect(() => {
-    if (orderData.data) {
-      // console.log(orderData);
-      setProducts(
-        orderData?.data.filter((item) => {
-          if (status !== "All") {
-            return item.status === status;
-          } else if (status === "All") {
-            return orderData;
-          }
-          return true; // or add your specific filter condition here
-        })
-      );
-    }
-  }, [chgorder, date, status, page, pageSize, orderData]);
+  // useEffect(() => {
+  //   if (orderData.data) {
+  //     // console.log(orderData);
+  //     setProducts(
+  //       orderData?.data.filter((item) => {
+  //         if (status !== "All") {
+  //           return item.status === status;
+  //         } else if (status === "All") {
+  //           return orderData;
+  //         }
+  //         return true; // or add your specific filter condition here
+  //       })
+  //     );
+  //   }
+  // }, [chgorder, orderData]);
 
   return (
     <Box sx={{ height: { xs: 600, md: 500 } }}>
       <DataGrid
         rows={
-          products?.map((item, index) => ({
+          orderData?.data?.map((item, index) => ({
             no: index + page * pageSize + 1,
             ...item,
           })) || []

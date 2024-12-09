@@ -14,7 +14,9 @@ export const getOrderData = createAsyncThunk("order/getAllOrder", (data) => {
   // console.log("data", data);
   return axios
     .get(
-      `/api/orders?date=${data.date}&limit=${data.pageSize}&page=${data.page}`
+      `/api/orders?date=${data.date}&limit=${data.pageSize}&page=${
+        data.page
+      }&status=${data.status !== "All" ? data.status : ""}`
     )
     .then((response) => response.data.data);
 });
